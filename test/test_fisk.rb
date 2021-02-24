@@ -35,6 +35,22 @@ class FiskTest < Minitest::Test
     assert_equal "rax, 0x4351ff23", i.op_str.to_s
   end
 
+  def test_add_rax_rcx
+    fisk = Fisk.new
+    fisk.add fisk.rax, fisk.rcx
+    i = disasm(fisk.to_binary).first
+    assert_equal "add", i.mnemonic.to_s
+    assert_equal "rax, rcx", i.op_str.to_s
+  end
+
+  def test_add_rcx_r9
+    fisk = Fisk.new
+    fisk.add fisk.rcx, fisk.r9
+    i = disasm(fisk.to_binary).first
+    assert_equal "add", i.mnemonic.to_s
+    assert_equal "rcx, r9", i.op_str.to_s
+  end
+
   def disasm binary
     cs = Crabstone::Disassembler.new(Crabstone::ARCH_X86, Crabstone::MODE_64)
     cs.disasm binary, 0

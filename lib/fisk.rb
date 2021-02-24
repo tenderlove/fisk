@@ -4,14 +4,22 @@ class Fisk
   X86_64 = JSON.load_file File.join(File.dirname(__FILE__), "x86_64.json")
 
   module Registers
-    class Register < Struct.new(:name, :type, :value)
+    class Register < Struct.new(:name, :type, :value, :alias)
+      def works? type
+        type == self.alias || type == self.type
+      end
     end
 
     EAX = Register.new :eax, "eax", 0
     ECX = Register.new :ecx, "r32", 1
+    EDX = Register.new :edx, "r32", 2
+    EBX = Register.new :ebx, "r32", 3
+    ESP = Register.new :esp, "r32", 4
+    EBP = Register.new :ebp, "r32", 5
     ESI = Register.new :esi, "r32", 6
+    EDI = Register.new :edi, "r32", 7
 
-    RAX = Register.new :rax, "rax", 0
+    RAX = Register.new :rax, "rax", 0, "r64"
     RCX = Register.new :rcx, "r64", 1
     RDX = Register.new :rdx, "r64", 2
     RBX = Register.new :rbx, "r64", 3
@@ -19,47 +27,28 @@ class Fisk
     RBP = Register.new :rbp, "r64", 5
     RSI = Register.new :rsi, "r64", 6
     RDI = Register.new :rdi, "r64", 7
-  end
-
-  module Instructions
-    class Instruction
-      attr_reader :value, :mnemonic
-
-      def initialize value, mnemonic
-        @value    = value
-        @mnemonic = mnemonic
-      end
-
-      def compile operands
-        [value, operands.op2.value].pack("Cl<")
-      end
+    8.times do |i|
+      i += 8
+      const_set "R#{i}", Register.new(:"r#{i}", "r64", i)
     end
-
-    Add = Instruction.new 0x05, "ADD"
   end
 
   class Imm32 < Struct.new(:value)
     def type
       "imm32"
     end
+
+    def works? type; self.type == type; end
   end
 
   def initialize
     @instructions = []
   end
 
-  def eax; Registers::EAX; end
-  def ecx; Registers::ECX; end
-  def esi; Registers::ESI; end
-
-  def rax; Registers::RAX; end
-  def rcx; Registers::RCX; end
-  def rdx; Registers::RDX; end
-  def rbx; Registers::RBX; end
-  def rsp; Registers::RSP; end
-  def rbp; Registers::RBP; end
-  def rsi; Registers::RSI; end
-  def rdi; Registers::RDI; end
+  Registers.constants.grep(/^[A-Z0-9]*$/).each do |const|
+    val = Registers.const_get const
+    define_method(const.downcase) { val }
+  end
 
   class Instruction
     def initialize insn, operands
@@ -68,23 +57,18 @@ class Fisk
     end
 
     def encode
-      #if @insn["encodings"].length > 1
-      #  raise NotImplementedError
-      #end
-
       encoding = @insn["encodings"].first
 
       buf = []
       pattern = ""
       encoding.each do |type, info|
         case type
-        when "prefix" then
         when "opcode" then
           buf << info["byte"].to_i(16)
           pattern << "C"
         when "immediate"
           idx = get_operand_idx info["value"]
-          buf << @operands[idx].value
+          buf << get_operand(idx).value
           if info["size"] == 4
             pattern << "l<"
           else
@@ -92,8 +76,8 @@ class Fisk
           end
         when "ModRM"
           mode = info["mode"].to_i(2)
-          reg = @operands[get_operand_idx(info["reg"])].value
-          rm = @operands[get_operand_idx(info["rm"])].value
+          reg = get_operand(get_operand_idx(info["reg"])).value & 0x7
+          rm = get_operand(get_operand_idx(info["rm"])).value & 0x7
           buf << ((mode << 6) | (reg << 3) | rm)
           pattern << "C"
         when "REX"
@@ -111,6 +95,12 @@ class Fisk
       buf.pack pattern
     end
 
+    private
+
+    def get_operand idx
+      @operands[idx]
+    end
+
     def get_operand_idx v
       if v =~ /^#(\d+)/
         $1.to_i
@@ -126,8 +116,7 @@ class Fisk
       when /^(\d+)$/
         v.to_i
       when /^#(\d+)$/
-        warn "not implemented"
-        0
+        (operands[$1.to_i].value >> 3)
       else
         raise NotImplementedError, v
       end
@@ -138,20 +127,23 @@ class Fisk
     possibles = X86_64["instructions"]["ADD"]["forms"].find_all do |insn|
       if insn["operands"].length == params.length
         params.zip(insn["operands"]).all? { |want_op, have_op|
-          want_op.type == have_op["type"]
+          want_op.works?(have_op["type"])
         }
       else
         false
       end
     end
 
-    if possibles.length > 1
-      p possibles
-      raise NotImplementedError, "too many"
-    end
     raise NotImplementedError, "couldn't find instruction" if possibles.length == 0
 
-    insn = possibles.first
+    insn = nil
+
+    if possibles.length > 1
+      # pick the shortest instruction
+      insn = possibles.sort_by { |thing| thing["encodings"].first.size }.first
+    else
+      insn = possibles.first
+    end
 
     @instructions << Instruction.new(insn, params)
     self
@@ -162,6 +154,6 @@ class Fisk
   end
 
   def to_binary
-    @instructions.map(&:encode).join.b
+    @instructions.map(&:encode).join
   end
 end
