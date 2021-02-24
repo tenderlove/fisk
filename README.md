@@ -19,7 +19,7 @@ fisk = Fisk.new
 
 binary = fisk.asm do
   push rbp
-  mov rsp, rbp
+  mov rbp, rsp
   int lit(3)
   pop rbp
   ret
