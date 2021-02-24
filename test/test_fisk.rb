@@ -3,8 +3,14 @@ require "crabstone"
 require "minitest/autorun"
 
 class FiskTest < Minitest::Test
+  attr_reader :fisk
+
+  def setup
+    super
+    @fisk = Fisk.new
+  end
+
   def test_add_eax
-    fisk = Fisk.new
     fisk.add fisk.eax, fisk.imm32(0x4351ff23)
     i = disasm(fisk.to_binary).first
     assert_equal "add", i.mnemonic.to_s
@@ -12,7 +18,6 @@ class FiskTest < Minitest::Test
   end
 
   def test_add_ecx_esi
-    fisk = Fisk.new
     fisk.add fisk.ecx, fisk.esi
     i = disasm(fisk.to_binary).first
     assert_equal "add", i.mnemonic.to_s
@@ -20,7 +25,6 @@ class FiskTest < Minitest::Test
   end
 
   def test_add_rcx_rsi
-    fisk = Fisk.new
     fisk.add fisk.rcx, fisk.rsi
     i = disasm(fisk.to_binary).first
     assert_equal "add", i.mnemonic.to_s
@@ -28,7 +32,6 @@ class FiskTest < Minitest::Test
   end
 
   def test_add_rax
-    fisk = Fisk.new
     fisk.add fisk.rax, fisk.imm32(0x4351ff23)
     i = disasm(fisk.to_binary).first
     assert_equal "add", i.mnemonic.to_s
@@ -36,7 +39,6 @@ class FiskTest < Minitest::Test
   end
 
   def test_add_rax_rcx
-    fisk = Fisk.new
     fisk.add fisk.rax, fisk.rcx
     i = disasm(fisk.to_binary).first
     assert_equal "add", i.mnemonic.to_s
@@ -44,11 +46,58 @@ class FiskTest < Minitest::Test
   end
 
   def test_add_rcx_r9
-    fisk = Fisk.new
     fisk.add fisk.rcx, fisk.r9
     i = disasm(fisk.to_binary).first
     assert_equal "add", i.mnemonic.to_s
     assert_equal "rcx, r9", i.op_str.to_s
+  end
+
+  def test_adc_rcx_r9
+    fisk.adc fisk.rcx, fisk.r9
+    i = disasm(fisk.to_binary).first
+    assert_equal "adc", i.mnemonic.to_s
+    assert_equal "rcx, r9", i.op_str.to_s
+  end
+
+  def test_int3
+    fisk.int fisk.lit(3)
+    i = disasm(fisk.to_binary).first
+    assert_equal "int3", i.mnemonic.to_s
+    assert_equal "", i.op_str.to_s
+  end
+
+  def test_int5
+    fisk.int fisk.imm8(5)
+    i = disasm(fisk.to_binary).first
+    assert_equal "int", i.mnemonic.to_s
+    assert_equal "5", i.op_str.to_s
+  end
+
+  def test_push_rbp
+    fisk.push fisk.rbp
+    i = disasm(fisk.to_binary).first
+    assert_equal "push", i.mnemonic.to_s
+    assert_equal "rbp", i.op_str.to_s
+  end
+
+  def test_mov_rsp_rbp
+    fisk.mov fisk.rsp, fisk.rbp
+    i = disasm(fisk.to_binary).first
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal "rsp, rbp", i.op_str.to_s
+  end
+
+  def test_popq
+    fisk.pop fisk.rbp
+    i = disasm(fisk.to_binary).first
+    assert_equal "pop", i.mnemonic.to_s
+    assert_equal "rbp", i.op_str.to_s
+  end
+
+  def test_ret
+    fisk.ret
+    i = disasm(fisk.to_binary).first
+    assert_equal "ret", i.mnemonic.to_s
   end
 
   def disasm binary
