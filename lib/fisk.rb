@@ -3,7 +3,7 @@
 require "json"
 
 class Fisk
-  X86_64 = JSON.load_file File.join(File.dirname(__FILE__), "x86_64.json")
+  X86_64 = JSON.load_file File.join(File.dirname(__FILE__), "json-x86-64/x86_64.json")
 
   module Registers
     class Register < Struct.new(:name, :type, :value)
@@ -191,6 +191,11 @@ class Fisk
   def lit val
     # to_s because we're getting the value from JSON as a string
     Lit.new val.to_s
+  end
+
+  def asm &block
+    instance_eval &block
+    to_binary
   end
 
   def to_binary

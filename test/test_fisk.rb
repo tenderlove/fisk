@@ -10,6 +10,17 @@ class FiskTest < Minitest::Test
     @fisk = Fisk.new
   end
 
+  def test_lol
+    binary = fisk.asm do
+      push rbp
+      mov rsp, rbp
+      int lit(3)
+      pop rbp
+      ret
+    end
+    assert_equal "UH\x89\xEC\xCC]\xC3".b, binary
+  end
+
   def test_add_eax
     fisk.add fisk.eax, fisk.imm32(0x4351ff23)
     i = disasm(fisk.to_binary).first

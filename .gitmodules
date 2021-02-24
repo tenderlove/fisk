@@ -1,0 +1,3 @@
+[submodule "lib/json-x86-64"]
+	path = lib/json-x86-64
+	url = https://github.com/astocko/json-x86-64.git
