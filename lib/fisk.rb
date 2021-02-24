@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "json"
 
 class Fisk
@@ -71,7 +73,7 @@ class Fisk
       encoding = @insn["encodings"].first
 
       buf = []
-      pattern = ""
+      pattern = "".dup
       encoding.each do |type, info|
         case type
         when "opcode" then
@@ -163,10 +165,10 @@ class Fisk
 
     if possibles.length > 1
       # pick the shortest instruction
-      insn = possibles.sort_by { |thing| thing["encodings"].first.size }.first
-    else
-      insn = possibles.first
+      possibles = possibles.sort_by { |thing| thing["encodings"].first.size }
     end
+
+    insn = possibles.first
 
     @instructions << Instruction.new(insn, params)
     self
