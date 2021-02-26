@@ -1,8 +1,6 @@
-require "fisk"
-require "crabstone"
-require "minitest/autorun"
+require "helper"
 
-class FiskTest < Minitest::Test
+class FiskTest < Fisk::Test
   attr_reader :fisk
 
   def setup
@@ -18,7 +16,7 @@ class FiskTest < Minitest::Test
       pop rbp
       ret
     end
-    assert_equal "UH\x89\xEC\xCC]\xC3".b, binary
+    assert_equal "UH\x89\xEC\xCC]\xC3".b, binary.string
   end
 
   def test_add_eax

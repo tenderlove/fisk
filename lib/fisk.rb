@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "json"
+require "stringio"
 
 class Fisk
   X86_64 = JSON.load_file File.join(File.dirname(__FILE__), "json-x86-64/x86_64.json")
@@ -69,11 +70,9 @@ class Fisk
       @operands = operands
     end
 
-    def encode
+    def encode buffer
       encoding = @insn["encodings"].first
 
-      buf = []
-      pattern = "".dup
       encoding.each do |type, info|
         case type
         when "opcode" then
@@ -84,26 +83,16 @@ class Fisk
             byte |= get_operand(idx).value
           end
 
-          buf << byte
-          pattern << "C"
+          buffer.putc byte
         when "immediate"
           idx = get_operand_idx info["value"]
-          buf << get_operand(idx).value
-          case info["size"]
-          when 4
-            pattern << "l<"
-          when 1
-            pattern << "C"
-          else
-            p info
-            raise NotImplementedError
-          end
+          value = get_operand(idx).value
+          write_num buffer, value, info["size"]
         when "ModRM"
           mode = info["mode"].to_i(2)
-          reg = get_operand(get_operand_idx(info["reg"])).value & 0x7
-          rm = get_operand(get_operand_idx(info["rm"])).value & 0x7
-          buf << ((mode << 6) | (reg << 3) | rm)
-          pattern << "C"
+          reg = get_operand_value(info["reg"]) & 0x7
+          rm = get_operand_value(info["rm"]) & 0x7
+          buffer.putc ((mode << 6) | (reg << 3) | rm)
         when "REX"
           next if info["mandatory"] == false
           rex = 0b0100
@@ -111,16 +100,32 @@ class Fisk
           rex = (rex << 1) | check_rex(info["R"], @operands)
           rex = (rex << 1) | check_rex(info["X"], @operands)
           rex = (rex << 1) | check_rex(info["B"], @operands)
-          buf << rex
-          pattern << "C"
+          buffer.putc rex
         else
           raise NotImplementedError, "unknown type #{type}"
         end
       end
-      buf.pack pattern
     end
 
     private
+
+    def write_num buffer, num, size
+      size.times {
+        buffer.putc(num & 0xFF)
+        num >>= 8
+      }
+    end
+
+    def get_operand_value v
+      case v
+      when /^#(\d+)$/
+        get_operand($1.to_i).value
+      when /^(\d+)$/
+        $1.to_i
+      else
+        raise NotImplementedError
+      end
+    end
 
     def get_operand idx
       @operands[idx]
@@ -193,12 +198,21 @@ class Fisk
     Lit.new val.to_s
   end
 
-  def asm &block
-    instance_eval &block
-    to_binary
+  def asm buf = StringIO.new(''.b), &block
+    instance_eval(&block)
+    write_to_buffer buf
+    buf
   end
 
   def to_binary
-    @instructions.map(&:encode).join
+    io = StringIO.new ''.b
+    write_to_buffer io
+    io.string
+  end
+
+  private
+
+  def write_to_buffer buffer
+    @instructions.each { |insn| insn.encode buffer }
   end
 end
