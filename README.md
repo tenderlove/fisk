@@ -33,31 +33,15 @@ machine code to some executable memory, and call it from a Ruby program that we
 will start in lldb.
 
 ```ruby
-require "fiddle"
 require "fisk"
+require "fisk/helpers"
 
-# Only works on x86_64 and probably only macOS
 module Break
-  include Fiddle
-
-  # from sys/mman.h on macOS
-  PROT_READ   = 0x01
-  PROT_WRITE  = 0x02
-  PROT_EXEC   = 0x04
-  MAP_PRIVATE = 0x0002
-  MAP_ANON    = 0x1000
-
-  mmap_ptr = Handle::DEFAULT["mmap"]
-  func = Function.new mmap_ptr, [TYPE_VOIDP,  TYPE_SIZE_T, TYPE_INT, TYPE_INT,  TYPE_INT, TYPE_INT], TYPE_VOIDP, name: "mmap"
-
-  # Expose the mmap system call
-  define_singleton_method :mmap do |addr, len, prot, flags, fd, offset|
-    func.call addr, len, prot, flags, fd, offset
-  end
-
   fisk = Fisk.new
 
-  binary = fisk.asm do
+  jitbuf = Fisk::Helpers.jitbuffer 4096
+
+  fisk.asm(jitbuf) do
     push rbp
     mov rbp, rsp
     int lit(3)
@@ -65,19 +49,7 @@ module Break
     ret
   end
 
-  mem = mmap 0, binary.bytesize, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_PRIVATE | MAP_ANON, -1, 0
-
-  # There's probably a better way to do this... but copy the assembled code
-  # in to executable memory.
-  binary.bytes.each_with_index { |byte, i| mem[i] = byte }
-
-  # Use the address of the executable memory as our function pointer location
-  func = Function.new mem.to_i, [], TYPE_VOIDP
-
-  # Define a Ruby function call that just wraps `func`
-  define_singleton_method :dance! do
-    func.call
-  end
+  define_singleton_method :dance!, &jitbuf.to_function([], Fiddle::TYPE_VOID)
 end
 
 def deep i = 2
