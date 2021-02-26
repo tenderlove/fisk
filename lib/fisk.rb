@@ -79,14 +79,12 @@ class Fisk
           byte = info["byte"].to_i(16)
 
           if info["addend"]
-            idx = get_operand_idx info["addend"]
-            byte |= get_operand(idx).value
+            byte |= get_operand_value(info["addend"])
           end
 
           buffer.putc byte
         when "immediate"
-          idx = get_operand_idx info["value"]
-          value = get_operand(idx).value
+          value = get_operand_value(info["value"])
           write_num buffer, value, info["size"]
         when "ModRM"
           mode = info["mode"].to_i(2)
@@ -119,20 +117,8 @@ class Fisk
     def get_operand_value v
       case v
       when /^#(\d+)$/
-        get_operand($1.to_i).value
+        @operands[$1.to_i].value
       when /^(\d+)$/
-        $1.to_i
-      else
-        raise NotImplementedError
-      end
-    end
-
-    def get_operand idx
-      @operands[idx]
-    end
-
-    def get_operand_idx v
-      if v =~ /^#(\d+)/
         $1.to_i
       else
         raise NotImplementedError
