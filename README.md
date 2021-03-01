@@ -28,7 +28,7 @@ end
 
 Though, it's not very fun to assemble something unless you can execute it.  So
 here is an example of how to execute the above assembly.  This assembly code
-will send an interrupt and tell the debugger to stop.  So lets write the
+will send an interrupt and tell the debugger to stop.  So let's write the
 machine code to some executable memory, and call it from a Ruby program that we
 will start in lldb.
 
