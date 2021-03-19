@@ -9,7 +9,7 @@ class Fisk
         this = self
         lambda { |*args| this.call(*args) }
       end
-    end unless Function.instance_method(:to_proc)
+    end unless Function.method_defined?(:to_proc)
 
     # from sys/mman.h on macOS
     PROT_READ   = 0x01

@@ -24,7 +24,41 @@ class RunFiskTest < Fisk::Test
     assert_equal 100, mem.size
   end
 
+  def test_get_address
+    fisk = Fisk.new
+    jitbuf = Fisk::Helpers.jitbuffer 4096
+
+    fisk.asm jitbuf do
+      push rbp
+      mov rbp, rsp
+      mov rax, rdi
+      pop rbp
+      ret
+    end
+
+    func = jitbuf.to_function [Fiddle::TYPE_VOIDP], Fiddle::TYPE_LONG
+    x = Object.new
+    wrapped = Fiddle.dlwrap x
+    assert_equal wrapped.to_i, func.call(wrapped)
+  end
+
   def test_fisk_jit
+    fisk = Fisk.new
+    jitbuf = Fisk::Helpers.jitbuffer 4096
+
+    fisk.asm jitbuf do
+      push rbp
+      mov rbp, rsp
+      mov rax, imm32(100)
+      pop rbp
+      ret
+    end
+
+    func = jitbuf.to_function [], Fiddle::TYPE_INT
+    assert_equal 100, func.call
+  end
+
+  def test_fisk_get_param
     fisk = Fisk.new
     jitbuf = Fisk::Helpers.jitbuffer 4096
 

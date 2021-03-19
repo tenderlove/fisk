@@ -8,6 +8,13 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_sub
+    fisk.sub fisk.rsp, fisk.imm8(16)
+    i = disasm(fisk.to_binary).first
+    assert_equal "sub", i.mnemonic.to_s
+    assert_equal "rsp, 0x10", i.op_str.to_s
+  end
+
   def test_lol
     binary = fisk.asm do
       push rbp
