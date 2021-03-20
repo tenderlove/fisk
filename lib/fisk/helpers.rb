@@ -16,7 +16,12 @@ class Fisk
     PROT_WRITE  = 0x02
     PROT_EXEC   = 0x04
     MAP_PRIVATE = 0x0002
-    MAP_ANON    = 0x1000
+
+    if RUBY_PLATFORM =~ /darwin/
+      MAP_ANON    = 0x1000
+    else
+      MAP_ANON    = 0x20
+    end
 
     mmap_ptr = Handle::DEFAULT["mmap"]
     mmap_func = Function.new mmap_ptr, [TYPE_VOIDP,
