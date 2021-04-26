@@ -20,7 +20,10 @@
     -%>
       <%- when "Operand" -%>
   operands << Fisk::Machine::Operand.new(<%= child["type"].dump %>)
-      <%- when "Encoding" -%>
+      <%-
+        when "Encoding"
+          size = 0
+      -%>
   encodings << Class.new(Fisk::Machine::Encoding) {
     def encode buffer, operands
       <%-
@@ -28,18 +31,33 @@
           next if encoding.text?
           case encoding.name
           when "Opcode"
+            size += 1
       -%>
       add_opcode buffer, operands, 0x<%= sprintf("%02X", encoding["byte"].to_i(16)) %>, <%= encoding["addend"].inspect %>
-        <%- when "Immediate" -%>
+        <%-
+            when "Immediate"
+              size += encoding["size"].to_i
+        -%>
       add_immediate buffer, operands, <%= encoding["value"].dump %>, <%= encoding["size"].to_i %>
-        <%- when "REX" -%>
+        <%-
+            when "CodeOffset"
+              size += encoding["size"].to_i
+        -%>
+      add_code_offset buffer, operands, <%= encoding["value"].dump %>, <%= encoding["size"].to_i %>
+        <%-
+            when "REX"
+              size += 1 unless encoding["mandatory"] == "false"
+        -%>
       add_rex(buffer, operands,
               <%= !(encoding["mandatory"] == "false") %>,
               <%= encoding["W"].inspect %>,
               <%= encoding["R"].inspect %>,
               <%= encoding["X"].inspect %>,
               <%= encoding["B"].inspect %>)
-        <%- when "ModRM" -%>
+        <%-
+            when "ModRM"
+              size += 1
+        -%>
       add_modrm(buffer, operands,
               <%= encoding["mode"].to_i(2) %>,
               <%= encoding["reg"].inspect %>,
@@ -51,6 +69,8 @@
         <%- end -%>
       <%- end -%>
     end
+
+    def bytesize; <%= size %>; end
   }.new
       <%- when "ISA" -%>
       <%- when "ImplicitOperand" -%>

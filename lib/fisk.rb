@@ -9,6 +9,8 @@ class Fisk
       def works? type
         type == self.name || type == self.type
       end
+
+      def unknown_label?; false; end
     end
 
     EAX = Register.new "eax", "r32", 0
@@ -37,12 +39,7 @@ class Fisk
   class Operand < Struct.new(:value)
     def type; value; end
     def works? type; self.type == type; end
-  end
-
-  class Imm32 < Operand
-    def type
-      "imm32"
-    end
+    def unknown_label?; false; end
   end
 
   class Imm8 < Operand
@@ -51,10 +48,60 @@ class Fisk
     end
   end
 
+  class Imm32 < Operand
+    def type
+      "imm32"
+    end
+  end
+
+  class Rel8 < Operand
+    def type
+      "rel8"
+    end
+  end
+
+  class Rel32 < Operand
+    def type
+      "rel32"
+    end
+  end
+
   class Lit < Operand; end
+
+  attr_reader :position
 
   def initialize
     @instructions = []
+    @labels = {}
+    @position = 0
+  end
+
+  class UnknownLabel < Struct.new(:name, :assembler, :insn)
+    def works? type
+      type == "rel32"
+    end
+
+    def unknown_label?; true; end
+
+    def value
+      label = assembler.label_for(name)
+      label.position - (insn.position + insn.bytesize)
+    end
+  end
+
+  class Label < Struct.new(:name, :position)
+  end
+
+  def label_for name
+    @labels.fetch name
+  end
+
+  def label name
+    UnknownLabel.new(name, self)
+  end
+
+  def make_label name
+    @labels[name] = Label.new(name, position)
   end
 
   Registers.constants.grep(/^[A-Z0-9]*$/).each do |const|
@@ -63,9 +110,16 @@ class Fisk
   end
 
   class Instruction
-    def initialize insn, operands
+    attr_reader :position
+
+    def initialize insn, operands, position
       @insn     = insn
       @operands = operands
+      @position = position
+    end
+
+    def encodings
+      @insn.encodings
     end
 
     def encode buffer
@@ -73,6 +127,9 @@ class Fisk
       encoding.encode buffer, @operands
     end
 
+    def bytesize
+      @insn.encodings.first.bytesize
+    end
   end
 
   def gen name, params
@@ -92,7 +149,11 @@ class Fisk
 
     insn = forms.first
 
-    @instructions << Instruction.new(insn, params)
+    insn = Instruction.new(insn, params, position)
+    @position += insn.bytesize
+    @instructions << insn
+    params.each { |param| param.insn = insn if param.unknown_label? }
+
     self
   end
 
@@ -102,12 +163,20 @@ class Fisk
     end
   end
 
+  def imm8 val
+    Imm8.new val
+  end
+
   def imm32 val
     Imm32.new val
   end
 
-  def imm8 val
-    Imm8.new val
+  def rel8 val
+    Rel8.new val
+  end
+
+  def rel32 val
+    Rel32.new val
   end
 
   def lit val
@@ -116,6 +185,7 @@ class Fisk
   end
 
   def asm buf = StringIO.new(''.b), &block
+    @position = 0
     instance_eval(&block)
     write_to_buffer buf
     buf

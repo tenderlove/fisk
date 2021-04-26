@@ -14,6 +14,11 @@ class Fisk
         write_num buffer, value, size
       end
 
+      def add_code_offset buffer, operands, value, size
+        value = get_operand_value(value, operands)
+        write_num buffer, value, size
+      end
+
       def add_rex buffer, operands, mandatory, w, r, x, b
         return if mandatory == false
 

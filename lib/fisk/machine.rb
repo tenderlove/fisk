@@ -14,6 +14,7 @@ class Fisk
 
     class Form
       attr_reader :operands, :encodings
+
       def initialize operands, encodings
         @operands = operands
         @encodings = encodings

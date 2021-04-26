@@ -2,6 +2,58 @@ require "helper"
 require "fisk/helpers"
 
 class RunFiskTest < Fisk::Test
+  def disasm binary
+    cs = Crabstone::Disassembler.new(Crabstone::ARCH_X86, Crabstone::MODE_64)
+    cs.disasm(binary, 0x0000).each {|i|
+      printf("0x%x:\t%s\t\t%s\n",i.address, i.mnemonic, i.op_str)
+    }
+  end
+
+  def test_sum
+    fisk = Fisk.new
+    jitbuf = Fisk::Helpers.jitbuffer 4096
+
+    fisk.asm jitbuf do
+      push rbp
+      mov rbp, rsp
+      mov rdx, imm32(1)
+      xor rax, rax
+    make_label :loop
+      add rax, rdx
+      inc rdx
+      cmp rdx, imm32(10)
+      jbe label(:loop)
+      pop rbp
+      ret
+    end
+
+    func = jitbuf.to_function [], Fiddle::TYPE_INT
+    assert_equal 11.times.inject(:+), func.call
+  end
+
+  def test_jmp
+    fisk = Fisk.new
+    jitbuf = Fisk::Helpers.jitbuffer 4096
+
+    fisk.asm jitbuf do
+      push rbp
+      mov rbp, rsp
+      jmp label(:foo)
+      make_label(:bar)
+      mov rax, imm32(100)
+      pop rbp
+      ret
+      make_label(:foo)
+      jmp label(:bar)
+      mov rax, imm32(42)
+      pop rbp
+      ret
+    end
+
+    func = jitbuf.to_function [], Fiddle::TYPE_INT
+    assert_equal 100, func.call
+  end
+
   def test_run_fisk
     fisk = Fisk.new
     mem = Fisk::Helpers.mmap_jit 4096

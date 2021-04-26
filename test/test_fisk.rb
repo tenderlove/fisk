@@ -116,6 +116,36 @@ class FiskTest < Fisk::Test
     assert_equal "ret", i.mnemonic.to_s
   end
 
+  def test_jmp
+    fisk.jmp fisk.rel32(0)
+    binary = fisk.to_binary
+    i = disasm(binary).first
+    assert_equal "jmp", i.mnemonic.to_s
+    assert_equal binary.bytesize.to_s, i.op_str.to_s
+  end
+
+  def test_jmp_rel8
+    fisk.jmp fisk.rel8(-2)
+    binary = fisk.to_binary
+    assert_equal "\xEB\xFE".b, binary
+  end
+
+  def test_jbe_rel8
+    fisk.jbe fisk.rel8(2)
+    binary = fisk.to_binary
+    i = disasm(binary).first
+    assert_equal "jbe", i.mnemonic.to_s
+    assert_equal "4", i.op_str.to_s
+  end
+
+  def test_jbe_rel32
+    fisk.jbe fisk.rel32(2)
+    binary = fisk.to_binary
+    i = disasm(binary).first
+    assert_equal "jbe", i.mnemonic.to_s
+    assert_equal "8", i.op_str.to_s
+  end
+
   def disasm binary
     cs = Crabstone::Disassembler.new(Crabstone::ARCH_X86, Crabstone::MODE_64)
     cs.disasm binary, 0
