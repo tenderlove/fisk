@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-require "json"
-require "stringio"
+require "fisk/machine/encoding"
+require "fisk/machine"
 
 class Fisk
-  X86_64 = JSON.load_file File.join(File.dirname(__FILE__), "json-x86-64/x86_64.json")
-
   module Registers
     class Register < Struct.new(:name, :type, :value)
       def works? type
@@ -71,101 +69,34 @@ class Fisk
     end
 
     def encode buffer
-      encoding = @insn["encodings"].first
-
-      encoding.each do |type, info|
-        case type
-        when "opcode" then
-          byte = info["byte"].to_i(16)
-
-          if info["addend"]
-            byte |= get_operand_value(info["addend"])
-          end
-
-          buffer.putc byte
-        when "immediate"
-          value = get_operand_value(info["value"])
-          write_num buffer, value, info["size"]
-        when "ModRM"
-          mode = info["mode"].to_i(2)
-          reg = get_operand_value(info["reg"]) & 0x7
-          rm = get_operand_value(info["rm"]) & 0x7
-          buffer.putc ((mode << 6) | (reg << 3) | rm)
-        when "REX"
-          next if info["mandatory"] == false
-          rex = 0b0100
-          rex = (rex << 1) | check_rex(info["W"], @operands)
-          rex = (rex << 1) | check_rex(info["R"], @operands)
-          rex = (rex << 1) | check_rex(info["X"], @operands)
-          rex = (rex << 1) | check_rex(info["B"], @operands)
-          buffer.putc rex
-        else
-          raise NotImplementedError, "unknown type #{type}"
-        end
-      end
+      encoding = @insn.encodings.first
+      encoding.encode buffer, @operands
     end
 
-    private
-
-    def write_num buffer, num, size
-      size.times {
-        buffer.putc(num & 0xFF)
-        num >>= 8
-      }
-    end
-
-    def get_operand_value v
-      case v
-      when /^#(\d+)$/
-        @operands[$1.to_i].value
-      when /^(\d+)$/
-        $1.to_i
-      else
-        raise NotImplementedError
-      end
-    end
-
-    def check_rex v, operands
-      return 0 unless v
-
-      case v
-      when /^(\d+)$/
-        v.to_i
-      when /^#(\d+)$/
-        (operands[$1.to_i].value >> 3)
-      else
-        raise NotImplementedError, v
-      end
-    end
   end
 
   def gen name, params
-    possibles = X86_64["instructions"][name]["forms"].find_all do |insn|
-      if (insn["operands"] || []).length == params.length
-        params.zip((insn["operands"] || [])).all? { |want_op, have_op|
-          want_op.works?(have_op["type"])
+    forms = Machine.instruction_with_name(name).forms.find_all do |insn|
+      if insn.operands.length == params.length
+        params.zip(insn.operands).all? { |want_op, have_op|
+          want_op.works?(have_op.type)
         }
       else
         false
       end
     end
 
-    raise NotImplementedError, "couldn't find instruction" if possibles.length == 0
+    raise NotImplementedError, "couldn't find instruction" if forms.length == 0
 
     insn = nil
 
-    if possibles.length > 1
-      # pick the shortest instruction
-      possibles = possibles.sort_by { |thing| thing["encodings"].first.size }
-    end
-
-    insn = possibles.first
+    insn = forms.first
 
     @instructions << Instruction.new(insn, params)
     self
   end
 
-  X86_64["instructions"].keys.each do |insn|
+  Machine.instructions.keys.each do |insn|
     define_method(insn.downcase) do |*params|
       gen insn, params
     end

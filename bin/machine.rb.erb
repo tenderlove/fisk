@@ -1,0 +1,67 @@
+<%= license.map { |x| "# #{x.chomp} " }.join "\n" %>
+
+<%-
+  doc.root.children.each do |instruction|
+    next unless instruction.name == "Instruction"
+    name = instruction["name"]
+-%>
+  # Instruction <%= name %>
+  forms = []
+  <%-
+    instruction.children.each do |form|
+      next unless form.name == "InstructionForm"
+  -%>
+  operands = []
+  encodings = []
+    <%-
+      form.children.each do |child|
+        next if child.text?
+        case child.name
+    -%>
+      <%- when "Operand" -%>
+  operands << Fisk::Machine::Operand.new(<%= child["type"].dump %>)
+      <%- when "Encoding" -%>
+  encodings << Class.new(Fisk::Machine::Encoding) {
+    def encode buffer, operands
+      <%-
+        child.children.each do |encoding|
+          next if encoding.text?
+          case encoding.name
+          when "Opcode"
+      -%>
+      add_opcode buffer, operands, 0x<%= sprintf("%02X", encoding["byte"].to_i(16)) %>, <%= encoding["addend"].inspect %>
+        <%- when "Immediate" -%>
+      add_immediate buffer, operands, <%= encoding["value"].dump %>, <%= encoding["size"].to_i %>
+        <%- when "REX" -%>
+      add_rex(buffer, operands,
+              <%= !(encoding["mandatory"] == "false") %>,
+              <%= encoding["W"].inspect %>,
+              <%= encoding["R"].inspect %>,
+              <%= encoding["X"].inspect %>,
+              <%= encoding["B"].inspect %>)
+        <%- when "ModRM" -%>
+      add_modrm(buffer, operands,
+              <%= encoding["mode"].to_i(2) %>,
+              <%= encoding["reg"].inspect %>,
+              <%= encoding["rm"].inspect %>)
+        <%- when "Prefix" -%>
+      add_prefix buffer, operands, 0x<%= sprintf("%02X", encoding["byte"].to_i(16)) %>, <%= encoding["mandatory"] %>
+        <%- else -%>
+      add_<%= encoding.name %> buffer, operands
+        <%- end -%>
+      <%- end -%>
+    end
+  }.new
+      <%- when "ISA" -%>
+      <%- when "ImplicitOperand" -%>
+      <%-
+          else
+            raise NotImplementedError, child.name
+      -%>
+      <%- end -%>
+    <%- end -%>
+  forms << Fisk::Machine::Form.new(operands, encodings)
+  <%- end -%>
+  Fisk::Machine::Instructions[<%= name.dump %>] = Fisk::Machine::Instruction.new(<%= name.dump %>, forms)
+
+<%- end -%>
