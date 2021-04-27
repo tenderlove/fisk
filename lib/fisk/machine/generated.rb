@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # ======================================= 
 # Opcodes Database license (2-clause BSD) 
 # ======================================= 
