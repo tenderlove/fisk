@@ -66,7 +66,11 @@ class Fisk
     end
   end
 
-  class Lit < Operand; end
+  class Lit < Operand
+    def type
+      value.to_s
+    end
+  end
 
   attr_reader :position
 
@@ -133,7 +137,8 @@ class Fisk
   end
 
   def gen name, params
-    forms = Machine.instruction_with_name(name).forms.find_all do |insn|
+    insns = Machine.instruction_with_name(name)
+    forms = insns.forms.find_all do |insn|
       if insn.operands.length == params.length
         params.zip(insn.operands).all? { |want_op, have_op|
           want_op.works?(have_op.type)
@@ -143,7 +148,7 @@ class Fisk
       end
     end
 
-    raise NotImplementedError, "couldn't find instruction" if forms.length == 0
+    raise NotImplementedError, "couldn't find instruction #{name}" if forms.length == 0
 
     insn = nil
 
@@ -181,7 +186,7 @@ class Fisk
 
   def lit val
     # to_s because we're getting the value from JSON as a string
-    Lit.new val.to_s
+    Lit.new val
   end
 
   def asm buf = StringIO.new(''.b), &block
