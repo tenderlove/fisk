@@ -2,7 +2,7 @@ class Fisk
   class Machine
     Instructions = {}
 
-    Operand = Struct.new :type
+    Operand = Struct.new(:type, :input, :output)
 
     def self.instructions
       Instructions

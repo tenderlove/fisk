@@ -2,6 +2,13 @@
 
 <%= license.map { |x| "# #{x.chomp} " }.join "\n" %>
 
+class Fisk
+  class Machine
+    OPERANDS = [
+<%- unique_operands.each do |u_op| -%>
+      Fisk::Machine::Operand.new(<%= u_op[0].dump %>, <%= u_op[1] || "nil" %>, <%= u_op[2] || "nil" %>),
+<% end %>
+    ]
 <%-
   doc.root.children.each do |instruction|
     next unless instruction.name == "Instruction"
@@ -21,7 +28,7 @@
         case child.name
     -%>
       <%- when "Operand" -%>
-  operands << Fisk::Machine::Operand.new(<%= child["type"].dump %>)
+  operands << OPERANDS[<%= unique_operands.index(%w{ type input output }.map { |n| child[n] }) %>]
       <%-
         when "Encoding"
           size = 0
@@ -87,3 +94,5 @@
   Fisk::Machine::Instructions[<%= name.dump %>] = Fisk::Machine::Instruction.new(<%= name.dump %>, forms)
 
 <%- end -%>
+  end
+end
