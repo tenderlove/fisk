@@ -1,14 +1,12 @@
 # Fisk - A Pure Ruby Assembler
 
 This is a pure Ruby assembler (I guess).  I'm not 100% sure if it counts as
-pure Ruby because it just reads a JSON file and metaprograms most of it.
+pure Ruby because it just reads an XML file and metaprograms most of it.
 Anyway, you can use it to write assembly in Ruby, then have it assembled.
 
 I named it after Wilson Fisk mainly because it reminds me of [this
 project](https://github.com/seattlerb/wilson) and because I've been playing
 lots of Spider-Man.
-
-If you want to hack on this project make sure to init the git submodules!
 
 ## Usage
 
