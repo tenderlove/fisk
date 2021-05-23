@@ -42,6 +42,16 @@ class Fisk
     def unknown_label?; false; end
   end
 
+  class M64 < Operand
+    def type
+      "m64"
+    end
+  end
+
+  def m64 x
+    M64.new x
+  end
+
   class Imm8 < Operand
     def type
       "imm8"
@@ -51,6 +61,12 @@ class Fisk
   class Imm32 < Operand
     def type
       "imm32"
+    end
+  end
+
+  class Imm64 < Operand
+    def type
+      "imm64"
     end
   end
 
@@ -184,6 +200,10 @@ class Fisk
 
   def imm32 val
     Imm32.new val
+  end
+
+  def imm64 val
+    Imm64.new val
   end
 
   def rel8 val
