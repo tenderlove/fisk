@@ -73,6 +73,8 @@ class Fisk
               <%= encoding["rm"].inspect %>)
         <%- when "Prefix" -%>
       add_prefix buffer, operands, 0x<%= sprintf("%02X", encoding["byte"].to_i(16)) %>, <%= encoding["mandatory"] %>
+        <%- when "DataOffset" -%>
+      add_data_offset buffer, operands, <%= encoding["value"].dump %>, <%= encoding["size"].to_i %>
         <%- else -%>
       add_<%= encoding.name %> buffer, operands
         <%- end -%>

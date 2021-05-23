@@ -66,6 +66,12 @@ class Fisk
     end
   end
 
+  class MOffs64 < Operand
+    def type
+      "moffs64"
+    end
+  end
+
   class Lit < Operand
     def type
       value.to_s
@@ -166,6 +172,10 @@ class Fisk
     define_method(insn.downcase) do |*params|
       gen insn, params
     end
+  end
+
+  def moffs64 val
+    MOffs64.new val
   end
 
   def imm8 val

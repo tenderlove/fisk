@@ -19183,7 +19183,7 @@ class Fisk
   encodings << Class.new(Fisk::Machine::Encoding) {
     def encode buffer, operands
       add_opcode buffer, operands, 0xA1, nil
-      add_DataOffset buffer, operands
+      add_data_offset buffer, operands, "#1", 4
     end
 
     def bytesize; 1; end
@@ -19300,7 +19300,7 @@ class Fisk
               nil,
               nil)
       add_opcode buffer, operands, 0xA1, nil
-      add_DataOffset buffer, operands
+      add_data_offset buffer, operands, "#1", 8
     end
 
     def bytesize; 2; end
@@ -19598,7 +19598,7 @@ class Fisk
   encodings << Class.new(Fisk::Machine::Encoding) {
     def encode buffer, operands
       add_opcode buffer, operands, 0xA3, nil
-      add_DataOffset buffer, operands
+      add_data_offset buffer, operands, "#0", 4
     end
 
     def bytesize; 1; end
@@ -19617,7 +19617,7 @@ class Fisk
               nil,
               nil)
       add_opcode buffer, operands, 0xA3, nil
-      add_DataOffset buffer, operands
+      add_data_offset buffer, operands, "#0", 8
     end
 
     def bytesize; 2; end
