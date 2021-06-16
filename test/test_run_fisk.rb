@@ -2,13 +2,6 @@ require "helper"
 require "fisk/helpers"
 
 class RunFiskTest < Fisk::Test
-  def disasm binary
-    cs = Crabstone::Disassembler.new(Crabstone::ARCH_X86, Crabstone::MODE_64)
-    cs.disasm(binary, 0x0000).each {|i|
-      printf("0x%x:\t%s\t\t%s\n",i.address, i.mnemonic, i.op_str)
-    }
-  end
-
   def test_sum
     fisk = Fisk.new
     jitbuf = Fisk::Helpers.jitbuffer 4096

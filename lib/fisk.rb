@@ -4,13 +4,28 @@ require "fisk/machine/encoding"
 require "fisk/machine"
 
 class Fisk
+  class Operand < Struct.new(:value)
+    def type; value; end
+    def works? type; self.type == type; end
+    def unknown_label?; false; end
+    def extended_register?; false; end
+  end
+
   module Registers
-    class Register < Struct.new(:name, :type, :value)
+    class Register < Operand
+      attr_reader :name, :type
+
+      def initialize name, type, value
+        @name = name
+        @type = type
+        super(value)
+      end
+
       def works? type
         type == self.name || type == self.type
       end
 
-      def unknown_label?; false; end
+      def extended_register?; value > 7; end
     end
 
     EAX = Register.new "eax", "r32", 0
@@ -36,11 +51,6 @@ class Fisk
     end
   end
 
-  class Operand < Struct.new(:value)
-    def type; value; end
-    def works? type; self.type == type; end
-    def unknown_label?; false; end
-  end
 
   class M64 < Operand
     def type

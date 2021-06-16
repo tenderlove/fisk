@@ -8,6 +8,13 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_jmp_extended_register
+    fisk.jmp fisk.r8
+    i = disasm(fisk.to_binary).first
+    assert_equal "jmp", i.mnemonic.to_s
+    assert_equal "r8", i.op_str.to_s
+  end
+
   def test_sub
     fisk.sub fisk.rsp, fisk.imm8(16)
     i = disasm(fisk.to_binary).first
