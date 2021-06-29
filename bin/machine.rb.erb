@@ -23,6 +23,10 @@ class Fisk
   operands = []
   encodings = []
     <%-
+      operands = form.children.reject(&:text?).find_all { |c| c.name == "Operand" }
+    -%>
+  # <%= form["gas-name"] %>: <%= operands.map { |op| op["type"] }.join(", ") %>
+    <%-
       form.children.each do |child|
         next if child.text?
         case child.name
