@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "stringio"
 require "fisk/machine/encoding"
 require "fisk/machine"
 
@@ -9,6 +10,7 @@ class Fisk
     def works? type; self.type == type; end
     def unknown_label?; false; end
     def extended_register?; false; end
+    def m64?; false; end
   end
 
   module Registers
@@ -53,13 +55,23 @@ class Fisk
 
 
   class M64 < Operand
+    attr_reader :displacement
+
+    def initialize register, displacement
+      super(register.value)
+      @register     = register
+      @displacement = displacement
+    end
+
     def type
       "m64"
     end
+
+    def m64?; true; end
   end
 
-  def m64 x
-    M64.new x
+  def m64 x, displacement = 0
+    M64.new x, displacement
   end
 
   class Imm8 < Operand

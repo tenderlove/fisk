@@ -4,9 +4,24 @@ class Fisk
       private
 
       def add_modrm buffer, operands, mode, reg, rm
+        offset_bytes = 0
+        if mem = operands.find(&:m64?)
+          if mem.displacement > 0
+            if mem.displacement <= 0xFF
+              offset_bytes = 1
+              mode |= 0x1
+            else
+              offset_bytes = 4
+              mode |= 0x2
+            end
+          end
+        end
         reg = get_operand_value(reg, operands) & 0x7
         rm = get_operand_value(rm, operands) & 0x7
         buffer.putc ((mode << 6) | (reg << 3) | rm)
+        if mem && mem.displacement > 0
+          write_num buffer, mem.displacement, offset_bytes
+        end
       end
 
       def add_immediate buffer, operands, value, size

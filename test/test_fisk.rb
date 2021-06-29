@@ -8,6 +8,20 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_read_with_zero_offset
+    fisk.mov fisk.m64(fisk.rcx), fisk.rcx
+    i = disasm(fisk.to_binary).first
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal "qword ptr [rcx], rcx", i.op_str.to_s
+  end
+
+  def test_read_with_non_zero_offset
+    fisk.mov fisk.m64(fisk.rcx, 0xa), fisk.rcx
+    i = disasm(fisk.to_binary).first
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal "qword ptr [rcx + 0xa], rcx", i.op_str.to_s
+  end
+
   def test_jmp_extended_register
     fisk.jmp fisk.r8
     i = disasm(fisk.to_binary).first
