@@ -16,26 +16,23 @@ class Fisk
             end
           end
         end
-        reg = get_operand_value(reg, operands) & 0x7
-        rm = get_operand_value(rm, operands) & 0x7
+        reg = reg & 0x7
+        rm = rm & 0x7
         buffer.putc ((mode << 6) | (reg << 3) | rm)
         if mem && mem.displacement > 0
           write_num buffer, mem.displacement, offset_bytes
         end
       end
 
-      def add_immediate buffer, operands, value, size
-        value = get_operand_value(value, operands)
+      def add_immediate buffer, value, size
         write_num buffer, value, size
       end
 
-      def add_code_offset buffer, operands, value, size
-        value = get_operand_value(value, operands)
+      def add_code_offset buffer, value, size
         write_num buffer, value, size
       end
 
-      def add_data_offset buffer, operands, value, size
-        value = get_operand_value(value, operands)
+      def add_data_offset buffer, value, size
         write_num buffer, value, size
       end
 
@@ -43,43 +40,16 @@ class Fisk
         return if mandatory == false && !operands.any?(&:extended_register?)
 
         rex = 0b0100
-        rex = (rex << 1) | check_rex(w, operands)
-        rex = (rex << 1) | check_rex(r, operands)
-        rex = (rex << 1) | check_rex(x, operands)
-        rex = (rex << 1) | check_rex(b, operands)
+        rex = (rex << 1) | w
+        rex = (rex << 1) | r
+        rex = (rex << 1) | x
+        rex = (rex << 1) | b
         buffer.putc rex
       end
 
-      def add_opcode buffer, operands, byte, addend
-        if addend
-          byte |= get_operand_value(addend, operands)
-        end
-
+      def add_opcode buffer, byte, addend
+        byte |= addend
         buffer.putc byte
-      end
-
-      def get_operand_value v, operands
-        case v
-        when /^#(\d+)$/
-          operands[$1.to_i].value
-        when /^(\d+)$/
-          $1.to_i
-        else
-          raise NotImplementedError
-        end
-      end
-
-      def check_rex v, operands
-        return 0 unless v
-
-        case v
-        when /^(\d+)$/
-          v.to_i
-        when /^#(\d+)$/
-          (operands[$1.to_i].value >> 3)
-        else
-          raise NotImplementedError, v
-        end
       end
 
       def write_num buffer, num, size
