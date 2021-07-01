@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "fisk"
-  s.version     = "1.0.0"
+  s.version     = "2.0.0"
   s.summary     = "Write assembly in Ruby!"
   s.description = "Tired of writing Ruby in Ruby? Now you can write assembly in Ruby!"
   s.authors     = ["Aaron Patterson"]
