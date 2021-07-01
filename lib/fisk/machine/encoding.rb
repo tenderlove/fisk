@@ -7,7 +7,7 @@ class Fisk
         offset_bytes = 0
         if mem = operands.find(&:m64?)
           if mem.displacement != 0
-            if mem.displacement.abs <= 0xFF
+            if 0xFF == mem.displacement | 0xFF
               offset_bytes = 1
               mode |= 0x1
             else
