@@ -8,6 +8,17 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_lazy_labels
+    fisk.jmp fisk.label(:foo)
+    fisk.make_label(:foo)
+    fisk.nop
+    jmp, nop = disasm(fisk.to_binary)
+    assert_equal "jmp", jmp.mnemonic.to_s
+    assert_equal "5", jmp.op_str.to_s
+    assert_equal "nop", nop.mnemonic.to_s
+    assert_equal 5, nop.address
+  end
+
   def test_read_with_edge_negative_offset
     fisk.mov fisk.m64(fisk.rcx, -0xFF), fisk.rcx
     i = disasm(fisk.to_binary).first

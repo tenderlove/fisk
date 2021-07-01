@@ -61,6 +61,13 @@ class Fisk
         @pos += 1
       end
 
+      def seek pos, whence = IO::SEEK_SET
+        raise NotImplementedError if whence != IO::SEEK_SET
+
+        @pos = pos
+        self
+      end
+
       def to_function params, ret
         Fiddle::Function.new memory.to_i, params, ret
       end

@@ -2,7 +2,60 @@ require "helper"
 require "fisk/helpers"
 
 class RunFiskTest < Fisk::Test
-  def test_sum2
+  def test_forward_label_rel32
+    fisk = Fisk.new
+    jitbuf = Fisk::Helpers.jitbuffer 4096
+
+    str = " " * 0xFFFFF
+    ptr = Fiddle::Pointer[str]
+
+    fisk.asm jitbuf do
+      push rbp
+      mov rbp, rsp
+      mov rdx, imm32(1)
+      jmp label(:foo)
+      mov r8, imm64(ptr.to_i)
+      mov r8, m64(r8, 0xFFFF)
+      int lit(3) # crash if we don't jump over this
+    make_label :foo
+      mov rax, imm32(0x3)
+      pop rbp
+      ret
+    end
+
+    func = jitbuf.to_function [], Fiddle::TYPE_INT
+    assert_equal 3, func.call
+  end
+
+  def test_label_rel32
+    fisk = Fisk.new
+    jitbuf = Fisk::Helpers.jitbuffer 4096
+
+    str = " " * 0xFFFFF
+    ptr = Fiddle::Pointer[str]
+
+    fisk.asm jitbuf do
+      push rbp
+      mov rbp, rsp
+      mov rdx, imm32(1)
+      mov r8, imm64(ptr.to_i)
+      mov r8, m64(r8, 0xFFFF)
+      xor rax, rax
+    make_label :loop
+      add rax, rdx
+      500.times { nop }
+      inc rdx
+      cmp rdx, imm32(10)
+      jbe label(:loop)
+      pop rbp
+      ret
+    end
+
+    func = jitbuf.to_function [], Fiddle::TYPE_INT
+    assert_equal 11.times.inject(:+), func.call
+  end
+
+  def test_label_rel8
     fisk = Fisk.new
     jitbuf = Fisk::Helpers.jitbuffer 4096
 

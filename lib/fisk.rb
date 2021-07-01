@@ -123,7 +123,7 @@ class Fisk
     @position = 0
   end
 
-  class UnknownLabel < Struct.new(:name, :assembler, :insn)
+  class UnknownLabel < Struct.new(:name)
     def works? type
       type == "rel32"
     end
@@ -136,19 +136,16 @@ class Fisk
     end
   end
 
-  class Label < Struct.new(:name, :position)
-  end
-
-  def label_for name
-    @labels.fetch name
+  class Label < Struct.new(:name)
+    def label?; true; end
   end
 
   def label name
-    UnknownLabel.new(name, self)
+    UnknownLabel.new(name)
   end
 
   def make_label name
-    @labels[name] = Label.new(name, position)
+    @instructions << Label.new(name)
   end
 
   Registers.constants.grep(/^[A-Z0-9]*$/).each do |const|
@@ -157,25 +154,77 @@ class Fisk
   end
 
   class Instruction
-    attr_reader :position
-
-    def initialize insn, operands, position
+    def initialize insn, form, operands
       @insn     = insn
+      @form     = form
       @operands = operands
-      @position = position
     end
 
     def encodings
-      @insn.encodings
+      @form.encodings
     end
 
-    def encode buffer
-      encoding = @insn.encodings.first
+    def encode buffer, labels
+      encoding = @form.encodings.first
       encoding.encode buffer, @operands
+      true
     end
 
     def bytesize
-      @insn.encodings.first.bytesize
+      @form.encodings.first.bytesize
+    end
+
+    def label?; false; end
+  end
+
+  class UnresolvedInstruction
+    def initialize insn, form, operand
+      @insn      = insn
+      @form      = form
+      @operand   = operand
+      @saved_pos = nil
+    end
+
+    def encode buffer, labels
+      # Estimate by using a rel32 offset
+      form          = find_form "rel32"
+      encoding      = form.encodings.first
+      operand_klass = Rel32
+
+      if labels.key? @operand.name
+        if @saved_pos
+          # Only use rel32 if we saved the position
+          buffer.seek @saved_pos, IO::SEEK_SET
+        else
+          estimated_offset = labels[@operand.name] - (buffer.pos + encoding.bytesize)
+
+          if estimated_offset >= -128 && estimated_offset <= 127
+            # fits in a rel8
+            operand_klass = Rel8
+            form          = find_form "rel8"
+            encoding      = form.encodings.first
+          end
+        end
+
+        jump_len = -(buffer.pos + encoding.bytesize - labels[@operand.name])
+        encoding.encode buffer, [operand_klass.new(jump_len)]
+        true
+      else
+        # We've hit a label that doesn't exist yet
+        # Save the buffer position so we can seek back to it later
+        @saved_pos = buffer.pos
+        # Write 5 bytes to reserve our spot
+        encoding.bytesize.times { buffer.putc 0 }
+        false
+      end
+    end
+
+    def label?; false; end
+
+    private
+
+    def find_form form_type
+      @insn.forms.find { |form| form.operands.first.type == form_type }
     end
   end
 
@@ -226,7 +275,25 @@ class Fisk
   private
 
   def write_to_buffer buffer
-    @instructions.each { |insn| insn.encode buffer }
+    labels = {}
+    unresolved = []
+    @instructions.each do |insn|
+      if insn.label?
+        labels[insn.name] = buffer.pos
+      else
+        unless insn.encode buffer, labels
+          unresolved << insn
+        end
+      end
+    end
+
+    return if unresolved.empty?
+
+    pos = buffer.pos
+    unresolved.each do |insn|
+      insn.encode buffer, labels
+    end
+    buffer.seek pos, IO::SEEK_SET
   end
 
   def gen_with_insn insns, params
@@ -244,12 +311,17 @@ class Fisk
 
     insn = nil
 
-    insn = forms.first
+    form = forms.first
 
-    insn = Instruction.new(insn, params, position)
-    @position += insn.bytesize
+    insn = if params.any?(&:unknown_label?)
+             if params.length > 1
+               raise ArgumentError, "labels only work with single param jump instructions"
+             end
+             UnresolvedInstruction.new(insns, form, params.first)
+           else
+             Instruction.new(insns, form, params)
+           end
     @instructions << insn
-    params.each { |param| param.insn = insn if param.unknown_label? }
 
     self
   end
