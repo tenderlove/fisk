@@ -10,7 +10,7 @@ class Fisk
     operands << OPERAND_TYPES[41]
     operands << OPERAND_TYPES[42]
     operands << OPERAND_TYPES[42]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x46, 0
@@ -22,7 +22,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    KXNORQ = Fisk::Machine::Instruction.new("KXNORQ", forms)
+    forms << Form.new(operands, encodings)
+    KXNORQ = Instruction.new("KXNORQ", forms)
   end
 end

@@ -9,7 +9,7 @@ class Fisk
     # pabsd: mm, mm
     operands << OPERAND_TYPES[35]
     operands << OPERAND_TYPES[36]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -28,13 +28,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # pabsd: mm, m64
     operands << OPERAND_TYPES[35]
     operands << OPERAND_TYPES[18]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -53,13 +53,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # pabsd: xmm, xmm
     operands << OPERAND_TYPES[26]
     operands << OPERAND_TYPES[24]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, true
         add_rex(buffer, operands,
@@ -79,13 +79,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # pabsd: xmm, m128
     operands << OPERAND_TYPES[26]
     operands << OPERAND_TYPES[25]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, true
         add_rex(buffer, operands,
@@ -105,7 +105,7 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    PABSD = Fisk::Machine::Instruction.new("PABSD", forms)
+    forms << Form.new(operands, encodings)
+    PABSD = Instruction.new("PABSD", forms)
   end
 end

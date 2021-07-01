@@ -9,7 +9,7 @@ class Fisk
     # crc32b: r32, r8
     operands << OPERAND_TYPES[12]
     operands << OPERAND_TYPES[3]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF2, true
         add_rex(buffer, operands,
@@ -29,13 +29,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # crc32w: r32, r16
     operands << OPERAND_TYPES[12]
     operands << OPERAND_TYPES[8]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, false
         add_prefix buffer, operands, 0xF2, true
@@ -56,13 +56,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # crc32l: r32, r32
     operands << OPERAND_TYPES[12]
     operands << OPERAND_TYPES[13]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF2, true
         add_rex(buffer, operands,
@@ -82,13 +82,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # crc32b: r32, m8
     operands << OPERAND_TYPES[12]
     operands << OPERAND_TYPES[4]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF2, true
         add_rex(buffer, operands,
@@ -108,13 +108,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # crc32w: r32, m16
     operands << OPERAND_TYPES[12]
     operands << OPERAND_TYPES[9]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, false
         add_prefix buffer, operands, 0xF2, true
@@ -135,13 +135,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # crc32l: r32, m32
     operands << OPERAND_TYPES[12]
     operands << OPERAND_TYPES[14]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF2, true
         add_rex(buffer, operands,
@@ -161,13 +161,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # crc32b: r64, r8
     operands << OPERAND_TYPES[16]
     operands << OPERAND_TYPES[3]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF2, true
         add_rex(buffer, operands,
@@ -187,13 +187,13 @@ class Fisk
 
       def bytesize; 5; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # crc32q: r64, r64
     operands << OPERAND_TYPES[16]
     operands << OPERAND_TYPES[17]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF2, true
         add_rex(buffer, operands,
@@ -213,13 +213,13 @@ class Fisk
 
       def bytesize; 5; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # crc32b: r64, m8
     operands << OPERAND_TYPES[16]
     operands << OPERAND_TYPES[4]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF2, true
         add_rex(buffer, operands,
@@ -239,13 +239,13 @@ class Fisk
 
       def bytesize; 5; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # crc32q: r64, m64
     operands << OPERAND_TYPES[16]
     operands << OPERAND_TYPES[18]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF2, true
         add_rex(buffer, operands,
@@ -265,7 +265,7 @@ class Fisk
 
       def bytesize; 5; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    CRC32 = Fisk::Machine::Instruction.new("CRC32", forms)
+    forms << Form.new(operands, encodings)
+    CRC32 = Instruction.new("CRC32", forms)
   end
 end

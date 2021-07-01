@@ -2,12 +2,13 @@
 #
 <%= license.map { |x| "# #{x.chomp} " }.join "\n" %>
 
-require "fisk/machine"
-require "fisk/machine/encoding"
+require "fisk/encoding"
 
 class Fisk
   module Instructions
-    Operand = Struct.new(:type, :input, :output)
+    Operand     = Struct.new(:type, :input, :output)
+    Form        = Struct.new(:operands, :encodings)
+    Instruction = Struct.new(:name, :forms)
 
     OPERAND_TYPES = [
 <%- unique_operands.each do |u_op| -%>

@@ -9,7 +9,7 @@ class Fisk
     # vpscatterdq: vm32x{k}, xmm
     operands << OPERAND_TYPES[103]
     operands << OPERAND_TYPES[24]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0xA0, 0
@@ -21,13 +21,13 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vpscatterdq: vm32x{k}, ymm
     operands << OPERAND_TYPES[103]
     operands << OPERAND_TYPES[60]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0xA0, 0
@@ -39,13 +39,13 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vpscatterdq: vm32y{k}, zmm
     operands << OPERAND_TYPES[104]
     operands << OPERAND_TYPES[63]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0xA0, 0
@@ -57,7 +57,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    VPSCATTERDQ = Fisk::Machine::Instruction.new("VPSCATTERDQ", forms)
+    forms << Form.new(operands, encodings)
+    VPSCATTERDQ = Instruction.new("VPSCATTERDQ", forms)
   end
 end

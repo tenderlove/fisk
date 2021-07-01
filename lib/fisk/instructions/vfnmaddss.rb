@@ -11,7 +11,7 @@ class Fisk
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[24]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x7A, 0
@@ -24,7 +24,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x7A, 0
@@ -37,7 +37,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vfnmaddss: xmm, xmm, xmm, m32
@@ -45,7 +45,7 @@ class Fisk
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[14]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x7A, 0
@@ -58,7 +58,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vfnmaddss: xmm, xmm, m32, xmm
@@ -66,7 +66,7 @@ class Fisk
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[14]
     operands << OPERAND_TYPES[24]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x7A, 0
@@ -79,7 +79,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    VFNMADDSS = Fisk::Machine::Instruction.new("VFNMADDSS", forms)
+    forms << Form.new(operands, encodings)
+    VFNMADDSS = Instruction.new("VFNMADDSS", forms)
   end
 end

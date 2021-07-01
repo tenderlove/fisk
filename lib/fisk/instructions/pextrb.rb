@@ -10,7 +10,7 @@ class Fisk
     operands << OPERAND_TYPES[27]
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, true
         add_rex(buffer, operands,
@@ -31,14 +31,14 @@ class Fisk
 
       def bytesize; 5; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # pextrb: m8, xmm, imm8
     operands << OPERAND_TYPES[43]
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, true
         add_rex(buffer, operands,
@@ -59,7 +59,7 @@ class Fisk
 
       def bytesize; 5; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    PEXTRB = Fisk::Machine::Instruction.new("PEXTRB", forms)
+    forms << Form.new(operands, encodings)
+    PEXTRB = Instruction.new("PEXTRB", forms)
   end
 end

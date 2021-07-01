@@ -8,7 +8,7 @@ class Fisk
     encodings = []
     # setnp: r8
     operands << OPERAND_TYPES[47]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -26,12 +26,12 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # setnp: m8
     operands << OPERAND_TYPES[43]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -49,7 +49,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    SETNP = Fisk::Machine::Instruction.new("SETNP", forms)
+    forms << Form.new(operands, encodings)
+    SETNP = Instruction.new("SETNP", forms)
   end
 end

@@ -9,7 +9,7 @@ class Fisk
     # knotw: k, k
     operands << OPERAND_TYPES[41]
     operands << OPERAND_TYPES[42]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x44, 0
@@ -21,7 +21,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    KNOTW = Fisk::Machine::Instruction.new("KNOTW", forms)
+    forms << Form.new(operands, encodings)
+    KNOTW = Instruction.new("KNOTW", forms)
   end
 end

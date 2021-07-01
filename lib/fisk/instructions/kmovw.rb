@@ -9,7 +9,7 @@ class Fisk
     # kmovw: k, k
     operands << OPERAND_TYPES[41]
     operands << OPERAND_TYPES[42]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x90, 0
@@ -21,13 +21,13 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # kmovw: k, r32
     operands << OPERAND_TYPES[41]
     operands << OPERAND_TYPES[13]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x92, 0
@@ -39,13 +39,13 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # kmovw: k, m16
     operands << OPERAND_TYPES[41]
     operands << OPERAND_TYPES[9]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x90, 0
@@ -57,13 +57,13 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # kmovw: r32, k
     operands << OPERAND_TYPES[27]
     operands << OPERAND_TYPES[42]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x93, 0
@@ -75,13 +75,13 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # kmovw: m16, k
     operands << OPERAND_TYPES[45]
     operands << OPERAND_TYPES[42]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x91, 0
@@ -93,7 +93,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    KMOVW = Fisk::Machine::Instruction.new("KMOVW", forms)
+    forms << Form.new(operands, encodings)
+    KMOVW = Instruction.new("KMOVW", forms)
   end
 end

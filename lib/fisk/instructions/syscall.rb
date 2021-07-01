@@ -7,7 +7,7 @@ class Fisk
     operands = []
     encodings = []
     # syscall: 
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_opcode buffer, 0x0F, 0
         add_opcode buffer, 0x05, 0
@@ -15,7 +15,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    SYSCALL = Fisk::Machine::Instruction.new("SYSCALL", forms)
+    forms << Form.new(operands, encodings)
+    SYSCALL = Instruction.new("SYSCALL", forms)
   end
 end

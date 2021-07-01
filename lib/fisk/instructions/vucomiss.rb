@@ -9,7 +9,7 @@ class Fisk
     # vucomiss: xmm, xmm
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[24]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x2E, 0
@@ -21,13 +21,13 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vucomiss: xmm, m32
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[14]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x2E, 0
@@ -39,13 +39,13 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vucomiss: xmm, m32
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[14]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x2E, 0
@@ -57,14 +57,14 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vucomiss: xmm, xmm, {sae}
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[72]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x2E, 0
@@ -76,7 +76,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    VUCOMISS = Fisk::Machine::Instruction.new("VUCOMISS", forms)
+    forms << Form.new(operands, encodings)
+    VUCOMISS = Instruction.new("VUCOMISS", forms)
   end
 end

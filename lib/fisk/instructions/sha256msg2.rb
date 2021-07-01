@@ -9,7 +9,7 @@ class Fisk
     # sha256msg2: xmm, xmm
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[24]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -28,13 +28,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # sha256msg2: xmm, m128
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[25]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -53,7 +53,7 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    SHA256MSG2 = Fisk::Machine::Instruction.new("SHA256MSG2", forms)
+    forms << Form.new(operands, encodings)
+    SHA256MSG2 = Instruction.new("SHA256MSG2", forms)
   end
 end

@@ -7,7 +7,7 @@ class Fisk
     operands = []
     encodings = []
     # ud2: 
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_opcode buffer, 0x0F, 0
         add_opcode buffer, 0x0B, 0
@@ -15,7 +15,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    UD2 = Fisk::Machine::Instruction.new("UD2", forms)
+    forms << Form.new(operands, encodings)
+    UD2 = Instruction.new("UD2", forms)
   end
 end

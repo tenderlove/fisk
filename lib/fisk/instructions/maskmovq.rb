@@ -9,7 +9,7 @@ class Fisk
     # maskmovq: mm, mm
     operands << OPERAND_TYPES[36]
     operands << OPERAND_TYPES[36]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -27,7 +27,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    MASKMOVQ = Fisk::Machine::Instruction.new("MASKMOVQ", forms)
+    forms << Form.new(operands, encodings)
+    MASKMOVQ = Instruction.new("MASKMOVQ", forms)
   end
 end

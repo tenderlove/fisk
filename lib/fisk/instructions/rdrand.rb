@@ -8,7 +8,7 @@ class Fisk
     encodings = []
     # rdrand: r16
     operands << OPERAND_TYPES[38]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, false
         add_rex(buffer, operands,
@@ -27,12 +27,12 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # rdrand: r32
     operands << OPERAND_TYPES[27]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -50,12 +50,12 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # rdrand: r64
     operands << OPERAND_TYPES[28]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               true,
@@ -73,7 +73,7 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    RDRAND = Fisk::Machine::Instruction.new("RDRAND", forms)
+    forms << Form.new(operands, encodings)
+    RDRAND = Instruction.new("RDRAND", forms)
   end
 end

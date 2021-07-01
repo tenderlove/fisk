@@ -7,7 +7,7 @@ class Fisk
     operands = []
     encodings = []
     # mwait: 
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_opcode buffer, 0x0F, 0
         add_opcode buffer, 0x01, 0
@@ -16,7 +16,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    MWAIT = Fisk::Machine::Instruction.new("MWAIT", forms)
+    forms << Form.new(operands, encodings)
+    MWAIT = Instruction.new("MWAIT", forms)
   end
 end

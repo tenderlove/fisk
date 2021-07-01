@@ -9,7 +9,7 @@ class Fisk
     # vbroadcastf32x4: ymm{k}{z}, m128
     operands << OPERAND_TYPES[59]
     operands << OPERAND_TYPES[25]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x1A, 0
@@ -21,13 +21,13 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vbroadcastf32x4: zmm{k}{z}, m128
     operands << OPERAND_TYPES[62]
     operands << OPERAND_TYPES[25]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x1A, 0
@@ -39,7 +39,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    VBROADCASTF32X4 = Fisk::Machine::Instruction.new("VBROADCASTF32X4", forms)
+    forms << Form.new(operands, encodings)
+    VBROADCASTF32X4 = Instruction.new("VBROADCASTF32X4", forms)
   end
 end

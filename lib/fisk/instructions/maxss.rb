@@ -9,7 +9,7 @@ class Fisk
     # maxss: xmm, xmm
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[24]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF3, true
         add_rex(buffer, operands,
@@ -28,13 +28,13 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # maxss: xmm, m32
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[14]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF3, true
         add_rex(buffer, operands,
@@ -53,7 +53,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    MAXSS = Fisk::Machine::Instruction.new("MAXSS", forms)
+    forms << Form.new(operands, encodings)
+    MAXSS = Instruction.new("MAXSS", forms)
   end
 end

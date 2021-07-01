@@ -9,7 +9,7 @@ class Fisk
     # punpckldq: mm, mm
     operands << OPERAND_TYPES[54]
     operands << OPERAND_TYPES[36]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -27,13 +27,13 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # punpckldq: mm, m32
     operands << OPERAND_TYPES[54]
     operands << OPERAND_TYPES[14]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -51,13 +51,13 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # punpckldq: xmm, xmm
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[24]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, true
         add_rex(buffer, operands,
@@ -76,13 +76,13 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # punpckldq: xmm, m128
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[25]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, true
         add_rex(buffer, operands,
@@ -101,7 +101,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    PUNPCKLDQ = Fisk::Machine::Instruction.new("PUNPCKLDQ", forms)
+    forms << Form.new(operands, encodings)
+    PUNPCKLDQ = Instruction.new("PUNPCKLDQ", forms)
   end
 end

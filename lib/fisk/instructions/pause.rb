@@ -7,7 +7,7 @@ class Fisk
     operands = []
     encodings = []
     # pause: 
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF3, true
         add_opcode buffer, 0x90, 0
@@ -15,7 +15,7 @@ class Fisk
 
       def bytesize; 1; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    PAUSE = Fisk::Machine::Instruction.new("PAUSE", forms)
+    forms << Form.new(operands, encodings)
+    PAUSE = Instruction.new("PAUSE", forms)
   end
 end

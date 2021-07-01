@@ -9,7 +9,7 @@ class Fisk
     # vphaddubd: xmm, xmm
     operands << OPERAND_TYPES[26]
     operands << OPERAND_TYPES[24]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0xD2, 0
@@ -21,13 +21,13 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vphaddubd: xmm, m128
     operands << OPERAND_TYPES[26]
     operands << OPERAND_TYPES[25]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0xD2, 0
@@ -39,7 +39,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    VPHADDUBD = Fisk::Machine::Instruction.new("VPHADDUBD", forms)
+    forms << Form.new(operands, encodings)
+    VPHADDUBD = Instruction.new("VPHADDUBD", forms)
   end
 end

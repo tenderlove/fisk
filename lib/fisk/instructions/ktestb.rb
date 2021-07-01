@@ -9,7 +9,7 @@ class Fisk
     # ktestb: k, k
     operands << OPERAND_TYPES[42]
     operands << OPERAND_TYPES[42]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x99, 0
@@ -21,7 +21,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    KTESTB = Fisk::Machine::Instruction.new("KTESTB", forms)
+    forms << Form.new(operands, encodings)
+    KTESTB = Instruction.new("KTESTB", forms)
   end
 end

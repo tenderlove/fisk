@@ -9,7 +9,7 @@ class Fisk
     # movss: xmm, xmm
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[24]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF3, true
         add_rex(buffer, operands,
@@ -28,7 +28,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF3, true
         add_rex(buffer, operands,
@@ -47,13 +47,13 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # movss: xmm, m32
     operands << OPERAND_TYPES[26]
     operands << OPERAND_TYPES[14]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF3, true
         add_rex(buffer, operands,
@@ -72,13 +72,13 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # movss: m32, xmm
     operands << OPERAND_TYPES[37]
     operands << OPERAND_TYPES[24]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF3, true
         add_rex(buffer, operands,
@@ -97,7 +97,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    MOVSS = Fisk::Machine::Instruction.new("MOVSS", forms)
+    forms << Form.new(operands, encodings)
+    MOVSS = Instruction.new("MOVSS", forms)
   end
 end

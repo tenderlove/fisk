@@ -10,7 +10,7 @@ class Fisk
     operands << OPERAND_TYPES[57]
     operands << OPERAND_TYPES[60]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x19, 0
@@ -23,14 +23,14 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vextractf64x2: m128{k}{z}, ymm, imm8
     operands << OPERAND_TYPES[73]
     operands << OPERAND_TYPES[60]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x19, 0
@@ -43,14 +43,14 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vextractf64x2: xmm{k}{z}, zmm, imm8
     operands << OPERAND_TYPES[57]
     operands << OPERAND_TYPES[63]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x19, 0
@@ -63,14 +63,14 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vextractf64x2: m128{k}{z}, zmm, imm8
     operands << OPERAND_TYPES[73]
     operands << OPERAND_TYPES[63]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x19, 0
@@ -83,7 +83,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    VEXTRACTF64X2 = Fisk::Machine::Instruction.new("VEXTRACTF64X2", forms)
+    forms << Form.new(operands, encodings)
+    VEXTRACTF64X2 = Instruction.new("VEXTRACTF64X2", forms)
   end
 end

@@ -7,14 +7,14 @@ class Fisk
     operands = []
     encodings = []
     # clc: 
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_opcode buffer, 0xF8, 0
       end
 
       def bytesize; 1; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    CLC = Fisk::Machine::Instruction.new("CLC", forms)
+    forms << Form.new(operands, encodings)
+    CLC = Instruction.new("CLC", forms)
   end
 end

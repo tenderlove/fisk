@@ -7,7 +7,7 @@ class Fisk
     operands = []
     encodings = []
     # sfence: 
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_opcode buffer, 0x0F, 0
         add_opcode buffer, 0xAE, 0
@@ -16,7 +16,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    SFENCE = Fisk::Machine::Instruction.new("SFENCE", forms)
+    forms << Form.new(operands, encodings)
+    SFENCE = Instruction.new("SFENCE", forms)
   end
 end

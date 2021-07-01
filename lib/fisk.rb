@@ -179,11 +179,6 @@ class Fisk
     end
   end
 
-  def gen name, params
-    insns = Machine.instruction_with_name(name)
-    gen_with_insn insns, params
-  end
-
   include Fisk::Instructions::DSLMethods
 
   def moffs64 val

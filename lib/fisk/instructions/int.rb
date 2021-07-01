@@ -8,19 +8,19 @@ class Fisk
     encodings = []
     # int: 3
     operands << OPERAND_TYPES[39]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_opcode buffer, 0xCC, 0
       end
 
       def bytesize; 1; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # int: imm8
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_opcode buffer, 0xCD, 0
         add_immediate buffer, operands[0].value, 1
@@ -28,7 +28,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    INT = Fisk::Machine::Instruction.new("INT", forms)
+    forms << Form.new(operands, encodings)
+    INT = Instruction.new("INT", forms)
   end
 end

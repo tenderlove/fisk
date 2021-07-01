@@ -10,7 +10,7 @@ class Fisk
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[17]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, true
         add_rex(buffer, operands,
@@ -31,14 +31,14 @@ class Fisk
 
       def bytesize; 6; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # pinsrq: xmm, m64, imm8
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[18]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, true
         add_rex(buffer, operands,
@@ -59,7 +59,7 @@ class Fisk
 
       def bytesize; 6; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    PINSRQ = Fisk::Machine::Instruction.new("PINSRQ", forms)
+    forms << Form.new(operands, encodings)
+    PINSRQ = Instruction.new("PINSRQ", forms)
   end
 end

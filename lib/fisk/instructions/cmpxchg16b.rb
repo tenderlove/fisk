@@ -8,7 +8,7 @@ class Fisk
     encodings = []
     # cmpxchg16b: m128
     operands << OPERAND_TYPES[25]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               true,
@@ -26,7 +26,7 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    CMPXCHG16B = Fisk::Machine::Instruction.new("CMPXCHG16B", forms)
+    forms << Form.new(operands, encodings)
+    CMPXCHG16B = Instruction.new("CMPXCHG16B", forms)
   end
 end

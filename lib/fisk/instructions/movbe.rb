@@ -9,7 +9,7 @@ class Fisk
     # movbew: r16, m16
     operands << OPERAND_TYPES[38]
     operands << OPERAND_TYPES[9]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, false
         add_rex(buffer, operands,
@@ -29,13 +29,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # movbel: r32, m32
     operands << OPERAND_TYPES[27]
     operands << OPERAND_TYPES[14]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -54,13 +54,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # movbeq: r64, m64
     operands << OPERAND_TYPES[28]
     operands << OPERAND_TYPES[18]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               true,
@@ -79,13 +79,13 @@ class Fisk
 
       def bytesize; 5; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # movbew: m16, r16
     operands << OPERAND_TYPES[45]
     operands << OPERAND_TYPES[8]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, false
         add_rex(buffer, operands,
@@ -105,13 +105,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # movbel: m32, r32
     operands << OPERAND_TYPES[37]
     operands << OPERAND_TYPES[13]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -130,13 +130,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # movbeq: m64, r64
     operands << OPERAND_TYPES[44]
     operands << OPERAND_TYPES[17]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               true,
@@ -155,7 +155,7 @@ class Fisk
 
       def bytesize; 5; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    MOVBE = Fisk::Machine::Instruction.new("MOVBE", forms)
+    forms << Form.new(operands, encodings)
+    MOVBE = Instruction.new("MOVBE", forms)
   end
 end

@@ -7,18 +7,18 @@ class Fisk
     operands = []
     encodings = []
     # xlatb: 
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_opcode buffer, 0xD7, 0
       end
 
       def bytesize; 1; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # xlatb: 
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               true,
@@ -31,7 +31,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    XLATB = Fisk::Machine::Instruction.new("XLATB", forms)
+    forms << Form.new(operands, encodings)
+    XLATB = Instruction.new("XLATB", forms)
   end
 end

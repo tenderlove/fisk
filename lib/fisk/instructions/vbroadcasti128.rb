@@ -9,7 +9,7 @@ class Fisk
     # vbroadcasti128: ymm, m128
     operands << OPERAND_TYPES[65]
     operands << OPERAND_TYPES[25]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x5A, 0
@@ -21,7 +21,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    VBROADCASTI128 = Fisk::Machine::Instruction.new("VBROADCASTI128", forms)
+    forms << Form.new(operands, encodings)
+    VBROADCASTI128 = Instruction.new("VBROADCASTI128", forms)
   end
 end

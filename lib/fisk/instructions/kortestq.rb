@@ -9,7 +9,7 @@ class Fisk
     # kortestq: k, k
     operands << OPERAND_TYPES[42]
     operands << OPERAND_TYPES[42]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x98, 0
@@ -21,7 +21,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    KORTESTQ = Fisk::Machine::Instruction.new("KORTESTQ", forms)
+    forms << Form.new(operands, encodings)
+    KORTESTQ = Instruction.new("KORTESTQ", forms)
   end
 end

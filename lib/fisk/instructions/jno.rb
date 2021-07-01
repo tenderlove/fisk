@@ -8,7 +8,7 @@ class Fisk
     encodings = []
     # jno: rel8
     operands << OPERAND_TYPES[40]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_opcode buffer, 0x71, 0
         add_code_offset buffer, operands[0].value, 1
@@ -16,12 +16,12 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # jno: rel32
     operands << OPERAND_TYPES[30]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_opcode buffer, 0x0F, 0
         add_opcode buffer, 0x81, 0
@@ -30,7 +30,7 @@ class Fisk
 
       def bytesize; 6; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    JNO = Fisk::Machine::Instruction.new("JNO", forms)
+    forms << Form.new(operands, encodings)
+    JNO = Instruction.new("JNO", forms)
   end
 end

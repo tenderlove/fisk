@@ -11,7 +11,7 @@ class Fisk
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x21, 0
@@ -24,7 +24,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vinsertps: xmm, xmm, xmm, imm8
@@ -32,7 +32,7 @@ class Fisk
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x21, 0
@@ -45,7 +45,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vinsertps: xmm, xmm, m32, imm8
@@ -53,7 +53,7 @@ class Fisk
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[14]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x21, 0
@@ -66,7 +66,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vinsertps: xmm, xmm, m32, imm8
@@ -74,7 +74,7 @@ class Fisk
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[14]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x21, 0
@@ -87,7 +87,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    VINSERTPS = Fisk::Machine::Instruction.new("VINSERTPS", forms)
+    forms << Form.new(operands, encodings)
+    VINSERTPS = Instruction.new("VINSERTPS", forms)
   end
 end

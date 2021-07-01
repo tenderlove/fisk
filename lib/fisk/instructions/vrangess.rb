@@ -11,7 +11,7 @@ class Fisk
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[14]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x51, 0
@@ -24,7 +24,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vrangess: xmm{k}{z}, xmm, xmm, {sae}, imm8
@@ -33,7 +33,7 @@ class Fisk
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[72]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x51, 0
@@ -46,7 +46,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    VRANGESS = Fisk::Machine::Instruction.new("VRANGESS", forms)
+    forms << Form.new(operands, encodings)
+    VRANGESS = Instruction.new("VRANGESS", forms)
   end
 end

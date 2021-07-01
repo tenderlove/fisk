@@ -9,7 +9,7 @@ class Fisk
     # pmovsxbq: xmm, xmm
     operands << OPERAND_TYPES[26]
     operands << OPERAND_TYPES[24]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, true
         add_rex(buffer, operands,
@@ -29,13 +29,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # pmovsxbq: xmm, m16
     operands << OPERAND_TYPES[26]
     operands << OPERAND_TYPES[9]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, true
         add_rex(buffer, operands,
@@ -55,7 +55,7 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    PMOVSXBQ = Fisk::Machine::Instruction.new("PMOVSXBQ", forms)
+    forms << Form.new(operands, encodings)
+    PMOVSXBQ = Instruction.new("PMOVSXBQ", forms)
   end
 end

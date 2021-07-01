@@ -8,7 +8,7 @@ class Fisk
     encodings = []
     # vscatterpf0qpd: vm64z{k}
     operands << OPERAND_TYPES[91]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0xC7, 0
@@ -20,7 +20,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    VSCATTERPF0QPD = Fisk::Machine::Instruction.new("VSCATTERPF0QPD", forms)
+    forms << Form.new(operands, encodings)
+    VSCATTERPF0QPD = Instruction.new("VSCATTERPF0QPD", forms)
   end
 end

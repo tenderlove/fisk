@@ -11,7 +11,7 @@ class Fisk
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[68]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0xC2, 0
@@ -24,7 +24,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vcmpps: k{k}, xmm, xmm, imm8
@@ -32,7 +32,7 @@ class Fisk
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0xC2, 0
@@ -45,7 +45,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vcmpps: k{k}, ymm, m256/m32bcst, imm8
@@ -53,7 +53,7 @@ class Fisk
     operands << OPERAND_TYPES[60]
     operands << OPERAND_TYPES[69]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0xC2, 0
@@ -66,7 +66,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vcmpps: k{k}, ymm, ymm, imm8
@@ -74,7 +74,7 @@ class Fisk
     operands << OPERAND_TYPES[60]
     operands << OPERAND_TYPES[60]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0xC2, 0
@@ -87,7 +87,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vcmpps: k{k}, zmm, m512/m32bcst, imm8
@@ -95,7 +95,7 @@ class Fisk
     operands << OPERAND_TYPES[63]
     operands << OPERAND_TYPES[70]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0xC2, 0
@@ -108,7 +108,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vcmpps: xmm, xmm, xmm, imm8
@@ -116,7 +116,7 @@ class Fisk
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0xC2, 0
@@ -129,7 +129,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vcmpps: xmm, xmm, m128, imm8
@@ -137,7 +137,7 @@ class Fisk
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[25]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0xC2, 0
@@ -150,7 +150,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vcmpps: ymm, ymm, ymm, imm8
@@ -158,7 +158,7 @@ class Fisk
     operands << OPERAND_TYPES[60]
     operands << OPERAND_TYPES[60]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0xC2, 0
@@ -171,7 +171,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vcmpps: ymm, ymm, m256, imm8
@@ -179,7 +179,7 @@ class Fisk
     operands << OPERAND_TYPES[60]
     operands << OPERAND_TYPES[66]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0xC2, 0
@@ -192,7 +192,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vcmpps: k{k}, zmm, zmm, {sae}, imm8
@@ -201,7 +201,7 @@ class Fisk
     operands << OPERAND_TYPES[63]
     operands << OPERAND_TYPES[72]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0xC2, 0
@@ -214,7 +214,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    VCMPPS = Fisk::Machine::Instruction.new("VCMPPS", forms)
+    forms << Form.new(operands, encodings)
+    VCMPPS = Instruction.new("VCMPPS", forms)
   end
 end

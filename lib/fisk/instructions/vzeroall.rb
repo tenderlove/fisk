@@ -7,7 +7,7 @@ class Fisk
     operands = []
     encodings = []
     # vzeroall: 
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x77, 0
@@ -15,7 +15,7 @@ class Fisk
 
       def bytesize; 1; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    VZEROALL = Fisk::Machine::Instruction.new("VZEROALL", forms)
+    forms << Form.new(operands, encodings)
+    VZEROALL = Instruction.new("VZEROALL", forms)
   end
 end

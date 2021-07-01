@@ -8,7 +8,7 @@ class Fisk
     encodings = []
     # stmxcsr: m32
     operands << OPERAND_TYPES[37]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -26,7 +26,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    STMXCSR = Fisk::Machine::Instruction.new("STMXCSR", forms)
+    forms << Form.new(operands, encodings)
+    STMXCSR = Instruction.new("STMXCSR", forms)
   end
 end

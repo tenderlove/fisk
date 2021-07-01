@@ -7,14 +7,14 @@ class Fisk
     operands = []
     encodings = []
     # stc: 
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_opcode buffer, 0xF9, 0
       end
 
       def bytesize; 1; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    STC = Fisk::Machine::Instruction.new("STC", forms)
+    forms << Form.new(operands, encodings)
+    STC = Instruction.new("STC", forms)
   end
 end

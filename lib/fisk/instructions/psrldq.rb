@@ -9,7 +9,7 @@ class Fisk
     # psrldq: xmm, imm8
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, true
         add_rex(buffer, operands,
@@ -29,7 +29,7 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    PSRLDQ = Fisk::Machine::Instruction.new("PSRLDQ", forms)
+    forms << Form.new(operands, encodings)
+    PSRLDQ = Instruction.new("PSRLDQ", forms)
   end
 end

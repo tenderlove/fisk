@@ -9,7 +9,7 @@ class Fisk
     # cvtsi2sd: xmm, r32
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[13]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF2, true
         add_rex(buffer, operands,
@@ -28,13 +28,13 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # cvtsi2sd: xmm, r64
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[17]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF2, true
         add_rex(buffer, operands,
@@ -53,13 +53,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # cvtsi2sd: xmm, m32
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[14]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF2, true
         add_rex(buffer, operands,
@@ -78,13 +78,13 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # cvtsi2sd: xmm, m64
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[18]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0xF2, true
         add_rex(buffer, operands,
@@ -103,7 +103,7 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    CVTSI2SD = Fisk::Machine::Instruction.new("CVTSI2SD", forms)
+    forms << Form.new(operands, encodings)
+    CVTSI2SD = Instruction.new("CVTSI2SD", forms)
   end
 end

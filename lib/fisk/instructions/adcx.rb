@@ -9,7 +9,7 @@ class Fisk
     # adcxl: r32, r32
     operands << OPERAND_TYPES[12]
     operands << OPERAND_TYPES[13]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, true
         add_rex(buffer, operands,
@@ -29,13 +29,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # adcxl: r32, m32
     operands << OPERAND_TYPES[12]
     operands << OPERAND_TYPES[14]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, true
         add_rex(buffer, operands,
@@ -55,13 +55,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # adcxq: r64, r64
     operands << OPERAND_TYPES[16]
     operands << OPERAND_TYPES[17]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, true
         add_rex(buffer, operands,
@@ -81,13 +81,13 @@ class Fisk
 
       def bytesize; 5; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # adcxq: r64, m64
     operands << OPERAND_TYPES[16]
     operands << OPERAND_TYPES[18]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, true
         add_rex(buffer, operands,
@@ -107,7 +107,7 @@ class Fisk
 
       def bytesize; 5; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    ADCX = Fisk::Machine::Instruction.new("ADCX", forms)
+    forms << Form.new(operands, encodings)
+    ADCX = Instruction.new("ADCX", forms)
   end
 end

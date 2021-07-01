@@ -26,7 +26,7 @@ class Fisk
         when "Encoding"
           size = 0
       -%>
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
       <%-
         child.children.each do |encoding|
@@ -84,8 +84,8 @@ class Fisk
       -%>
       <%- end -%>
     <%- end -%>
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
   <%- end -%>
-    <%= name %> = Fisk::Machine::Instruction.new(<%= name.dump %>, forms)
+    <%= name %> = Instruction.new(<%= name.dump %>, forms)
   end
 end

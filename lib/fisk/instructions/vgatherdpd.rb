@@ -9,7 +9,7 @@ class Fisk
     # vgatherdpd: xmm{k}, vm32x
     operands << OPERAND_TYPES[83]
     operands << OPERAND_TYPES[84]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x92, 0
@@ -21,13 +21,13 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vgatherdpd: ymm{k}, vm32x
     operands << OPERAND_TYPES[85]
     operands << OPERAND_TYPES[84]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x92, 0
@@ -39,13 +39,13 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vgatherdpd: zmm{k}, vm32y
     operands << OPERAND_TYPES[86]
     operands << OPERAND_TYPES[87]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x92, 0
@@ -57,14 +57,14 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vgatherdpd: xmm, vm32x, xmm
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[84]
     operands << OPERAND_TYPES[23]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x92, 0
@@ -76,14 +76,14 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vgatherdpd: ymm, vm32x, ymm
     operands << OPERAND_TYPES[82]
     operands << OPERAND_TYPES[84]
     operands << OPERAND_TYPES[82]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x92, 0
@@ -95,7 +95,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    VGATHERDPD = Fisk::Machine::Instruction.new("VGATHERDPD", forms)
+    forms << Form.new(operands, encodings)
+    VGATHERDPD = Instruction.new("VGATHERDPD", forms)
   end
 end

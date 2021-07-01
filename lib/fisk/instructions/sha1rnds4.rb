@@ -10,7 +10,7 @@ class Fisk
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -30,14 +30,14 @@ class Fisk
 
       def bytesize; 5; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # sha1rnds4: xmm, m128, imm8
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[25]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -57,7 +57,7 @@ class Fisk
 
       def bytesize; 5; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    SHA1RNDS4 = Fisk::Machine::Instruction.new("SHA1RNDS4", forms)
+    forms << Form.new(operands, encodings)
+    SHA1RNDS4 = Instruction.new("SHA1RNDS4", forms)
   end
 end

@@ -9,7 +9,7 @@ class Fisk
     # movslq: r64, r32
     operands << OPERAND_TYPES[28]
     operands << OPERAND_TYPES[13]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               true,
@@ -26,13 +26,13 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # movslq: r64, m32
     operands << OPERAND_TYPES[28]
     operands << OPERAND_TYPES[14]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               true,
@@ -49,7 +49,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    MOVSXD = Fisk::Machine::Instruction.new("MOVSXD", forms)
+    forms << Form.new(operands, encodings)
+    MOVSXD = Instruction.new("MOVSXD", forms)
   end
 end

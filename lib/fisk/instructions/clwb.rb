@@ -8,7 +8,7 @@ class Fisk
     encodings = []
     # clwb: m8
     operands << OPERAND_TYPES[4]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, true
         add_rex(buffer, operands,
@@ -27,7 +27,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    CLWB = Fisk::Machine::Instruction.new("CLWB", forms)
+    forms << Form.new(operands, encodings)
+    CLWB = Instruction.new("CLWB", forms)
   end
 end

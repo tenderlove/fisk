@@ -10,7 +10,7 @@ class Fisk
     operands << OPERAND_TYPES[57]
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[18]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x2D, 0
@@ -22,7 +22,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vscalefsd: xmm{k}{z}, xmm, xmm, {er}
@@ -30,7 +30,7 @@ class Fisk
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[67]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x2D, 0
@@ -42,7 +42,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    VSCALEFSD = Fisk::Machine::Instruction.new("VSCALEFSD", forms)
+    forms << Form.new(operands, encodings)
+    VSCALEFSD = Instruction.new("VSCALEFSD", forms)
   end
 end

@@ -9,7 +9,7 @@ class Fisk
     # cvtpi2ps: xmm, mm
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[36]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -27,13 +27,13 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # cvtpi2ps: xmm, m64
     operands << OPERAND_TYPES[23]
     operands << OPERAND_TYPES[18]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -51,7 +51,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    CVTPI2PS = Fisk::Machine::Instruction.new("CVTPI2PS", forms)
+    forms << Form.new(operands, encodings)
+    CVTPI2PS = Instruction.new("CVTPI2PS", forms)
   end
 end

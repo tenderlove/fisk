@@ -8,7 +8,7 @@ class Fisk
     encodings = []
     # jrcxz: rel8
     operands << OPERAND_TYPES[40]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_opcode buffer, 0xE3, 0
         add_code_offset buffer, operands[0].value, 1
@@ -16,7 +16,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    JRCXZ = Fisk::Machine::Instruction.new("JRCXZ", forms)
+    forms << Form.new(operands, encodings)
+    JRCXZ = Instruction.new("JRCXZ", forms)
   end
 end

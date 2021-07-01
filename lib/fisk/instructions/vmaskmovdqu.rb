@@ -9,7 +9,7 @@ class Fisk
     # vmaskmovdqu: xmm, xmm
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[24]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0xF7, 0
@@ -21,7 +21,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    VMASKMOVDQU = Fisk::Machine::Instruction.new("VMASKMOVDQU", forms)
+    forms << Form.new(operands, encodings)
+    VMASKMOVDQU = Instruction.new("VMASKMOVDQU", forms)
   end
 end

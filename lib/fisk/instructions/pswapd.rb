@@ -9,7 +9,7 @@ class Fisk
     # pswapd: mm, mm
     operands << OPERAND_TYPES[35]
     operands << OPERAND_TYPES[36]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -28,13 +28,13 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # pswapd: mm, m64
     operands << OPERAND_TYPES[35]
     operands << OPERAND_TYPES[18]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -53,7 +53,7 @@ class Fisk
 
       def bytesize; 4; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    PSWAPD = Fisk::Machine::Instruction.new("PSWAPD", forms)
+    forms << Form.new(operands, encodings)
+    PSWAPD = Instruction.new("PSWAPD", forms)
   end
 end

@@ -10,7 +10,7 @@ class Fisk
     operands << OPERAND_TYPES[71]
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[58]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x27, 0
@@ -22,14 +22,14 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vptestnmq: k{k}, xmm, xmm
     operands << OPERAND_TYPES[71]
     operands << OPERAND_TYPES[24]
     operands << OPERAND_TYPES[24]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x27, 0
@@ -41,14 +41,14 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vptestnmq: k{k}, ymm, m256/m64bcst
     operands << OPERAND_TYPES[71]
     operands << OPERAND_TYPES[60]
     operands << OPERAND_TYPES[61]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x27, 0
@@ -60,14 +60,14 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vptestnmq: k{k}, ymm, ymm
     operands << OPERAND_TYPES[71]
     operands << OPERAND_TYPES[60]
     operands << OPERAND_TYPES[60]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x27, 0
@@ -79,14 +79,14 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vptestnmq: k{k}, zmm, m512/m64bcst
     operands << OPERAND_TYPES[71]
     operands << OPERAND_TYPES[63]
     operands << OPERAND_TYPES[64]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x27, 0
@@ -98,14 +98,14 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vptestnmq: k{k}, zmm, zmm
     operands << OPERAND_TYPES[71]
     operands << OPERAND_TYPES[63]
     operands << OPERAND_TYPES[63]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x27, 0
@@ -117,7 +117,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    VPTESTNMQ = Fisk::Machine::Instruction.new("VPTESTNMQ", forms)
+    forms << Form.new(operands, encodings)
+    VPTESTNMQ = Instruction.new("VPTESTNMQ", forms)
   end
 end

@@ -9,7 +9,7 @@ class Fisk
     # leaw: r16, m
     operands << OPERAND_TYPES[38]
     operands << OPERAND_TYPES[46]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_prefix buffer, operands, 0x66, false
         add_rex(buffer, operands,
@@ -27,13 +27,13 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # leal: r32, m
     operands << OPERAND_TYPES[27]
     operands << OPERAND_TYPES[46]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -50,13 +50,13 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # leaq: r64, m
     operands << OPERAND_TYPES[28]
     operands << OPERAND_TYPES[46]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               true,
@@ -73,7 +73,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    LEA = Fisk::Machine::Instruction.new("LEA", forms)
+    forms << Form.new(operands, encodings)
+    LEA = Instruction.new("LEA", forms)
   end
 end

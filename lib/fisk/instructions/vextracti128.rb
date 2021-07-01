@@ -10,7 +10,7 @@ class Fisk
     operands << OPERAND_TYPES[26]
     operands << OPERAND_TYPES[60]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x39, 0
@@ -23,14 +23,14 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vextracti128: m128, ymm, imm8
     operands << OPERAND_TYPES[53]
     operands << OPERAND_TYPES[60]
     operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x39, 0
@@ -43,7 +43,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    VEXTRACTI128 = Fisk::Machine::Instruction.new("VEXTRACTI128", forms)
+    forms << Form.new(operands, encodings)
+    VEXTRACTI128 = Instruction.new("VEXTRACTI128", forms)
   end
 end

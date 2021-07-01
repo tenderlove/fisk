@@ -7,7 +7,7 @@ class Fisk
     operands = []
     encodings = []
     # cqto: 
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               true,
@@ -20,7 +20,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    CQO = Fisk::Machine::Instruction.new("CQO", forms)
+    forms << Form.new(operands, encodings)
+    CQO = Instruction.new("CQO", forms)
   end
 end

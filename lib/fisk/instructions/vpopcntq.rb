@@ -9,7 +9,7 @@ class Fisk
     # vpopcntq: zmm{k}{z}, m512/m64bcst
     operands << OPERAND_TYPES[62]
     operands << OPERAND_TYPES[64]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x55, 0
@@ -21,13 +21,13 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # vpopcntq: zmm{k}{z}, zmm
     operands << OPERAND_TYPES[62]
     operands << OPERAND_TYPES[63]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_EVEX buffer, operands
         add_opcode buffer, 0x55, 0
@@ -39,7 +39,7 @@ class Fisk
 
       def bytesize; 2; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    VPOPCNTQ = Fisk::Machine::Instruction.new("VPOPCNTQ", forms)
+    forms << Form.new(operands, encodings)
+    VPOPCNTQ = Instruction.new("VPOPCNTQ", forms)
   end
 end

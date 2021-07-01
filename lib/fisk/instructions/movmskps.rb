@@ -9,7 +9,7 @@ class Fisk
     # movmskps: r32, xmm
     operands << OPERAND_TYPES[27]
     operands << OPERAND_TYPES[24]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -27,7 +27,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    MOVMSKPS = Fisk::Machine::Instruction.new("MOVMSKPS", forms)
+    forms << Form.new(operands, encodings)
+    MOVMSKPS = Instruction.new("MOVMSKPS", forms)
   end
 end

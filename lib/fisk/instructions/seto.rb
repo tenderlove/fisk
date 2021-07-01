@@ -8,7 +8,7 @@ class Fisk
     encodings = []
     # seto: r8
     operands << OPERAND_TYPES[47]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -26,12 +26,12 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # seto: m8
     operands << OPERAND_TYPES[43]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -49,7 +49,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    SETO = Fisk::Machine::Instruction.new("SETO", forms)
+    forms << Form.new(operands, encodings)
+    SETO = Instruction.new("SETO", forms)
   end
 end

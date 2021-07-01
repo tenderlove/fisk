@@ -8,7 +8,7 @@ class Fisk
     encodings = []
     # prefetcht0: m8
     operands << OPERAND_TYPES[4]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_rex(buffer, operands,
               false,
@@ -26,7 +26,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    PREFETCHT0 = Fisk::Machine::Instruction.new("PREFETCHT0", forms)
+    forms << Form.new(operands, encodings)
+    PREFETCHT0 = Instruction.new("PREFETCHT0", forms)
   end
 end

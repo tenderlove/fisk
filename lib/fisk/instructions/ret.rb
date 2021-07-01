@@ -7,19 +7,19 @@ class Fisk
     operands = []
     encodings = []
     # ret: 
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_opcode buffer, 0xC3, 0
       end
 
       def bytesize; 1; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
+    forms << Form.new(operands, encodings)
     operands = []
     encodings = []
     # ret: imm16
     operands << OPERAND_TYPES[6]
-    encodings << Class.new(Fisk::Machine::Encoding) {
+    encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_opcode buffer, 0xC2, 0
         add_immediate buffer, operands[0].value, 2
@@ -27,7 +27,7 @@ class Fisk
 
       def bytesize; 3; end
     }.new
-    forms << Fisk::Machine::Form.new(operands, encodings)
-    RET = Fisk::Machine::Instruction.new("RET", forms)
+    forms << Form.new(operands, encodings)
+    RET = Instruction.new("RET", forms)
   end
 end
