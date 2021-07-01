@@ -2,6 +2,33 @@ require "helper"
 require "fisk/helpers"
 
 class RunFiskTest < Fisk::Test
+  def test_sum2
+    fisk = Fisk.new
+    jitbuf = Fisk::Helpers.jitbuffer 4096
+
+    str = " " * 0xFFFFF
+    ptr = Fiddle::Pointer[str]
+
+    fisk.asm jitbuf do
+      push rbp
+      mov rbp, rsp
+      mov rdx, imm32(1)
+      mov r8, imm64(ptr.to_i)
+      mov r8, m64(r8, 0xFFFF)
+      xor rax, rax
+    make_label :loop
+      add rax, rdx
+      inc rdx
+      cmp rdx, imm32(10)
+      jbe label(:loop)
+      pop rbp
+      ret
+    end
+
+    func = jitbuf.to_function [], Fiddle::TYPE_INT
+    assert_equal 11.times.inject(:+), func.call
+  end
+
   def test_sum
     fisk = Fisk.new
     jitbuf = Fisk::Helpers.jitbuffer 4096
