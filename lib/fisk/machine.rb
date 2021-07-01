@@ -1,15 +1,7 @@
 class Fisk
   class Machine
-    Instructions = {}
-
-    Operand = Struct.new(:type, :input, :output)
-
-    def self.instructions
-      Instructions
-    end
-
     def self.instruction_with_name name
-      Instructions[name]
+      Instructions.const_get name
     end
 
     class Form
@@ -31,5 +23,3 @@ class Fisk
     end
   end
 end
-
-require "fisk/machine/generated"

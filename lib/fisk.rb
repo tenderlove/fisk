@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 require "stringio"
-require "fisk/machine/encoding"
-require "fisk/machine"
+require "fisk/instructions"
 
 class Fisk
   class Operand < Struct.new(:value)
@@ -182,35 +181,10 @@ class Fisk
 
   def gen name, params
     insns = Machine.instruction_with_name(name)
-    forms = insns.forms.find_all do |insn|
-      if insn.operands.length == params.length
-        params.zip(insn.operands).all? { |want_op, have_op|
-          want_op.works?(have_op.type)
-        }
-      else
-        false
-      end
-    end
-
-    raise NotImplementedError, "couldn't find instruction #{name}" if forms.length == 0
-
-    insn = nil
-
-    insn = forms.first
-
-    insn = Instruction.new(insn, params, position)
-    @position += insn.bytesize
-    @instructions << insn
-    params.each { |param| param.insn = insn if param.unknown_label? }
-
-    self
+    gen_with_insn insns, params
   end
 
-  Machine.instructions.keys.each do |insn|
-    define_method(insn.downcase) do |*params|
-      gen insn, params
-    end
-  end
+  include Fisk::Instructions::DSLMethods
 
   def moffs64 val
     MOffs64.new val
@@ -258,5 +232,30 @@ class Fisk
 
   def write_to_buffer buffer
     @instructions.each { |insn| insn.encode buffer }
+  end
+
+  def gen_with_insn insns, params
+    forms = insns.forms.find_all do |insn|
+      if insn.operands.length == params.length
+        params.zip(insn.operands).all? { |want_op, have_op|
+          want_op.works?(have_op.type)
+        }
+      else
+        false
+      end
+    end
+
+    raise NotImplementedError, "couldn't find instruction #{name}" if forms.length == 0
+
+    insn = nil
+
+    insn = forms.first
+
+    insn = Instruction.new(insn, params, position)
+    @position += insn.bytesize
+    @instructions << insn
+    params.each { |param| param.insn = insn if param.unknown_label? }
+
+    self
   end
 end

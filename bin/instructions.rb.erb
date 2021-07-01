@@ -1,0 +1,44 @@
+# frozen_string_literal: true
+#
+<%= license.map { |x| "# #{x.chomp} " }.join "\n" %>
+
+require "fisk/machine"
+require "fisk/machine/encoding"
+
+class Fisk
+  module Instructions
+    Operand = Struct.new(:type, :input, :output)
+
+    OPERAND_TYPES = [
+<%- unique_operands.each do |u_op| -%>
+      Operand.new(<%= u_op[0].dump %>, <%= u_op[1] || "nil" %>, <%= u_op[2] || "nil" %>),
+<% end %>
+    ]
+
+    def self.instruction_names
+      constants - [:Operand, :OPERAND_TYPES]
+    end
+<%-
+  doc.root.children.each do |instruction|
+    next unless instruction.name == "Instruction"
+    name = instruction["name"]
+-%>
+    autoload :<%= name %>, "fisk/instructions/<%= name.downcase %>"
+<%-
+  end
+-%>
+    module DSLMethods
+<%-
+  doc.root.children.each do |instruction|
+    next unless instruction.name == "Instruction"
+    name = instruction["name"]
+-%>
+      def <%= name.downcase %>(*params)
+        gen_with_insn Fisk::Instructions::<%= name %>, params
+      end
+<%-
+  end
+-%>
+    end
+  end
+end

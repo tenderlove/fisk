@@ -1,0 +1,62 @@
+# frozen_string_literal: true
+
+class Fisk
+  module Instructions
+    # Instruction EXTRQ
+    forms = []
+    operands = []
+    encodings = []
+    # extrq: xmm, xmm
+    operands << OPERAND_TYPES[23]
+    operands << OPERAND_TYPES[24]
+    encodings << Class.new(Fisk::Machine::Encoding) {
+      def encode buffer, operands
+        add_prefix buffer, operands, 0x66, true
+        add_rex(buffer, operands,
+              false,
+              0,
+              (operands[0].value >> 3),
+              0,
+              (operands[1].value >> 3))
+        add_opcode buffer, 0x0F, 0
+        add_opcode buffer, 0x79, 0
+        add_modrm(buffer, operands,
+              3,
+              operands[0].value,
+              operands[1].value)
+      end
+
+      def bytesize; 3; end
+    }.new
+    forms << Fisk::Machine::Form.new(operands, encodings)
+    operands = []
+    encodings = []
+    # extrq: xmm, imm8, imm8
+    operands << OPERAND_TYPES[23]
+    operands << OPERAND_TYPES[1]
+    operands << OPERAND_TYPES[1]
+    encodings << Class.new(Fisk::Machine::Encoding) {
+      def encode buffer, operands
+        add_prefix buffer, operands, 0x66, true
+        add_rex(buffer, operands,
+              false,
+              0,
+              0,
+              0,
+              (operands[0].value >> 3))
+        add_opcode buffer, 0x0F, 0
+        add_opcode buffer, 0x78, 0
+        add_modrm(buffer, operands,
+              3,
+              0,
+              operands[0].value)
+        add_immediate buffer, operands[1].value, 1
+        add_immediate buffer, operands[2].value, 1
+      end
+
+      def bytesize; 5; end
+    }.new
+    forms << Fisk::Machine::Form.new(operands, encodings)
+    EXTRQ = Fisk::Machine::Instruction.new("EXTRQ", forms)
+  end
+end
