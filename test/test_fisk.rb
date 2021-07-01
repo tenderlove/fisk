@@ -8,6 +8,20 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_read_with_large_negative_offset
+    fisk.mov fisk.m64(fisk.rcx, -0xcafe), fisk.rcx
+    i = disasm(fisk.to_binary).first
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal "qword ptr [rcx - 0xcafe], rcx", i.op_str.to_s
+  end
+
+  def test_read_with_negative_offset
+    fisk.mov fisk.m64(fisk.rcx, -8), fisk.rcx
+    i = disasm(fisk.to_binary).first
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal "qword ptr [rcx - 8], rcx", i.op_str.to_s
+  end
+
   def test_read_with_zero_offset
     fisk.mov fisk.m64(fisk.rcx), fisk.rcx
     i = disasm(fisk.to_binary).first
