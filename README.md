@@ -51,7 +51,7 @@ mov rax, m64(rax)
 Dereferencing the value 8 bytes away RAX and storing the value in the R9 register:
 
 ```ruby
-mov rax, m64(rax, 8)
+mov r9, m64(rax, 8)
 ```
 
 ## Executing Assembly
