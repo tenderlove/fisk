@@ -24,7 +24,39 @@ binary = fisk.asm do
 end
 ```
 
-Though, it's not very fun to assemble something unless you can execute it.  So
+Fisk uses Intel assembly syntax, so the first operand is the *destination*, and
+the second operand is the source.  So for example `mov rax, imm8(1)` means "put
+an immediate that is 8 bits wide with the value of 1 in the RAX register".
+
+## Sizes and Memory Operands
+
+In order to select the right x86 instruction to emit, Fisk needs to know the
+types of the operands.  Register types are already implied, but things like
+immediates and memory operands need to be specified.
+
+Below are a few examples.
+
+Putting a 32 bit immediate in the RAX register:
+
+```ruby
+mov rax, imm32(0xFFF)
+```
+
+Dereferencing the value in RAX and storing the value in the RAX register:
+
+```ruby
+mov rax, m64(rax)
+```
+
+Dereferencing the value 8 bytes away RAX and storing the value in the R9 register:
+
+```ruby
+mov rax, m64(rax, 8)
+```
+
+## Executing Assembly
+
+Now, it's not very fun to assemble something unless you can execute it.  So
 here is an example of how to execute the above assembly.  This assembly code
 will send an interrupt and tell the debugger to stop.  So let's write the
 machine code to some executable memory, and call it from a Ruby program that we
