@@ -307,7 +307,7 @@ class Fisk
       end
     end
 
-    raise NotImplementedError, "couldn't find instruction #{name}" if forms.length == 0
+    raise NotImplementedError, "couldn't find instruction #{insns.name}" if forms.length == 0
 
     insn = nil
 
