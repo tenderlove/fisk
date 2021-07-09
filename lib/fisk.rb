@@ -120,7 +120,6 @@ class Fisk
   def initialize
     @instructions = []
     @labels = {}
-    @position = 0
   end
 
   class UnknownLabel < Struct.new(:name)
@@ -260,7 +259,6 @@ class Fisk
   end
 
   def asm buf = StringIO.new(''.b), &block
-    @position = 0
     instance_eval(&block)
     write_to_buffer buf
     buf
