@@ -17,7 +17,7 @@ class RunFiskTest < Fisk::Test
       mov r8, imm64(ptr.to_i)
       mov r8, m64(r8, 0xFFFF)
       int lit(3) # crash if we don't jump over this
-    make_label :foo
+    put_label :foo
       mov rax, imm32(0x3)
       pop rbp
       ret
@@ -41,7 +41,7 @@ class RunFiskTest < Fisk::Test
       mov r8, imm64(ptr.to_i)
       mov r8, m64(r8, 0xFFFF)
       xor rax, rax
-    make_label :loop
+    put_label :loop
       add rax, rdx
       500.times { nop }
       inc rdx
@@ -69,7 +69,7 @@ class RunFiskTest < Fisk::Test
       mov r8, imm64(ptr.to_i)
       mov r8, m64(r8, 0xFFFF)
       xor rax, rax
-    make_label :loop
+    put_label :loop
       add rax, rdx
       inc rdx
       cmp rdx, imm32(10)
@@ -91,7 +91,7 @@ class RunFiskTest < Fisk::Test
       mov rbp, rsp
       mov rdx, imm32(1)
       xor rax, rax
-    make_label :loop
+    put_label :loop
       add rax, rdx
       inc rdx
       cmp rdx, imm32(10)
@@ -112,11 +112,11 @@ class RunFiskTest < Fisk::Test
       push rbp
       mov rbp, rsp
       jmp label(:foo)
-      make_label(:bar)
+      put_label(:bar)
       mov rax, imm32(100)
       pop rbp
       ret
-      make_label(:foo)
+      put_label(:foo)
       jmp label(:bar)
       mov rax, imm32(42)
       pop rbp

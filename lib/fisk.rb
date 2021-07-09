@@ -120,6 +120,7 @@ class Fisk
   def initialize
     @instructions = []
     @labels = {}
+    yield self if block_given?
   end
 
   class UnknownLabel < Struct.new(:name)
@@ -139,12 +140,20 @@ class Fisk
     def label?; true; end
   end
 
+  # Create a label to be used with jump instructions.  For example:
+  #
+  #   fisk.jmp(fisk.label(:foo))
+  #   fisk.int(lit(3))
+  #   fisk.make_label(:foo)
+  #
   def label name
     UnknownLabel.new(name)
   end
 
-  def make_label name
+  # Insert a label named +name+ at the current position in the instructions.
+  def put_label name
     @instructions << Label.new(name)
+    self
   end
 
   Registers.constants.grep(/^[A-Z0-9]*$/).each do |const|
@@ -305,7 +314,17 @@ class Fisk
       end
     end
 
-    raise NotImplementedError, "couldn't find instruction #{insns.name}" if forms.length == 0
+    if forms.length == 0
+      valid_forms = insns.forms.map { |form|
+        "    #{insns.name} #{form.operands.map(&:type).join(", ")}"
+      }.join "\n"
+      msg = <<~eostr
+      Couldn't find instruction #{insns.name} #{params.map(&:type).join(", ")}
+      Valid forms:
+      #{valid_forms}
+      eostr
+      raise NotImplementedError, msg
+    end
 
     insn = nil
 

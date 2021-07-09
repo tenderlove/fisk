@@ -17,9 +17,23 @@ class FiskTest < Fisk::Test
     assert_equal "qword ptr [rcx - 0xff], rcx", i.op_str.to_s
   end
 
+  def test_chain_methods
+    fisk.jmp fisk.label(:foo)
+    fisk.put_label(:foo)
+    fisk.nop
+    str = fisk.to_binary
+
+    fisk = Fisk.new
+    fisk.jmp(fisk.label(:foo))
+      .put_label(:foo)
+      .nop
+
+    assert_equal str, fisk.to_binary
+  end
+
   def test_lazy_labels
     fisk.jmp fisk.label(:foo)
-    fisk.make_label(:foo)
+    fisk.put_label(:foo)
     fisk.nop
     jmp, nop = disasm(fisk.to_binary)
     assert_equal "jmp", jmp.mnemonic.to_s
