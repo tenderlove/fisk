@@ -260,19 +260,17 @@ class Fisk
 
   def asm buf = StringIO.new(''.b), &block
     instance_eval(&block)
-    write_to_buffer buf
+    write_to buf
     buf
   end
 
   def to_binary
     io = StringIO.new ''.b
-    write_to_buffer io
+    write_to io
     io.string
   end
 
-  private
-
-  def write_to_buffer buffer
+  def write_to buffer
     labels = {}
     unresolved = []
     @instructions.each do |insn|
@@ -292,6 +290,8 @@ class Fisk
       insn.encode buffer, labels
     end
     buffer.seek pos, IO::SEEK_SET
+
+    buffer
   end
 
   def gen_with_insn insns, params

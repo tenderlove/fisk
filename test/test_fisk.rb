@@ -8,6 +8,15 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_write_to
+    buf = StringIO.new(''.b)
+    fisk.mov fisk.m64(fisk.rcx, -0xFF), fisk.rcx
+    fisk.write_to buf
+    i = disasm(buf.string).first
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal "qword ptr [rcx - 0xff], rcx", i.op_str.to_s
+  end
+
   def test_lazy_labels
     fisk.jmp fisk.label(:foo)
     fisk.make_label(:foo)
