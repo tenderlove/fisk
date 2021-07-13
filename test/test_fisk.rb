@@ -8,6 +8,14 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_imm_casts_to_int
+    [8, 16, 32, 64].each do |size|
+      assert_raises do
+        fisk.send("imm#{size}", Object.new)
+      end
+    end
+  end
+
   def test_signed_immediate_select_imm8
     assert_equal "imm8", fisk.imm(0x7F).type
     assert_equal "imm8", fisk.imm(-0x7F - 1).type

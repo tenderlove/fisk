@@ -82,7 +82,7 @@ class Fisk
         end
       end
 
-      def imm#{size} val; Imm#{size}.new(val); end
+      def imm#{size} val; Imm#{size}.new(val.to_i); end
     eostr
   end
 
