@@ -8,6 +8,42 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_signed_immediate_select_imm8
+    assert_equal "imm8", fisk.imm(0x7F).type
+    assert_equal "imm8", fisk.imm(-0x7F - 1).type
+    assert_equal "imm8", fisk.imm(0).type
+  end
+
+  def test_signed_immediate_select_imm16
+    assert_equal "imm16", fisk.imm(0x7F + 1).type
+    assert_equal "imm16", fisk.imm(-0x7F - 2).type
+
+    assert_equal "imm16", fisk.imm(0x7FFF).type
+    assert_equal "imm16", fisk.imm(-0x7FFF - 1).type
+  end
+
+  def test_signed_immediate_select_imm32
+    assert_equal "imm32", fisk.imm(0x7FFF + 1).type
+    assert_equal "imm32", fisk.imm(-0x7FFF - 2).type
+
+    assert_equal "imm32", fisk.imm(0x7FFFFFFF).type
+    assert_equal "imm32", fisk.imm(-0x7FFFFFFF - 1).type
+  end
+
+  def test_signed_immediate_select_imm64
+    assert_equal "imm64", fisk.imm(0x7FFFFFFF + 1).type
+    assert_equal "imm64", fisk.imm(-0x7FFFFFFF - 2).type
+
+    assert_equal "imm64", fisk.imm(-0x7FFFFFFFFFFFFFFF - 1).type
+    assert_equal "imm64", fisk.imm(0x7FFFFFFFFFFFFFFF).type
+  end
+
+  def test_signed_immediate_select_too_big
+    assert_raises(ArgumentError) do
+      fisk.imm(0x7FFFFFFFFFFFFFFF + 1)
+    end
+  end
+
   def test_write_to
     buf = StringIO.new(''.b)
     fisk.mov fisk.m64(fisk.rcx, -0xFF), fisk.rcx

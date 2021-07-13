@@ -73,22 +73,17 @@ class Fisk
     M64.new x, displacement
   end
 
-  class Imm8 < Operand
-    def type
-      "imm8"
-    end
-  end
+  # Define all immediate value methods of different sizes
+  [8, 16, 32, 64].each do |size|
+    class_eval <<~eostr, __FILE__, __LINE__ + 1
+      class Imm#{size} < Operand
+        def type
+          "imm#{size}"
+        end
+      end
 
-  class Imm32 < Operand
-    def type
-      "imm32"
-    end
-  end
-
-  class Imm64 < Operand
-    def type
-      "imm64"
-    end
+      def imm#{size} val; Imm#{size}.new(val); end
+    eostr
   end
 
   class Rel8 < Operand
@@ -242,16 +237,19 @@ class Fisk
     MOffs64.new val
   end
 
-  def imm8 val
-    Imm8.new val
-  end
-
-  def imm32 val
-    Imm32.new val
-  end
-
-  def imm64 val
-    Imm64.new val
+  # Create a signed immediate value of the right width
+  def imm val
+    if val >= -0x7F - 1 && val <= 0x7F
+      imm8 val
+    elsif val >=  -0x7FFF - 1 && val <= 0x7FFF
+      imm16 val
+    elsif val >=  -0x7FFFFFFF - 1 && val <= 0x7FFFFFFF
+      imm32 val
+    elsif val >=  -0x7FFFFFFFFFFFFFFF - 1 && val <= 0x7FFFFFFFFFFFFFFF
+      imm64 val
+    else
+      raise ArgumentError, "#{val} is larger than a 64 bit int"
+    end
   end
 
   def rel8 val
