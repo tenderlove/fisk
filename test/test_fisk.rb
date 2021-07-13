@@ -44,6 +44,38 @@ class FiskTest < Fisk::Test
     end
   end
 
+  def test_negative_unsigned
+    assert_raises(ArgumentError) do
+      fisk.uimm(-0xF)
+    end
+  end
+
+  def test_unsigned_immediate_select_imm8
+    assert_equal "imm8", fisk.uimm(0xFF).type
+    assert_equal "imm8", fisk.uimm(0).type
+  end
+
+  def test_unsigned_immediate_select_imm16
+    assert_equal "imm16", fisk.uimm(0xFF + 1).type
+    assert_equal "imm16", fisk.uimm(0xFFFF).type
+  end
+
+  def test_unsigned_immediate_select_imm32
+    assert_equal "imm32", fisk.uimm(0xFFFF + 1).type
+    assert_equal "imm32", fisk.uimm(0xFFFFFFFF).type
+  end
+
+  def test_unsigned_immediate_select_imm64
+    assert_equal "imm64", fisk.uimm(0xFFFFFFFF + 1).type
+    assert_equal "imm64", fisk.uimm(0xFFFFFFFFFFFFFFFF).type
+  end
+
+  def test_unsigned_immediate_too_big
+    assert_raises ArgumentError do
+      fisk.uimm(0xFFFFFFFFFFFFFFFF + 1)
+    end
+  end
+
   def test_write_to
     buf = StringIO.new(''.b)
     fisk.mov fisk.m64(fisk.rcx, -0xFF), fisk.rcx

@@ -252,6 +252,23 @@ class Fisk
     end
   end
 
+  # Create an unsigned immediate value of the right width
+  def uimm val
+    if val < 0
+      raise ArgumentError, "#{val} is negative"
+    elsif val <= 0xFF
+      imm8 val
+    elsif val <= 0xFFFF
+      imm16 val
+    elsif val <= 0xFFFFFFFF
+      imm32 val
+    elsif val <= 0xFFFFFFFFFFFFFFFF
+      imm64 val
+    else
+      raise ArgumentError, "#{val} is too large for a 64 bit int"
+    end
+  end
+
   def rel8 val
     Rel8.new val
   end
@@ -261,7 +278,6 @@ class Fisk
   end
 
   def lit val
-    # to_s because we're getting the value from JSON as a string
     Lit.new val
   end
 
