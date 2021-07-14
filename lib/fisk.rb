@@ -50,6 +50,12 @@ class Fisk
       i += 8
       const_set "R#{i}", Register.new("r#{i}", "r64", i)
     end
+
+    # List of *caller* saved registers for the C calling convention
+    CALLER_SAVED = [ RDI, RSI, RDX, RCX, R8, R9, R10, R11 ]
+
+    # List of *callee* saved registers for the C calling convention
+    CALLEE_SAVED = [ RBX, RSP, RBP, R12, R13, R14, R15 ]
   end
 
 
