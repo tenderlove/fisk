@@ -1,5 +1,7 @@
 # Fisk - A Pure Ruby Assembler
 
+Tired of writing Ruby in Ruby?  Now you can write assembly in Ruby with Fisk!
+
 This is a pure Ruby x86-64 assembler (I guess).  I'm not 100% sure if it counts
 as pure Ruby because it just reads an XML file and metaprograms most of it.
 Anyway, you can use it to write assembly in Ruby, then have it assembled.
