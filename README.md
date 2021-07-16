@@ -54,6 +54,27 @@ Dereferencing the value 8 bytes away RAX and storing the value in the R9 registe
 mov r9, m64(rax, 8)
 ```
 
+## Register Allocation
+
+Fisk supports simple register assignment.  You can make temporary registers,
+then have Fisk assign registers for you.  For example:
+
+```ruby
+fisk = Fisk.new
+
+# Make some temporary registers
+reg1 = fisk.register("temp1")
+reg2 = fisk.register("temp2")
+
+# XOR the two virtual registers
+fisk.xor reg1, reg2
+
+# Ask Fisk to assign registers from the pool of registers passed in
+fisk.assign_registers([fisk.r9, fisk.r10])
+```
+
+Currently, Fisk won't spill registers for you, it just raises an exception.
+
 ## Executing Assembly
 
 Now, it's not very fun to assemble something unless you can execute it.  So

@@ -11,4 +11,9 @@ class Fisk::Test < Minitest::Test
       printf("0x%x:\t%s\t\t%s\n",i.address, i.mnemonic, i.op_str)
     }
   end
+
+  def disasm binary
+    cs = Crabstone::Disassembler.new(Crabstone::ARCH_X86, Crabstone::MODE_64)
+    cs.disasm binary, 0
+  end
 end

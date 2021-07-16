@@ -297,9 +297,4 @@ class FiskTest < Fisk::Test
     assert_equal "jbe", i.mnemonic.to_s
     assert_equal "8", i.op_str.to_s
   end
-
-  def disasm binary
-    cs = Crabstone::Disassembler.new(Crabstone::ARCH_X86, Crabstone::MODE_64)
-    cs.disasm binary, 0
-  end
 end

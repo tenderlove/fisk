@@ -2,31 +2,70 @@
 
 require "stringio"
 require "fisk/instructions"
+require "set"
 
 class Fisk
-  class Operand < Struct.new(:value)
-    def type; value; end
+  class Operand
     def works? type; self.type == type; end
     def unknown_label?; false; end
+    def register?; false; end
+    def temp_register?; false; end
     def extended_register?; false; end
     def m64?; false; end
   end
 
+  class ValueOperand < Operand
+    attr_reader :value
+    alias :type :value
+
+    def initialize value
+      @value = value
+    end
+  end
+
   module Registers
     class Register < Operand
-      attr_reader :name, :type
+      attr_reader :name, :type, :value
 
       def initialize name, type, value
         @name = name
         @type = type
-        super(value)
+        @value = value
       end
 
       def works? type
         type == self.name || type == self.type
       end
 
+      def register?; true; end
       def extended_register?; value > 7; end
+    end
+
+    class Temp < Operand
+      attr_reader :name, :type, :range
+
+      attr_accessor :register
+
+      def initialize name, type
+        @name     = name
+        @type     = type
+        @range    = []
+        @register = nil
+      end
+
+      def temp_register?; true; end
+
+      def start_point
+        @range.first
+      end
+
+      def end_point
+        @range.last
+      end
+
+      def value
+        @register.value
+      end
     end
 
     EAX = Register.new "eax", "r32", 0
@@ -59,7 +98,7 @@ class Fisk
   end
 
 
-  class M64 < Operand
+  class M64 < ValueOperand
     attr_reader :displacement
 
     def initialize register, displacement
@@ -82,7 +121,7 @@ class Fisk
   # Define all immediate value methods of different sizes
   [8, 16, 32, 64].each do |size|
     class_eval <<~eostr, __FILE__, __LINE__ + 1
-      class Imm#{size} < Operand
+      class Imm#{size} < ValueOperand
         def type
           "imm#{size}"
         end
@@ -92,31 +131,29 @@ class Fisk
     eostr
   end
 
-  class Rel8 < Operand
+  class Rel8 < ValueOperand
     def type
       "rel8"
     end
   end
 
-  class Rel32 < Operand
+  class Rel32 < ValueOperand
     def type
       "rel32"
     end
   end
 
-  class MOffs64 < Operand
+  class MOffs64 < ValueOperand
     def type
       "moffs64"
     end
   end
 
-  class Lit < Operand
+  class Lit < ValueOperand
     def type
       value.to_s
     end
   end
-
-  attr_reader :position
 
   def initialize
     @instructions = []
@@ -145,7 +182,7 @@ class Fisk
   #
   #   fisk.jmp(fisk.label(:foo))
   #   fisk.int(lit(3))
-  #   fisk.make_label(:foo)
+  #   fisk.put_label(:foo)
   #
   def label name
     UnknownLabel.new(name)
@@ -156,6 +193,48 @@ class Fisk
     @instructions << Label.new(name)
     self
   end
+  alias :make_label :put_label
+
+  # Allocate and return a new register.  These registers will be replaced with
+  # real registers when `assign_registers` is called.
+  def register name = "temp"
+    Registers::Temp.new name, "r64"
+  end
+
+  # Assign registers to any temporary registers.  Only registers in +list+
+  # will be used when selecting register assignments
+  def assign_registers list
+    temp_registers = Set.new
+    @instructions.each_with_index do |insn, i|
+      insn.operands.find_all(&:temp_register?).each do |reg|
+        reg.range << i
+        temp_registers << reg
+      end
+    end
+
+    temp_registers = temp_registers.sort_by(&:start_point)
+
+    active         = []
+    free_registers = list.reverse
+    register_count = list.length
+
+    temp_registers.each do |temp_reg|
+      # expire old intervals
+      active, dead = active.sort_by(&:end_point).partition do |j|
+        j.end_point >= temp_reg.start_point
+      end
+
+      # Add unused registers back to the free register list
+      dead.each { |tr| free_registers << tr.register }
+
+      if active.length == register_count
+        raise NotImplementedError, "Register spilled"
+      end
+
+      temp_reg.register = free_registers.pop
+      active << temp_reg
+    end
+  end
 
   Registers.constants.grep(/^[A-Z0-9]*$/).each do |const|
     val = Registers.const_get const
@@ -163,6 +242,8 @@ class Fisk
   end
 
   class Instruction
+    attr_reader :operands
+
     def initialize insn, form, operands
       @insn     = insn
       @form     = form
@@ -287,18 +368,30 @@ class Fisk
     Lit.new val
   end
 
+  # Instance eval's a given block and writes encoded instructions to +buf+.
+  # For example:
+  #
+  #   fisk = Fisk.new
+  #   fisk.asm do
+  #     mov r9, imm64(32)
+  #   end
+  #
   def asm buf = StringIO.new(''.b), &block
     instance_eval(&block)
     write_to buf
     buf
   end
 
+  # Encodes all instructions and returns a binary string with the encoded
+  # instructions.
   def to_binary
     io = StringIO.new ''.b
     write_to io
     io.string
   end
 
+  # Encode all instructions and write them to +buffer+.  +buffer+ should be an
+  # IO object.
   def write_to buffer
     labels = {}
     unresolved = []
@@ -346,8 +439,6 @@ class Fisk
       raise NotImplementedError, msg
     end
 
-    insn = nil
-
     form = forms.first
 
     insn = if params.any?(&:unknown_label?)
@@ -358,6 +449,7 @@ class Fisk
            else
              Instruction.new(insns, form, params)
            end
+
     @instructions << insn
 
     self
