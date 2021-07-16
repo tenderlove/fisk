@@ -8,6 +8,20 @@ class RegisterAllocationTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_with_memory_operand
+    reg = fisk.register
+    fisk.m64(reg)
+    fisk.assign_registers([fisk.r9])
+  end
+
+  def test_with_unresolved_jumps
+    reg = fisk.register
+    label = fisk.label "foo"
+    fisk.jmp label
+    fisk.put_label "foo"
+    fisk.assign_registers([fisk.r9])
+  end
+
   def test_make_temporary_register_with_name
     name = "aaron"
     reg = fisk.register name

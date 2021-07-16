@@ -98,13 +98,16 @@ class Fisk
   end
 
 
-  class M64 < ValueOperand
+  class M64 < Operand
     attr_reader :displacement
 
     def initialize register, displacement
-      super(register.value)
       @register     = register
       @displacement = displacement
+    end
+
+    def value
+      @register.value
     end
 
     def type
@@ -176,6 +179,7 @@ class Fisk
 
   class Label < Struct.new(:name)
     def label?; true; end
+    def has_temp_registers?; false; end
   end
 
   # Create a label to be used with jump instructions.  For example:
@@ -206,9 +210,11 @@ class Fisk
   def assign_registers list
     temp_registers = Set.new
     @instructions.each_with_index do |insn, i|
-      insn.operands.find_all(&:temp_register?).each do |reg|
-        reg.range << i
-        temp_registers << reg
+      if insn.has_temp_registers?
+        insn.temp_registers.each do |reg|
+          reg.range << i
+          temp_registers << reg
+        end
       end
     end
 
@@ -242,12 +248,18 @@ class Fisk
   end
 
   class Instruction
-    attr_reader :operands
-
     def initialize insn, form, operands
       @insn     = insn
       @form     = form
       @operands = operands
+    end
+
+    def has_temp_registers?
+      @operands.any?(&:temp_register?)
+    end
+
+    def temp_registers
+      @operands.find_all(&:temp_register?)
     end
 
     def encodings
@@ -274,6 +286,8 @@ class Fisk
       @operand   = operand
       @saved_pos = nil
     end
+
+    def has_temp_registers?; false; end
 
     def encode buffer, labels
       # Estimate by using a rel32 offset
