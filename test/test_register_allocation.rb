@@ -8,6 +8,17 @@ class RegisterAllocationTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_call_r8_with_reg_assignment
+    reg = fisk.register
+    fisk.mov(reg, fisk.imm64(123))
+    fisk.call(reg)
+    fisk.assign_registers([fisk.r8, fisk.r9])
+
+    i = disasm(fisk.to_binary)[1]
+    assert_equal "call", i.mnemonic.to_s
+    assert_equal "r8", i.op_str.to_s
+  end
+
   def test_with_memory_operand
     reg = fisk.register
     fisk.m64(reg)

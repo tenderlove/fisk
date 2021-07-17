@@ -55,6 +55,10 @@ class Fisk
 
       def temp_register?; true; end
 
+      def extended_register?
+        @register.extended_register?
+      end
+
       def start_point
         @range.first
       end
