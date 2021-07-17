@@ -12,6 +12,14 @@ class Fisk
     def temp_register?; false; end
     def extended_register?; false; end
     def m64?; false; end
+
+    def rex_value
+      value >> 3
+    end
+
+    def op_value
+      value
+    end
   end
 
   class ValueOperand < Operand
@@ -37,8 +45,12 @@ class Fisk
         type == self.name || type == self.type
       end
 
+      def op_value
+        value & 0x7
+      end
+
       def register?; true; end
-      def extended_register?; value > 7; end
+      def extended_register?; @value > 7; end
     end
 
     class Temp < Operand
@@ -57,6 +69,10 @@ class Fisk
 
       def extended_register?
         @register.extended_register?
+      end
+
+      def rex_value
+        @register.rex_value
       end
 
       def start_point

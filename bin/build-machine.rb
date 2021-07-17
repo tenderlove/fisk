@@ -8,7 +8,7 @@ def parse_rex v
     when /^(\d+)$/
       v
     when /^#(\d+)$/
-      "(operands[#{$1.to_i}].value >> 3)"
+      "operands[#{$1.to_i}].rex_value"
     else
       raise NotImplementedError, v
     end
@@ -23,7 +23,7 @@ def parse_operand_value v
     when /^(\d+)$/
       v
     when /^#(\d+)$/
-      "operands[#{$1.to_i}].value"
+      "operands[#{$1.to_i}].op_value"
     else
       raise NotImplementedError, v
     end

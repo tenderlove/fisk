@@ -93,6 +93,14 @@ class FiskTest < Fisk::Test
     assert_equal "qword ptr [rcx - 0xff], rcx", i.op_str.to_s
   end
 
+  def test_push_r8
+    fisk.push fisk.r8
+    bin = fisk.to_binary
+    i = disasm(bin).first
+    assert_equal "push", i.mnemonic.to_s
+    assert_equal "r8", i.op_str.to_s
+  end
+
   def test_chain_methods
     fisk.jmp fisk.label(:foo)
     fisk.put_label(:foo)

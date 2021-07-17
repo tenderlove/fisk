@@ -17,8 +17,8 @@ class Fisk
         add_opcode buffer, 0x5E, 0
         add_modrm(buffer, operands,
               3,
-              operands[0].value,
-              operands[3].value)
+              operands[0].op_value,
+              operands[3].op_value)
         add_RegisterByte buffer, operands
       end
 
@@ -30,8 +30,8 @@ class Fisk
         add_opcode buffer, 0x5E, 0
         add_modrm(buffer, operands,
               3,
-              operands[0].value,
-              operands[2].value)
+              operands[0].op_value,
+              operands[2].op_value)
         add_RegisterByte buffer, operands
       end
 
@@ -51,8 +51,8 @@ class Fisk
         add_opcode buffer, 0x5E, 0
         add_modrm(buffer, operands,
               0,
-              operands[0].value,
-              operands[3].value)
+              operands[0].op_value,
+              operands[3].op_value)
         add_RegisterByte buffer, operands
       end
 
@@ -72,8 +72,8 @@ class Fisk
         add_opcode buffer, 0x5E, 0
         add_modrm(buffer, operands,
               0,
-              operands[0].value,
-              operands[2].value)
+              operands[0].op_value,
+              operands[2].op_value)
         add_RegisterByte buffer, operands
       end
 
@@ -93,8 +93,8 @@ class Fisk
         add_opcode buffer, 0x5E, 0
         add_modrm(buffer, operands,
               3,
-              operands[0].value,
-              operands[3].value)
+              operands[0].op_value,
+              operands[3].op_value)
         add_RegisterByte buffer, operands
       end
 
@@ -106,8 +106,8 @@ class Fisk
         add_opcode buffer, 0x5E, 0
         add_modrm(buffer, operands,
               3,
-              operands[0].value,
-              operands[2].value)
+              operands[0].op_value,
+              operands[2].op_value)
         add_RegisterByte buffer, operands
       end
 
@@ -127,8 +127,8 @@ class Fisk
         add_opcode buffer, 0x5E, 0
         add_modrm(buffer, operands,
               0,
-              operands[0].value,
-              operands[3].value)
+              operands[0].op_value,
+              operands[3].op_value)
         add_RegisterByte buffer, operands
       end
 
@@ -148,8 +148,8 @@ class Fisk
         add_opcode buffer, 0x5E, 0
         add_modrm(buffer, operands,
               0,
-              operands[0].value,
-              operands[2].value)
+              operands[0].op_value,
+              operands[2].op_value)
         add_RegisterByte buffer, operands
       end
 

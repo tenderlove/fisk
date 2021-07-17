@@ -15,7 +15,7 @@ class Fisk
         add_modrm(buffer, operands,
               0,
               2,
-              operands[0].value)
+              operands[0].op_value)
       end
 
       def bytesize; 2; end

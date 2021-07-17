@@ -23,7 +23,7 @@ class Fisk
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
         add_opcode buffer, 0xCD, 0
-        add_immediate buffer, operands[0].value, 1
+        add_immediate buffer, operands[0].op_value, 1
       end
 
       def bytesize; 2; end

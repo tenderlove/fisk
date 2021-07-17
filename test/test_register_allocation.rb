@@ -26,7 +26,6 @@ class RegisterAllocationTest < Fisk::Test
   end
 
   def test_with_unresolved_jumps
-    reg = fisk.register
     label = fisk.label "foo"
     fisk.jmp label
     fisk.put_label "foo"

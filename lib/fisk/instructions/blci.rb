@@ -16,7 +16,7 @@ class Fisk
         add_modrm(buffer, operands,
               3,
               6,
-              operands[1].value)
+              operands[1].op_value)
       end
 
       def bytesize; 2; end
@@ -34,7 +34,7 @@ class Fisk
         add_modrm(buffer, operands,
               0,
               6,
-              operands[1].value)
+              operands[1].op_value)
       end
 
       def bytesize; 2; end
@@ -52,7 +52,7 @@ class Fisk
         add_modrm(buffer, operands,
               3,
               6,
-              operands[1].value)
+              operands[1].op_value)
       end
 
       def bytesize; 2; end
@@ -70,7 +70,7 @@ class Fisk
         add_modrm(buffer, operands,
               0,
               6,
-              operands[1].value)
+              operands[1].op_value)
       end
 
       def bytesize; 2; end

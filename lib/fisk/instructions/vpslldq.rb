@@ -17,8 +17,8 @@ class Fisk
         add_modrm(buffer, operands,
               3,
               7,
-              operands[1].value)
-        add_immediate buffer, operands[2].value, 1
+              operands[1].op_value)
+        add_immediate buffer, operands[2].op_value, 1
       end
 
       def bytesize; 3; end
@@ -37,8 +37,8 @@ class Fisk
         add_modrm(buffer, operands,
               3,
               7,
-              operands[1].value)
-        add_immediate buffer, operands[2].value, 1
+              operands[1].op_value)
+        add_immediate buffer, operands[2].op_value, 1
       end
 
       def bytesize; 3; end
@@ -57,8 +57,8 @@ class Fisk
         add_modrm(buffer, operands,
               0,
               7,
-              operands[1].value)
-        add_immediate buffer, operands[2].value, 1
+              operands[1].op_value)
+        add_immediate buffer, operands[2].op_value, 1
       end
 
       def bytesize; 3; end
@@ -77,8 +77,8 @@ class Fisk
         add_modrm(buffer, operands,
               3,
               7,
-              operands[1].value)
-        add_immediate buffer, operands[2].value, 1
+              operands[1].op_value)
+        add_immediate buffer, operands[2].op_value, 1
       end
 
       def bytesize; 3; end
@@ -97,8 +97,8 @@ class Fisk
         add_modrm(buffer, operands,
               3,
               7,
-              operands[1].value)
-        add_immediate buffer, operands[2].value, 1
+              operands[1].op_value)
+        add_immediate buffer, operands[2].op_value, 1
       end
 
       def bytesize; 3; end
@@ -117,8 +117,8 @@ class Fisk
         add_modrm(buffer, operands,
               0,
               7,
-              operands[1].value)
-        add_immediate buffer, operands[2].value, 1
+              operands[1].op_value)
+        add_immediate buffer, operands[2].op_value, 1
       end
 
       def bytesize; 3; end
@@ -137,8 +137,8 @@ class Fisk
         add_modrm(buffer, operands,
               3,
               7,
-              operands[1].value)
-        add_immediate buffer, operands[2].value, 1
+              operands[1].op_value)
+        add_immediate buffer, operands[2].op_value, 1
       end
 
       def bytesize; 3; end
@@ -157,8 +157,8 @@ class Fisk
         add_modrm(buffer, operands,
               0,
               7,
-              operands[1].value)
-        add_immediate buffer, operands[2].value, 1
+              operands[1].op_value)
+        add_immediate buffer, operands[2].op_value, 1
       end
 
       def bytesize; 3; end
