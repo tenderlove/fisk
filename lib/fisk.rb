@@ -178,12 +178,6 @@ class Fisk
     end
   end
 
-  def initialize
-    @instructions = []
-    @labels = {}
-    yield self if block_given?
-  end
-
   class UnknownLabel < Struct.new(:name)
     def works? type
       type == "rel32"
@@ -199,7 +193,193 @@ class Fisk
 
   class Label < Struct.new(:name)
     def label?; true; end
+    def jump?; false; end
     def has_temp_registers?; false; end
+  end
+
+  class Instruction
+    def initialize insn, form, operands
+      @insn     = insn
+      @form     = form
+      @operands = operands
+    end
+
+    def jump?
+      false
+    end
+
+    def has_temp_registers?
+      @operands.any?(&:temp_register?)
+    end
+
+    def temp_registers
+      @operands.find_all(&:temp_register?)
+    end
+
+    def encodings
+      @form.encodings
+    end
+
+    def encode buffer, labels
+      encoding = @form.encodings.first
+      encoding.encode buffer, @operands
+      true
+    end
+
+    def bytesize
+      @form.encodings.first.bytesize
+    end
+
+    def label?; false; end
+  end
+
+  class UnresolvedInstruction
+    def initialize insn, form, operand
+      @insn      = insn
+      @form      = form
+      @operand   = operand
+      @saved_pos = nil
+    end
+
+    def jump?
+      true
+    end
+
+    def target
+      @operand.name
+    end
+
+    def has_temp_registers?; false; end
+
+    def encode buffer, labels
+      # Estimate by using a rel32 offset
+      form          = find_form "rel32"
+      encoding      = form.encodings.first
+      operand_klass = Rel32
+
+      if labels.key? @operand.name
+        if @saved_pos
+          # Only use rel32 if we saved the position
+          buffer.seek @saved_pos, IO::SEEK_SET
+        else
+          estimated_offset = labels[@operand.name] - (buffer.pos + encoding.bytesize)
+
+          if estimated_offset >= -128 && estimated_offset <= 127
+            # fits in a rel8
+            operand_klass = Rel8
+            form          = find_form "rel8"
+            encoding      = form.encodings.first
+          end
+        end
+
+        jump_len = -(buffer.pos + encoding.bytesize - labels[@operand.name])
+        encoding.encode buffer, [operand_klass.new(jump_len)]
+        true
+      else
+        # We've hit a label that doesn't exist yet
+        # Save the buffer position so we can seek back to it later
+        @saved_pos = buffer.pos
+        # Write 5 bytes to reserve our spot
+        encoding.bytesize.times { buffer.putc 0 }
+        false
+      end
+    end
+
+    def label?; false; end
+
+    private
+
+    def find_form form_type
+      @insn.forms.find { |form| form.operands.first.type == form_type }
+    end
+  end
+
+  BasicBlock = Struct.new(:name, :insns, :fall, :jump) do
+    def jump?
+      insns.last.jump?
+    end
+
+    def jump_name
+      insns.last.target
+    end
+  end
+
+  def initialize
+    @instructions = []
+    @labels = {}
+    yield self if block_given?
+  end
+
+  # Return a list of basic blocks for the instructions
+  def basic_blocks
+    blocks = []
+    bb_index = 0
+
+    chunks = @instructions.chunk { |insn|
+      if insn.label?
+        # start a new block here
+        bb_index += 1
+      end
+
+      ret_idx = bb_index
+
+      if insn.jump?
+        # end the block here
+        bb_index += 1
+      end
+
+      ret_idx
+    }.to_a
+
+    chunk_name = ->(chunk_id, insns) {
+      if insns.first.label?
+        insns.first.name
+      else
+        :"bb_#{chunk_id}"
+      end
+    }
+
+    jump_targets = {}
+    wants_target = []
+
+    chunks.each_with_index do |(chunk_id, insns), idx|
+      prev_block = blocks.last
+
+      name = chunk_name.(chunk_id, insns)
+
+      next_chunk_id, next_insns = chunks[idx + 1]
+
+      outgoing = []
+
+      if next_chunk_id
+        outgoing << chunk_name.(next_chunk_id, next_insns)
+      end
+
+      bb = BasicBlock.new(name, insns)
+
+      if bb.jump?
+        target_name = bb.jump_name
+
+        # if we need to jump backwards, the label should already be filled in.
+        # Otherwise we need to find the block later (we're jumping forward)
+        if jump_targets[target_name]
+          bb.jump = jump_targets[target_name]
+        else
+          wants_target << bb
+        end
+      end
+
+      jump_targets[bb.name] = bb
+
+      prev_block.fall = bb if prev_block
+
+      blocks << bb
+    end
+
+    # fill in any forward jumps
+    wants_target.each { |bb| bb.jump = jump_targets[bb.jump_name] }
+
+    blocks
   end
 
   # Create a label to be used with jump instructions.  For example:
@@ -265,91 +445,6 @@ class Fisk
   Registers.constants.grep(/^[A-Z0-9]*$/).each do |const|
     val = Registers.const_get const
     define_method(const.downcase) { val }
-  end
-
-  class Instruction
-    def initialize insn, form, operands
-      @insn     = insn
-      @form     = form
-      @operands = operands
-    end
-
-    def has_temp_registers?
-      @operands.any?(&:temp_register?)
-    end
-
-    def temp_registers
-      @operands.find_all(&:temp_register?)
-    end
-
-    def encodings
-      @form.encodings
-    end
-
-    def encode buffer, labels
-      encoding = @form.encodings.first
-      encoding.encode buffer, @operands
-      true
-    end
-
-    def bytesize
-      @form.encodings.first.bytesize
-    end
-
-    def label?; false; end
-  end
-
-  class UnresolvedInstruction
-    def initialize insn, form, operand
-      @insn      = insn
-      @form      = form
-      @operand   = operand
-      @saved_pos = nil
-    end
-
-    def has_temp_registers?; false; end
-
-    def encode buffer, labels
-      # Estimate by using a rel32 offset
-      form          = find_form "rel32"
-      encoding      = form.encodings.first
-      operand_klass = Rel32
-
-      if labels.key? @operand.name
-        if @saved_pos
-          # Only use rel32 if we saved the position
-          buffer.seek @saved_pos, IO::SEEK_SET
-        else
-          estimated_offset = labels[@operand.name] - (buffer.pos + encoding.bytesize)
-
-          if estimated_offset >= -128 && estimated_offset <= 127
-            # fits in a rel8
-            operand_klass = Rel8
-            form          = find_form "rel8"
-            encoding      = form.encodings.first
-          end
-        end
-
-        jump_len = -(buffer.pos + encoding.bytesize - labels[@operand.name])
-        encoding.encode buffer, [operand_klass.new(jump_len)]
-        true
-      else
-        # We've hit a label that doesn't exist yet
-        # Save the buffer position so we can seek back to it later
-        @saved_pos = buffer.pos
-        # Write 5 bytes to reserve our spot
-        encoding.bytesize.times { buffer.putc 0 }
-        false
-      end
-    end
-
-    def label?; false; end
-
-    private
-
-    def find_form form_type
-      @insn.forms.find { |form| form.operands.first.type == form_type }
-    end
   end
 
   include Fisk::Instructions::DSLMethods
