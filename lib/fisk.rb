@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 require "stringio"
+require "set"
+
 require "fisk/instructions"
 require "fisk/basic_block"
 require "fisk/errors"
-require "set"
+require "fisk/version"
 
 class Fisk
   class Operand

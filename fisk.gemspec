@@ -1,6 +1,10 @@
+$: << File.expand_path("lib")
+
+require "fisk/version"
+
 Gem::Specification.new do |s|
   s.name        = "fisk"
-  s.version     = "2.0.0"
+  s.version     = Fisk::VERSION
   s.summary     = "Write assembly in Ruby!"
   s.description = "Tired of writing Ruby in Ruby? Now you can write assembly in Ruby!"
   s.authors     = ["Aaron Patterson"]
