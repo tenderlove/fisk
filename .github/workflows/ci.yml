@@ -29,6 +29,12 @@ jobs:
             brew update
             brew install capstone
 
+      - name: shrug
+        if: matrix.os == 'macos'
+        run: |
+            system_profiler SPHardwareDataType
+
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@477b21f02be01bcb8030d50f37cfec92bfa615b6
         with:
