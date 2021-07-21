@@ -33,3 +33,4 @@ Rake::TestTask.new do |t|
 end
 
 task :test => LIB_FILE
+task :default => :test
