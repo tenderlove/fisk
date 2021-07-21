@@ -17,4 +17,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'minitest', '~> 5.14'
   s.add_development_dependency 'crabstone', '~> 4.0'
   s.add_development_dependency 'rake', '~> 13.0'
+  s.add_development_dependency 'nokogiri', '~> 1.11'
 end
