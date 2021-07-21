@@ -148,4 +148,54 @@ class RegisterAllocationTest < Fisk::Test
       fisk.assign_registers([Fisk::Registers::R9])
     end
   end
+
+  def test_registers_can_be_released
+    reg1 = fisk.register
+    reg2 = fisk.register
+    fisk.xor reg1, reg1
+    fisk.release_register reg1
+    fisk.xor reg2, reg2
+    fisk.release_register reg2
+    fisk.assign_registers([Fisk::Registers::R9], local: true)
+    i = disasm(fisk.to_binary)
+    assert_equal "xor", i[0].mnemonic.to_s
+    assert_equal "r9, r9", i[0].op_str.to_s
+    assert_equal "xor", i[1].mnemonic.to_s
+    assert_equal "r9, r9", i[1].op_str.to_s
+  end
+
+  def test_multiple_releases_is_an_error
+    reg1 = fisk.register
+    fisk.xor reg1, reg1
+    fisk.release_register reg1
+    assert_raises Fisk::Errors::AlreadyReleasedError do
+      fisk.release_register reg1
+    end
+  end
+
+  def test_use_after_invalidation_is_error
+    reg1 = fisk.register
+    fisk.xor reg1, reg1
+    fisk.release_register reg1
+    assert_raises Fisk::Errors::UseAfterInvalidationError do
+      fisk.xor reg1, reg1
+    end
+  end
+
+  def test_release_all_registers
+    reg1 = fisk.register
+    fisk.xor reg1, reg1
+    fisk.release_all_registers
+    assert_raises Fisk::Errors::UseAfterInvalidationError do
+      fisk.xor reg1, reg1
+    end
+  end
+
+  def test_unreleased_registers_raise_exception
+    reg1 = fisk.register
+    fisk.xor reg1, reg1
+    assert_raises Fisk::Errors::UnreleasedRegisterError do
+      fisk.assign_registers([Fisk::Registers::R9], local: true)
+    end
+  end
 end

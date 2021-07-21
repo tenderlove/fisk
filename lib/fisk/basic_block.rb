@@ -139,7 +139,6 @@ class Fisk
         if ins == block.in
           # Done with this block!
           block.live.each do |live_register|
-            live_register.start_point ||= block.start_point
             live_register.end_point ||= block.end_point
 
             if live_register.start_point > block.start_point

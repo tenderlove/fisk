@@ -3,6 +3,7 @@
 require "stringio"
 require "fisk/instructions"
 require "fisk/basic_block"
+require "fisk/errors"
 require "set"
 
 class Fisk
@@ -175,6 +176,7 @@ class Fisk
     end
 
     def unknown_label?; true; end
+    def temp_register?; false; end
 
     def value
       label = assembler.label_for(name)
@@ -288,7 +290,28 @@ class Fisk
   def initialize
     @instructions = []
     @labels = {}
+    # A set of temp registers recorded as we see them (not at allocation time)
+    @temp_registers = Set.new
     yield self if block_given?
+  end
+
+  # Mark a temporary register as "done being used" at this point in the
+  # instructions.  Using the register after passing the register to this
+  # method results in undefined behavior.
+  def release_register reg
+    if reg.end_point
+      raise Errors::AlreadyReleasedError, "register #{reg.name} already released at #{reg.end_point}"
+    end
+
+    reg.end_point = (@instructions.length - 1)
+  end
+
+  # Releases all registers that haven't already been released
+  def release_all_registers
+    @temp_registers.each do |reg|
+      next if reg.end_point
+      release_register reg
+    end
   end
 
   # Return a list of basic blocks for the instructions
@@ -327,9 +350,19 @@ class Fisk
 
   # Assign registers to any temporary registers.  Only registers in +list+
   # will be used when selecting register assignments
-  def assign_registers list
-    cfg = self.cfg
-    temp_registers = cfg.variables
+  def assign_registers list, local: false
+    temp_registers = @temp_registers
+
+    # This mutates the temp registers, setting their end_point based on
+    # the CFG
+    self.cfg unless local
+
+    temp_registers.each do |reg|
+      unless reg.end_point
+        raise Errors::UnreleasedRegisterError, "Register #{reg.name} hasn't been released"
+      end
+    end
+
     temp_registers = temp_registers.sort_by(&:start_point)
 
     active         = []
@@ -482,14 +515,27 @@ class Fisk
 
     form = forms.first
 
-    insn = if params.any?(&:unknown_label?)
-             if params.length > 1
-               raise ArgumentError, "labels only work with single param jump instructions"
-             end
-             UnresolvedInstruction.new(insns, form, params.first)
-           else
-             Instruction.new(insns, form, params)
-           end
+    insn = nil
+
+    params.each do |param|
+      if param.unknown_label?
+        if params.length > 1
+          raise ArgumentError, "labels only work with single param jump instructions"
+        end
+        insn = UnresolvedInstruction.new(insns, form, params.first)
+      end
+
+      if param.temp_register?
+        if param.end_point
+          raise Errors::UseAfterInvalidationError, "Register #{param.name} used after release"
+        end
+        @temp_registers << param
+
+        param.start_point ||= @instructions.length
+      end
+    end
+
+    insn ||= Instruction.new(insns, form, params)
 
     @instructions << insn
 
