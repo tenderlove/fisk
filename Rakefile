@@ -10,8 +10,9 @@ INSNS_DIR    = "lib/fisk/instructions"
 
 file XML_FILE do
   Dir.mkdir 'tmp' unless File.directory?("tmp")
-  cd "tmp"
-  sh "git clone https://github.com/Maratyszcza/Opcodes.git"
+  cd "tmp" do
+    sh "git clone https://github.com/Maratyszcza/Opcodes.git"
+  end
 end
 
 file INSNS_DIR do
@@ -33,3 +34,4 @@ Rake::TestTask.new do |t|
 end
 
 task :test => LIB_FILE
+task :default => :test
