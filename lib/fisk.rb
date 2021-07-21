@@ -2,6 +2,7 @@
 
 require "stringio"
 require "fisk/instructions"
+require "fisk/basic_block"
 require "set"
 
 class Fisk
@@ -49,20 +50,18 @@ class Fisk
         value & 0x7
       end
 
-      def register?; true; end
       def extended_register?; @value > 7; end
     end
 
     class Temp < Operand
-      attr_reader :name, :type, :range
-
-      attr_accessor :register
+      attr_reader :name, :type
+      attr_accessor :register, :start_point, :end_point
 
       def initialize name, type
-        @name     = name
-        @type     = type
-        @range    = []
-        @register = nil
+        @name        = name
+        @type        = type
+        @start_point = nil
+        @end_point   = nil
       end
 
       def temp_register?; true; end
@@ -73,14 +72,6 @@ class Fisk
 
       def rex_value
         @register.rex_value
-      end
-
-      def start_point
-        @range.first
-      end
-
-      def end_point
-        @range.last
       end
 
       def value
@@ -294,16 +285,6 @@ class Fisk
     end
   end
 
-  BasicBlock = Struct.new(:name, :insns, :fall, :jump) do
-    def jump?
-      insns.last.jump?
-    end
-
-    def jump_name
-      insns.last.target
-    end
-  end
-
   def initialize
     @instructions = []
     @labels = {}
@@ -312,74 +293,13 @@ class Fisk
 
   # Return a list of basic blocks for the instructions
   def basic_blocks
-    blocks = []
-    bb_index = 0
+    cfg.blocks
+  end
 
-    chunks = @instructions.chunk { |insn|
-      if insn.label?
-        # start a new block here
-        bb_index += 1
-      end
-
-      ret_idx = bb_index
-
-      if insn.jump?
-        # end the block here
-        bb_index += 1
-      end
-
-      ret_idx
-    }.to_a
-
-    chunk_name = ->(chunk_id, insns) {
-      if insns.first.label?
-        insns.first.name
-      else
-        :"bb_#{chunk_id}"
-      end
-    }
-
-    jump_targets = {}
-    wants_target = []
-
-    chunks.each_with_index do |(chunk_id, insns), idx|
-      prev_block = blocks.last
-
-      name = chunk_name.(chunk_id, insns)
-
-      next_chunk_id, next_insns = chunks[idx + 1]
-
-      outgoing = []
-
-      if next_chunk_id
-        outgoing << chunk_name.(next_chunk_id, next_insns)
-      end
-
-      bb = BasicBlock.new(name, insns)
-
-      if bb.jump?
-        target_name = bb.jump_name
-
-        # if we need to jump backwards, the label should already be filled in.
-        # Otherwise we need to find the block later (we're jumping forward)
-        if jump_targets[target_name]
-          bb.jump = jump_targets[target_name]
-        else
-          wants_target << bb
-        end
-      end
-
-      jump_targets[bb.name] = bb
-
-      prev_block.fall = bb if prev_block
-
-      blocks << bb
-    end
-
-    # fill in any forward jumps
-    wants_target.each { |bb| bb.jump = jump_targets[bb.jump_name] }
-
-    blocks
+  # Return a cfg for these instructions.  The CFG includes connected basic
+  # blocks as well as any temporary registers
+  def cfg
+    CFG.build @instructions
   end
 
   # Create a label to be used with jump instructions.  For example:
@@ -408,16 +328,8 @@ class Fisk
   # Assign registers to any temporary registers.  Only registers in +list+
   # will be used when selecting register assignments
   def assign_registers list
-    temp_registers = Set.new
-    @instructions.each_with_index do |insn, i|
-      if insn.has_temp_registers?
-        insn.temp_registers.each do |reg|
-          reg.range << i
-          temp_registers << reg
-        end
-      end
-    end
-
+    cfg = self.cfg
+    temp_registers = cfg.variables
     temp_registers = temp_registers.sort_by(&:start_point)
 
     active         = []
