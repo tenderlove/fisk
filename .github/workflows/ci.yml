@@ -8,15 +8,27 @@ on:
 
 jobs:
   test:
+    runs-on: ${{ matrix.os }}-latest
 
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu, macos]
 
     steps:
       - uses: actions/checkout@v2
-      - name: Install libcapstone
+      - name: Install libcapstone Linux
+        if: matrix.os == 'ubuntu'
         run: |
-          sudo apt-get update -y
-          sudo apt-get install -y libcapstone-dev
+            sudo apt-get update -y
+            sudo apt-get install -y libcapstone-dev
+
+      - name: Install libcapstone macOS
+        if: matrix.os == 'macos'
+        run: |
+            brew update
+            brew install capstone
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@477b21f02be01bcb8030d50f37cfec92bfa615b6
         with:
