@@ -231,8 +231,7 @@ class Fisk
         .jmp(fisk.label(:head))
       .put_label(:break)             # block 3
 
-      blocks = fisk.basic_blocks
-
+      fisk.basic_blocks
 
       assert_equal 0, reg1.start_point
       assert_equal 0, reg2.start_point

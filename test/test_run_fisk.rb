@@ -15,7 +15,7 @@ class RunFiskTest < Fisk::Test
     end
 
     func = jitbuf.to_function [], Fiddle::TYPE_INT
-    assert_equal -123, func.call
+    assert_equal(-123, func.call)
   end
 
   def test_forward_label_rel32
