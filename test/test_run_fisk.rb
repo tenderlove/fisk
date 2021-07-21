@@ -2,6 +2,22 @@ require "helper"
 require "fisk/helpers"
 
 class RunFiskTest < Fisk::Test
+  def test_negative
+    fisk = Fisk.new
+    jitbuf = Fisk::Helpers.jitbuffer 4096
+
+    fisk.asm jitbuf do
+      push rbp
+      mov rbp, rsp
+      mov rax, imm64(-123)
+      pop rbp
+      ret
+    end
+
+    func = jitbuf.to_function [], Fiddle::TYPE_INT
+    assert_equal -123, func.call
+  end
+
   def test_forward_label_rel32
     fisk = Fisk.new
     jitbuf = Fisk::Helpers.jitbuffer 4096
