@@ -2,6 +2,7 @@
 
 require "stringio"
 require "fisk/instructions"
+require "fisk/basic_block"
 require "set"
 
 class Fisk
@@ -49,20 +50,18 @@ class Fisk
         value & 0x7
       end
 
-      def register?; true; end
       def extended_register?; @value > 7; end
     end
 
     class Temp < Operand
-      attr_reader :name, :type, :range
-
-      attr_accessor :register
+      attr_reader :name, :type
+      attr_accessor :register, :start_point, :end_point
 
       def initialize name, type
-        @name     = name
-        @type     = type
-        @range    = []
-        @register = nil
+        @name        = name
+        @type        = type
+        @start_point = nil
+        @end_point   = nil
       end
 
       def temp_register?; true; end
@@ -73,14 +72,6 @@ class Fisk
 
       def rex_value
         @register.rex_value
-      end
-
-      def start_point
-        @range.first
-      end
-
-      def end_point
-        @range.last
       end
 
       def value
@@ -178,12 +169,6 @@ class Fisk
     end
   end
 
-  def initialize
-    @instructions = []
-    @labels = {}
-    yield self if block_given?
-  end
-
   class UnknownLabel < Struct.new(:name)
     def works? type
       type == "rel32"
@@ -199,72 +184,8 @@ class Fisk
 
   class Label < Struct.new(:name)
     def label?; true; end
+    def jump?; false; end
     def has_temp_registers?; false; end
-  end
-
-  # Create a label to be used with jump instructions.  For example:
-  #
-  #   fisk.jmp(fisk.label(:foo))
-  #   fisk.int(lit(3))
-  #   fisk.put_label(:foo)
-  #
-  def label name
-    UnknownLabel.new(name)
-  end
-
-  # Insert a label named +name+ at the current position in the instructions.
-  def put_label name
-    @instructions << Label.new(name)
-    self
-  end
-  alias :make_label :put_label
-
-  # Allocate and return a new register.  These registers will be replaced with
-  # real registers when `assign_registers` is called.
-  def register name = "temp"
-    Registers::Temp.new name, "r64"
-  end
-
-  # Assign registers to any temporary registers.  Only registers in +list+
-  # will be used when selecting register assignments
-  def assign_registers list
-    temp_registers = Set.new
-    @instructions.each_with_index do |insn, i|
-      if insn.has_temp_registers?
-        insn.temp_registers.each do |reg|
-          reg.range << i
-          temp_registers << reg
-        end
-      end
-    end
-
-    temp_registers = temp_registers.sort_by(&:start_point)
-
-    active         = []
-    free_registers = list.reverse
-    register_count = list.length
-
-    temp_registers.each do |temp_reg|
-      # expire old intervals
-      active, dead = active.sort_by(&:end_point).partition do |j|
-        j.end_point >= temp_reg.start_point
-      end
-
-      # Add unused registers back to the free register list
-      dead.each { |tr| free_registers << tr.register }
-
-      if active.length == register_count
-        raise NotImplementedError, "Register spilled"
-      end
-
-      temp_reg.register = free_registers.pop
-      active << temp_reg
-    end
-  end
-
-  Registers.constants.grep(/^[A-Z0-9]*$/).each do |const|
-    val = Registers.const_get const
-    define_method(const.downcase) { val }
   end
 
   class Instruction
@@ -272,6 +193,10 @@ class Fisk
       @insn     = insn
       @form     = form
       @operands = operands
+    end
+
+    def jump?
+      false
     end
 
     def has_temp_registers?
@@ -305,6 +230,14 @@ class Fisk
       @form      = form
       @operand   = operand
       @saved_pos = nil
+    end
+
+    def jump?
+      true
+    end
+
+    def target
+      @operand.name
     end
 
     def has_temp_registers?; false; end
@@ -350,6 +283,80 @@ class Fisk
     def find_form form_type
       @insn.forms.find { |form| form.operands.first.type == form_type }
     end
+  end
+
+  def initialize
+    @instructions = []
+    @labels = {}
+    yield self if block_given?
+  end
+
+  # Return a list of basic blocks for the instructions
+  def basic_blocks
+    cfg.blocks
+  end
+
+  # Return a cfg for these instructions.  The CFG includes connected basic
+  # blocks as well as any temporary registers
+  def cfg
+    CFG.build @instructions
+  end
+
+  # Create a label to be used with jump instructions.  For example:
+  #
+  #   fisk.jmp(fisk.label(:foo))
+  #   fisk.int(lit(3))
+  #   fisk.put_label(:foo)
+  #
+  def label name
+    UnknownLabel.new(name)
+  end
+
+  # Insert a label named +name+ at the current position in the instructions.
+  def put_label name
+    @instructions << Label.new(name)
+    self
+  end
+  alias :make_label :put_label
+
+  # Allocate and return a new register.  These registers will be replaced with
+  # real registers when `assign_registers` is called.
+  def register name = "temp"
+    Registers::Temp.new name, "r64"
+  end
+
+  # Assign registers to any temporary registers.  Only registers in +list+
+  # will be used when selecting register assignments
+  def assign_registers list
+    cfg = self.cfg
+    temp_registers = cfg.variables
+    temp_registers = temp_registers.sort_by(&:start_point)
+
+    active         = []
+    free_registers = list.reverse
+    register_count = list.length
+
+    temp_registers.each do |temp_reg|
+      # expire old intervals
+      active, dead = active.sort_by(&:end_point).partition do |j|
+        j.end_point >= temp_reg.start_point
+      end
+
+      # Add unused registers back to the free register list
+      dead.each { |tr| free_registers << tr.register }
+
+      if active.length == register_count
+        raise NotImplementedError, "Register spilled"
+      end
+
+      temp_reg.register = free_registers.pop
+      active << temp_reg
+    end
+  end
+
+  Registers.constants.grep(/^[A-Z0-9]*$/).each do |const|
+    val = Registers.const_get const
+    define_method(const.downcase) { val }
   end
 
   include Fisk::Instructions::DSLMethods

@@ -100,6 +100,7 @@ class RegisterAllocationTest < Fisk::Test
     reg1 = fisk.register
     reg2 = fisk.register
     fisk.xor reg1, reg1
+    fisk.put_label(:foo) # make two basic blocks
     fisk.xor reg2, reg2
     fisk.assign_registers([Fisk::Registers::R9])
     i = disasm(fisk.to_binary)
@@ -107,6 +108,35 @@ class RegisterAllocationTest < Fisk::Test
     assert_equal "r9, r9", i[0].op_str.to_s
     assert_equal "xor", i[1].mnemonic.to_s
     assert_equal "r9, r9", i[1].op_str.to_s
+  end
+
+  def test_spill_not_implemented_cfg
+    __ = fisk
+
+    reg1 = fisk.register("temp1")
+    reg2 = fisk.register("temp2")
+    reg3 = fisk.register("temp3")
+
+    __.mov(reg1, fisk.imm32(1))    # block 0
+      .mov(reg2, fisk.imm32(1))
+    .put_label(:head)              # block 1
+      .cmp(reg1, fisk.imm32(100))
+      .jg(fisk.label(:break))
+      .add(reg1, reg2)             # block 2
+      .mov(reg3, fisk.imm32(1))
+      .mov(reg2, reg3)
+      .jmp(fisk.label(:head))
+    .put_label(:break)             # block 3
+
+    assert_raises(NotImplementedError) do
+      fisk.assign_registers([Fisk::Registers::R8, Fisk::Registers::R9])
+    end
+
+    fisk.assign_registers([Fisk::Registers::R8, Fisk::Registers::R9, Fisk::Registers::R10])
+
+    assert_equal "r8", reg1.register.name
+    assert_equal "r9", reg2.register.name
+    assert_equal "r10", reg3.register.name
   end
 
   def test_spill_not_implemented
