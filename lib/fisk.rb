@@ -69,6 +69,10 @@ class Fisk
 
       def temp_register?; true; end
 
+      def op_value
+        @register.op_value
+      end
+
       def extended_register?
         @register.extended_register?
       end
