@@ -13,7 +13,7 @@ class FiskTest < Fisk::Test
     lea = disasm(fisk.to_binary).first
 
     assert_equal "lea", lea.mnemonic.to_s
-    assert_equal "r8, [r9]", lea.op_str.to_s
+    assert_match(/r8, (?:qword ptr )?\[r9\]/, lea.op_str.to_s)
   end
 
   def test_lea_with_offset
@@ -21,7 +21,7 @@ class FiskTest < Fisk::Test
     lea = disasm(fisk.to_binary).first
 
     assert_equal "lea", lea.mnemonic.to_s
-    assert_equal "r8, [r9 + 0xa]", lea.op_str.to_s
+    assert_match(/r8, (?:qword ptr )?\[r9 \+ 0xa\]/, lea.op_str.to_s)
   end
 
   def test_lea_with_negative_offset
@@ -29,7 +29,7 @@ class FiskTest < Fisk::Test
     lea = disasm(fisk.to_binary).first
 
     assert_equal "lea", lea.mnemonic.to_s
-    assert_equal "r8, [r9 - 0xa]", lea.op_str.to_s
+    assert_match(/r8, (?:qword ptr )?\[r9 \- 0xa\]/, lea.op_str.to_s)
   end
 
   def test_imm_casts_to_int
