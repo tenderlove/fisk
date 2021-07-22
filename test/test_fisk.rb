@@ -8,6 +8,30 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_lea
+    fisk.lea(fisk.r8, fisk.m(fisk.r9))
+    lea = disasm(fisk.to_binary).first
+
+    assert_equal "lea", lea.mnemonic.to_s
+    assert_equal "r8, [r9]", lea.op_str.to_s
+  end
+
+  def test_lea_with_offset
+    fisk.lea(fisk.r8, fisk.m(fisk.r9, 10))
+    lea = disasm(fisk.to_binary).first
+
+    assert_equal "lea", lea.mnemonic.to_s
+    assert_equal "r8, [r9 + 0xa]", lea.op_str.to_s
+  end
+
+  def test_lea_with_negative_offset
+    fisk.lea(fisk.r8, fisk.m(fisk.r9, -10))
+    lea = disasm(fisk.to_binary).first
+
+    assert_equal "lea", lea.mnemonic.to_s
+    assert_equal "r8, [r9 - 0xa]", lea.op_str.to_s
+  end
+
   def test_imm_casts_to_int
     [8, 16, 32, 64].each do |size|
       assert_raises do

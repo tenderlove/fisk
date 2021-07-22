@@ -4,7 +4,7 @@ class Fisk
 
     def add_modrm buffer, operands, mode, reg, rm
       offset_bytes = 0
-      if mem = operands.find(&:m64?)
+      if mem = operands.find(&:memory?)
         if mem.displacement != 0
           if 0xFF == mem.displacement | 0xFF
             offset_bytes = 1

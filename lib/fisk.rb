@@ -15,7 +15,7 @@ class Fisk
     def register?; false; end
     def temp_register?; false; end
     def extended_register?; false; end
-    def m64?; false; end
+    def memory?; false; end
 
     def rex_value
       value >> 3
@@ -115,8 +115,7 @@ class Fisk
     CALLEE_SAVED = [ RBX, RSP, RBP, R12, R13, R14, R15 ]
   end
 
-
-  class M64 < Operand
+  class Memory < Operand
     attr_reader :displacement
 
     def initialize register, displacement
@@ -128,15 +127,27 @@ class Fisk
       @register.value
     end
 
+    def memory?; true; end
+  end
+
+  class M64 < Memory
     def type
       "m64"
     end
+  end
 
-    def m64?; true; end
+  class M < Memory
+    def type
+      "m"
+    end
   end
 
   def m64 x, displacement = 0
     M64.new x, displacement
+  end
+
+  def m x, displacement = 0
+    M.new x, displacement
   end
 
   # Define all immediate value methods of different sizes
