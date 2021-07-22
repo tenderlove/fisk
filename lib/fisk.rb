@@ -56,6 +56,28 @@ class Fisk
       def extended_register?; @value > 7; end
     end
 
+    class Rip
+      def initialize displacement
+        @displacement = displacement
+      end
+
+      def works? type
+        type == "r64"
+      end
+
+      def unknown_label?; false; end
+      def temp_register?; false; end
+      def memory?; false; end
+
+      def rex_value
+        0x0
+      end
+
+      def op_value
+        0x0
+      end
+    end
+
     class Temp < Operand
       attr_reader :name, :type
       attr_accessor :register, :start_point, :end_point
@@ -140,6 +162,10 @@ class Fisk
     def type
       "m"
     end
+  end
+
+  def rip displacement = 0
+    Registers::Rip.new(displacement)
   end
 
   def m64 x, displacement = 0
