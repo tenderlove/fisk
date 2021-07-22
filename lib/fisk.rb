@@ -16,6 +16,7 @@ class Fisk
     def temp_register?; false; end
     def extended_register?; false; end
     def memory?; false; end
+    def rip?; false; end
 
     def rex_value
       value >> 3
@@ -54,20 +55,24 @@ class Fisk
       end
 
       def extended_register?; @value > 7; end
+      def rip?; false; end
     end
 
     class Rip
+      attr_reader :displacement
+
       def initialize displacement
         @displacement = displacement
       end
 
       def works? type
-        type == "r64"
+        type == "m64" || type == "m"
       end
 
       def unknown_label?; false; end
       def temp_register?; false; end
-      def memory?; false; end
+      def memory?; true; end
+      def rip?; true; end
 
       def rex_value
         0x0

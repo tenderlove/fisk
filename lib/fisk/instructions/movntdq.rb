@@ -20,10 +20,10 @@ class Fisk
               operands[0].rex_value)
         add_opcode buffer, 0x0F, 0
         add_opcode buffer, 0xE7, 0
-        add_modrm(buffer, operands,
+        add_modrm(buffer,
               0,
               operands[1].op_value,
-              operands[0].op_value)
+              operands[0].op_value, operands)
       end
 
       def bytesize; 3; end

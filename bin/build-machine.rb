@@ -2,6 +2,20 @@ require "nokogiri"
 require "stringio"
 require "erb"
 
+def modrm_method operands
+  op_types = operands.map { |x| x["type"] }
+  case op_types
+  in [/^m\d*$/, /^r\d+$/]
+    "add_modrm_mem_reg"
+  in [/^r\d+$/, /^m\d*$/]
+    "add_modrm_reg_mem"
+  in [/^r\d+$/, /^r\d+$/]
+    "add_modrm_reg_reg"
+  else
+    "add_modrm"
+  end
+end
+
 def parse_rex v
   if v
     case v

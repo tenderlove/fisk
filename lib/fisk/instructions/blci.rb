@@ -13,10 +13,10 @@ class Fisk
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x02, 0
-        add_modrm(buffer, operands,
+        add_modrm_reg_reg(buffer,
               3,
               6,
-              operands[1].op_value)
+              operands[1].op_value, operands)
       end
 
       def bytesize; 2; end
@@ -31,10 +31,10 @@ class Fisk
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x02, 0
-        add_modrm(buffer, operands,
+        add_modrm_reg_mem(buffer,
               0,
               6,
-              operands[1].op_value)
+              operands[1].op_value, operands)
       end
 
       def bytesize; 2; end
@@ -49,10 +49,10 @@ class Fisk
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x02, 0
-        add_modrm(buffer, operands,
+        add_modrm_reg_reg(buffer,
               3,
               6,
-              operands[1].op_value)
+              operands[1].op_value, operands)
       end
 
       def bytesize; 2; end
@@ -67,10 +67,10 @@ class Fisk
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0x02, 0
-        add_modrm(buffer, operands,
+        add_modrm_reg_mem(buffer,
               0,
               6,
-              operands[1].op_value)
+              operands[1].op_value, operands)
       end
 
       def bytesize; 2; end

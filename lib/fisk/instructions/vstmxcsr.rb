@@ -12,10 +12,10 @@ class Fisk
       def encode buffer, operands
         add_VEX buffer, operands
         add_opcode buffer, 0xAE, 0
-        add_modrm(buffer, operands,
+        add_modrm(buffer,
               0,
               3,
-              operands[0].op_value)
+              operands[0].op_value, operands)
       end
 
       def bytesize; 2; end

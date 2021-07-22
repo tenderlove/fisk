@@ -60,10 +60,10 @@ class Fisk
             when "ModRM"
               size += 1
         -%>
-        add_modrm(buffer, operands,
+        <%= modrm_method(operands) %>(buffer,
               <%= encoding["mode"].to_i(2) %>,
               <%= parse_operand_value encoding["reg"] %>,
-              <%= parse_operand_value encoding["rm"] %>)
+              <%= parse_operand_value encoding["rm"] %>, operands)
         <%- when "Prefix" -%>
         add_prefix buffer, operands, 0x<%= sprintf("%02X", encoding["byte"].to_i(16)) %>, <%= encoding["mandatory"] %>
         <%- when "DataOffset" -%>

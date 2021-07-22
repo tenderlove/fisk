@@ -8,16 +8,30 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
-  def test_rip_rel
-    p fisk.rax.rex_value.to_s(16)
-    #fisk.mov(fisk.rip(2), fisk.r8)
-    fisk.mov(fisk.rip(2), fisk.rax)
-    bin = fisk.to_binary
-    p bin.bytes.map { |x| x.to_s(16) }.join(" ")
-    i = disasm(bin).first
+  def test_lea_to_rip
+    fisk.lea(fisk.r8, fisk.rip(2))
+
+    i = disasm(fisk.to_binary).first
+
+    assert_equal "lea", i.mnemonic.to_s
+    assert_match(/r8, (?:qword ptr )?\[rip \+ 2\]/, i.op_str.to_s)
+  end
+
+  def test_rip_to_rax
+    fisk.mov(fisk.rax, fisk.rip(2))
+
+    i = disasm(fisk.to_binary).first
 
     assert_equal "mov", i.mnemonic.to_s
-    assert_equal "(rip)", i.op_str.to_s
+    assert_equal "rax, qword ptr [rip + 2]", i.op_str.to_s
+  end
+
+  def test_rax_to_rip
+    fisk.mov(fisk.rip(2), fisk.rax)
+    i = disasm(fisk.to_binary).first
+
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal "qword ptr [rip + 2], rax", i.op_str.to_s
   end
 
   def test_lea

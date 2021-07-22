@@ -20,10 +20,10 @@ class Fisk
         add_opcode buffer, 0x0F, 0
         add_opcode buffer, 0x38, 0
         add_opcode buffer, 0x06, 0
-        add_modrm(buffer, operands,
+        add_modrm(buffer,
               3,
               operands[0].op_value,
-              operands[1].op_value)
+              operands[1].op_value, operands)
       end
 
       def bytesize; 4; end
@@ -45,10 +45,10 @@ class Fisk
         add_opcode buffer, 0x0F, 0
         add_opcode buffer, 0x38, 0
         add_opcode buffer, 0x06, 0
-        add_modrm(buffer, operands,
+        add_modrm(buffer,
               0,
               operands[0].op_value,
-              operands[1].op_value)
+              operands[1].op_value, operands)
       end
 
       def bytesize; 4; end
@@ -71,10 +71,10 @@ class Fisk
         add_opcode buffer, 0x0F, 0
         add_opcode buffer, 0x38, 0
         add_opcode buffer, 0x06, 0
-        add_modrm(buffer, operands,
+        add_modrm(buffer,
               3,
               operands[0].op_value,
-              operands[1].op_value)
+              operands[1].op_value, operands)
       end
 
       def bytesize; 4; end
@@ -97,10 +97,10 @@ class Fisk
         add_opcode buffer, 0x0F, 0
         add_opcode buffer, 0x38, 0
         add_opcode buffer, 0x06, 0
-        add_modrm(buffer, operands,
+        add_modrm(buffer,
               0,
               operands[0].op_value,
-              operands[1].op_value)
+              operands[1].op_value, operands)
       end
 
       def bytesize; 4; end
