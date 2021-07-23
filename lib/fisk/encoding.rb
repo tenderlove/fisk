@@ -107,5 +107,9 @@ class Fisk
         num >>= 8
       }
     end
+
+    def add_prefix buffer, operands, byte, mandatory
+      buffer.putc byte
+    end
   end
 end

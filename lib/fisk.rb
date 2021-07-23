@@ -54,7 +54,10 @@ class Fisk
         value & 0x7
       end
 
-      def extended_register?; @value > 7; end
+      def extended_register?
+        @value > 7 || EXTENDED_R8.include?(self)
+      end
+
       def rip?; false; end
     end
 
@@ -121,6 +124,31 @@ class Fisk
       end
     end
 
+    AL  = Register.new "al", "r8", 0
+    CL  = Register.new "cl", "r8", 1
+    DL  = Register.new "dl", "r8", 2
+    BL  = Register.new "bl", "r8", 3
+
+    SPL = Register.new "spl", "r8", 4
+    BPL = Register.new "bpl", "r8", 5
+    SIL = Register.new "sil", "r8", 6
+    DIL = Register.new "dil", "r8", 7
+    EXTENDED_R8 = [SPL, BPL, SIL, DIL]
+
+    AH = Register.new "ah", "r8", 4
+    CH = Register.new "ch", "r8", 5
+    DH = Register.new "dh", "r8", 6
+    BH = Register.new "bh", "r8", 7
+
+    AX = Register.new "ax", "r16", 0
+    CX = Register.new "cx", "r16", 1
+    DX = Register.new "dx", "r16", 2
+    BX = Register.new "bx", "r16", 3
+    SP = Register.new "sp", "r16", 4
+    BP = Register.new "bp", "r16", 5
+    SI = Register.new "si", "r16", 6
+    DI = Register.new "di", "r16", 7
+
     EAX = Register.new "eax", "r32", 0
     ECX = Register.new "ecx", "r32", 1
     EDX = Register.new "edx", "r32", 2
@@ -141,6 +169,9 @@ class Fisk
     8.times do |i|
       i += 8
       const_set "R#{i}", Register.new("r#{i}", "r64", i)
+      const_set "R#{i}D", Register.new("r#{i}d", "r32", i)
+      const_set "R#{i}W", Register.new("r#{i}w", "r16", i)
+      const_set "R#{i}B", Register.new("r#{i}b", "r8", i)
     end
 
     # List of *caller* saved registers for the C calling convention
