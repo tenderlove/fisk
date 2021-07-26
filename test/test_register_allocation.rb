@@ -8,6 +8,15 @@ class RegisterAllocationTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_encode_temp_register_without_assignemt_raises
+    reg = fisk.register
+    fisk.push(reg)
+
+    assert_raises Fisk::Errors::UnassignedRegister do
+      fisk.to_binary
+    end
+  end
+
   def test_push_r8_with_reg_assignment
     reg = fisk.register
     fisk.push(reg)

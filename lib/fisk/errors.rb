@@ -15,5 +15,10 @@ class Fisk
     # allocation was requested
     class UnreleasedRegisterError < Error
     end
+
+    # Raised when a temporary register hasn't been assigned a real register,
+    # but it's used in the encoding process.
+    class UnassignedRegister < Error
+    end
   end
 end
