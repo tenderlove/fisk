@@ -97,19 +97,27 @@ class Fisk
       def temp_register?; true; end
 
       def op_value
-        @register.op_value
+        reg.op_value
       end
 
       def extended_register?
-        @register.extended_register?
+        reg.extended_register?
       end
 
       def rex_value
-        @register.rex_value
+        reg.rex_value
       end
 
       def value
-        @register.value
+        reg.value
+      end
+
+      def reg
+        unless @register
+          raise Errors::UnassignedRegister, "Temporary register #{name} hasn't been assigned a real register"
+        end
+
+        @register
       end
     end
 
