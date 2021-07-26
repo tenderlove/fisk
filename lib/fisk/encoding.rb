@@ -6,7 +6,7 @@ class Fisk
       offset_bytes = 0
       if mem = operands.find(&:memory?)
         if mem.displacement != 0
-          if 0xFF == mem.displacement | 0xFF
+          if mem.displacement >= -0x7F - 1 && mem.displacement < 0x7F
             offset_bytes = 1
             mode |= 0x1
           else
@@ -43,7 +43,7 @@ class Fisk
       end
 
       if mem.displacement != 0
-        if 0xFF == mem.displacement | 0xFF
+        if mem.displacement >= -0x7F - 1 && mem.displacement < 0x7F
           offset_bytes = 1
           mode |= 0x1
         else

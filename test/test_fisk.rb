@@ -8,6 +8,14 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_m64_encoding
+    fisk.mov(fisk.m64(fisk.rax, 0xf8), fisk.rax)
+    i = disasm(fisk.to_binary).first
+
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal("qword ptr [rax + 0xf8], rax", i.op_str.to_s)
+  end
+
   def test_lea_to_rip
     fisk.lea(fisk.r8, fisk.rip(2))
 
