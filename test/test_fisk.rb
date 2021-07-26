@@ -355,4 +355,20 @@ class FiskTest < Fisk::Test
     assert_equal "jbe", i.mnemonic.to_s
     assert_equal "8", i.op_str.to_s
   end
+
+  def test_comments
+    fisk.comment "will xor"
+    fisk.comment "second comment"
+    fisk.xor fisk.rax, fisk.rax
+    fisk.comment "did xor"
+    fisk.mov fisk.rax, fisk.rax
+    metadata = {}
+    binary = fisk.to_binary metadata: metadata
+    comments = metadata[:comments]
+    insns = disasm(binary)
+    assert_equal "will xor\nsecond comment", comments[insns[0].address]
+    assert_equal "xor", insns[0].mnemonic.to_s
+    assert_equal "did xor", comments[insns[1].address]
+    assert_equal "mov", insns[1].mnemonic.to_s
+  end
 end

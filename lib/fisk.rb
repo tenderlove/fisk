@@ -246,6 +246,11 @@ class Fisk
     def has_temp_registers?; false; end
   end
 
+  class Comment < Struct.new(:message)
+    def label?; false; end
+    def comment?; true; end
+  end
+
   class Instruction
     def initialize insn, form, operands
       @insn     = insn
@@ -280,6 +285,7 @@ class Fisk
     end
 
     def label?; false; end
+    def comment?; false; end
   end
 
   class UnresolvedInstruction
@@ -335,6 +341,7 @@ class Fisk
     end
 
     def label?; false; end
+    def comment?; false; end
 
     private
 
@@ -397,6 +404,12 @@ class Fisk
     self
   end
   alias :make_label :put_label
+
+  # Insert a comment at the current position in the instructions.
+  def comment message
+    @instructions << Comment.new(message)
+    self
+  end
 
   # Allocate and return a new register.  These registers will be replaced with
   # real registers when `assign_registers` is called.
@@ -506,34 +519,39 @@ class Fisk
   #     mov r9, imm64(32)
   #   end
   #
-  def asm buf = StringIO.new(''.b), &block
+  def asm buf = StringIO.new(''.b), metadata: {}, &block
     instance_eval(&block)
-    write_to buf
+    write_to buf, metadata: metadata
     buf
   end
 
   # Encodes all instructions and returns a binary string with the encoded
   # instructions.
-  def to_binary
+  def to_binary(metadata: {})
     io = StringIO.new ''.b
-    write_to io
+    write_to io, metadata: metadata
     io.string
   end
 
   # Encode all instructions and write them to +buffer+.  +buffer+ should be an
   # IO object.
-  def write_to buffer
+  def write_to buffer, metadata: {}
     labels = {}
+    comments = {}
     unresolved = []
     @instructions.each do |insn|
       if insn.label?
         labels[insn.name] = buffer.pos
+      elsif insn.comment?
+        comments.update({buffer.pos => insn.message}) { |_, *lines| lines.join($/) }
       else
         unless insn.encode buffer, labels
           unresolved << insn
         end
       end
     end
+
+    metadata[:comments] = comments
 
     return if unresolved.empty?
 
