@@ -249,6 +249,10 @@ class Fisk
       false
     end
 
+    def lazy?
+      false
+    end
+
     def has_temp_registers?
       @operands.any?(&:temp_register?)
     end
@@ -284,6 +288,10 @@ class Fisk
 
     def jump?
       true
+    end
+
+    def lazy?
+      false
     end
 
     def target
@@ -381,6 +389,40 @@ class Fisk
   #
   def label name
     UnknownLabel.new(name)
+  end
+
+  Lazy = Struct.new(:block) do # :nodoc:
+    def label?; false; end
+    def lazy?; true; end
+
+    def encode buffer, labels
+      block.call buffer.pos
+    end
+  end
+
+  # Record a block that will be called during instruction encoding.  The block
+  # will be yielded the current position of the buffer.
+  #
+  # For example:
+  #
+  #   patch_position = nil
+  #
+  #   fisk.nop
+  #   fisk.lazy { |pos| patch_location = pos }
+  #   fisk.jmp(fisk.label(:foo))
+  #   fisk.lazy { |_|
+  #     fisk.mov(fisk.r8, fisk.imm64(patch_location))
+  #   }
+  #   fisk.write_to(buf)
+  #
+  # The first lazy block will be yielded the position of the buffer immediately
+  # after encoding the `nop` instruction and before encoding the `jmp`
+  # instruction.  The second lazy block will be yielded to after the `jmp`
+  # instruction has been encoded.  This gives you a chance to write the buffer
+  # position from certain points in to your assembly
+  def lazy &block
+    @instructions << Lazy.new(block)
+    self
   end
 
   # Insert a label named +name+ at the current position in the instructions.
@@ -517,15 +559,25 @@ class Fisk
   def write_to buffer
     labels = {}
     unresolved = []
-    @instructions.each do |insn|
+    instructions = @instructions.dup
+    backup = @instructions.dup
+    @instructions.clear
+
+    while insn = instructions.shift
       if insn.label?
         labels[insn.name] = buffer.pos
+      elsif insn.lazy?
+        insn.encode buffer, labels
+        instructions.unshift(*@instructions)
+        @instructions.clear
       else
         unless insn.encode buffer, labels
           unresolved << insn
         end
       end
     end
+
+    @instructions = backup
 
     return if unresolved.empty?
 
