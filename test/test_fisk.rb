@@ -79,6 +79,51 @@ class FiskTest < Fisk::Test
     assert_match(/r8, (?:qword ptr )?\[r9 \- 0xa\]/, lea.op_str.to_s)
   end
 
+  def test_lazy
+    buf = StringIO.new(''.b)
+    patch_location = nil
+    fisk.nop
+    fisk.lazy { |pos|
+      patch_location = pos
+    }
+    fisk.nop
+    fisk.lazy { |_|
+      fisk.mov(fisk.r8, fisk.imm64(patch_location))
+    }
+    fisk.write_to buf
+    assert_equal 1, patch_location
+    i = disasm(buf.string).last
+    assert_equal "movabs", i.mnemonic.to_s
+    assert_equal "r8, 1", i.op_str.to_s
+  end
+
+  def test_super_lazy
+    buf = StringIO.new(''.b)
+    fisk.lazy { |_|
+      fisk.mov(fisk.r8, fisk.imm64(10))
+      fisk.lazy { |_|
+        fisk.mov(fisk.r8, fisk.imm64(1))
+      }
+    }
+    fisk.write_to buf
+    i = disasm(buf.string).last
+    assert_equal "movabs", i.mnemonic.to_s
+    assert_equal "r8, 1", i.op_str.to_s
+  end
+
+  def test_super_lazy_twice
+    fisk.lazy { |_|
+      fisk.mov(fisk.r8, fisk.imm64(10))
+      fisk.lazy { |_|
+        fisk.mov(fisk.r8, fisk.imm64(1))
+      }
+    }
+
+    one, two = 2.times.map { fisk.to_binary }
+
+    assert_equal one, two
+  end
+
   def test_imm_casts_to_int
     [8, 16, 32, 64].each do |size|
       assert_raises do
