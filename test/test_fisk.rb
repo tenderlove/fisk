@@ -379,4 +379,74 @@ class FiskTest < Fisk::Test
     assert_equal "did xor", comments[insns[1].address]
     assert_equal "mov", insns[1].mnemonic.to_s
   end
+  
+  def test_r8h
+    fisk.mov fisk.ah, fisk.imm8(1)
+    binary = fisk.to_binary
+    i = disasm(binary).first
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal "ah, 1", i.op_str.to_s
+  end
+
+  def test_r8l
+    fisk.mov fisk.al, fisk.imm8(1)
+    binary = fisk.to_binary
+    i = disasm(binary).first
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal "al, 1", i.op_str.to_s
+  end
+
+  def test_r8rex
+    fisk.mov fisk.spl, fisk.imm8(1)
+    binary = fisk.to_binary
+    i = disasm(binary).first
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal "spl, 1", i.op_str.to_s
+  end
+
+  def test_r16
+    fisk.mov fisk.ax, fisk.imm16(1)
+    binary = fisk.to_binary
+    i = disasm(binary).first
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal "ax, 1", i.op_str.to_s
+  end
+
+  def test_r32
+    fisk.mov fisk.eax, fisk.imm32(1)
+    binary = fisk.to_binary
+    i = disasm(binary).first
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal "eax, 1", i.op_str.to_s
+  end
+
+  def test_r64
+    fisk.mov fisk.rax, fisk.imm32(1)
+    binary = fisk.to_binary
+    i = disasm(binary).first
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal "rax, 1", i.op_str.to_s
+  end
+
+  def test_set
+    fisk.mov fisk.r9, fisk.imm64(1)
+    fisk.mov fisk.r10, fisk.imm64(2)
+    fisk.cmp fisk.r9, fisk.r10
+    fisk.sete fisk.al
+    binary = fisk.to_binary
+    i = disasm(binary)[3]
+    assert_equal "sete", i.mnemonic.to_s
+    assert_equal "al", i.op_str.to_s
+  end
+
+  def test_cmov
+    fisk.mov fisk.r9, fisk.imm64(1)
+    fisk.mov fisk.r10, fisk.imm64(2)
+    fisk.cmp fisk.r9, fisk.r10
+    fisk.cmove fisk.r9, fisk.r10
+    binary = fisk.to_binary
+    i = disasm(binary)[3]
+    assert_equal "cmove", i.mnemonic.to_s
+    assert_equal "r9, r10", i.op_str.to_s
+  end
 end
