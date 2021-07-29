@@ -11,7 +11,7 @@ require "fisk/version"
 class Fisk
   class Operand
     def works? type; self.type == type; end
-    def unknown_label?; false; end
+    def unresolved?; false; end
     def register?; false; end
     def temp_register?; false; end
     def extended_register?; false; end
@@ -72,7 +72,10 @@ class Fisk
         type == "m64" || type == "m"
       end
 
-      def unknown_label?; false; end
+      def unresolved?
+        false
+      end
+
       def temp_register?; false; end
       def memory?; true; end
       def rip?; true; end
@@ -262,7 +265,7 @@ class Fisk
       type == "rel32"
     end
 
-    def unknown_label?; true; end
+    def unresolved?; true; end
     def temp_register?; false; end
 
     def value
@@ -289,6 +292,10 @@ class Fisk
       @operands = operands
     end
 
+    def retry?
+      false
+    end
+
     def jump?
       false
     end
@@ -308,7 +315,6 @@ class Fisk
     def encode buffer, labels
       encoding = @form.encodings.first
       encoding.encode buffer, @operands
-      true
     end
 
     def bytesize
@@ -324,7 +330,7 @@ class Fisk
       @insn      = insn
       @form      = form
       @operand   = operand
-      @saved_pos = nil
+      @retry     = false
     end
 
     def jump?
@@ -333,6 +339,10 @@ class Fisk
 
     def target
       @operand.name
+    end
+
+    def retry?
+      true
     end
 
     def has_temp_registers?; false; end
@@ -344,10 +354,7 @@ class Fisk
       operand_klass = Rel32
 
       if labels.key? @operand.name
-        if @saved_pos
-          # Only use rel32 if we saved the position
-          buffer.seek @saved_pos, IO::SEEK_SET
-        else
+        unless @retry
           estimated_offset = labels[@operand.name] - (buffer.pos + encoding.bytesize)
 
           if estimated_offset >= -128 && estimated_offset <= 127
@@ -360,14 +367,10 @@ class Fisk
 
         jump_len = -(buffer.pos + encoding.bytesize - labels[@operand.name])
         encoding.encode buffer, [operand_klass.new(jump_len)]
-        true
       else
-        # We've hit a label that doesn't exist yet
-        # Save the buffer position so we can seek back to it later
-        @saved_pos = buffer.pos
+        @retry = true
         # Write 5 bytes to reserve our spot
         encoding.bytesize.times { buffer.putc 0 }
-        false
       end
     end
 
@@ -564,6 +567,8 @@ class Fisk
     io.string
   end
 
+  RetryRequest = Struct.new(:insn, :io_seek_pos)
+
   # Encode all instructions and write them to +buffer+.  +buffer+ should be an
   # IO object.
   def write_to buffer, metadata: {}
@@ -576,8 +581,12 @@ class Fisk
       elsif insn.comment?
         comments.update({buffer.pos => insn.message}) { |_, *lines| lines.join($/) }
       else
-        unless insn.encode buffer, labels
-          unresolved << insn
+        if insn.retry?
+          retry_req = RetryRequest.new(insn, buffer.pos)
+          unresolved << retry_req
+          insn.encode buffer, labels
+        else
+          insn.encode buffer, labels
         end
       end
     end
@@ -587,7 +596,9 @@ class Fisk
     return if unresolved.empty?
 
     pos = buffer.pos
-    unresolved.each do |insn|
+    unresolved.each do |req|
+      insn = req.insn
+      buffer.seek req.io_seek_pos, IO::SEEK_SET
       insn.encode buffer, labels
     end
     buffer.seek pos, IO::SEEK_SET
@@ -623,7 +634,7 @@ class Fisk
     insn = nil
 
     params.each do |param|
-      if param.unknown_label?
+      if param.unresolved?
         if params.length > 1
           raise ArgumentError, "labels only work with single param jump instructions"
         end
