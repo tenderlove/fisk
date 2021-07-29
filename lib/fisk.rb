@@ -267,11 +267,6 @@ class Fisk
 
     def unresolved?; true; end
     def temp_register?; false; end
-
-    def value
-      label = assembler.label_for(name)
-      label.position - (insn.position + insn.bytesize)
-    end
   end
 
   class Label < Struct.new(:name)
