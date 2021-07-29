@@ -62,7 +62,7 @@ class Fisk
     end
 
     class Rip
-      attr_reader :displacement
+      attr_accessor :displacement
 
       def initialize displacement
         @displacement = displacement
@@ -73,7 +73,7 @@ class Fisk
       end
 
       def unresolved?
-        false
+        @displacement.is_a?(Fisk::UnknownLabel)
       end
 
       def temp_register?; false; end
@@ -325,7 +325,38 @@ class Fisk
     def comment?; false; end
   end
 
-  class UnresolvedInstruction
+  class UnresolvedRIPInstruction
+    def initialize insn, form, operands
+      @insn      = insn
+      @form      = form
+      @operands  = operands
+      @retry     = false
+    end
+
+    def label?; false; end
+    def comment?; false; end
+    def retry?; true; end
+
+    def encode buffer, labels
+      # Use dummy values for any unresolvable operands
+      operands = @operands.map do |op|
+        if op.rip? && op.unresolved?
+          # Try resolving the operands
+          if labels.key?(op.displacement.name)
+            Registers::Rip.new labels[op.displacement.name]
+          else
+            Registers::Rip.new 0x0CAFE
+          end
+        else
+          op
+        end
+      end
+
+      @form.encodings.first.encode buffer, operands
+    end
+  end
+
+  class UnresolvedJumpInstruction
     def initialize insn, form, operand
       @insn      = insn
       @form      = form
@@ -370,7 +401,7 @@ class Fisk
       else
         @retry = true
         # Write 5 bytes to reserve our spot
-        encoding.bytesize.times { buffer.putc 0 }
+        encoding.encode buffer, [operand_klass.new(0x0CAFE)]
       end
     end
 
@@ -635,10 +666,12 @@ class Fisk
 
     params.each do |param|
       if param.unresolved?
-        if params.length > 1
-          raise ArgumentError, "labels only work with single param jump instructions"
+        if insns.name =~ /^J/ # I hope all jump instructions start with J!
+          insn = UnresolvedJumpInstruction.new(insns, form, params.first)
+        else
+          # If it's not a jump instruction, assume unresolved RIP relative 😬
+          insn = UnresolvedRIPInstruction.new(insns, form, params)
         end
-        insn = UnresolvedInstruction.new(insns, form, params.first)
       end
 
       if param.temp_register?
