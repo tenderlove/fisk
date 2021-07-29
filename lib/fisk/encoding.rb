@@ -90,7 +90,7 @@ class Fisk
     end
 
     def add_rex buffer, operands, mandatory, w, r, x, b
-      return if mandatory == false && !operands.any?(&:extended_register?)
+      return 0 if mandatory == false && !operands.any?(&:extended_register?)
 
       rex = 0b0100
       rex = (rex << 1) | w

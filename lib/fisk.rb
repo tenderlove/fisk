@@ -615,10 +615,9 @@ class Fisk
         if insn.retry?
           retry_req = RetryRequest.new(insn, buffer.pos)
           unresolved << retry_req
-          insn.encode buffer, labels
-        else
-          insn.encode buffer, labels
         end
+
+        write_instruction insn, buffer, labels
       end
     end
 
@@ -689,5 +688,11 @@ class Fisk
     @instructions << insn
 
     self
+  end
+
+  private
+
+  def write_instruction insn, buffer, labels
+    insn.encode buffer, labels
   end
 end

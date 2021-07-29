@@ -11,8 +11,9 @@ class Fisk
     operands << OPERAND_TYPES[1]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_opcode buffer, 0x14, 0
-        add_immediate buffer, operands[1].op_value, 1
+        add_opcode(buffer, 0x14, 0) +
+        add_immediate(buffer, operands[1].op_value, 1) +
+        0
       end
 
       def bytesize; 2; end
@@ -30,13 +31,14 @@ class Fisk
               0,
               0,
               0,
-              operands[0].rex_value)
-        add_opcode buffer, 0x80, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x80, 0) +
         add_modrm(buffer,
               3,
               2,
-              operands[0].op_value, operands)
-        add_immediate buffer, operands[1].op_value, 1
+              operands[0].op_value, operands) +
+        add_immediate(buffer, operands[1].op_value, 1) +
+        0
       end
 
       def bytesize; 3; end
@@ -54,12 +56,13 @@ class Fisk
               0,
               operands[1].rex_value,
               0,
-              operands[0].rex_value)
-        add_opcode buffer, 0x10, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x10, 0) +
         add_modrm_reg_reg(buffer,
               3,
               operands[1].op_value,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -71,12 +74,13 @@ class Fisk
               0,
               operands[0].rex_value,
               0,
-              operands[1].rex_value)
-        add_opcode buffer, 0x12, 0
+              operands[1].rex_value) +
+        add_opcode(buffer, 0x12, 0) +
         add_modrm_reg_reg(buffer,
               3,
               operands[0].op_value,
-              operands[1].op_value, operands)
+              operands[1].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -94,12 +98,13 @@ class Fisk
               0,
               operands[0].rex_value,
               operands[1].rex_value,
-              operands[1].rex_value)
-        add_opcode buffer, 0x12, 0
+              operands[1].rex_value) +
+        add_opcode(buffer, 0x12, 0) +
         add_modrm_reg_mem(buffer,
               0,
               operands[0].op_value,
-              operands[1].op_value, operands)
+              operands[1].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -112,9 +117,10 @@ class Fisk
     operands << OPERAND_TYPES[6]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_prefix buffer, operands, 0x66, false
-        add_opcode buffer, 0x15, 0
-        add_immediate buffer, operands[1].op_value, 2
+        add_prefix(buffer, operands, 0x66, false) +
+        add_opcode(buffer, 0x15, 0) +
+        add_immediate(buffer, operands[1].op_value, 2) +
+        0
       end
 
       def bytesize; 3; end
@@ -127,19 +133,20 @@ class Fisk
     operands << OPERAND_TYPES[1]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_prefix buffer, operands, 0x66, false
+        add_prefix(buffer, operands, 0x66, false) +
         add_rex(buffer, operands,
               false,
               0,
               0,
               0,
-              operands[0].rex_value)
-        add_opcode buffer, 0x83, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x83, 0) +
         add_modrm(buffer,
               3,
               2,
-              operands[0].op_value, operands)
-        add_immediate buffer, operands[1].op_value, 1
+              operands[0].op_value, operands) +
+        add_immediate(buffer, operands[1].op_value, 1) +
+        0
       end
 
       def bytesize; 3; end
@@ -152,19 +159,20 @@ class Fisk
     operands << OPERAND_TYPES[6]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_prefix buffer, operands, 0x66, false
+        add_prefix(buffer, operands, 0x66, false) +
         add_rex(buffer, operands,
               false,
               0,
               0,
               0,
-              operands[0].rex_value)
-        add_opcode buffer, 0x81, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x81, 0) +
         add_modrm(buffer,
               3,
               2,
-              operands[0].op_value, operands)
-        add_immediate buffer, operands[1].op_value, 2
+              operands[0].op_value, operands) +
+        add_immediate(buffer, operands[1].op_value, 2) +
+        0
       end
 
       def bytesize; 4; end
@@ -177,36 +185,38 @@ class Fisk
     operands << OPERAND_TYPES[8]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_prefix buffer, operands, 0x66, false
+        add_prefix(buffer, operands, 0x66, false) +
         add_rex(buffer, operands,
               false,
               0,
               operands[1].rex_value,
               0,
-              operands[0].rex_value)
-        add_opcode buffer, 0x11, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x11, 0) +
         add_modrm_reg_reg(buffer,
               3,
               operands[1].op_value,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
     }.new
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_prefix buffer, operands, 0x66, false
+        add_prefix(buffer, operands, 0x66, false) +
         add_rex(buffer, operands,
               false,
               0,
               operands[0].rex_value,
               0,
-              operands[1].rex_value)
-        add_opcode buffer, 0x13, 0
+              operands[1].rex_value) +
+        add_opcode(buffer, 0x13, 0) +
         add_modrm_reg_reg(buffer,
               3,
               operands[0].op_value,
-              operands[1].op_value, operands)
+              operands[1].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -219,18 +229,19 @@ class Fisk
     operands << OPERAND_TYPES[9]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_prefix buffer, operands, 0x66, false
+        add_prefix(buffer, operands, 0x66, false) +
         add_rex(buffer, operands,
               false,
               0,
               operands[0].rex_value,
               operands[1].rex_value,
-              operands[1].rex_value)
-        add_opcode buffer, 0x13, 0
+              operands[1].rex_value) +
+        add_opcode(buffer, 0x13, 0) +
         add_modrm_reg_mem(buffer,
               0,
               operands[0].op_value,
-              operands[1].op_value, operands)
+              operands[1].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -243,8 +254,9 @@ class Fisk
     operands << OPERAND_TYPES[11]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_opcode buffer, 0x15, 0
-        add_immediate buffer, operands[1].op_value, 4
+        add_opcode(buffer, 0x15, 0) +
+        add_immediate(buffer, operands[1].op_value, 4) +
+        0
       end
 
       def bytesize; 5; end
@@ -262,13 +274,14 @@ class Fisk
               0,
               0,
               0,
-              operands[0].rex_value)
-        add_opcode buffer, 0x83, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x83, 0) +
         add_modrm(buffer,
               3,
               2,
-              operands[0].op_value, operands)
-        add_immediate buffer, operands[1].op_value, 1
+              operands[0].op_value, operands) +
+        add_immediate(buffer, operands[1].op_value, 1) +
+        0
       end
 
       def bytesize; 3; end
@@ -286,13 +299,14 @@ class Fisk
               0,
               0,
               0,
-              operands[0].rex_value)
-        add_opcode buffer, 0x81, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x81, 0) +
         add_modrm(buffer,
               3,
               2,
-              operands[0].op_value, operands)
-        add_immediate buffer, operands[1].op_value, 4
+              operands[0].op_value, operands) +
+        add_immediate(buffer, operands[1].op_value, 4) +
+        0
       end
 
       def bytesize; 6; end
@@ -310,12 +324,13 @@ class Fisk
               0,
               operands[1].rex_value,
               0,
-              operands[0].rex_value)
-        add_opcode buffer, 0x11, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x11, 0) +
         add_modrm_reg_reg(buffer,
               3,
               operands[1].op_value,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -327,12 +342,13 @@ class Fisk
               0,
               operands[0].rex_value,
               0,
-              operands[1].rex_value)
-        add_opcode buffer, 0x13, 0
+              operands[1].rex_value) +
+        add_opcode(buffer, 0x13, 0) +
         add_modrm_reg_reg(buffer,
               3,
               operands[0].op_value,
-              operands[1].op_value, operands)
+              operands[1].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -350,12 +366,13 @@ class Fisk
               0,
               operands[0].rex_value,
               operands[1].rex_value,
-              operands[1].rex_value)
-        add_opcode buffer, 0x13, 0
+              operands[1].rex_value) +
+        add_opcode(buffer, 0x13, 0) +
         add_modrm_reg_mem(buffer,
               0,
               operands[0].op_value,
-              operands[1].op_value, operands)
+              operands[1].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -373,9 +390,10 @@ class Fisk
               1,
               0,
               0,
-              0)
-        add_opcode buffer, 0x15, 0
-        add_immediate buffer, operands[1].op_value, 4
+              0) +
+        add_opcode(buffer, 0x15, 0) +
+        add_immediate(buffer, operands[1].op_value, 4) +
+        0
       end
 
       def bytesize; 6; end
@@ -393,13 +411,14 @@ class Fisk
               1,
               0,
               0,
-              operands[0].rex_value)
-        add_opcode buffer, 0x83, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x83, 0) +
         add_modrm(buffer,
               3,
               2,
-              operands[0].op_value, operands)
-        add_immediate buffer, operands[1].op_value, 1
+              operands[0].op_value, operands) +
+        add_immediate(buffer, operands[1].op_value, 1) +
+        0
       end
 
       def bytesize; 4; end
@@ -417,13 +436,14 @@ class Fisk
               1,
               0,
               0,
-              operands[0].rex_value)
-        add_opcode buffer, 0x81, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x81, 0) +
         add_modrm(buffer,
               3,
               2,
-              operands[0].op_value, operands)
-        add_immediate buffer, operands[1].op_value, 4
+              operands[0].op_value, operands) +
+        add_immediate(buffer, operands[1].op_value, 4) +
+        0
       end
 
       def bytesize; 7; end
@@ -441,12 +461,13 @@ class Fisk
               1,
               operands[1].rex_value,
               0,
-              operands[0].rex_value)
-        add_opcode buffer, 0x11, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x11, 0) +
         add_modrm_reg_reg(buffer,
               3,
               operands[1].op_value,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 3; end
@@ -458,12 +479,13 @@ class Fisk
               1,
               operands[0].rex_value,
               0,
-              operands[1].rex_value)
-        add_opcode buffer, 0x13, 0
+              operands[1].rex_value) +
+        add_opcode(buffer, 0x13, 0) +
         add_modrm_reg_reg(buffer,
               3,
               operands[0].op_value,
-              operands[1].op_value, operands)
+              operands[1].op_value, operands) +
+        0
       end
 
       def bytesize; 3; end
@@ -481,12 +503,13 @@ class Fisk
               1,
               operands[0].rex_value,
               operands[1].rex_value,
-              operands[1].rex_value)
-        add_opcode buffer, 0x13, 0
+              operands[1].rex_value) +
+        add_opcode(buffer, 0x13, 0) +
         add_modrm_reg_mem(buffer,
               0,
               operands[0].op_value,
-              operands[1].op_value, operands)
+              operands[1].op_value, operands) +
+        0
       end
 
       def bytesize; 3; end
@@ -504,13 +527,14 @@ class Fisk
               0,
               0,
               operands[0].rex_value,
-              operands[0].rex_value)
-        add_opcode buffer, 0x80, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x80, 0) +
         add_modrm(buffer,
               0,
               2,
-              operands[0].op_value, operands)
-        add_immediate buffer, operands[1].op_value, 1
+              operands[0].op_value, operands) +
+        add_immediate(buffer, operands[1].op_value, 1) +
+        0
       end
 
       def bytesize; 3; end
@@ -528,12 +552,13 @@ class Fisk
               0,
               operands[1].rex_value,
               operands[0].rex_value,
-              operands[0].rex_value)
-        add_opcode buffer, 0x10, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x10, 0) +
         add_modrm_mem_reg(buffer,
               0,
               operands[1].op_value,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -546,19 +571,20 @@ class Fisk
     operands << OPERAND_TYPES[1]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_prefix buffer, operands, 0x66, false
+        add_prefix(buffer, operands, 0x66, false) +
         add_rex(buffer, operands,
               false,
               0,
               0,
               operands[0].rex_value,
-              operands[0].rex_value)
-        add_opcode buffer, 0x83, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x83, 0) +
         add_modrm(buffer,
               0,
               2,
-              operands[0].op_value, operands)
-        add_immediate buffer, operands[1].op_value, 1
+              operands[0].op_value, operands) +
+        add_immediate(buffer, operands[1].op_value, 1) +
+        0
       end
 
       def bytesize; 3; end
@@ -571,19 +597,20 @@ class Fisk
     operands << OPERAND_TYPES[6]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_prefix buffer, operands, 0x66, false
+        add_prefix(buffer, operands, 0x66, false) +
         add_rex(buffer, operands,
               false,
               0,
               0,
               operands[0].rex_value,
-              operands[0].rex_value)
-        add_opcode buffer, 0x81, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x81, 0) +
         add_modrm(buffer,
               0,
               2,
-              operands[0].op_value, operands)
-        add_immediate buffer, operands[1].op_value, 2
+              operands[0].op_value, operands) +
+        add_immediate(buffer, operands[1].op_value, 2) +
+        0
       end
 
       def bytesize; 4; end
@@ -596,18 +623,19 @@ class Fisk
     operands << OPERAND_TYPES[8]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_prefix buffer, operands, 0x66, false
+        add_prefix(buffer, operands, 0x66, false) +
         add_rex(buffer, operands,
               false,
               0,
               operands[1].rex_value,
               operands[0].rex_value,
-              operands[0].rex_value)
-        add_opcode buffer, 0x11, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x11, 0) +
         add_modrm_mem_reg(buffer,
               0,
               operands[1].op_value,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -625,13 +653,14 @@ class Fisk
               0,
               0,
               operands[0].rex_value,
-              operands[0].rex_value)
-        add_opcode buffer, 0x83, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x83, 0) +
         add_modrm(buffer,
               0,
               2,
-              operands[0].op_value, operands)
-        add_immediate buffer, operands[1].op_value, 1
+              operands[0].op_value, operands) +
+        add_immediate(buffer, operands[1].op_value, 1) +
+        0
       end
 
       def bytesize; 3; end
@@ -649,13 +678,14 @@ class Fisk
               0,
               0,
               operands[0].rex_value,
-              operands[0].rex_value)
-        add_opcode buffer, 0x81, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x81, 0) +
         add_modrm(buffer,
               0,
               2,
-              operands[0].op_value, operands)
-        add_immediate buffer, operands[1].op_value, 4
+              operands[0].op_value, operands) +
+        add_immediate(buffer, operands[1].op_value, 4) +
+        0
       end
 
       def bytesize; 6; end
@@ -673,12 +703,13 @@ class Fisk
               0,
               operands[1].rex_value,
               operands[0].rex_value,
-              operands[0].rex_value)
-        add_opcode buffer, 0x11, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x11, 0) +
         add_modrm_mem_reg(buffer,
               0,
               operands[1].op_value,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -696,13 +727,14 @@ class Fisk
               1,
               0,
               operands[0].rex_value,
-              operands[0].rex_value)
-        add_opcode buffer, 0x83, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x83, 0) +
         add_modrm(buffer,
               0,
               2,
-              operands[0].op_value, operands)
-        add_immediate buffer, operands[1].op_value, 1
+              operands[0].op_value, operands) +
+        add_immediate(buffer, operands[1].op_value, 1) +
+        0
       end
 
       def bytesize; 4; end
@@ -720,13 +752,14 @@ class Fisk
               1,
               0,
               operands[0].rex_value,
-              operands[0].rex_value)
-        add_opcode buffer, 0x81, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x81, 0) +
         add_modrm(buffer,
               0,
               2,
-              operands[0].op_value, operands)
-        add_immediate buffer, operands[1].op_value, 4
+              operands[0].op_value, operands) +
+        add_immediate(buffer, operands[1].op_value, 4) +
+        0
       end
 
       def bytesize; 7; end
@@ -744,12 +777,13 @@ class Fisk
               1,
               operands[1].rex_value,
               operands[0].rex_value,
-              operands[0].rex_value)
-        add_opcode buffer, 0x11, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0x11, 0) +
         add_modrm_mem_reg(buffer,
               0,
               operands[1].op_value,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 3; end

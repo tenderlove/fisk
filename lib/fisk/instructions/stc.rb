@@ -9,7 +9,8 @@ class Fisk
     # stc: 
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_opcode buffer, 0xF9, 0
+        add_opcode(buffer, 0xF9, 0) +
+        0
       end
 
       def bytesize; 1; end

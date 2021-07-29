@@ -9,8 +9,9 @@ class Fisk
     # cbtw: 
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_prefix buffer, operands, 0x66, false
-        add_opcode buffer, 0x98, 0
+        add_prefix(buffer, operands, 0x66, false) +
+        add_opcode(buffer, 0x98, 0) +
+        0
       end
 
       def bytesize; 1; end

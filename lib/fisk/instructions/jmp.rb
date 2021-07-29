@@ -10,8 +10,9 @@ class Fisk
     operands << OPERAND_TYPES[40]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_opcode buffer, 0xEB, 0
-        add_code_offset buffer, operands[0].op_value, 1
+        add_opcode(buffer, 0xEB, 0) +
+        add_code_offset(buffer, operands[0].op_value, 1) +
+        0
       end
 
       def bytesize; 2; end
@@ -23,8 +24,9 @@ class Fisk
     operands << OPERAND_TYPES[30]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_opcode buffer, 0xE9, 0
-        add_code_offset buffer, operands[0].op_value, 4
+        add_opcode(buffer, 0xE9, 0) +
+        add_code_offset(buffer, operands[0].op_value, 4) +
+        0
       end
 
       def bytesize; 5; end
@@ -41,12 +43,13 @@ class Fisk
               0,
               0,
               0,
-              operands[0].rex_value)
-        add_opcode buffer, 0xFF, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0xFF, 0) +
         add_modrm(buffer,
               3,
               4,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -63,12 +66,13 @@ class Fisk
               0,
               0,
               operands[0].rex_value,
-              operands[0].rex_value)
-        add_opcode buffer, 0xFF, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0xFF, 0) +
         add_modrm(buffer,
               0,
               4,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
