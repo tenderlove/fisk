@@ -312,10 +312,6 @@ class Fisk
       encoding.encode buffer, @operands
     end
 
-    def bytesize
-      @form.encodings.first.bytesize
-    end
-
     def label?; false; end
     def comment?; false; end
   end
