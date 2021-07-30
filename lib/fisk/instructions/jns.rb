@@ -3,36 +3,32 @@
 class Fisk
   module Instructions
     # Instruction JNS
-    forms = []
-    operands = [
-        OPERAND_TYPES[40],
-    ].freeze
-    encodings = [
-      Class.new(Fisk::Encoding) {
-        def encode buffer, operands
-          add_opcode(buffer, 0x79, 0) +
-          add_code_offset(buffer, operands[0].op_value, 1) +
-          0
-        end
-      }.new.freeze,
-    ].freeze
+    JNS = Instruction.new("JNS", [
     # jns: rel8
-    forms << Form.new(operands, encodings)
-    operands = [
-        OPERAND_TYPES[30],
-    ].freeze
-    encodings = [
-      Class.new(Fisk::Encoding) {
-        def encode buffer, operands
-          add_opcode(buffer, 0x0F, 0) +
-          add_opcode(buffer, 0x89, 0) +
-          add_code_offset(buffer, operands[0].op_value, 4) +
-          0
-        end
-      }.new.freeze,
-    ].freeze
+      Form.new([
+        OPERAND_TYPES[40],
+      ].freeze, [
+        Class.new(Fisk::Encoding) {
+          def encode buffer, operands
+            add_opcode(buffer, 0x79, 0) +
+            add_code_offset(buffer, operands[0].op_value, 1) +
+            0
+          end
+        }.new.freeze,
+      ].freeze).freeze,
     # jns: rel32
-    forms << Form.new(operands, encodings)
-    JNS = Instruction.new("JNS", forms)
+      Form.new([
+        OPERAND_TYPES[30],
+      ].freeze, [
+        Class.new(Fisk::Encoding) {
+          def encode buffer, operands
+            add_opcode(buffer, 0x0F, 0) +
+            add_opcode(buffer, 0x89, 0) +
+            add_code_offset(buffer, operands[0].op_value, 4) +
+            0
+          end
+        }.new.freeze,
+      ].freeze).freeze,
+    ].freeze).freeze
   end
 end

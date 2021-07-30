@@ -3,31 +3,29 @@
 class Fisk
   module Instructions
     # Instruction PREFETCH
-    forms = []
-    operands = [
+    PREFETCH = Instruction.new("PREFETCH", [
+    # prefetch: m8
+      Form.new([
         OPERAND_TYPES[4],
-    ].freeze
-    encodings = [
-      Class.new(Fisk::Encoding) {
-        def encode buffer, operands
-          add_rex(buffer, operands,
+      ].freeze, [
+        Class.new(Fisk::Encoding) {
+          def encode buffer, operands
+            add_rex(buffer, operands,
               false,
               0,
               0,
               operands[0].rex_value,
               operands[0].rex_value) +
-          add_opcode(buffer, 0x0F, 0) +
-          add_opcode(buffer, 0x0D, 0) +
-          add_modrm(buffer,
+            add_opcode(buffer, 0x0F, 0) +
+            add_opcode(buffer, 0x0D, 0) +
+            add_modrm(buffer,
               0,
               0,
               operands[0].op_value, operands) +
-          0
-        end
-      }.new.freeze,
-    ].freeze
-    # prefetch: m8
-    forms << Form.new(operands, encodings)
-    PREFETCH = Instruction.new("PREFETCH", forms)
+            0
+          end
+        }.new.freeze,
+      ].freeze).freeze,
+    ].freeze).freeze
   end
 end

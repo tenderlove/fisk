@@ -3,19 +3,17 @@
 class Fisk
   module Instructions
     # Instruction CDQ
-    forms = []
-    operands = [
-    ].freeze
-    encodings = [
-      Class.new(Fisk::Encoding) {
-        def encode buffer, operands
-          add_opcode(buffer, 0x99, 0) +
-          0
-        end
-      }.new.freeze,
-    ].freeze
+    CDQ = Instruction.new("CDQ", [
     # cltd: 
-    forms << Form.new(operands, encodings)
-    CDQ = Instruction.new("CDQ", forms)
+      Form.new([
+      ].freeze, [
+        Class.new(Fisk::Encoding) {
+          def encode buffer, operands
+            add_opcode(buffer, 0x99, 0) +
+            0
+          end
+        }.new.freeze,
+      ].freeze).freeze,
+    ].freeze).freeze
   end
 end

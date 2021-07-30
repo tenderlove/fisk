@@ -3,49 +3,45 @@
 class Fisk
   module Instructions
     # Instruction VPCMPESTRM
-    forms = []
-    operands = [
+    VPCMPESTRM = Instruction.new("VPCMPESTRM", [
+    # vpcmpestrm: xmm, xmm, imm8
+      Form.new([
         OPERAND_TYPES[24],
         OPERAND_TYPES[24],
         OPERAND_TYPES[1],
-    ].freeze
-    encodings = [
-      Class.new(Fisk::Encoding) {
-        def encode buffer, operands
-          add_VEX(buffer, operands)
-          add_opcode(buffer, 0x60, 0) +
-          add_modrm(buffer,
+      ].freeze, [
+        Class.new(Fisk::Encoding) {
+          def encode buffer, operands
+            add_VEX(buffer, operands)
+            add_opcode(buffer, 0x60, 0) +
+            add_modrm(buffer,
               3,
               operands[0].op_value,
               operands[1].op_value, operands) +
-          add_immediate(buffer, operands[2].op_value, 1) +
-          0
-        end
-      }.new.freeze,
-    ].freeze
-    # vpcmpestrm: xmm, xmm, imm8
-    forms << Form.new(operands, encodings)
-    operands = [
+            add_immediate(buffer, operands[2].op_value, 1) +
+            0
+          end
+        }.new.freeze,
+      ].freeze).freeze,
+    # vpcmpestrm: xmm, m128, imm8
+      Form.new([
         OPERAND_TYPES[24],
         OPERAND_TYPES[25],
         OPERAND_TYPES[1],
-    ].freeze
-    encodings = [
-      Class.new(Fisk::Encoding) {
-        def encode buffer, operands
-          add_VEX(buffer, operands)
-          add_opcode(buffer, 0x60, 0) +
-          add_modrm(buffer,
+      ].freeze, [
+        Class.new(Fisk::Encoding) {
+          def encode buffer, operands
+            add_VEX(buffer, operands)
+            add_opcode(buffer, 0x60, 0) +
+            add_modrm(buffer,
               0,
               operands[0].op_value,
               operands[1].op_value, operands) +
-          add_immediate(buffer, operands[2].op_value, 1) +
-          0
-        end
-      }.new.freeze,
-    ].freeze
-    # vpcmpestrm: xmm, m128, imm8
-    forms << Form.new(operands, encodings)
-    VPCMPESTRM = Instruction.new("VPCMPESTRM", forms)
+            add_immediate(buffer, operands[2].op_value, 1) +
+            0
+          end
+        }.new.freeze,
+      ].freeze).freeze,
+    ].freeze).freeze
   end
 end

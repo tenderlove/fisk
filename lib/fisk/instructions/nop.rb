@@ -3,19 +3,17 @@
 class Fisk
   module Instructions
     # Instruction NOP
-    forms = []
-    operands = [
-    ].freeze
-    encodings = [
-      Class.new(Fisk::Encoding) {
-        def encode buffer, operands
-          add_opcode(buffer, 0x90, 0) +
-          0
-        end
-      }.new.freeze,
-    ].freeze
+    NOP = Instruction.new("NOP", [
     # nop: 
-    forms << Form.new(operands, encodings)
-    NOP = Instruction.new("NOP", forms)
+      Form.new([
+      ].freeze, [
+        Class.new(Fisk::Encoding) {
+          def encode buffer, operands
+            add_opcode(buffer, 0x90, 0) +
+            0
+          end
+        }.new.freeze,
+      ].freeze).freeze,
+    ].freeze).freeze
   end
 end

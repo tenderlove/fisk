@@ -3,20 +3,18 @@
 class Fisk
   module Instructions
     # Instruction EMMS
-    forms = []
-    operands = [
-    ].freeze
-    encodings = [
-      Class.new(Fisk::Encoding) {
-        def encode buffer, operands
-          add_opcode(buffer, 0x0F, 0) +
-          add_opcode(buffer, 0x77, 0) +
-          0
-        end
-      }.new.freeze,
-    ].freeze
+    EMMS = Instruction.new("EMMS", [
     # emms: 
-    forms << Form.new(operands, encodings)
-    EMMS = Instruction.new("EMMS", forms)
+      Form.new([
+      ].freeze, [
+        Class.new(Fisk::Encoding) {
+          def encode buffer, operands
+            add_opcode(buffer, 0x0F, 0) +
+            add_opcode(buffer, 0x77, 0) +
+            0
+          end
+        }.new.freeze,
+      ].freeze).freeze,
+    ].freeze).freeze
   end
 end

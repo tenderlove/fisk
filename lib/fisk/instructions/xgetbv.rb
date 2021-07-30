@@ -3,21 +3,19 @@
 class Fisk
   module Instructions
     # Instruction XGETBV
-    forms = []
-    operands = [
-    ].freeze
-    encodings = [
-      Class.new(Fisk::Encoding) {
-        def encode buffer, operands
-          add_opcode(buffer, 0x0F, 0) +
-          add_opcode(buffer, 0x01, 0) +
-          add_opcode(buffer, 0xD0, 0) +
-          0
-        end
-      }.new.freeze,
-    ].freeze
+    XGETBV = Instruction.new("XGETBV", [
     # xgetbv: 
-    forms << Form.new(operands, encodings)
-    XGETBV = Instruction.new("XGETBV", forms)
+      Form.new([
+      ].freeze, [
+        Class.new(Fisk::Encoding) {
+          def encode buffer, operands
+            add_opcode(buffer, 0x0F, 0) +
+            add_opcode(buffer, 0x01, 0) +
+            add_opcode(buffer, 0xD0, 0) +
+            0
+          end
+        }.new.freeze,
+      ].freeze).freeze,
+    ].freeze).freeze
   end
 end

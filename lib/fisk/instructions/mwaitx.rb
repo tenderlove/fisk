@@ -3,21 +3,19 @@
 class Fisk
   module Instructions
     # Instruction MWAITX
-    forms = []
-    operands = [
-    ].freeze
-    encodings = [
-      Class.new(Fisk::Encoding) {
-        def encode buffer, operands
-          add_opcode(buffer, 0x0F, 0) +
-          add_opcode(buffer, 0x01, 0) +
-          add_opcode(buffer, 0xFB, 0) +
-          0
-        end
-      }.new.freeze,
-    ].freeze
+    MWAITX = Instruction.new("MWAITX", [
     # mwaitx: 
-    forms << Form.new(operands, encodings)
-    MWAITX = Instruction.new("MWAITX", forms)
+      Form.new([
+      ].freeze, [
+        Class.new(Fisk::Encoding) {
+          def encode buffer, operands
+            add_opcode(buffer, 0x0F, 0) +
+            add_opcode(buffer, 0x01, 0) +
+            add_opcode(buffer, 0xFB, 0) +
+            0
+          end
+        }.new.freeze,
+      ].freeze).freeze,
+    ].freeze).freeze
   end
 end

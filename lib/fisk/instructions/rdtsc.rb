@@ -3,20 +3,18 @@
 class Fisk
   module Instructions
     # Instruction RDTSC
-    forms = []
-    operands = [
-    ].freeze
-    encodings = [
-      Class.new(Fisk::Encoding) {
-        def encode buffer, operands
-          add_opcode(buffer, 0x0F, 0) +
-          add_opcode(buffer, 0x31, 0) +
-          0
-        end
-      }.new.freeze,
-    ].freeze
+    RDTSC = Instruction.new("RDTSC", [
     # rdtsc: 
-    forms << Form.new(operands, encodings)
-    RDTSC = Instruction.new("RDTSC", forms)
+      Form.new([
+      ].freeze, [
+        Class.new(Fisk::Encoding) {
+          def encode buffer, operands
+            add_opcode(buffer, 0x0F, 0) +
+            add_opcode(buffer, 0x31, 0) +
+            0
+          end
+        }.new.freeze,
+      ].freeze).freeze,
+    ].freeze).freeze
   end
 end

@@ -3,19 +3,17 @@
 class Fisk
   module Instructions
     # Instruction CLC
-    forms = []
-    operands = [
-    ].freeze
-    encodings = [
-      Class.new(Fisk::Encoding) {
-        def encode buffer, operands
-          add_opcode(buffer, 0xF8, 0) +
-          0
-        end
-      }.new.freeze,
-    ].freeze
+    CLC = Instruction.new("CLC", [
     # clc: 
-    forms << Form.new(operands, encodings)
-    CLC = Instruction.new("CLC", forms)
+      Form.new([
+      ].freeze, [
+        Class.new(Fisk::Encoding) {
+          def encode buffer, operands
+            add_opcode(buffer, 0xF8, 0) +
+            0
+          end
+        }.new.freeze,
+      ].freeze).freeze,
+    ].freeze).freeze
   end
 end

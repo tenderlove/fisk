@@ -3,21 +3,19 @@
 class Fisk
   module Instructions
     # Instruction RDTSCP
-    forms = []
-    operands = [
-    ].freeze
-    encodings = [
-      Class.new(Fisk::Encoding) {
-        def encode buffer, operands
-          add_opcode(buffer, 0x0F, 0) +
-          add_opcode(buffer, 0x01, 0) +
-          add_opcode(buffer, 0xF9, 0) +
-          0
-        end
-      }.new.freeze,
-    ].freeze
+    RDTSCP = Instruction.new("RDTSCP", [
     # rdtscp: 
-    forms << Form.new(operands, encodings)
-    RDTSCP = Instruction.new("RDTSCP", forms)
+      Form.new([
+      ].freeze, [
+        Class.new(Fisk::Encoding) {
+          def encode buffer, operands
+            add_opcode(buffer, 0x0F, 0) +
+            add_opcode(buffer, 0x01, 0) +
+            add_opcode(buffer, 0xF9, 0) +
+            0
+          end
+        }.new.freeze,
+      ].freeze).freeze,
+    ].freeze).freeze
   end
 end

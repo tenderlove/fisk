@@ -3,55 +3,51 @@
 class Fisk
   module Instructions
     # Instruction SETE
-    forms = []
-    operands = [
+    SETE = Instruction.new("SETE", [
+    # sete: r8
+      Form.new([
         OPERAND_TYPES[47],
-    ].freeze
-    encodings = [
-      Class.new(Fisk::Encoding) {
-        def encode buffer, operands
-          add_rex(buffer, operands,
+      ].freeze, [
+        Class.new(Fisk::Encoding) {
+          def encode buffer, operands
+            add_rex(buffer, operands,
               false,
               0,
               0,
               0,
               operands[0].rex_value) +
-          add_opcode(buffer, 0x0F, 0) +
-          add_opcode(buffer, 0x94, 0) +
-          add_modrm(buffer,
+            add_opcode(buffer, 0x0F, 0) +
+            add_opcode(buffer, 0x94, 0) +
+            add_modrm(buffer,
               3,
               0,
               operands[0].op_value, operands) +
-          0
-        end
-      }.new.freeze,
-    ].freeze
-    # sete: r8
-    forms << Form.new(operands, encodings)
-    operands = [
+            0
+          end
+        }.new.freeze,
+      ].freeze).freeze,
+    # sete: m8
+      Form.new([
         OPERAND_TYPES[43],
-    ].freeze
-    encodings = [
-      Class.new(Fisk::Encoding) {
-        def encode buffer, operands
-          add_rex(buffer, operands,
+      ].freeze, [
+        Class.new(Fisk::Encoding) {
+          def encode buffer, operands
+            add_rex(buffer, operands,
               false,
               0,
               0,
               operands[0].rex_value,
               operands[0].rex_value) +
-          add_opcode(buffer, 0x0F, 0) +
-          add_opcode(buffer, 0x94, 0) +
-          add_modrm(buffer,
+            add_opcode(buffer, 0x0F, 0) +
+            add_opcode(buffer, 0x94, 0) +
+            add_modrm(buffer,
               0,
               0,
               operands[0].op_value, operands) +
-          0
-        end
-      }.new.freeze,
-    ].freeze
-    # sete: m8
-    forms << Form.new(operands, encodings)
-    SETE = Instruction.new("SETE", forms)
+            0
+          end
+        }.new.freeze,
+      ].freeze).freeze,
+    ].freeze).freeze
   end
 end
