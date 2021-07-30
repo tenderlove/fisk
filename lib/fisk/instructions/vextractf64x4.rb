@@ -21,8 +21,6 @@ class Fisk
         add_immediate(buffer, operands[2].op_value, 1) +
         0
       end
-
-      def bytesize; 3; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -42,8 +40,6 @@ class Fisk
         add_immediate(buffer, operands[2].op_value, 1) +
         0
       end
-
-      def bytesize; 3; end
     }.new
     forms << Form.new(operands, encodings)
     VEXTRACTF64X4 = Instruction.new("VEXTRACTF64X4", forms)

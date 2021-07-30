@@ -23,8 +23,6 @@ class Fisk
         add_RegisterByte(buffer, operands)
         0
       end
-
-      def bytesize; 2; end
     }.new
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
@@ -37,8 +35,6 @@ class Fisk
         add_RegisterByte(buffer, operands)
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -60,8 +56,6 @@ class Fisk
         add_RegisterByte(buffer, operands)
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -83,8 +77,6 @@ class Fisk
         add_RegisterByte(buffer, operands)
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -106,8 +98,6 @@ class Fisk
         add_RegisterByte(buffer, operands)
         0
       end
-
-      def bytesize; 2; end
     }.new
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
@@ -120,8 +110,6 @@ class Fisk
         add_RegisterByte(buffer, operands)
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -143,8 +131,6 @@ class Fisk
         add_RegisterByte(buffer, operands)
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -166,8 +152,6 @@ class Fisk
         add_RegisterByte(buffer, operands)
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     VPERMIL2PD = Instruction.new("VPERMIL2PD", forms)

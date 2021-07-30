@@ -12,8 +12,6 @@ class Fisk
         add_opcode(buffer, 0xFC, 0) +
         0
       end
-
-      def bytesize; 1; end
     }.new
     forms << Form.new(operands, encodings)
     CLD = Instruction.new("CLD", forms)

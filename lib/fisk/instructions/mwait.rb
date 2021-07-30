@@ -14,8 +14,6 @@ class Fisk
         add_opcode(buffer, 0xC9, 0) +
         0
       end
-
-      def bytesize; 3; end
     }.new
     forms << Form.new(operands, encodings)
     MWAIT = Instruction.new("MWAIT", forms)

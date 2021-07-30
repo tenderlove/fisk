@@ -20,8 +20,6 @@ class Fisk
         add_opcode(buffer, 0xC8, operands[0].op_value) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -40,8 +38,6 @@ class Fisk
         add_opcode(buffer, 0xC8, operands[0].op_value) +
         0
       end
-
-      def bytesize; 3; end
     }.new
     forms << Form.new(operands, encodings)
     BSWAP = Instruction.new("BSWAP", forms)

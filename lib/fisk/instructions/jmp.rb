@@ -14,8 +14,6 @@ class Fisk
         add_code_offset(buffer, operands[0].op_value, 1) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -28,8 +26,6 @@ class Fisk
         add_code_offset(buffer, operands[0].op_value, 4) +
         0
       end
-
-      def bytesize; 5; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -51,8 +47,6 @@ class Fisk
               operands[0].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -74,8 +68,6 @@ class Fisk
               operands[0].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     JMP = Instruction.new("JMP", forms)

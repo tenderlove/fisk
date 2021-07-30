@@ -27,8 +27,6 @@ class Fisk
         add_immediate(buffer, operands[2].op_value, 1) +
         0
       end
-
-      def bytesize; 4; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -56,8 +54,6 @@ class Fisk
         add_immediate(buffer, operands[2].op_value, 1) +
         0
       end
-
-      def bytesize; 5; end
     }.new
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
@@ -77,8 +73,6 @@ class Fisk
         add_immediate(buffer, operands[2].op_value, 1) +
         0
       end
-
-      def bytesize; 4; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -106,8 +100,6 @@ class Fisk
         add_immediate(buffer, operands[2].op_value, 1) +
         0
       end
-
-      def bytesize; 5; end
     }.new
     forms << Form.new(operands, encodings)
     PEXTRW = Instruction.new("PEXTRW", forms)

@@ -25,8 +25,6 @@ class Fisk
               operands[0].op_value, operands) +
         0
       end
-
-      def bytesize; 3; end
     }.new
     forms << Form.new(operands, encodings)
     CLWB = Instruction.new("CLWB", forms)

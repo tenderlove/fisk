@@ -12,8 +12,6 @@ class Fisk
         add_opcode(buffer, 0xC3, 0) +
         0
       end
-
-      def bytesize; 1; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -26,8 +24,6 @@ class Fisk
         add_immediate(buffer, operands[0].op_value, 2) +
         0
       end
-
-      def bytesize; 3; end
     }.new
     forms << Form.new(operands, encodings)
     RET = Instruction.new("RET", forms)

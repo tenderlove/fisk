@@ -18,8 +18,6 @@ class Fisk
         add_opcode(buffer, 0x98, 0) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     CDQE = Instruction.new("CDQE", forms)

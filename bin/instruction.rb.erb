@@ -24,7 +24,6 @@ class Fisk
     operands << OPERAND_TYPES[<%= unique_operands.index(%w{ type input output }.map { |n| child[n] }) %>]
       <%-
         when "Encoding"
-          size = 0
       -%>
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
@@ -33,22 +32,18 @@ class Fisk
           next if encoding.text?
           case encoding.name
           when "Opcode"
-            size += 1
       -%>
         add_opcode(buffer, 0x<%= sprintf("%02X", encoding["byte"].to_i(16)) %>, <%= parse_operand_value encoding["addend"] %>) +
         <%-
             when "Immediate"
-              size += encoding["size"].to_i
         -%>
         add_immediate(buffer, <%= parse_operand_value encoding["value"] %>, <%= encoding["size"].to_i %>) +
         <%-
             when "CodeOffset"
-              size += encoding["size"].to_i
         -%>
         add_code_offset(buffer, <%= parse_operand_value encoding["value"] %>, <%= encoding["size"].to_i %>) +
         <%-
             when "REX"
-              size += 1 unless encoding["mandatory"] == "false"
         -%>
         add_rex(buffer, operands,
               <%= !(encoding["mandatory"] == "false") %>,
@@ -58,7 +53,6 @@ class Fisk
               <%= parse_rex encoding["B"] %>) +
         <%-
             when "ModRM"
-              size += 1
         -%>
         <%= modrm_method(operands) %>(buffer,
               <%= encoding["mode"].to_i(2) %>,
@@ -74,8 +68,6 @@ class Fisk
       <%- end -%>
         0
       end
-
-      def bytesize; <%= size %>; end
     }.new
       <%- when "ISA" -%>
       <%- when "ImplicitOperand" -%>

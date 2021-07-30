@@ -12,8 +12,6 @@ class Fisk
         add_opcode(buffer, 0xF9, 0) +
         0
       end
-
-      def bytesize; 1; end
     }.new
     forms << Form.new(operands, encodings)
     STC = Instruction.new("STC", forms)

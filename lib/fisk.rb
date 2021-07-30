@@ -371,23 +371,25 @@ class Fisk
 
     def encode buffer, labels
       # Estimate by using a rel32 offset
-      form          = find_form "rel32"
-      encoding      = form.encodings.first
-      operand_klass = Rel32
+      form              = find_form "rel32"
+      encoding          = form.encodings.first
+      operand_klass     = Rel32
+      encoding_bytesize = 5 # Rel32 encoding uses 5 bytes
 
       if labels.key? @operand.name
         unless @retry
-          estimated_offset = labels[@operand.name] - (buffer.pos + encoding.bytesize)
+          estimated_offset = labels[@operand.name] - (buffer.pos + encoding_bytesize)
 
           if estimated_offset >= -128 && estimated_offset <= 127
             # fits in a rel8
-            operand_klass = Rel8
-            form          = find_form "rel8"
-            encoding      = form.encodings.first
+            operand_klass     = Rel8
+            form              = find_form "rel8"
+            encoding          = form.encodings.first
+            encoding_bytesize = 2 # Rel8 only needs 2 bytes
           end
         end
 
-        jump_len = -(buffer.pos + encoding.bytesize - labels[@operand.name])
+        jump_len = -(buffer.pos + encoding_bytesize - labels[@operand.name])
         encoding.encode buffer, [operand_klass.new(jump_len)]
       else
         @retry = true

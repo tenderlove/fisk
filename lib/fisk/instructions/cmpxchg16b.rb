@@ -24,8 +24,6 @@ class Fisk
               operands[0].op_value, operands) +
         0
       end
-
-      def bytesize; 4; end
     }.new
     forms << Form.new(operands, encodings)
     CMPXCHG16B = Instruction.new("CMPXCHG16B", forms)

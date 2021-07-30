@@ -19,8 +19,6 @@ class Fisk
               operands[1].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     KORTESTQ = Instruction.new("KORTESTQ", forms)

@@ -13,8 +13,6 @@ class Fisk
         add_opcode(buffer, 0x31, 0) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     RDTSC = Instruction.new("RDTSC", forms)

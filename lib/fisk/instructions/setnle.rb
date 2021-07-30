@@ -24,8 +24,6 @@ class Fisk
               operands[0].op_value, operands) +
         0
       end
-
-      def bytesize; 3; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -48,8 +46,6 @@ class Fisk
               operands[0].op_value, operands) +
         0
       end
-
-      def bytesize; 3; end
     }.new
     forms << Form.new(operands, encodings)
     SETNLE = Instruction.new("SETNLE", forms)

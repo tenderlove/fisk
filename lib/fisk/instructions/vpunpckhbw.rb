@@ -20,8 +20,6 @@ class Fisk
               operands[2].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -40,8 +38,6 @@ class Fisk
               operands[2].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -60,8 +56,6 @@ class Fisk
               operands[2].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -80,8 +74,6 @@ class Fisk
               operands[2].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -100,8 +92,6 @@ class Fisk
               operands[2].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -120,8 +110,6 @@ class Fisk
               operands[2].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -140,8 +128,6 @@ class Fisk
               operands[2].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -160,8 +146,6 @@ class Fisk
               operands[2].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -180,8 +164,6 @@ class Fisk
               operands[2].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -200,8 +182,6 @@ class Fisk
               operands[2].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     VPUNPCKHBW = Instruction.new("VPUNPCKHBW", forms)

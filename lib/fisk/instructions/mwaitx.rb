@@ -14,8 +14,6 @@ class Fisk
         add_opcode(buffer, 0xFB, 0) +
         0
       end
-
-      def bytesize; 3; end
     }.new
     forms << Form.new(operands, encodings)
     MWAITX = Instruction.new("MWAITX", forms)

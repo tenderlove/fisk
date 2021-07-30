@@ -26,8 +26,6 @@ class Fisk
         add_opcode(buffer, 0xA7, 0) +
         0
       end
-
-      def bytesize; 4; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -52,8 +50,6 @@ class Fisk
         add_opcode(buffer, 0xA7, 0) +
         0
       end
-
-      def bytesize; 4; end
     }.new
     forms << Form.new(operands, encodings)
     PFRSQIT1 = Instruction.new("PFRSQIT1", forms)

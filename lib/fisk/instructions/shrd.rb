@@ -28,8 +28,6 @@ class Fisk
         add_immediate(buffer, operands[2].op_value, 1) +
         0
       end
-
-      def bytesize; 4; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -55,8 +53,6 @@ class Fisk
               operands[0].op_value, operands) +
         0
       end
-
-      def bytesize; 3; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -82,8 +78,6 @@ class Fisk
         add_immediate(buffer, operands[2].op_value, 1) +
         0
       end
-
-      def bytesize; 4; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -108,8 +102,6 @@ class Fisk
               operands[0].op_value, operands) +
         0
       end
-
-      def bytesize; 3; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -135,8 +127,6 @@ class Fisk
         add_immediate(buffer, operands[2].op_value, 1) +
         0
       end
-
-      def bytesize; 5; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -161,8 +151,6 @@ class Fisk
               operands[0].op_value, operands) +
         0
       end
-
-      def bytesize; 4; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -189,8 +177,6 @@ class Fisk
         add_immediate(buffer, operands[2].op_value, 1) +
         0
       end
-
-      def bytesize; 4; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -216,8 +202,6 @@ class Fisk
               operands[0].op_value, operands) +
         0
       end
-
-      def bytesize; 3; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -243,8 +227,6 @@ class Fisk
         add_immediate(buffer, operands[2].op_value, 1) +
         0
       end
-
-      def bytesize; 4; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -269,8 +251,6 @@ class Fisk
               operands[0].op_value, operands) +
         0
       end
-
-      def bytesize; 3; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -296,8 +276,6 @@ class Fisk
         add_immediate(buffer, operands[2].op_value, 1) +
         0
       end
-
-      def bytesize; 5; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -322,8 +300,6 @@ class Fisk
               operands[0].op_value, operands) +
         0
       end
-
-      def bytesize; 4; end
     }.new
     forms << Form.new(operands, encodings)
     SHRD = Instruction.new("SHRD", forms)

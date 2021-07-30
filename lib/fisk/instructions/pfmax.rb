@@ -26,8 +26,6 @@ class Fisk
         add_opcode(buffer, 0xA4, 0) +
         0
       end
-
-      def bytesize; 4; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -52,8 +50,6 @@ class Fisk
         add_opcode(buffer, 0xA4, 0) +
         0
       end
-
-      def bytesize; 4; end
     }.new
     forms << Form.new(operands, encodings)
     PFMAX = Instruction.new("PFMAX", forms)

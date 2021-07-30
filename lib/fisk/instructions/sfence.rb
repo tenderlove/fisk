@@ -14,8 +14,6 @@ class Fisk
         add_opcode(buffer, 0xF8, 0) +
         0
       end
-
-      def bytesize; 3; end
     }.new
     forms << Form.new(operands, encodings)
     SFENCE = Instruction.new("SFENCE", forms)

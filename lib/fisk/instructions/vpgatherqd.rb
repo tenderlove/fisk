@@ -19,8 +19,6 @@ class Fisk
               operands[1].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -38,8 +36,6 @@ class Fisk
               operands[1].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -57,8 +53,6 @@ class Fisk
               operands[1].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -77,8 +71,6 @@ class Fisk
               operands[1].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -97,8 +89,6 @@ class Fisk
               operands[1].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     VPGATHERQD = Instruction.new("VPGATHERQD", forms)

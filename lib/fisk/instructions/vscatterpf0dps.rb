@@ -18,8 +18,6 @@ class Fisk
               operands[0].op_value, operands) +
         0
       end
-
-      def bytesize; 2; end
     }.new
     forms << Form.new(operands, encodings)
     VSCATTERPF0DPS = Instruction.new("VSCATTERPF0DPS", forms)

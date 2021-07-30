@@ -26,8 +26,6 @@ class Fisk
               operands[1].op_value, operands) +
         0
       end
-
-      def bytesize; 3; end
     }.new
     forms << Form.new(operands, encodings)
     operands = []
@@ -56,8 +54,6 @@ class Fisk
         add_immediate(buffer, operands[3].op_value, 1) +
         0
       end
-
-      def bytesize; 5; end
     }.new
     forms << Form.new(operands, encodings)
     INSERTQ = Instruction.new("INSERTQ", forms)
