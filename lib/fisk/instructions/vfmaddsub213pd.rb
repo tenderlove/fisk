@@ -4,186 +4,206 @@ class Fisk
   module Instructions
     # Instruction VFMADDSUB213PD
     forms = []
-    operands = []
-    encodings = []
+    operands = [
+        OPERAND_TYPES[79],
+        OPERAND_TYPES[24],
+        OPERAND_TYPES[58],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_EVEX(buffer, operands)
+          add_opcode(buffer, 0xA6, 0) +
+          add_modrm(buffer,
+              0,
+              operands[0].op_value,
+              operands[2].op_value, operands) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # vfmaddsub213pd: xmm{k}{z}, xmm, m128/m64bcst
-    operands << OPERAND_TYPES[79]
-    operands << OPERAND_TYPES[24]
-    operands << OPERAND_TYPES[58]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_EVEX(buffer, operands)
-        add_opcode(buffer, 0xA6, 0) +
-        add_modrm(buffer,
-              0,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[79],
+        OPERAND_TYPES[24],
+        OPERAND_TYPES[24],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_EVEX(buffer, operands)
+          add_opcode(buffer, 0xA6, 0) +
+          add_modrm(buffer,
+              3,
               operands[0].op_value,
               operands[2].op_value, operands) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # vfmaddsub213pd: xmm{k}{z}, xmm, xmm
-    operands << OPERAND_TYPES[79]
-    operands << OPERAND_TYPES[24]
-    operands << OPERAND_TYPES[24]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_EVEX(buffer, operands)
-        add_opcode(buffer, 0xA6, 0) +
-        add_modrm(buffer,
-              3,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[80],
+        OPERAND_TYPES[60],
+        OPERAND_TYPES[61],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_EVEX(buffer, operands)
+          add_opcode(buffer, 0xA6, 0) +
+          add_modrm(buffer,
+              0,
               operands[0].op_value,
               operands[2].op_value, operands) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # vfmaddsub213pd: ymm{k}{z}, ymm, m256/m64bcst
-    operands << OPERAND_TYPES[80]
-    operands << OPERAND_TYPES[60]
-    operands << OPERAND_TYPES[61]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_EVEX(buffer, operands)
-        add_opcode(buffer, 0xA6, 0) +
-        add_modrm(buffer,
-              0,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[80],
+        OPERAND_TYPES[60],
+        OPERAND_TYPES[60],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_EVEX(buffer, operands)
+          add_opcode(buffer, 0xA6, 0) +
+          add_modrm(buffer,
+              3,
               operands[0].op_value,
               operands[2].op_value, operands) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # vfmaddsub213pd: ymm{k}{z}, ymm, ymm
-    operands << OPERAND_TYPES[80]
-    operands << OPERAND_TYPES[60]
-    operands << OPERAND_TYPES[60]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_EVEX(buffer, operands)
-        add_opcode(buffer, 0xA6, 0) +
-        add_modrm(buffer,
-              3,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[81],
+        OPERAND_TYPES[63],
+        OPERAND_TYPES[64],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_EVEX(buffer, operands)
+          add_opcode(buffer, 0xA6, 0) +
+          add_modrm(buffer,
+              0,
               operands[0].op_value,
               operands[2].op_value, operands) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # vfmaddsub213pd: zmm{k}{z}, zmm, m512/m64bcst
-    operands << OPERAND_TYPES[81]
-    operands << OPERAND_TYPES[63]
-    operands << OPERAND_TYPES[64]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_EVEX(buffer, operands)
-        add_opcode(buffer, 0xA6, 0) +
-        add_modrm(buffer,
-              0,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[23],
+        OPERAND_TYPES[24],
+        OPERAND_TYPES[24],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_VEX(buffer, operands)
+          add_opcode(buffer, 0xA6, 0) +
+          add_modrm(buffer,
+              3,
               operands[0].op_value,
               operands[2].op_value, operands) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # vfmaddsub213pd: xmm, xmm, xmm
-    operands << OPERAND_TYPES[23]
-    operands << OPERAND_TYPES[24]
-    operands << OPERAND_TYPES[24]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_VEX(buffer, operands)
-        add_opcode(buffer, 0xA6, 0) +
-        add_modrm(buffer,
-              3,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[23],
+        OPERAND_TYPES[24],
+        OPERAND_TYPES[25],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_VEX(buffer, operands)
+          add_opcode(buffer, 0xA6, 0) +
+          add_modrm(buffer,
+              0,
               operands[0].op_value,
               operands[2].op_value, operands) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # vfmaddsub213pd: xmm, xmm, m128
-    operands << OPERAND_TYPES[23]
-    operands << OPERAND_TYPES[24]
-    operands << OPERAND_TYPES[25]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_VEX(buffer, operands)
-        add_opcode(buffer, 0xA6, 0) +
-        add_modrm(buffer,
-              0,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[82],
+        OPERAND_TYPES[60],
+        OPERAND_TYPES[60],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_VEX(buffer, operands)
+          add_opcode(buffer, 0xA6, 0) +
+          add_modrm(buffer,
+              3,
               operands[0].op_value,
               operands[2].op_value, operands) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # vfmaddsub213pd: ymm, ymm, ymm
-    operands << OPERAND_TYPES[82]
-    operands << OPERAND_TYPES[60]
-    operands << OPERAND_TYPES[60]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_VEX(buffer, operands)
-        add_opcode(buffer, 0xA6, 0) +
-        add_modrm(buffer,
-              3,
-              operands[0].op_value,
-              operands[2].op_value, operands) +
-        0
-      end
-    }.new
     forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
-    # vfmaddsub213pd: ymm, ymm, m256
-    operands << OPERAND_TYPES[82]
-    operands << OPERAND_TYPES[60]
-    operands << OPERAND_TYPES[66]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_VEX(buffer, operands)
-        add_opcode(buffer, 0xA6, 0) +
-        add_modrm(buffer,
+    operands = [
+        OPERAND_TYPES[82],
+        OPERAND_TYPES[60],
+        OPERAND_TYPES[66],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_VEX(buffer, operands)
+          add_opcode(buffer, 0xA6, 0) +
+          add_modrm(buffer,
               0,
               operands[0].op_value,
               operands[2].op_value, operands) +
-        0
-      end
-    }.new
+          0
+        end
+      }.new.freeze,
+    ].freeze
+    # vfmaddsub213pd: ymm, ymm, m256
     forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
-    # vfmaddsub213pd: zmm{k}{z}, zmm, zmm, {er}
-    operands << OPERAND_TYPES[81]
-    operands << OPERAND_TYPES[63]
-    operands << OPERAND_TYPES[63]
-    operands << OPERAND_TYPES[67]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_EVEX(buffer, operands)
-        add_opcode(buffer, 0xA6, 0) +
-        add_modrm(buffer,
+    operands = [
+        OPERAND_TYPES[81],
+        OPERAND_TYPES[63],
+        OPERAND_TYPES[63],
+        OPERAND_TYPES[67],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_EVEX(buffer, operands)
+          add_opcode(buffer, 0xA6, 0) +
+          add_modrm(buffer,
               3,
               operands[0].op_value,
               operands[2].op_value, operands) +
-        0
-      end
-    }.new
+          0
+        end
+      }.new.freeze,
+    ].freeze
+    # vfmaddsub213pd: zmm{k}{z}, zmm, zmm, {er}
     forms << Form.new(operands, encodings)
     VFMADDSUB213PD = Instruction.new("VFMADDSUB213PD", forms)
   end

@@ -4,291 +4,315 @@ class Fisk
   module Instructions
     # Instruction BT
     forms = []
-    operands = []
-    encodings = []
+    operands = [
+        OPERAND_TYPES[8],
+        OPERAND_TYPES[1],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_prefix(buffer, operands, 0x66, false) +
+          add_rex(buffer, operands,
+              false,
+              0,
+              0,
+              0,
+              operands[0].rex_value) +
+          add_opcode(buffer, 0x0F, 0) +
+          add_opcode(buffer, 0xBA, 0) +
+          add_modrm(buffer,
+              3,
+              4,
+              operands[0].op_value, operands) +
+          add_immediate(buffer, operands[1].op_value, 1) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # btw: r16, imm8
-    operands << OPERAND_TYPES[8]
-    operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_prefix(buffer, operands, 0x66, false) +
-        add_rex(buffer, operands,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[8],
+        OPERAND_TYPES[8],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_prefix(buffer, operands, 0x66, false) +
+          add_rex(buffer, operands,
               false,
               0,
-              0,
+              operands[1].rex_value,
               0,
               operands[0].rex_value) +
-        add_opcode(buffer, 0x0F, 0) +
-        add_opcode(buffer, 0xBA, 0) +
-        add_modrm(buffer,
+          add_opcode(buffer, 0x0F, 0) +
+          add_opcode(buffer, 0xA3, 0) +
+          add_modrm_reg_reg(buffer,
               3,
-              4,
+              operands[1].op_value,
               operands[0].op_value, operands) +
-        add_immediate(buffer, operands[1].op_value, 1) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # btw: r16, r16
-    operands << OPERAND_TYPES[8]
-    operands << OPERAND_TYPES[8]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_prefix(buffer, operands, 0x66, false) +
-        add_rex(buffer, operands,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[13],
+        OPERAND_TYPES[1],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_rex(buffer, operands,
               false,
               0,
-              operands[1].rex_value,
+              0,
               0,
               operands[0].rex_value) +
-        add_opcode(buffer, 0x0F, 0) +
-        add_opcode(buffer, 0xA3, 0) +
-        add_modrm_reg_reg(buffer,
+          add_opcode(buffer, 0x0F, 0) +
+          add_opcode(buffer, 0xBA, 0) +
+          add_modrm(buffer,
               3,
-              operands[1].op_value,
+              4,
               operands[0].op_value, operands) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          add_immediate(buffer, operands[1].op_value, 1) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # btl: r32, imm8
-    operands << OPERAND_TYPES[13]
-    operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_rex(buffer, operands,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[13],
+        OPERAND_TYPES[13],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_rex(buffer, operands,
               false,
               0,
-              0,
+              operands[1].rex_value,
               0,
               operands[0].rex_value) +
-        add_opcode(buffer, 0x0F, 0) +
-        add_opcode(buffer, 0xBA, 0) +
-        add_modrm(buffer,
+          add_opcode(buffer, 0x0F, 0) +
+          add_opcode(buffer, 0xA3, 0) +
+          add_modrm_reg_reg(buffer,
               3,
-              4,
+              operands[1].op_value,
               operands[0].op_value, operands) +
-        add_immediate(buffer, operands[1].op_value, 1) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # btl: r32, r32
-    operands << OPERAND_TYPES[13]
-    operands << OPERAND_TYPES[13]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_rex(buffer, operands,
-              false,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[17],
+        OPERAND_TYPES[1],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_rex(buffer, operands,
+              true,
+              1,
               0,
-              operands[1].rex_value,
               0,
               operands[0].rex_value) +
-        add_opcode(buffer, 0x0F, 0) +
-        add_opcode(buffer, 0xA3, 0) +
-        add_modrm_reg_reg(buffer,
+          add_opcode(buffer, 0x0F, 0) +
+          add_opcode(buffer, 0xBA, 0) +
+          add_modrm(buffer,
               3,
-              operands[1].op_value,
+              4,
               operands[0].op_value, operands) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          add_immediate(buffer, operands[1].op_value, 1) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # btq: r64, imm8
-    operands << OPERAND_TYPES[17]
-    operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_rex(buffer, operands,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[17],
+        OPERAND_TYPES[17],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_rex(buffer, operands,
               true,
               1,
-              0,
+              operands[1].rex_value,
               0,
               operands[0].rex_value) +
-        add_opcode(buffer, 0x0F, 0) +
-        add_opcode(buffer, 0xBA, 0) +
-        add_modrm(buffer,
+          add_opcode(buffer, 0x0F, 0) +
+          add_opcode(buffer, 0xA3, 0) +
+          add_modrm_reg_reg(buffer,
               3,
-              4,
+              operands[1].op_value,
               operands[0].op_value, operands) +
-        add_immediate(buffer, operands[1].op_value, 1) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # btq: r64, r64
-    operands << OPERAND_TYPES[17]
-    operands << OPERAND_TYPES[17]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_rex(buffer, operands,
-              true,
-              1,
-              operands[1].rex_value,
-              0,
-              operands[0].rex_value) +
-        add_opcode(buffer, 0x0F, 0) +
-        add_opcode(buffer, 0xA3, 0) +
-        add_modrm_reg_reg(buffer,
-              3,
-              operands[1].op_value,
-              operands[0].op_value, operands) +
-        0
-      end
-    }.new
     forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+    operands = [
+        OPERAND_TYPES[9],
+        OPERAND_TYPES[1],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_prefix(buffer, operands, 0x66, false) +
+          add_rex(buffer, operands,
+              false,
+              0,
+              0,
+              operands[0].rex_value,
+              operands[0].rex_value) +
+          add_opcode(buffer, 0x0F, 0) +
+          add_opcode(buffer, 0xBA, 0) +
+          add_modrm(buffer,
+              0,
+              4,
+              operands[0].op_value, operands) +
+          add_immediate(buffer, operands[1].op_value, 1) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # btw: m16, imm8
-    operands << OPERAND_TYPES[9]
-    operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_prefix(buffer, operands, 0x66, false) +
-        add_rex(buffer, operands,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[9],
+        OPERAND_TYPES[8],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_prefix(buffer, operands, 0x66, false) +
+          add_rex(buffer, operands,
               false,
               0,
-              0,
+              operands[1].rex_value,
               operands[0].rex_value,
               operands[0].rex_value) +
-        add_opcode(buffer, 0x0F, 0) +
-        add_opcode(buffer, 0xBA, 0) +
-        add_modrm(buffer,
+          add_opcode(buffer, 0x0F, 0) +
+          add_opcode(buffer, 0xA3, 0) +
+          add_modrm_mem_reg(buffer,
               0,
-              4,
+              operands[1].op_value,
               operands[0].op_value, operands) +
-        add_immediate(buffer, operands[1].op_value, 1) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # btw: m16, r16
-    operands << OPERAND_TYPES[9]
-    operands << OPERAND_TYPES[8]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_prefix(buffer, operands, 0x66, false) +
-        add_rex(buffer, operands,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[14],
+        OPERAND_TYPES[1],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_rex(buffer, operands,
               false,
               0,
-              operands[1].rex_value,
+              0,
               operands[0].rex_value,
               operands[0].rex_value) +
-        add_opcode(buffer, 0x0F, 0) +
-        add_opcode(buffer, 0xA3, 0) +
-        add_modrm_mem_reg(buffer,
+          add_opcode(buffer, 0x0F, 0) +
+          add_opcode(buffer, 0xBA, 0) +
+          add_modrm(buffer,
               0,
-              operands[1].op_value,
+              4,
               operands[0].op_value, operands) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          add_immediate(buffer, operands[1].op_value, 1) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # btl: m32, imm8
-    operands << OPERAND_TYPES[14]
-    operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_rex(buffer, operands,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[14],
+        OPERAND_TYPES[13],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_rex(buffer, operands,
               false,
               0,
-              0,
+              operands[1].rex_value,
               operands[0].rex_value,
               operands[0].rex_value) +
-        add_opcode(buffer, 0x0F, 0) +
-        add_opcode(buffer, 0xBA, 0) +
-        add_modrm(buffer,
+          add_opcode(buffer, 0x0F, 0) +
+          add_opcode(buffer, 0xA3, 0) +
+          add_modrm_mem_reg(buffer,
               0,
-              4,
+              operands[1].op_value,
               operands[0].op_value, operands) +
-        add_immediate(buffer, operands[1].op_value, 1) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # btl: m32, r32
-    operands << OPERAND_TYPES[14]
-    operands << OPERAND_TYPES[13]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_rex(buffer, operands,
-              false,
-              0,
-              operands[1].rex_value,
-              operands[0].rex_value,
-              operands[0].rex_value) +
-        add_opcode(buffer, 0x0F, 0) +
-        add_opcode(buffer, 0xA3, 0) +
-        add_modrm_mem_reg(buffer,
-              0,
-              operands[1].op_value,
-              operands[0].op_value, operands) +
-        0
-      end
-    }.new
     forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
-    # btq: m64, imm8
-    operands << OPERAND_TYPES[18]
-    operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_rex(buffer, operands,
+    operands = [
+        OPERAND_TYPES[18],
+        OPERAND_TYPES[1],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_rex(buffer, operands,
               true,
               1,
               0,
               operands[0].rex_value,
               operands[0].rex_value) +
-        add_opcode(buffer, 0x0F, 0) +
-        add_opcode(buffer, 0xBA, 0) +
-        add_modrm(buffer,
+          add_opcode(buffer, 0x0F, 0) +
+          add_opcode(buffer, 0xBA, 0) +
+          add_modrm(buffer,
               0,
               4,
               operands[0].op_value, operands) +
-        add_immediate(buffer, operands[1].op_value, 1) +
-        0
-      end
-    }.new
+          add_immediate(buffer, operands[1].op_value, 1) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
+    # btq: m64, imm8
     forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
-    # btq: m64, r64
-    operands << OPERAND_TYPES[18]
-    operands << OPERAND_TYPES[17]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_rex(buffer, operands,
+    operands = [
+        OPERAND_TYPES[18],
+        OPERAND_TYPES[17],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_rex(buffer, operands,
               true,
               1,
               operands[1].rex_value,
               operands[0].rex_value,
               operands[0].rex_value) +
-        add_opcode(buffer, 0x0F, 0) +
-        add_opcode(buffer, 0xA3, 0) +
-        add_modrm_mem_reg(buffer,
+          add_opcode(buffer, 0x0F, 0) +
+          add_opcode(buffer, 0xA3, 0) +
+          add_modrm_mem_reg(buffer,
               0,
               operands[1].op_value,
               operands[0].op_value, operands) +
-        0
-      end
-    }.new
+          0
+        end
+      }.new.freeze,
+    ].freeze
+    # btq: m64, r64
     forms << Form.new(operands, encodings)
     BT = Instruction.new("BT", forms)
   end

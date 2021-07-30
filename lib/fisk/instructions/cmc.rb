@@ -4,15 +4,17 @@ class Fisk
   module Instructions
     # Instruction CMC
     forms = []
-    operands = []
-    encodings = []
+    operands = [
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_opcode(buffer, 0xF5, 0) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # cmc: 
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_opcode(buffer, 0xF5, 0) +
-        0
-      end
-    }.new
     forms << Form.new(operands, encodings)
     CMC = Instruction.new("CMC", forms)
   end

@@ -4,51 +4,55 @@ class Fisk
   module Instructions
     # Instruction MINPS
     forms = []
-    operands = []
-    encodings = []
-    # minps: xmm, xmm
-    operands << OPERAND_TYPES[23]
-    operands << OPERAND_TYPES[24]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_rex(buffer, operands,
+    operands = [
+        OPERAND_TYPES[23],
+        OPERAND_TYPES[24],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_rex(buffer, operands,
               false,
               0,
               operands[0].rex_value,
               0,
               operands[1].rex_value) +
-        add_opcode(buffer, 0x0F, 0) +
-        add_opcode(buffer, 0x5D, 0) +
-        add_modrm(buffer,
+          add_opcode(buffer, 0x0F, 0) +
+          add_opcode(buffer, 0x5D, 0) +
+          add_modrm(buffer,
               3,
               operands[0].op_value,
               operands[1].op_value, operands) +
-        0
-      end
-    }.new
+          0
+        end
+      }.new.freeze,
+    ].freeze
+    # minps: xmm, xmm
     forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
-    # minps: xmm, m128
-    operands << OPERAND_TYPES[23]
-    operands << OPERAND_TYPES[25]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_rex(buffer, operands,
+    operands = [
+        OPERAND_TYPES[23],
+        OPERAND_TYPES[25],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_rex(buffer, operands,
               false,
               0,
               operands[0].rex_value,
               operands[1].rex_value,
               operands[1].rex_value) +
-        add_opcode(buffer, 0x0F, 0) +
-        add_opcode(buffer, 0x5D, 0) +
-        add_modrm(buffer,
+          add_opcode(buffer, 0x0F, 0) +
+          add_opcode(buffer, 0x5D, 0) +
+          add_modrm(buffer,
               0,
               operands[0].op_value,
               operands[1].op_value, operands) +
-        0
-      end
-    }.new
+          0
+        end
+      }.new.freeze,
+    ].freeze
+    # minps: xmm, m128
     forms << Form.new(operands, encodings)
     MINPS = Instruction.new("MINPS", forms)
   end

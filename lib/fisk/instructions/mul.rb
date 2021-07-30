@@ -4,175 +4,191 @@ class Fisk
   module Instructions
     # Instruction MUL
     forms = []
-    operands = []
-    encodings = []
+    operands = [
+        OPERAND_TYPES[3],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_rex(buffer, operands,
+              false,
+              0,
+              0,
+              0,
+              operands[0].rex_value) +
+          add_opcode(buffer, 0xF6, 0) +
+          add_modrm(buffer,
+              3,
+              4,
+              operands[0].op_value, operands) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # mulb: r8
-    operands << OPERAND_TYPES[3]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_rex(buffer, operands,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[8],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_prefix(buffer, operands, 0x66, false) +
+          add_rex(buffer, operands,
               false,
               0,
               0,
               0,
               operands[0].rex_value) +
-        add_opcode(buffer, 0xF6, 0) +
-        add_modrm(buffer,
+          add_opcode(buffer, 0xF7, 0) +
+          add_modrm(buffer,
               3,
               4,
               operands[0].op_value, operands) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # mulw: r16
-    operands << OPERAND_TYPES[8]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_prefix(buffer, operands, 0x66, false) +
-        add_rex(buffer, operands,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[13],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_rex(buffer, operands,
               false,
               0,
               0,
               0,
               operands[0].rex_value) +
-        add_opcode(buffer, 0xF7, 0) +
-        add_modrm(buffer,
+          add_opcode(buffer, 0xF7, 0) +
+          add_modrm(buffer,
               3,
               4,
               operands[0].op_value, operands) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # mull: r32
-    operands << OPERAND_TYPES[13]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_rex(buffer, operands,
-              false,
-              0,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[17],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_rex(buffer, operands,
+              true,
+              1,
               0,
               0,
               operands[0].rex_value) +
-        add_opcode(buffer, 0xF7, 0) +
-        add_modrm(buffer,
+          add_opcode(buffer, 0xF7, 0) +
+          add_modrm(buffer,
               3,
               4,
               operands[0].op_value, operands) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # mulq: r64
-    operands << OPERAND_TYPES[17]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_rex(buffer, operands,
-              true,
-              1,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[4],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_rex(buffer, operands,
+              false,
               0,
               0,
+              operands[0].rex_value,
               operands[0].rex_value) +
-        add_opcode(buffer, 0xF7, 0) +
-        add_modrm(buffer,
-              3,
+          add_opcode(buffer, 0xF6, 0) +
+          add_modrm(buffer,
+              0,
               4,
               operands[0].op_value, operands) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # mulb: m8
-    operands << OPERAND_TYPES[4]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_rex(buffer, operands,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[9],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_prefix(buffer, operands, 0x66, false) +
+          add_rex(buffer, operands,
               false,
               0,
               0,
               operands[0].rex_value,
               operands[0].rex_value) +
-        add_opcode(buffer, 0xF6, 0) +
-        add_modrm(buffer,
+          add_opcode(buffer, 0xF7, 0) +
+          add_modrm(buffer,
               0,
               4,
               operands[0].op_value, operands) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # mulw: m16
-    operands << OPERAND_TYPES[9]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_prefix(buffer, operands, 0x66, false) +
-        add_rex(buffer, operands,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[14],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_rex(buffer, operands,
               false,
               0,
               0,
               operands[0].rex_value,
               operands[0].rex_value) +
-        add_opcode(buffer, 0xF7, 0) +
-        add_modrm(buffer,
+          add_opcode(buffer, 0xF7, 0) +
+          add_modrm(buffer,
               0,
               4,
               operands[0].op_value, operands) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # mull: m32
-    operands << OPERAND_TYPES[14]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_rex(buffer, operands,
-              false,
-              0,
-              0,
-              operands[0].rex_value,
-              operands[0].rex_value) +
-        add_opcode(buffer, 0xF7, 0) +
-        add_modrm(buffer,
-              0,
-              4,
-              operands[0].op_value, operands) +
-        0
-      end
-    }.new
     forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
-    # mulq: m64
-    operands << OPERAND_TYPES[18]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_rex(buffer, operands,
+    operands = [
+        OPERAND_TYPES[18],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_rex(buffer, operands,
               true,
               1,
               0,
               operands[0].rex_value,
               operands[0].rex_value) +
-        add_opcode(buffer, 0xF7, 0) +
-        add_modrm(buffer,
+          add_opcode(buffer, 0xF7, 0) +
+          add_modrm(buffer,
               0,
               4,
               operands[0].op_value, operands) +
-        0
-      end
-    }.new
+          0
+        end
+      }.new.freeze,
+    ].freeze
+    # mulq: m64
     forms << Form.new(operands, encodings)
     MUL = Instruction.new("MUL", forms)
   end

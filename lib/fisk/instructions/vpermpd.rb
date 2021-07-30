@@ -4,191 +4,211 @@ class Fisk
   module Instructions
     # Instruction VPERMPD
     forms = []
-    operands = []
-    encodings = []
+    operands = [
+        OPERAND_TYPES[59],
+        OPERAND_TYPES[61],
+        OPERAND_TYPES[1],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_EVEX(buffer, operands)
+          add_opcode(buffer, 0x01, 0) +
+          add_modrm(buffer,
+              0,
+              operands[0].op_value,
+              operands[1].op_value, operands) +
+          add_immediate(buffer, operands[2].op_value, 1) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # vpermpd: ymm{k}{z}, m256/m64bcst, imm8
-    operands << OPERAND_TYPES[59]
-    operands << OPERAND_TYPES[61]
-    operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_EVEX(buffer, operands)
-        add_opcode(buffer, 0x01, 0) +
-        add_modrm(buffer,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[62],
+        OPERAND_TYPES[64],
+        OPERAND_TYPES[1],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_EVEX(buffer, operands)
+          add_opcode(buffer, 0x01, 0) +
+          add_modrm(buffer,
               0,
               operands[0].op_value,
               operands[1].op_value, operands) +
-        add_immediate(buffer, operands[2].op_value, 1) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          add_immediate(buffer, operands[2].op_value, 1) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # vpermpd: zmm{k}{z}, m512/m64bcst, imm8
-    operands << OPERAND_TYPES[62]
-    operands << OPERAND_TYPES[64]
-    operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_EVEX(buffer, operands)
-        add_opcode(buffer, 0x01, 0) +
-        add_modrm(buffer,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[59],
+        OPERAND_TYPES[60],
+        OPERAND_TYPES[61],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_EVEX(buffer, operands)
+          add_opcode(buffer, 0x16, 0) +
+          add_modrm(buffer,
               0,
               operands[0].op_value,
-              operands[1].op_value, operands) +
-        add_immediate(buffer, operands[2].op_value, 1) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+              operands[2].op_value, operands) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # vpermpd: ymm{k}{z}, ymm, m256/m64bcst
-    operands << OPERAND_TYPES[59]
-    operands << OPERAND_TYPES[60]
-    operands << OPERAND_TYPES[61]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_EVEX(buffer, operands)
-        add_opcode(buffer, 0x16, 0) +
-        add_modrm(buffer,
-              0,
-              operands[0].op_value,
-              operands[2].op_value, operands) +
-        0
-      end
-    }.new
     forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+    operands = [
+        OPERAND_TYPES[59],
+        OPERAND_TYPES[60],
+        OPERAND_TYPES[1],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_EVEX(buffer, operands)
+          add_opcode(buffer, 0x01, 0) +
+          add_modrm(buffer,
+              3,
+              operands[0].op_value,
+              operands[1].op_value, operands) +
+          add_immediate(buffer, operands[2].op_value, 1) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # vpermpd: ymm{k}{z}, ymm, imm8
-    operands << OPERAND_TYPES[59]
-    operands << OPERAND_TYPES[60]
-    operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_EVEX(buffer, operands)
-        add_opcode(buffer, 0x01, 0) +
-        add_modrm(buffer,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[59],
+        OPERAND_TYPES[60],
+        OPERAND_TYPES[60],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_EVEX(buffer, operands)
+          add_opcode(buffer, 0x16, 0) +
+          add_modrm(buffer,
               3,
               operands[0].op_value,
-              operands[1].op_value, operands) +
-        add_immediate(buffer, operands[2].op_value, 1) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+              operands[2].op_value, operands) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # vpermpd: ymm{k}{z}, ymm, ymm
-    operands << OPERAND_TYPES[59]
-    operands << OPERAND_TYPES[60]
-    operands << OPERAND_TYPES[60]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_EVEX(buffer, operands)
-        add_opcode(buffer, 0x16, 0) +
-        add_modrm(buffer,
-              3,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[62],
+        OPERAND_TYPES[63],
+        OPERAND_TYPES[64],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_EVEX(buffer, operands)
+          add_opcode(buffer, 0x16, 0) +
+          add_modrm(buffer,
+              0,
               operands[0].op_value,
               operands[2].op_value, operands) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # vpermpd: zmm{k}{z}, zmm, m512/m64bcst
-    operands << OPERAND_TYPES[62]
-    operands << OPERAND_TYPES[63]
-    operands << OPERAND_TYPES[64]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_EVEX(buffer, operands)
-        add_opcode(buffer, 0x16, 0) +
-        add_modrm(buffer,
-              0,
-              operands[0].op_value,
-              operands[2].op_value, operands) +
-        0
-      end
-    }.new
     forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+    operands = [
+        OPERAND_TYPES[62],
+        OPERAND_TYPES[63],
+        OPERAND_TYPES[1],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_EVEX(buffer, operands)
+          add_opcode(buffer, 0x01, 0) +
+          add_modrm(buffer,
+              3,
+              operands[0].op_value,
+              operands[1].op_value, operands) +
+          add_immediate(buffer, operands[2].op_value, 1) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # vpermpd: zmm{k}{z}, zmm, imm8
-    operands << OPERAND_TYPES[62]
-    operands << OPERAND_TYPES[63]
-    operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_EVEX(buffer, operands)
-        add_opcode(buffer, 0x01, 0) +
-        add_modrm(buffer,
-              3,
-              operands[0].op_value,
-              operands[1].op_value, operands) +
-        add_immediate(buffer, operands[2].op_value, 1) +
-        0
-      end
-    }.new
     forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
-    # vpermpd: zmm{k}{z}, zmm, zmm
-    operands << OPERAND_TYPES[62]
-    operands << OPERAND_TYPES[63]
-    operands << OPERAND_TYPES[63]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_EVEX(buffer, operands)
-        add_opcode(buffer, 0x16, 0) +
-        add_modrm(buffer,
+    operands = [
+        OPERAND_TYPES[62],
+        OPERAND_TYPES[63],
+        OPERAND_TYPES[63],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_EVEX(buffer, operands)
+          add_opcode(buffer, 0x16, 0) +
+          add_modrm(buffer,
               3,
               operands[0].op_value,
               operands[2].op_value, operands) +
-        0
-      end
-    }.new
+          0
+        end
+      }.new.freeze,
+    ].freeze
+    # vpermpd: zmm{k}{z}, zmm, zmm
     forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
-    # vpermpd: ymm, ymm, imm8
-    operands << OPERAND_TYPES[65]
-    operands << OPERAND_TYPES[60]
-    operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_VEX(buffer, operands)
-        add_opcode(buffer, 0x01, 0) +
-        add_modrm(buffer,
+    operands = [
+        OPERAND_TYPES[65],
+        OPERAND_TYPES[60],
+        OPERAND_TYPES[1],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_VEX(buffer, operands)
+          add_opcode(buffer, 0x01, 0) +
+          add_modrm(buffer,
               3,
               operands[0].op_value,
               operands[1].op_value, operands) +
-        add_immediate(buffer, operands[2].op_value, 1) +
-        0
-      end
-    }.new
+          add_immediate(buffer, operands[2].op_value, 1) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
+    # vpermpd: ymm, ymm, imm8
     forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
-    # vpermpd: ymm, m256, imm8
-    operands << OPERAND_TYPES[65]
-    operands << OPERAND_TYPES[66]
-    operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_VEX(buffer, operands)
-        add_opcode(buffer, 0x01, 0) +
-        add_modrm(buffer,
+    operands = [
+        OPERAND_TYPES[65],
+        OPERAND_TYPES[66],
+        OPERAND_TYPES[1],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_VEX(buffer, operands)
+          add_opcode(buffer, 0x01, 0) +
+          add_modrm(buffer,
               0,
               operands[0].op_value,
               operands[1].op_value, operands) +
-        add_immediate(buffer, operands[2].op_value, 1) +
-        0
-      end
-    }.new
+          add_immediate(buffer, operands[2].op_value, 1) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
+    # vpermpd: ymm, m256, imm8
     forms << Form.new(operands, encodings)
     VPERMPD = Instruction.new("VPERMPD", forms)
   end

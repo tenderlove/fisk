@@ -4,16 +4,18 @@ class Fisk
   module Instructions
     # Instruction VZEROUPPER
     forms = []
-    operands = []
-    encodings = []
+    operands = [
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_VEX(buffer, operands)
+          add_opcode(buffer, 0x77, 0) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # vzeroupper: 
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_VEX(buffer, operands)
-        add_opcode(buffer, 0x77, 0) +
-        0
-      end
-    }.new
     forms << Form.new(operands, encodings)
     VZEROUPPER = Instruction.new("VZEROUPPER", forms)
   end

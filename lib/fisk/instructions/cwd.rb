@@ -4,16 +4,18 @@ class Fisk
   module Instructions
     # Instruction CWD
     forms = []
-    operands = []
-    encodings = []
+    operands = [
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_prefix(buffer, operands, 0x66, false) +
+          add_opcode(buffer, 0x99, 0) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # cwtd: 
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_prefix(buffer, operands, 0x66, false) +
-        add_opcode(buffer, 0x99, 0) +
-        0
-      end
-    }.new
     forms << Form.new(operands, encodings)
     CWD = Instruction.new("CWD", forms)
   end

@@ -4,45 +4,49 @@ class Fisk
   module Instructions
     # Instruction VPCOMB
     forms = []
-    operands = []
-    encodings = []
-    # vpcomb: xmm, xmm, xmm, imm8
-    operands << OPERAND_TYPES[26]
-    operands << OPERAND_TYPES[24]
-    operands << OPERAND_TYPES[24]
-    operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_VEX(buffer, operands)
-        add_opcode(buffer, 0xCC, 0) +
-        add_modrm(buffer,
+    operands = [
+        OPERAND_TYPES[26],
+        OPERAND_TYPES[24],
+        OPERAND_TYPES[24],
+        OPERAND_TYPES[1],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_VEX(buffer, operands)
+          add_opcode(buffer, 0xCC, 0) +
+          add_modrm(buffer,
               3,
               operands[0].op_value,
               operands[2].op_value, operands) +
-        add_immediate(buffer, operands[3].op_value, 1) +
-        0
-      end
-    }.new
+          add_immediate(buffer, operands[3].op_value, 1) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
+    # vpcomb: xmm, xmm, xmm, imm8
     forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
-    # vpcomb: xmm, xmm, m128, imm8
-    operands << OPERAND_TYPES[26]
-    operands << OPERAND_TYPES[24]
-    operands << OPERAND_TYPES[25]
-    operands << OPERAND_TYPES[1]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_VEX(buffer, operands)
-        add_opcode(buffer, 0xCC, 0) +
-        add_modrm(buffer,
+    operands = [
+        OPERAND_TYPES[26],
+        OPERAND_TYPES[24],
+        OPERAND_TYPES[25],
+        OPERAND_TYPES[1],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_VEX(buffer, operands)
+          add_opcode(buffer, 0xCC, 0) +
+          add_modrm(buffer,
               0,
               operands[0].op_value,
               operands[2].op_value, operands) +
-        add_immediate(buffer, operands[3].op_value, 1) +
-        0
-      end
-    }.new
+          add_immediate(buffer, operands[3].op_value, 1) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
+    # vpcomb: xmm, xmm, m128, imm8
     forms << Form.new(operands, encodings)
     VPCOMB = Instruction.new("VPCOMB", forms)
   end

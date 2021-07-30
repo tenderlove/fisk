@@ -4,72 +4,78 @@ class Fisk
   module Instructions
     # Instruction LEA
     forms = []
-    operands = []
-    encodings = []
+    operands = [
+        OPERAND_TYPES[38],
+        OPERAND_TYPES[46],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_prefix(buffer, operands, 0x66, false) +
+          add_rex(buffer, operands,
+              false,
+              0,
+              operands[0].rex_value,
+              operands[1].rex_value,
+              operands[1].rex_value) +
+          add_opcode(buffer, 0x8D, 0) +
+          add_modrm_reg_mem(buffer,
+              0,
+              operands[0].op_value,
+              operands[1].op_value, operands) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # leaw: r16, m
-    operands << OPERAND_TYPES[38]
-    operands << OPERAND_TYPES[46]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_prefix(buffer, operands, 0x66, false) +
-        add_rex(buffer, operands,
+    forms << Form.new(operands, encodings)
+    operands = [
+        OPERAND_TYPES[27],
+        OPERAND_TYPES[46],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_rex(buffer, operands,
               false,
               0,
               operands[0].rex_value,
               operands[1].rex_value,
               operands[1].rex_value) +
-        add_opcode(buffer, 0x8D, 0) +
-        add_modrm_reg_mem(buffer,
+          add_opcode(buffer, 0x8D, 0) +
+          add_modrm_reg_mem(buffer,
               0,
               operands[0].op_value,
               operands[1].op_value, operands) +
-        0
-      end
-    }.new
-    forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # leal: r32, m
-    operands << OPERAND_TYPES[27]
-    operands << OPERAND_TYPES[46]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_rex(buffer, operands,
-              false,
-              0,
-              operands[0].rex_value,
-              operands[1].rex_value,
-              operands[1].rex_value) +
-        add_opcode(buffer, 0x8D, 0) +
-        add_modrm_reg_mem(buffer,
-              0,
-              operands[0].op_value,
-              operands[1].op_value, operands) +
-        0
-      end
-    }.new
     forms << Form.new(operands, encodings)
-    operands = []
-    encodings = []
-    # leaq: r64, m
-    operands << OPERAND_TYPES[28]
-    operands << OPERAND_TYPES[46]
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_rex(buffer, operands,
+    operands = [
+        OPERAND_TYPES[28],
+        OPERAND_TYPES[46],
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_rex(buffer, operands,
               true,
               1,
               operands[0].rex_value,
               operands[1].rex_value,
               operands[1].rex_value) +
-        add_opcode(buffer, 0x8D, 0) +
-        add_modrm_reg_mem(buffer,
+          add_opcode(buffer, 0x8D, 0) +
+          add_modrm_reg_mem(buffer,
               0,
               operands[0].op_value,
               operands[1].op_value, operands) +
-        0
-      end
-    }.new
+          0
+        end
+      }.new.freeze,
+    ].freeze
+    # leaq: r64, m
     forms << Form.new(operands, encodings)
     LEA = Instruction.new("LEA", forms)
   end

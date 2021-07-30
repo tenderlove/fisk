@@ -4,15 +4,17 @@ class Fisk
   module Instructions
     # Instruction CLD
     forms = []
-    operands = []
-    encodings = []
+    operands = [
+    ].freeze
+    encodings = [
+      Class.new(Fisk::Encoding) {
+        def encode buffer, operands
+          add_opcode(buffer, 0xFC, 0) +
+          0
+        end
+      }.new.freeze,
+    ].freeze
     # cld: 
-    encodings << Class.new(Fisk::Encoding) {
-      def encode buffer, operands
-        add_opcode(buffer, 0xFC, 0) +
-        0
-      end
-    }.new
     forms << Form.new(operands, encodings)
     CLD = Instruction.new("CLD", forms)
   end
