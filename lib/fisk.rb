@@ -269,30 +269,33 @@ class Fisk
     def temp_register?; false; end
   end
 
-  class Label < Struct.new(:name)
-    def label?; true; end
-    def jump?; false; end
+  module InstructionPredicates
+    def retry?;              false; end
+    def label?;              false; end
+    def jump?;               false; end
     def has_temp_registers?; false; end
+    def comment?;            false; end
+  end
+
+  class Label < Struct.new(:name)
+    include InstructionPredicates
+
+    def label?; true; end
   end
 
   class Comment < Struct.new(:message)
-    def label?; false; end
+    include InstructionPredicates
+
     def comment?; true; end
   end
 
   class Instruction
+    include InstructionPredicates
+
     def initialize insn, form, operands
       @insn     = insn
       @form     = form
       @operands = operands
-    end
-
-    def retry?
-      false
-    end
-
-    def jump?
-      false
     end
 
     def has_temp_registers?
@@ -311,12 +314,11 @@ class Fisk
       encoding = @form.encodings.first
       encoding.encode buffer, @operands
     end
-
-    def label?; false; end
-    def comment?; false; end
   end
 
   class UnresolvedRIPInstruction
+    include InstructionPredicates
+
     def initialize insn, form, operands
       @insn      = insn
       @form      = form
@@ -324,8 +326,6 @@ class Fisk
       @retry     = false
     end
 
-    def label?; false; end
-    def comment?; false; end
     def retry?; true; end
 
     def encode buffer, labels
@@ -348,6 +348,8 @@ class Fisk
   end
 
   class UnresolvedJumpInstruction
+    include InstructionPredicates
+
     def initialize insn, form, operand
       @insn      = insn
       @form      = form
@@ -366,8 +368,6 @@ class Fisk
     def retry?
       true
     end
-
-    def has_temp_registers?; false; end
 
     def encode buffer, labels
       # Estimate by using a rel32 offset
@@ -397,9 +397,6 @@ class Fisk
         encoding.encode buffer, [operand_klass.new(0x0CAFE)]
       end
     end
-
-    def label?; false; end
-    def comment?; false; end
 
     private
 
