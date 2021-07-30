@@ -8,6 +8,36 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_put_anon_label_block
+    found = nil
+    fisk.mov(fisk.rax, fisk.rip(fisk.label(:foo)))
+    fisk.nop
+    fisk.nop
+    fisk.nop
+    fisk.put_label { |pos| found = pos }
+
+    assert_nil found
+    fisk.to_binary
+    assert_equal 10, found
+  end
+
+  def test_put_label_block
+    found = nil
+    fisk.mov(fisk.rax, fisk.rip(fisk.label(:foo)))
+    fisk.nop
+    fisk.nop
+    fisk.nop
+    fisk.put_label(:foo) { |pos| found = pos }
+    fisk.jmp(fisk.label(:foo))
+
+    assert_nil found
+    insns = disasm(fisk.to_binary)
+    assert_equal 10, found
+
+    x = insns.find { |insn| insn.address == found }
+    assert_equal "jmp", x.mnemonic.to_s
+  end
+
   def test_rip_to_label
     fisk.mov(fisk.rax, fisk.rip(fisk.label(:foo)))
     fisk.nop

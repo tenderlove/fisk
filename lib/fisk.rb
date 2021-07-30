@@ -284,8 +284,21 @@ class Fisk
     def comment?;            false; end
   end
 
-  class Label < Struct.new(:name)
+  class Label
     include InstructionPredicates
+
+    attr_reader :name, :pos
+
+    def initialize name, &blk
+      @name = name
+      @pos  = nil
+      @blk  = blk
+    end
+
+    def set_pos pos
+      @pos = pos
+      @blk.call(pos) if @blk
+    end
 
     def label?; true; end
   end
@@ -461,8 +474,10 @@ class Fisk
   end
 
   # Insert a label named +name+ at the current position in the instructions.
-  def put_label name
-    @instructions << Label.new(name)
+  # Takes an optional block which will get the position associated with the
+  # label.
+  def put_label name = nil, &block
+    @instructions << Label.new(name, &block)
     self
   end
   alias :make_label :put_label
@@ -606,6 +621,7 @@ class Fisk
     @instructions.each do |insn|
       if insn.label?
         labels[insn.name] = buffer.pos
+        insn.set_pos buffer.pos
       elsif insn.comment?
         comments.update({buffer.pos => insn.message}) { |_, *lines| lines.join($/) }
       else
