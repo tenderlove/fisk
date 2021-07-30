@@ -9,14 +9,19 @@ require "fisk/errors"
 require "fisk/version"
 
 class Fisk
-  class Operand
-    def works? type; self.type == type; end
-    def unresolved?; false; end
-    def register?; false; end
-    def temp_register?; false; end
+  module OperandPredicates
+    def unresolved?;        false; end
+    def register?;          false; end
+    def temp_register?;     false; end
     def extended_register?; false; end
-    def memory?; false; end
-    def rip?; false; end
+    def memory?;            false; end
+    def rip?;               false; end
+  end
+
+  class Operand
+    include OperandPredicates
+
+    def works? type; self.type == type; end
 
     def rex_value
       value >> 3
@@ -57,11 +62,9 @@ class Fisk
       def extended_register?
         @value > 7 || EXTENDED_R8.include?(self)
       end
-
-      def rip?; false; end
     end
 
-    class Rip
+    class Rip < Operand
       attr_accessor :displacement
 
       def initialize displacement
@@ -76,7 +79,6 @@ class Fisk
         @displacement.is_a?(Fisk::UnknownLabel)
       end
 
-      def temp_register?; false; end
       def memory?; true; end
       def rip?; true; end
 
@@ -260,13 +262,18 @@ class Fisk
     end
   end
 
-  class UnknownLabel < Struct.new(:name)
+  class UnknownLabel < Operand
+    attr_reader :name
+
+    def initialize name
+      @name = name
+    end
+
     def works? type
       type == "rel32"
     end
 
     def unresolved?; true; end
-    def temp_register?; false; end
   end
 
   module InstructionPredicates
