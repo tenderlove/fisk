@@ -14,8 +14,9 @@ class Fisk
               1,
               0,
               0,
-              0)
-        add_opcode buffer, 0x98, 0
+              0) +
+        add_opcode(buffer, 0x98, 0) +
+        0
       end
 
       def bytesize; 2; end

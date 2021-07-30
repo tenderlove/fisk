@@ -11,12 +11,13 @@ class Fisk
     operands << OPERAND_TYPES[42]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_VEX buffer, operands
-        add_opcode buffer, 0x90, 0
+        add_VEX(buffer, operands)
+        add_opcode(buffer, 0x90, 0) +
         add_modrm(buffer,
               3,
               operands[0].op_value,
-              operands[1].op_value, operands)
+              operands[1].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -29,12 +30,13 @@ class Fisk
     operands << OPERAND_TYPES[13]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_VEX buffer, operands
-        add_opcode buffer, 0x92, 0
+        add_VEX(buffer, operands)
+        add_opcode(buffer, 0x92, 0) +
         add_modrm(buffer,
               3,
               operands[0].op_value,
-              operands[1].op_value, operands)
+              operands[1].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -47,12 +49,13 @@ class Fisk
     operands << OPERAND_TYPES[4]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_VEX buffer, operands
-        add_opcode buffer, 0x90, 0
+        add_VEX(buffer, operands)
+        add_opcode(buffer, 0x90, 0) +
         add_modrm(buffer,
               0,
               operands[0].op_value,
-              operands[1].op_value, operands)
+              operands[1].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -65,12 +68,13 @@ class Fisk
     operands << OPERAND_TYPES[42]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_VEX buffer, operands
-        add_opcode buffer, 0x93, 0
+        add_VEX(buffer, operands)
+        add_opcode(buffer, 0x93, 0) +
         add_modrm(buffer,
               3,
               operands[0].op_value,
-              operands[1].op_value, operands)
+              operands[1].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -83,12 +87,13 @@ class Fisk
     operands << OPERAND_TYPES[42]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_VEX buffer, operands
-        add_opcode buffer, 0x91, 0
+        add_VEX(buffer, operands)
+        add_opcode(buffer, 0x91, 0) +
         add_modrm(buffer,
               0,
               operands[1].op_value,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end

@@ -19,7 +19,9 @@ class Fisk
       rm = rm & 0x7
       buffer.putc ((mode << 6) | (reg << 3) | rm)
       if mem && mem.displacement != 0
-        write_num buffer, mem.displacement, offset_bytes
+        1 + write_num(buffer, mem.displacement, offset_bytes)
+      else
+        1
       end
     end
 
@@ -38,8 +40,7 @@ class Fisk
 
       if mem.rip?
         buffer.putc 0x5
-        write_num buffer, mem.displacement, 4
-        return
+        return 1 + write_num(buffer, mem.displacement, 4)
       end
 
       if mem.displacement != 0
@@ -57,7 +58,9 @@ class Fisk
       buffer.putc ((mode << 6) | (reg << 3) | rm)
 
       if mem.displacement != 0
-        write_num buffer, mem.displacement, offset_bytes
+        1 + write_num(buffer, mem.displacement, offset_bytes)
+      else
+        1
       end
     end
 
@@ -65,11 +68,12 @@ class Fisk
     def add_modrm_reg_reg buffer, mode, reg, rm, operands
       if rip = operands.find(&:rip?)
         buffer.putc 0x5
-        write_num buffer, rip.displacement, 4
+        1 + write_num(buffer, rip.displacement, 4)
       else
         reg = reg & 0x7
         rm = rm & 0x7
         buffer.putc ((mode << 6) | (reg << 3) | rm)
+        1
       end
     end
 
@@ -86,7 +90,7 @@ class Fisk
     end
 
     def add_rex buffer, operands, mandatory, w, r, x, b
-      return if mandatory == false && !operands.any?(&:extended_register?)
+      return 0 if mandatory == false && !operands.any?(&:extended_register?)
 
       rex = 0b0100
       rex = (rex << 1) | w
@@ -94,11 +98,13 @@ class Fisk
       rex = (rex << 1) | x
       rex = (rex << 1) | b
       buffer.putc rex
+      1
     end
 
     def add_opcode buffer, byte, addend
       byte |= addend
       buffer.putc byte
+      1
     end
 
     def write_num buffer, num, size
@@ -106,10 +112,12 @@ class Fisk
         buffer.putc(num & 0xFF)
         num >>= 8
       }
+      size
     end
 
     def add_prefix buffer, operands, byte, mandatory
       buffer.putc byte
+      1
     end
   end
 end

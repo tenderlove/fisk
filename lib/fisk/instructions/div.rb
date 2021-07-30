@@ -15,12 +15,13 @@ class Fisk
               0,
               0,
               0,
-              operands[0].rex_value)
-        add_opcode buffer, 0xF6, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0xF6, 0) +
         add_modrm(buffer,
               3,
               6,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -32,18 +33,19 @@ class Fisk
     operands << OPERAND_TYPES[8]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_prefix buffer, operands, 0x66, false
+        add_prefix(buffer, operands, 0x66, false) +
         add_rex(buffer, operands,
               false,
               0,
               0,
               0,
-              operands[0].rex_value)
-        add_opcode buffer, 0xF7, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0xF7, 0) +
         add_modrm(buffer,
               3,
               6,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -60,12 +62,13 @@ class Fisk
               0,
               0,
               0,
-              operands[0].rex_value)
-        add_opcode buffer, 0xF7, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0xF7, 0) +
         add_modrm(buffer,
               3,
               6,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -82,12 +85,13 @@ class Fisk
               1,
               0,
               0,
-              operands[0].rex_value)
-        add_opcode buffer, 0xF7, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0xF7, 0) +
         add_modrm(buffer,
               3,
               6,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 3; end
@@ -104,12 +108,13 @@ class Fisk
               0,
               0,
               operands[0].rex_value,
-              operands[0].rex_value)
-        add_opcode buffer, 0xF6, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0xF6, 0) +
         add_modrm(buffer,
               0,
               6,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -121,18 +126,19 @@ class Fisk
     operands << OPERAND_TYPES[9]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_prefix buffer, operands, 0x66, false
+        add_prefix(buffer, operands, 0x66, false) +
         add_rex(buffer, operands,
               false,
               0,
               0,
               operands[0].rex_value,
-              operands[0].rex_value)
-        add_opcode buffer, 0xF7, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0xF7, 0) +
         add_modrm(buffer,
               0,
               6,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -149,12 +155,13 @@ class Fisk
               0,
               0,
               operands[0].rex_value,
-              operands[0].rex_value)
-        add_opcode buffer, 0xF7, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0xF7, 0) +
         add_modrm(buffer,
               0,
               6,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 2; end
@@ -171,12 +178,13 @@ class Fisk
               1,
               0,
               operands[0].rex_value,
-              operands[0].rex_value)
-        add_opcode buffer, 0xF7, 0
+              operands[0].rex_value) +
+        add_opcode(buffer, 0xF7, 0) +
         add_modrm(buffer,
               0,
               6,
-              operands[0].op_value, operands)
+              operands[0].op_value, operands) +
+        0
       end
 
       def bytesize; 3; end

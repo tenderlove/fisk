@@ -35,17 +35,17 @@ class Fisk
           when "Opcode"
             size += 1
       -%>
-        add_opcode buffer, 0x<%= sprintf("%02X", encoding["byte"].to_i(16)) %>, <%= parse_operand_value encoding["addend"] %>
+        add_opcode(buffer, 0x<%= sprintf("%02X", encoding["byte"].to_i(16)) %>, <%= parse_operand_value encoding["addend"] %>) +
         <%-
             when "Immediate"
               size += encoding["size"].to_i
         -%>
-        add_immediate buffer, <%= parse_operand_value encoding["value"] %>, <%= encoding["size"].to_i %>
+        add_immediate(buffer, <%= parse_operand_value encoding["value"] %>, <%= encoding["size"].to_i %>) +
         <%-
             when "CodeOffset"
               size += encoding["size"].to_i
         -%>
-        add_code_offset buffer, <%= parse_operand_value encoding["value"] %>, <%= encoding["size"].to_i %>
+        add_code_offset(buffer, <%= parse_operand_value encoding["value"] %>, <%= encoding["size"].to_i %>) +
         <%-
             when "REX"
               size += 1 unless encoding["mandatory"] == "false"
@@ -55,7 +55,7 @@ class Fisk
               <%= parse_rex encoding["W"] %>,
               <%= parse_rex encoding["R"] %>,
               <%= parse_rex encoding["X"] %>,
-              <%= parse_rex encoding["B"] %>)
+              <%= parse_rex encoding["B"] %>) +
         <%-
             when "ModRM"
               size += 1
@@ -63,15 +63,16 @@ class Fisk
         <%= modrm_method(operands) %>(buffer,
               <%= encoding["mode"].to_i(2) %>,
               <%= parse_operand_value encoding["reg"] %>,
-              <%= parse_operand_value encoding["rm"] %>, operands)
+              <%= parse_operand_value encoding["rm"] %>, operands) +
         <%- when "Prefix" -%>
-        add_prefix buffer, operands, 0x<%= sprintf("%02X", encoding["byte"].to_i(16)) %>, <%= encoding["mandatory"] %>
+        add_prefix(buffer, operands, 0x<%= sprintf("%02X", encoding["byte"].to_i(16)) %>, <%= encoding["mandatory"] %>) +
         <%- when "DataOffset" -%>
-        add_data_offset buffer, <%= parse_operand_value encoding["value"] %>, <%= encoding["size"].to_i %>
+        add_data_offset(buffer, <%= parse_operand_value encoding["value"] %>, <%= encoding["size"].to_i %>) +
         <%- else -%>
-        add_<%= encoding.name %> buffer, operands
+        add_<%= encoding.name %>(buffer, operands)
         <%- end -%>
       <%- end -%>
+        0
       end
 
       def bytesize; <%= size %>; end

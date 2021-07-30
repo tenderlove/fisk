@@ -9,7 +9,8 @@ class Fisk
     # ret: 
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_opcode buffer, 0xC3, 0
+        add_opcode(buffer, 0xC3, 0) +
+        0
       end
 
       def bytesize; 1; end
@@ -21,8 +22,9 @@ class Fisk
     operands << OPERAND_TYPES[6]
     encodings << Class.new(Fisk::Encoding) {
       def encode buffer, operands
-        add_opcode buffer, 0xC2, 0
-        add_immediate buffer, operands[0].op_value, 2
+        add_opcode(buffer, 0xC2, 0) +
+        add_immediate(buffer, operands[0].op_value, 2) +
+        0
       end
 
       def bytesize; 3; end
