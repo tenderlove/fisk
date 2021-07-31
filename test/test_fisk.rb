@@ -8,6 +8,18 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  %w{ rax rcx rdx rbx rsp rbp rsi rdi r8 r9 r10 }.each do |reg|
+    define_method "test_#{reg}_to_offset" do
+      fisk.lea(fisk.send(reg), fisk.rip(15))
+
+      bytes = fisk.to_binary
+      i = disasm(fisk.to_binary).first
+
+      assert_equal "lea", i.mnemonic.to_s
+      assert_match(/#{reg}, (?:qword ptr )?\[rip \+ 0xf\]/, i.op_str.to_s)
+    end
+  end
+
   def test_rip_to_label
     fisk.mov(fisk.rax, fisk.rip(fisk.label(:foo)))
     fisk.nop

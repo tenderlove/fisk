@@ -39,7 +39,7 @@ class Fisk
       offset_bytes = 0
 
       if mem.rip?
-        buffer.putc 0x5
+        buffer.putc 0x5 + ((reg_opnd.value % 8) * 8)
         return 1 + write_num(buffer, mem.displacement, 4)
       end
 
