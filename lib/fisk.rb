@@ -359,18 +359,14 @@ class Fisk
     include InstructionPredicates
 
     def initialize insn, form, operand
-      @insn      = insn
-      @form      = form
-      @operand   = operand
-      @retry     = false
+      @insn       = insn
+      @form       = form
+      @operand    = operand
+      @must_retry = false
     end
 
     def jump?
       true
-    end
-
-    def lazy?
-      false
     end
 
     def target
@@ -386,26 +382,31 @@ class Fisk
       form              = find_form "rel32"
       encoding          = form.encodings.first
       operand_klass     = Rel32
-      encoding_bytesize = 5 # Rel32 encoding uses 5 bytes
 
-      if labels.key? @operand.name
-        unless @retry
-          estimated_offset = labels[@operand.name] - (buffer.pos + encoding_bytesize)
+      if labels.key? target
+        unless @must_retry
+          estimated_offset = labels[target] - (buffer.pos + 6) # 6 seems like a good length
 
           if estimated_offset >= -128 && estimated_offset <= 127
             # fits in a rel8
             operand_klass     = Rel8
             form              = find_form "rel8"
             encoding          = form.encodings.first
-            encoding_bytesize = 2 # Rel8 only needs 2 bytes
           end
         end
 
-        jump_len = -(buffer.pos + encoding_bytesize - labels[@operand.name])
+        # We don't know what the size of the jump will be, so just write
+        # it out with some dummy data and keep track of the buffer position.
+        # Calculate the real jump offset, then rewind and patch the jump with
+        # the right location. 😩
+        pos = buffer.pos
+        encoding.encode buffer, [operand_klass.new(0xFE)]
+        encoded_size = buffer.pos - pos
+        jump_len = -(buffer.pos - labels[target])
+        buffer.seek pos, IO::SEEK_SET
         encoding.encode buffer, [operand_klass.new(jump_len)]
       else
-        @retry = true
-        # Write 5 bytes to reserve our spot
+        @must_retry = true
         encoding.encode buffer, [operand_klass.new(0x0CAFE)]
       end
     end

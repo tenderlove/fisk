@@ -8,6 +8,20 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_jump_target
+    expected_pos = nil
+    fisk.jz(fisk.label(:continue))
+    fisk.mov(fisk.r9, fisk.imm64(1234))
+      .jmp(fisk.r9)
+      .put_label(:continue)
+      .lazy { |pos| expected_pos = pos }
+      .mov(fisk.r9, fisk.r10)
+
+    i = disasm(fisk.to_binary).first
+    assert_equal "je", i.mnemonic.to_s
+    assert_equal sprintf("%#02x", expected_pos), i.op_str.to_s
+  end
+
   %w{ rax rcx rdx rbx rsp rbp rsi rdi r8 r9 r10 }.each do |reg|
     define_method "test_#{reg}_to_offset" do
       fisk.lea(fisk.send(reg), fisk.rip(15))
