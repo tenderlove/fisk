@@ -401,7 +401,6 @@ class Fisk
         # the right location. 😩
         pos = buffer.pos
         encoding.encode buffer, [operand_klass.new(0xFE)]
-        encoded_size = buffer.pos - pos
         jump_len = -(buffer.pos - labels[target])
         buffer.seek pos, IO::SEEK_SET
         encoding.encode buffer, [operand_klass.new(jump_len)]
