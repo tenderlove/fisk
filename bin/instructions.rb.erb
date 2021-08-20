@@ -6,14 +6,35 @@ require "fisk/encoding"
 
 class Fisk
   module Instructions
-    Operand     = Struct.new(:type, :input, :output)
+    Operand     = Struct.new(:type, :input, :output) do
+      def immediate?; false; end
+    end
+
+    class Immediate < Operand
+      attr_reader :size
+
+      def initialize type, input, output, size
+        super(type, input, output)
+        @size = size
+      end
+
+      def immediate?; true; end
+    end
+
     Form        = Struct.new(:operands, :encodings)
     Instruction = Struct.new(:name, :forms)
 
     OPERAND_TYPES = [
-<%- unique_operands.each do |u_op| -%>
+<%-
+  unique_operands.each do |u_op|
+    if u_op[0] =~ /^imm(\d+)$/
+      size = $1.to_i
+-%>
+      Immediate.new(<%= u_op[0].dump %>, <%= u_op[1] || "nil" %>, <%= u_op[2] || "nil" %>, <%= size %>),
+<%- else -%>
       Operand.new(<%= u_op[0].dump %>, <%= u_op[1] || "nil" %>, <%= u_op[2] || "nil" %>),
-<% end %>
+<%- end -%>
+<%- end -%>
     ]
 
     def self.instruction_names
