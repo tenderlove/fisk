@@ -8,6 +8,18 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_immediate_predicate
+    assert_predicate fisk.imm8(1), :immediate?
+    refute_predicate fisk.r9, :immediate?
+  end
+
+  def test_find_compatible_instruction
+    fisk.mov(fisk.r9, fisk.imm8(1))
+    i = disasm(fisk.to_binary).first
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal "r9, 1", i.op_str.to_s
+  end
+
   def test_jump_target
     expected_pos = nil
     fisk.jz(fisk.label(:continue))

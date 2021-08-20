@@ -51,9 +51,10 @@ class Fisk
     class JITBuffer
       attr_reader :memory, :pos
 
-      def initialize memory
+      def initialize memory, size
         @memory = memory
         @pos = 0
+        @size = size
       end
 
       def putc byte
@@ -74,7 +75,7 @@ class Fisk
     end
 
     def self.jitbuffer size
-      JITBuffer.new mmap_jit size
+      JITBuffer.new mmap_jit(size), size
     end
   end
 end

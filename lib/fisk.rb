@@ -16,12 +16,15 @@ class Fisk
     def extended_register?; false; end
     def memory?;            false; end
     def rip?;               false; end
+    def immediate?;         false; end
   end
 
   class Operand
     include OperandPredicates
 
-    def works? type; self.type == type; end
+    def works? op
+      self.type == op.type
+    end
 
     def rex_value
       value >> 3
@@ -51,7 +54,8 @@ class Fisk
         @value = value
       end
 
-      def works? type
+      def works? op
+        type = op.type
         type == self.name || type == self.type
       end
 
@@ -71,7 +75,8 @@ class Fisk
         @displacement = displacement
       end
 
-      def works? type
+      def works? op
+        type = op.type
         type == "m64" || type == "m"
       end
 
@@ -187,7 +192,7 @@ class Fisk
   end
 
   class Memory < Operand
-    attr_reader :displacement
+    attr_reader :register, :displacement
 
     def initialize register, displacement
       @register     = register
@@ -225,13 +230,23 @@ class Fisk
     M.new x, displacement
   end
 
+  class ImmediateOperand < ValueOperand
+    def immediate?; true; end
+
+    def works? insn_op
+      insn_op.immediate? && size <= insn_op.size
+    end
+  end
+
   # Define all immediate value methods of different sizes
   [8, 16, 32, 64].each do |size|
     class_eval <<~eostr, __FILE__, __LINE__ + 1
-      class Imm#{size} < ValueOperand
+      class Imm#{size} < ImmediateOperand
         def type
           "imm#{size}"
         end
+
+        def size; #{size}; end
       end
 
       def imm#{size} val; Imm#{size}.new(val.to_i); end
@@ -269,7 +284,8 @@ class Fisk
       @name = name
     end
 
-    def works? type
+    def works? op
+      type = op.type
       type == "rel32"
     end
 
@@ -519,6 +535,14 @@ class Fisk
     Registers::Temp.new name, "r64"
   end
 
+  # Allocate a register and yield it to the block.  The register will be
+  # automatically released after the block is finished.
+  def with_register name = "temp"
+    reg = register(name)
+    yield reg
+    release_register reg
+  end
+
   # Assign registers to any temporary registers.  Only registers in +list+
   # will be used when selecting register assignments
   def assign_registers list, local: false
@@ -571,6 +595,8 @@ class Fisk
 
   # Create a signed immediate value of the right width
   def imm val
+    val = val.to_i
+
     if val >= -0x7F - 1 && val <= 0x7F
       imm8 val
     elsif val >=  -0x7FFF - 1 && val <= 0x7FFF
@@ -586,6 +612,8 @@ class Fisk
 
   # Create an unsigned immediate value of the right width
   def uimm val
+    val = val.to_i
+
     if val < 0
       raise ArgumentError, "#{val} is negative"
     elsif val <= 0xFF
@@ -686,7 +714,7 @@ class Fisk
     forms = insns.forms.find_all do |insn|
       if insn.operands.length == params.length
         params.zip(insn.operands).all? { |want_op, have_op|
-          want_op.works?(have_op.type)
+          want_op.works?(have_op)
         }
       else
         false

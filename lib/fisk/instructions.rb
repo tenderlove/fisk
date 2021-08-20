@@ -20,23 +20,37 @@ require "fisk/encoding"
 
 class Fisk
   module Instructions
-    Operand     = Struct.new(:type, :input, :output)
+    Operand     = Struct.new(:type, :input, :output) do
+      def immediate?; false; end
+    end
+
+    class Immediate < Operand
+      attr_reader :size
+
+      def initialize type, input, output, size
+        super(type, input, output)
+        @size = size
+      end
+
+      def immediate?; true; end
+    end
+
     Form        = Struct.new(:operands, :encodings)
     Instruction = Struct.new(:name, :forms)
 
     OPERAND_TYPES = [
       Operand.new("al", true, true),
-      Operand.new("imm8", nil, nil),
+      Immediate.new("imm8", nil, nil, 8),
       Operand.new("r8", true, true),
       Operand.new("r8", true, false),
       Operand.new("m8", true, false),
       Operand.new("ax", true, true),
-      Operand.new("imm16", nil, nil),
+      Immediate.new("imm16", nil, nil, 16),
       Operand.new("r16", true, true),
       Operand.new("r16", true, false),
       Operand.new("m16", true, false),
       Operand.new("eax", true, true),
-      Operand.new("imm32", nil, nil),
+      Immediate.new("imm32", nil, nil, 32),
       Operand.new("r32", true, true),
       Operand.new("r32", true, false),
       Operand.new("m32", true, false),
@@ -77,7 +91,7 @@ class Fisk
       Operand.new("moffs32", nil, nil),
       Operand.new("rax", false, true),
       Operand.new("moffs64", nil, nil),
-      Operand.new("imm64", nil, nil),
+      Immediate.new("imm64", nil, nil, 64),
       Operand.new("m128", false, true),
       Operand.new("mm", true, true),
       Operand.new("1", nil, nil),
@@ -125,7 +139,7 @@ class Fisk
       Operand.new("zmm", false, true),
       Operand.new("m64{k}", false, true),
       Operand.new("m32{k}", false, true),
-      Operand.new("imm4", nil, nil),
+      Immediate.new("imm4", nil, nil, 4),
       Operand.new("m32{k}{z}", false, true),
       Operand.new("m16{k}{z}", false, true),
       Operand.new("vm32x{k}", false, true),
@@ -134,7 +148,6 @@ class Fisk
       Operand.new("vm64x{k}", false, true),
       Operand.new("vm64y{k}", false, true),
       Operand.new("vm64z{k}", false, true),
-
     ]
 
     def self.instruction_names
