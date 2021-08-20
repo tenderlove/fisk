@@ -72,6 +72,23 @@ class Fisk
       def to_function params, ret
         Fiddle::Function.new memory.to_i, params, ret
       end
+
+      # Write a jump instruction at location +at+ that jumps to the location
+      # specified by +to+. +type+ specifies the type of jump
+      def patch_jump at:, to:, type: :jmp
+        saved_pos = self.pos
+        rel_jump = 0xCAFE
+        2.times do
+          seek at, IO::SEEK_SET
+          Fisk.new { |__| __.public_send(type, __.rel32(rel_jump)) }.write_to(self)
+          rel_jump = to - address
+        end
+        seek saved_pos, IO::SEEK_SET
+      end
+
+      def address
+        memory.to_i + pos
+      end
     end
 
     def self.jitbuffer size

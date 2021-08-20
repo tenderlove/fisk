@@ -2,6 +2,66 @@ require "helper"
 require "fisk/helpers"
 
 class RunFiskTest < Fisk::Test
+  def test_jit_jump_patch
+    jitbuf = Fisk::Helpers.jitbuffer 4096
+    jump_pos = nil
+    fisk = Fisk.new { |__|
+      __.push(__.rbp)
+        .mov(__.rbp, __.rsp)
+        .mov(__.rax, __.imm64(-123))
+
+      __.lazy { |pos| jump_pos = pos }
+        .jmp(__.rel32(1234))
+    }
+    fisk.write_to jitbuf
+    jump = disasm(jitbuf.memory[0, 4096])[3]
+
+    assert_equal "jmp", jump.mnemonic.to_s
+    assert_equal "0x4e5", jump.op_str.to_s
+
+    jitbuf.patch_jump at: jump_pos, to: jitbuf.memory.to_i
+
+    jump = disasm(jitbuf.memory[0, 4096])[3]
+    assert_equal "jmp", jump.mnemonic.to_s
+    assert_equal "0", jump.op_str.to_s
+
+    jitbuf.patch_jump at: jump_pos, to: jitbuf.memory.to_i + 0xFF
+
+    jump = disasm(jitbuf.memory[0, 4096])[3]
+    assert_equal "jmp", jump.mnemonic.to_s
+    assert_equal "0xff", jump.op_str.to_s
+  end
+
+  def test_jit_patch_jump_type
+    jitbuf = Fisk::Helpers.jitbuffer 4096
+    jump_pos = nil
+    fisk = Fisk.new { |__|
+      __.push(__.rbp)
+        .mov(__.rbp, __.rsp)
+        .mov(__.rax, __.imm64(-123))
+
+      __.lazy { |pos| jump_pos = pos }
+        .jmp(__.rel32(1234))
+    }
+    fisk.write_to jitbuf
+    jump = disasm(jitbuf.memory[0, 4096])[3]
+
+    assert_equal "jmp", jump.mnemonic.to_s
+    assert_equal "0x4e5", jump.op_str.to_s
+
+    jitbuf.patch_jump at: jump_pos, to: jitbuf.memory.to_i, type: :jg
+
+    jump = disasm(jitbuf.memory[0, 4096])[3]
+    assert_equal "jg", jump.mnemonic.to_s
+    assert_equal "0", jump.op_str.to_s
+
+    jitbuf.patch_jump at: jump_pos, to: jitbuf.memory.to_i + 0xFF, type: :jne
+
+    jump = disasm(jitbuf.memory[0, 4096])[3]
+    assert_equal "jne", jump.mnemonic.to_s
+    assert_equal "0xff", jump.op_str.to_s
+  end
+
   def test_negative
     fisk = Fisk.new
     jitbuf = Fisk::Helpers.jitbuffer 4096
