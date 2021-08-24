@@ -2,6 +2,17 @@ require "helper"
 require "fisk/helpers"
 
 class RunFiskTest < Fisk::Test
+  def test_jit_jump_absolute
+    jitbuf = Fisk::Helpers.jitbuffer 4096
+    fisk = Fisk.new { |__|
+      __.jmp(__.absolute(jitbuf.memory.to_i))
+    }
+    fisk.write_to jitbuf
+    jump = disasm(jitbuf.memory[0, 4096])[0]
+    assert_equal "jmp", jump.mnemonic.to_s
+    assert_equal "0", jump.op_str.to_s
+  end
+
   def test_jit_jump_patch
     jitbuf = Fisk::Helpers.jitbuffer 4096
     jump_pos = nil
@@ -86,7 +97,6 @@ class RunFiskTest < Fisk::Test
 
   def test_write_jump_moves
     jitbuf = Fisk::Helpers.jitbuffer 4096
-    jump_pos = nil
     fisk = Fisk.new { |__|
       __.push(__.rbp)
         .mov(__.rbp, __.rsp)

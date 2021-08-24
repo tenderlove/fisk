@@ -38,7 +38,6 @@ class FiskTest < Fisk::Test
     define_method "test_#{reg}_to_offset" do
       fisk.lea(fisk.send(reg), fisk.rip(15))
 
-      bytes = fisk.to_binary
       i = disasm(fisk.to_binary).first
 
       assert_equal "lea", i.mnemonic.to_s

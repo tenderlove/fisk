@@ -17,6 +17,7 @@ class Fisk
     def memory?;            false; end
     def rip?;               false; end
     def immediate?;         false; end
+    def absolute_location?; false; end
   end
 
   class Operand
@@ -108,6 +109,7 @@ class Fisk
       end
 
       def temp_register?; true; end
+      def register?; true; end
 
       def op_value
         reg.op_value
@@ -253,13 +255,15 @@ class Fisk
     eostr
   end
 
-  class Rel8 < ValueOperand
+  class Relative < ValueOperand; end
+
+  class Rel8 < Relative
     def type
       "rel8"
     end
   end
 
-  class Rel32 < ValueOperand
+  class Rel32 < Relative
     def type
       "rel32"
     end
@@ -368,6 +372,46 @@ class Fisk
       end
 
       @form.encodings.first.encode buffer, operands
+      @saved_pos = buffer.pos
+    end
+  end
+
+  class AbsoluteJumpInstruction
+    include InstructionPredicates
+
+    def initialize insn, form, operand
+      @insn       = insn
+      @form       = form
+      @operand    = operand
+      @must_retry = false
+    end
+
+    def jump?
+      true
+    end
+
+    def target
+      @operand.name
+    end
+
+    def encode buffer, labels
+      form              = find_form "rel32"
+      encoding          = form.encodings.first
+      operand_klass     = Rel32
+
+      pos = buffer.pos
+      rel_jump = 0xCAFE
+      2.times do
+        buffer.seek pos, IO::SEEK_SET
+        encoding.encode buffer, [operand_klass.new(rel_jump)]
+        rel_jump = @operand.value - buffer.address
+      end
+    end
+
+    private
+
+    def find_form form_type
+      @insn.forms.find { |form| form.operands.first.type == form_type }
     end
   end
 
@@ -637,6 +681,23 @@ class Fisk
     Rel32.new val
   end
 
+  class AbsoluteLocation < Rel32
+    def absolute_location?;  true; end
+  end
+
+  # Creates an "absolute" location.  Use this for JUMP instructions where you
+  # know the absolute location but want a relative location calculated later.
+  #
+  # For example:
+  #
+  #   fisk.jmp fisk.absolute(0xCAFE)
+  #
+  # The emitted JMP instruction will use a calculated relative address (this is
+  # because x64 doesn't have a jump to absolute position).
+  def absolute val
+    AbsoluteLocation.new val
+  end
+
   def lit val
     Lit.new val
   end
@@ -745,6 +806,10 @@ class Fisk
           # If it's not a jump instruction, assume unresolved RIP relative 😬
           insn = UnresolvedRIPInstruction.new(insns, form, params)
         end
+      end
+
+      if param.absolute_location? && insns.name =~ /^J/
+        insn = AbsoluteJumpInstruction.new(insns, form, params.first)
       end
 
       if param.temp_register?
