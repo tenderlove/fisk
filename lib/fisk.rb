@@ -67,6 +67,10 @@ class Fisk
       def extended_register?
         @value > 7 || EXTENDED_R8.include?(self)
       end
+
+      def to_register
+        self
+      end
     end
 
     class Rip < Operand
@@ -125,6 +129,10 @@ class Fisk
 
       def value
         reg.value
+      end
+
+      def to_register
+        self
       end
 
       def reg
@@ -203,6 +211,10 @@ class Fisk
 
     def value
       @register.value
+    end
+
+    def + displacement
+      self.class.new(register, self.displacement + displacement)
     end
 
     def memory?; true; end

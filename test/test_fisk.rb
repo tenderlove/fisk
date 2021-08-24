@@ -8,6 +8,12 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_to_register
+    assert_equal fisk.r9, fisk.r9.to_register
+    temp = fisk.register
+    assert_equal temp, temp.to_register
+  end
+
   def test_immediate_predicate
     assert_predicate fisk.imm8(1), :immediate?
     refute_predicate fisk.r9, :immediate?
