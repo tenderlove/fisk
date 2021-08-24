@@ -364,6 +364,7 @@ class Fisk
       @form      = form
       @operands  = operands
       @retry     = false
+      @saved_pos = 0
     end
 
     def retry?; true; end
@@ -374,7 +375,7 @@ class Fisk
         if op.rip? && op.unresolved?
           # Try resolving the operands
           if labels.key?(op.displacement.name)
-            Registers::Rip.new labels[op.displacement.name]
+            Registers::Rip.new labels[op.displacement.name] - @saved_pos
           else
             Registers::Rip.new 0x0CAFE
           end

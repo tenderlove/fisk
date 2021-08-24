@@ -61,7 +61,7 @@ class FiskTest < Fisk::Test
     i = disasm(fisk.to_binary).first
 
     assert_equal "mov", i.mnemonic.to_s
-    assert_equal "rax, qword ptr [rip + 0xa]", i.op_str.to_s
+    assert_equal "rax, qword ptr [rip + 3]", i.op_str.to_s
   end
 
   def test_m64_encoding
