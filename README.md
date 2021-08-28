@@ -1,4 +1,4 @@
-# Fisk - A Pure Ruby Assembler
+# Fisk - A Pure Ruby x86-64 Assembler
 
 Tired of writing Ruby in Ruby?  Now you can write assembly in Ruby with Fisk!
 
