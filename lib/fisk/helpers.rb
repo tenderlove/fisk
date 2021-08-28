@@ -77,7 +77,9 @@ class Fisk
       # specified by +to+. +type+ specifies the type of jump.  This method
       # maintains the current position of the cursor inside the memory chunk
       def patch_jump at:, to:, type: :jmp
-        seek write_jump(to: to, at: at, type: type), IO::SEEK_SET
+        pos = self.pos
+        write_jump(to: to, at: at, type: type)
+        seek pos, IO::SEEK_SET
       end
 
       # Write a jump instruction at location +at+ that jumps to the location
@@ -86,14 +88,13 @@ class Fisk
       #
       # This method does not maintain the current position of the cursor
       def write_jump to:, at: self.pos, type: :jmp
-        pos = self.pos
         rel_jump = 0xCAFE
         2.times do
           seek at, IO::SEEK_SET
           Fisk.new { |__| __.public_send(type, __.rel32(rel_jump)) }.write_to(self)
           rel_jump = to - address
         end
-        pos
+        self.pos
       end
 
       def address

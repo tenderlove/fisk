@@ -20,5 +20,16 @@ class Fisk
     # but it's used in the encoding process.
     class UnassignedRegister < Error
     end
+
+    # Raised when a label is used but the location is never defined.  For
+    # example, the `label` method is called, but there is no corresponding
+    # `put_label`
+    class MissingLabel < Error
+    end
+
+    # Raised when a label is defined multiple times.  For example, calling
+    # `put_label` with the same name twice
+    class LabelAlreadyDefined < Error
+    end
   end
 end

@@ -105,7 +105,7 @@ class RunFiskTest < Fisk::Test
     fisk.write_to jitbuf
 
     current_pos = jitbuf.pos
-    assert_equal current_pos, jitbuf.write_jump(to: jitbuf.address + 0xFF)
+    jitbuf.write_jump(to: jitbuf.address + 0xFF)
 
     jump = disasm(jitbuf.memory[current_pos, jitbuf.pos])[0]
 

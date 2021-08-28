@@ -478,6 +478,10 @@ class Fisk
         buffer.seek pos, IO::SEEK_SET
         encoding.encode buffer, [operand_klass.new(jump_len)]
       else
+        if @must_retry
+          # We retried once, but the label wasn't defined
+          raise Errors::MissingLabel, "Label `#{target}` was used, but not defined"
+        end
         @must_retry = true
         encoding.encode buffer, [operand_klass.new(0x0CAFE)]
       end
@@ -575,6 +579,10 @@ class Fisk
 
   # Insert a label named +name+ at the current position in the instructions.
   def put_label name
+    if @labels.key? name
+      raise Errors::LabelAlreadyDefined, "Label `#{name}` is already defined"
+    end
+    @labels[name] = nil
     @instructions << Label.new(name)
     self
   end

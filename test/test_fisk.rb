@@ -8,6 +8,20 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_multiple_put_label_raises
+    fisk.put_label(:continue)
+    assert_raises Fisk::Errors::LabelAlreadyDefined do
+      fisk.put_label(:continue)
+    end
+  end
+
+  def test_missing_jump_label_raises
+    fisk.jz(fisk.label(:continue))
+    assert_raises Fisk::Errors::MissingLabel do
+      fisk.to_binary
+    end
+  end
+
   def test_to_register
     assert_equal fisk.r9, fisk.r9.to_register
     temp = fisk.register
