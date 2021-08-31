@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPBLENDMW
+    # Instruction VPBLENDMW: Blend Word Vectors Using an OpMask Control
     VPBLENDMW = Instruction.new("VPBLENDMW", [
     # vpblendmw: xmm{k}{z}, xmm, xmm
       Form.new([

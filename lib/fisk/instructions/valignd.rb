@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VALIGND
+    # Instruction VALIGND: Align Doubleword Vectors
     VALIGND = Instruction.new("VALIGND", [
     # valignd: xmm{k}{z}, xmm, m128/m32bcst, imm8
       Form.new([

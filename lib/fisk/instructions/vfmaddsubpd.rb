@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VFMADDSUBPD
+    # Instruction VFMADDSUBPD: Fused Multiply-Alternating Add/Subtract of Packed Double-Precision Floating-Point Values
     VFMADDSUBPD = Instruction.new("VFMADDSUBPD", [
     # vfmaddsubpd: xmm, xmm, xmm, xmm
       Form.new([

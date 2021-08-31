@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPADDQ
+    # Instruction VPADDQ: Add Packed Quadword Integers
     VPADDQ = Instruction.new("VPADDQ", [
     # vpaddq: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

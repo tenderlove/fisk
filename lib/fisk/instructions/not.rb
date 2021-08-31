@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction NOT
+    # Instruction NOT: One's Complement Negation
     NOT = Instruction.new("NOT", [
     # notb: r8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPINSRB
+    # Instruction VPINSRB: Insert Byte
     VPINSRB = Instruction.new("VPINSRB", [
     # vpinsrb: xmm, xmm, r32, imm8
       Form.new([

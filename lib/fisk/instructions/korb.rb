@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KORB
+    # Instruction KORB: Bitwise Logical OR 8-bit Masks
     KORB = Instruction.new("KORB", [
     # korb: k, k, k
       Form.new([

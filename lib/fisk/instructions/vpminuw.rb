@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMINUW
+    # Instruction VPMINUW: Minimum of Packed Unsigned Word Integers
     VPMINUW = Instruction.new("VPMINUW", [
     # vpminuw: xmm{k}{z}, xmm, xmm
       Form.new([

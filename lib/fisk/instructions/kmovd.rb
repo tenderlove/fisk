@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KMOVD
+    # Instruction KMOVD: Move 32-bit Mask
     KMOVD = Instruction.new("KMOVD", [
     # kmovd: k, k
       Form.new([

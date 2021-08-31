@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VRANGEPS
+    # Instruction VRANGEPS: Range Restriction Calculation For Packed Pairs of Single-Precision Floating-Point Values
     VRANGEPS = Instruction.new("VRANGEPS", [
     # vrangeps: xmm{k}{z}, xmm, m128/m32bcst, imm8
       Form.new([

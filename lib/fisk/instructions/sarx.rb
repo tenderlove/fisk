@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SARX
+    # Instruction SARX: Arithmetic Shift Right Without Affecting Flags
     SARX = Instruction.new("SARX", [
     # sarxl: r32, r32, r32
       Form.new([

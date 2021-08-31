@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VAESDEC
+    # Instruction VAESDEC: Perform One Round of an AES Decryption Flow
     VAESDEC = Instruction.new("VAESDEC", [
     # vaesdec: xmm, xmm, xmm
       Form.new([

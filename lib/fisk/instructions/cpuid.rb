@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CPUID
+    # Instruction CPUID: CPU Identification
     CPUID = Instruction.new("CPUID", [
     # cpuid: 
       Form.new([

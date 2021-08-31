@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSHAQ
+    # Instruction VPSHAQ: Packed Shift Arithmetic Quadwords
     VPSHAQ = Instruction.new("VPSHAQ", [
     # vpshaq: xmm, xmm, xmm
       Form.new([

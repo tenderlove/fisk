@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVM2W
+    # Instruction VPMOVM2W: Expand Bits of Mask Register to Packed Word Integers
     VPMOVM2W = Instruction.new("VPMOVM2W", [
     # vpmovm2w: xmm, k
       Form.new([

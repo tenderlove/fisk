@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction T1MSKC
+    # Instruction T1MSKC: Inverse Mask From Trailing Ones
     T1MSKC = Instruction.new("T1MSKC", [
     # t1mskc: r32, r32
       Form.new([

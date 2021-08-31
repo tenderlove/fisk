@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VBLENDPS
+    # Instruction VBLENDPS:  Blend Packed Single Precision Floating-Point Values
     VBLENDPS = Instruction.new("VBLENDPS", [
     # vblendps: xmm, xmm, xmm, imm8
       Form.new([

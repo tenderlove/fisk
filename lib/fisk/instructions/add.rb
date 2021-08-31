@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction ADD
+    # Instruction ADD: Add
     ADD = Instruction.new("ADD", [
     # addb: al, imm8
       Form.new([

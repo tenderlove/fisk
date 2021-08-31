@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KADDD
+    # Instruction KADDD: ADD Two 32-bit Masks
     KADDD = Instruction.new("KADDD", [
     # kaddd: k, k, k
       Form.new([

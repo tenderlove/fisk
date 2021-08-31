@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMAXUQ
+    # Instruction VPMAXUQ: Maximum of Packed Unsigned Quadword Integers
     VPMAXUQ = Instruction.new("VPMAXUQ", [
     # vpmaxuq: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KSHIFTRQ
+    # Instruction KSHIFTRQ: Shift Right 64-bit Masks
     KSHIFTRQ = Instruction.new("KSHIFTRQ", [
     # kshiftrq: k, k, imm8
       Form.new([

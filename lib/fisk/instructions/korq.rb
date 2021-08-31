@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KORQ
+    # Instruction KORQ: Bitwise Logical OR 64-bit Masks
     KORQ = Instruction.new("KORQ", [
     # korq: k, k, k
       Form.new([

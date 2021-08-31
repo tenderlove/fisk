@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMINSD
+    # Instruction VMINSD: Return Minimum Scalar Double-Precision Floating-Point Value
     VMINSD = Instruction.new("VMINSD", [
     # vminsd: xmm{k}{z}, xmm, m64
       Form.new([

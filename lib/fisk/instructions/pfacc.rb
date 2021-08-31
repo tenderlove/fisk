@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PFACC
+    # Instruction PFACC: Packed Floating-Point Accumulate
     PFACC = Instruction.new("PFACC", [
     # pfacc: mm, mm
       Form.new([

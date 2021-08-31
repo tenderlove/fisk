@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPHADDUBD
+    # Instruction VPHADDUBD: Packed Horizontal Add Unsigned Byte to Doubleword
     VPHADDUBD = Instruction.new("VPHADDUBD", [
     # vphaddubd: xmm, xmm
       Form.new([

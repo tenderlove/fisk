@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VBROADCASTI128
+    # Instruction VBROADCASTI128: Broadcast 128 Bits of Integer Data
     VBROADCASTI128 = Instruction.new("VBROADCASTI128", [
     # vbroadcasti128: ymm, m128
       Form.new([

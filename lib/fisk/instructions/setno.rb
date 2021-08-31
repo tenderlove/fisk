@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETNO
+    # Instruction SETNO: Set byte if not overflow (OF == 0)
     SETNO = Instruction.new("SETNO", [
     # setno: r8
       Form.new([

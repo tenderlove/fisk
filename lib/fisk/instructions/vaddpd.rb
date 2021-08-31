@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VADDPD
+    # Instruction VADDPD: Add Packed Double-Precision Floating-Point Values
     VADDPD = Instruction.new("VADDPD", [
     # vaddpd: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

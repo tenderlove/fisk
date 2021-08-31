@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSCATTERQQ
+    # Instruction VPSCATTERQQ: Scatter Packed Quadword Values with Signed Quadword Indices
     VPSCATTERQQ = Instruction.new("VPSCATTERQQ", [
     # vpscatterqq: vm64x{k}, xmm
       Form.new([

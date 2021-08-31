@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSRAQ
+    # Instruction VPSRAQ: Shift Packed Quadword Data Right Arithmetic
     VPSRAQ = Instruction.new("VPSRAQ", [
     # vpsraq: xmm{k}{z}, m128/m64bcst, imm8
       Form.new([

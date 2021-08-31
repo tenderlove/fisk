@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VBROADCASTF128
+    # Instruction VBROADCASTF128: Broadcast 128 Bit of Floating-Point Data
     VBROADCASTF128 = Instruction.new("VBROADCASTF128", [
     # vbroadcastf128: ymm, m128
       Form.new([

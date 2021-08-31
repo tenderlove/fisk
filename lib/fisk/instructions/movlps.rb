@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVLPS
+    # Instruction MOVLPS: Move Low Packed Single-Precision Floating-Point Values
     MOVLPS = Instruction.new("MOVLPS", [
     # movlps: xmm, m64
       Form.new([

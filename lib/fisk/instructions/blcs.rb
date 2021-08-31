@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction BLCS
+    # Instruction BLCS: Set Lowest Clear Bit
     BLCS = Instruction.new("BLCS", [
     # blcs: r32, r32
       Form.new([

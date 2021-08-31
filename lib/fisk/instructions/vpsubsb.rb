@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSUBSB
+    # Instruction VPSUBSB: Subtract Packed Signed Byte Integers with Signed Saturation
     VPSUBSB = Instruction.new("VPSUBSB", [
     # vpsubsb: xmm{k}{z}, xmm, xmm
       Form.new([

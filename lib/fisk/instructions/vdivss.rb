@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VDIVSS
+    # Instruction VDIVSS: Divide Scalar Single-Precision Floating-Point Values
     VDIVSS = Instruction.new("VDIVSS", [
     # vdivss: xmm{k}{z}, xmm, m32
       Form.new([

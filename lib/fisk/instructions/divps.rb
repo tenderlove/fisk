@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction DIVPS
+    # Instruction DIVPS: Divide Packed Single-Precision Floating-Point Values
     DIVPS = Instruction.new("DIVPS", [
     # divps: xmm, xmm
       Form.new([

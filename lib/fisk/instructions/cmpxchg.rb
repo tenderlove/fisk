@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMPXCHG
+    # Instruction CMPXCHG: Compare and Exchange
     CMPXCHG = Instruction.new("CMPXCHG", [
     # cmpxchgb: r8, r8
       Form.new([

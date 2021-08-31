@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMOVC
+    # Instruction CMOVC: Move if carry (CF == 1)
     CMOVC = Instruction.new("CMOVC", [
     # cmovc: r16, r16
       Form.new([

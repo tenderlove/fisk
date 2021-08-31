@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPINSRD
+    # Instruction VPINSRD: Insert Doubleword
     VPINSRD = Instruction.new("VPINSRD", [
     # vpinsrd: xmm, xmm, r32, imm8
       Form.new([

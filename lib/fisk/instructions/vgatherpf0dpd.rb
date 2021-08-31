@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VGATHERPF0DPD
+    # Instruction VGATHERPF0DPD: Sparse Prefetch Packed Double-Precision Floating-Point Data Values with Signed Doubleword Indices Using T0 Hint
     VGATHERPF0DPD = Instruction.new("VGATHERPF0DPD", [
     # vgatherpf0dpd: vm32y{k}
       Form.new([

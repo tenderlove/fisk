@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVM2B
+    # Instruction VPMOVM2B: Expand Bits of Mask Register to Packed Byte Integers
     VPMOVM2B = Instruction.new("VPMOVM2B", [
     # vpmovm2b: xmm, k
       Form.new([

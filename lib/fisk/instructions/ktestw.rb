@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KTESTW
+    # Instruction KTESTW: Bit Test 16-bit Masks and Set Flags
     KTESTW = Instruction.new("KTESTW", [
     # ktestw: k, k
       Form.new([

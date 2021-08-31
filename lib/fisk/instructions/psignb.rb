@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PSIGNB
+    # Instruction PSIGNB: Packed Sign of Byte Integers
     PSIGNB = Instruction.new("PSIGNB", [
     # psignb: mm, mm
       Form.new([

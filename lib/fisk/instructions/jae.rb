@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JAE
+    # Instruction JAE: Jump if above or equal (CF == 0)
     JAE = Instruction.new("JAE", [
     # jae: rel8
       Form.new([

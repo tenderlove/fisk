@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PADDUSB
+    # Instruction PADDUSB: Add Packed Unsigned Byte Integers with Unsigned Saturation
     PADDUSB = Instruction.new("PADDUSB", [
     # paddusb: mm, mm
       Form.new([

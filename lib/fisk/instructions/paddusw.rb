@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PADDUSW
+    # Instruction PADDUSW: Add Packed Unsigned Word Integers with Unsigned Saturation
     PADDUSW = Instruction.new("PADDUSW", [
     # paddusw: mm, mm
       Form.new([

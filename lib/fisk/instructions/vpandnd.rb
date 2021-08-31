@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPANDND
+    # Instruction VPANDND: Bitwise Logical AND NOT of Packed Doubleword Integers
     VPANDND = Instruction.new("VPANDND", [
     # vpandnd: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

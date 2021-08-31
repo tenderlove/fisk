@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VFIXUPIMMSS
+    # Instruction VFIXUPIMMSS: Fix Up Special Scalar Single-Precision Floating-Point Value
     VFIXUPIMMSS = Instruction.new("VFIXUPIMMSS", [
     # vfixupimmss: xmm{k}{z}, xmm, m32, imm8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVDDUP
+    # Instruction MOVDDUP: Move One Double-FP and Duplicate
     MOVDDUP = Instruction.new("MOVDDUP", [
     # movddup: xmm, xmm
       Form.new([

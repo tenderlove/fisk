@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JNB
+    # Instruction JNB: Jump if not below (CF == 0)
     JNB = Instruction.new("JNB", [
     # jnb: rel8
       Form.new([

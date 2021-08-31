@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KNOTD
+    # Instruction KNOTD: NOT 32-bit Mask Register
     KNOTD = Instruction.new("KNOTD", [
     # knotd: k, k
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction STD
+    # Instruction STD: Set Direction Flag
     STD = Instruction.new("STD", [
     # std: 
       Form.new([

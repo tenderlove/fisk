@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCVTPD2QQ
+    # Instruction VCVTPD2QQ: Convert Packed Double-Precision Floating-Point Values to Packed Quadword Integers
     VCVTPD2QQ = Instruction.new("VCVTPD2QQ", [
     # vcvtpd2qq: xmm{k}{z}, m128/m64bcst
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSRLVD
+    # Instruction VPSRLVD: Variable Shift Packed Doubleword Data Right Logical
     VPSRLVD = Instruction.new("VPSRLVD", [
     # vpsrlvd: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

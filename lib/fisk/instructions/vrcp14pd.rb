@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VRCP14PD
+    # Instruction VRCP14PD: Compute Approximate Reciprocals of Packed Double-Precision Floating-Point Values
     VRCP14PD = Instruction.new("VRCP14PD", [
     # vrcp14pd: xmm{k}{z}, m128/m64bcst
       Form.new([

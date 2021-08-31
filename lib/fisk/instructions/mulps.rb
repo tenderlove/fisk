@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MULPS
+    # Instruction MULPS: Multiply Packed Single-Precision Floating-Point Values
     MULPS = Instruction.new("MULPS", [
     # mulps: xmm, xmm
       Form.new([

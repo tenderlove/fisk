@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VORPS
+    # Instruction VORPS: Bitwise Logical OR of Single-Precision Floating-Point Values
     VORPS = Instruction.new("VORPS", [
     # vorps: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

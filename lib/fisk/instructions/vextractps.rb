@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VEXTRACTPS
+    # Instruction VEXTRACTPS: Extract Packed Single Precision Floating-Point Value
     VEXTRACTPS = Instruction.new("VEXTRACTPS", [
     # vextractps: r32, xmm, imm8
       Form.new([

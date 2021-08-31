@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVZX
+    # Instruction MOVZX: Move with Zero-Extend
     MOVZX = Instruction.new("MOVZX", [
     # movzbw: r16, r8
       Form.new([

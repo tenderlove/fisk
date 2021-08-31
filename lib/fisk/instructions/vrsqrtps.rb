@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VRSQRTPS
+    # Instruction VRSQRTPS: Compute Reciprocals of Square Roots of Packed Single-Precision Floating-Point Values
     VRSQRTPS = Instruction.new("VRSQRTPS", [
     # vrsqrtps: xmm, xmm
       Form.new([

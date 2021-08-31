@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VTESTPD
+    # Instruction VTESTPD: Packed Double-Precision Floating-Point Bit Test
     VTESTPD = Instruction.new("VTESTPD", [
     # vtestpd: xmm, xmm
       Form.new([

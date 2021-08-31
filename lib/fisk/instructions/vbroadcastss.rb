@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VBROADCASTSS
+    # Instruction VBROADCASTSS: Broadcast Single-Precision Floating-Point Element
     VBROADCASTSS = Instruction.new("VBROADCASTSS", [
     # vbroadcastss: ymm{k}{z}, xmm
       Form.new([

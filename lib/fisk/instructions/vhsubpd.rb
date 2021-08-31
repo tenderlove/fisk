@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VHSUBPD
+    # Instruction VHSUBPD: Packed Double-FP Horizontal Subtract
     VHSUBPD = Instruction.new("VHSUBPD", [
     # vhsubpd: xmm, xmm, xmm
       Form.new([

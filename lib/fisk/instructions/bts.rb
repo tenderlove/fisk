@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction BTS
+    # Instruction BTS: Bit Test and Set
     BTS = Instruction.new("BTS", [
     # btsw: r16, imm8
       Form.new([

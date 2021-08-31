@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVDQA
+    # Instruction MOVDQA: Move Aligned Double Quadword
     MOVDQA = Instruction.new("MOVDQA", [
     # movdqa: xmm, xmm
       Form.new([

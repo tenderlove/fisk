@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction HSUBPD
+    # Instruction HSUBPD: Packed Double-FP Horizontal Subtract
     HSUBPD = Instruction.new("HSUBPD", [
     # hsubpd: xmm, xmm
       Form.new([

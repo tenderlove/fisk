@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MUL
+    # Instruction MUL: Unsigned Multiply
     MUL = Instruction.new("MUL", [
     # mulb: r8
       Form.new([

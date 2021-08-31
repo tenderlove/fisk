@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVZXBW
+    # Instruction VPMOVZXBW: Move Packed Byte Integers to Word Integers with Zero Extension
     VPMOVZXBW = Instruction.new("VPMOVZXBW", [
     # vpmovzxbw: xmm{k}{z}, xmm
       Form.new([

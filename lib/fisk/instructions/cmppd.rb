@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMPPD
+    # Instruction CMPPD: Compare Packed Double-Precision Floating-Point Values
     CMPPD = Instruction.new("CMPPD", [
     # cmppd: xmm, xmm, imm8
       Form.new([

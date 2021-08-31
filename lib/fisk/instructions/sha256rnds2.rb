@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SHA256RNDS2
+    # Instruction SHA256RNDS2: Perform Two Rounds of SHA256 Operation
     SHA256RNDS2 = Instruction.new("SHA256RNDS2", [
     # sha256rnds2: xmm, xmm, xmm0
       Form.new([

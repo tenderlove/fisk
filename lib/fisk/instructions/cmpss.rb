@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMPSS
+    # Instruction CMPSS: Compare Scalar Single-Precision Floating-Point Values
     CMPSS = Instruction.new("CMPSS", [
     # cmpss: xmm, xmm, imm8
       Form.new([

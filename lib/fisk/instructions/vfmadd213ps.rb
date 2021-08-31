@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VFMADD213PS
+    # Instruction VFMADD213PS: Fused Multiply-Add of Packed Single-Precision Floating-Point Values
     VFMADD213PS = Instruction.new("VFMADD213PS", [
     # vfmadd213ps: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

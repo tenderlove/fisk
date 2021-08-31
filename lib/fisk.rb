@@ -833,7 +833,7 @@ class Fisk
         end
       end
 
-      if param.absolute_location? && insns.name =~ /^J/
+      if param.absolute_location? && insns.name =~ /^(?:J|CALL)/
         insn = AbsoluteJumpInstruction.new(insns, form, params.first)
       end
 

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMPPS
+    # Instruction CMPPS: Compare Packed Single-Precision Floating-Point Values
     CMPPS = Instruction.new("CMPPS", [
     # cmpps: xmm, xmm, imm8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPHSUBDQ
+    # Instruction VPHSUBDQ: Packed Horizontal Subtract Signed Doubleword to Signed Quadword
     VPHSUBDQ = Instruction.new("VPHSUBDQ", [
     # vphsubdq: xmm, xmm
       Form.new([

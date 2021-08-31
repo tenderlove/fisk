@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPADDSW
+    # Instruction VPADDSW: Add Packed Signed Word Integers with Signed Saturation
     VPADDSW = Instruction.new("VPADDSW", [
     # vpaddsw: xmm{k}{z}, xmm, xmm
       Form.new([

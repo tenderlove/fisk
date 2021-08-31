@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPTERNLOGQ
+    # Instruction VPTERNLOGQ: Bitwise Ternary Logical Operation on Quadword Values
     VPTERNLOGQ = Instruction.new("VPTERNLOGQ", [
     # vpternlogq: xmm{k}{z}, xmm, m128/m64bcst, imm8
       Form.new([

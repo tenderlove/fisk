@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PEXTRD
+    # Instruction PEXTRD: Extract Doubleword
     PEXTRD = Instruction.new("PEXTRD", [
     # pextrd: r32, xmm, imm8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PSRLW
+    # Instruction PSRLW: Shift Packed Word Data Right Logical
     PSRLW = Instruction.new("PSRLW", [
     # psrlw: mm, imm8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PXOR
+    # Instruction PXOR: Packed Bitwise Logical Exclusive OR
     PXOR = Instruction.new("PXOR", [
     # pxor: mm, mm
       Form.new([

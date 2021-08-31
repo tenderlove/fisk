@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPROLQ
+    # Instruction VPROLQ: Rotate Packed Quadword Left
     VPROLQ = Instruction.new("VPROLQ", [
     # vprolq: xmm{k}{z}, m128/m64bcst, imm8
       Form.new([

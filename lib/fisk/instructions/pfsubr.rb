@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PFSUBR
+    # Instruction PFSUBR: Packed Floating-Point Subtract Reverse
     PFSUBR = Instruction.new("PFSUBR", [
     # pfsubr: mm, mm
       Form.new([

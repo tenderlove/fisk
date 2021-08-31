@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PADDSB
+    # Instruction PADDSB: Add Packed Signed Byte Integers with Signed Saturation
     PADDSB = Instruction.new("PADDSB", [
     # paddsb: mm, mm
       Form.new([

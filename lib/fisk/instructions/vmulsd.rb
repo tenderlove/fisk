@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMULSD
+    # Instruction VMULSD: Multiply Scalar Double-Precision Floating-Point Values
     VMULSD = Instruction.new("VMULSD", [
     # vmulsd: xmm{k}{z}, xmm, m64
       Form.new([

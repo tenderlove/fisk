@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVNTPD
+    # Instruction MOVNTPD: Store Packed Double-Precision Floating-Point Values Using Non-Temporal Hint
     MOVNTPD = Instruction.new("MOVNTPD", [
     # movntpd: m128, xmm
       Form.new([

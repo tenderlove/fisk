@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction DPPS
+    # Instruction DPPS: Dot Product of Packed Single Precision Floating-Point Values
     DPPS = Instruction.new("DPPS", [
     # dpps: xmm, xmm, imm8
       Form.new([

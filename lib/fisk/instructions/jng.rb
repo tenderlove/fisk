@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JNG
+    # Instruction JNG: Jump if not greater (ZF == 1 or SF != OF)
     JNG = Instruction.new("JNG", [
     # jng: rel8
       Form.new([

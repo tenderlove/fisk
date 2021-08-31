@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PADDB
+    # Instruction PADDB: Add Packed Byte Integers
     PADDB = Instruction.new("PADDB", [
     # paddb: mm, mm
       Form.new([

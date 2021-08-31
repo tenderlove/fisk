@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VRNDSCALESD
+    # Instruction VRNDSCALESD: Round Scalar Double-Precision Floating-Point Value To Include A Given Number Of Fraction Bits
     VRNDSCALESD = Instruction.new("VRNDSCALESD", [
     # vrndscalesd: xmm{k}{z}, xmm, m64, imm8
       Form.new([

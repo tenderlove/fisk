@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VINSERTI32X4
+    # Instruction VINSERTI32X4: Insert 128 Bits of Packed Doubleword Integer Values
     VINSERTI32X4 = Instruction.new("VINSERTI32X4", [
     # vinserti32x4: ymm{k}{z}, ymm, xmm, imm8
       Form.new([

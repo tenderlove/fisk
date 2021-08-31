@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PEXTRB
+    # Instruction PEXTRB: Extract Byte
     PEXTRB = Instruction.new("PEXTRB", [
     # pextrb: r32, xmm, imm8
       Form.new([

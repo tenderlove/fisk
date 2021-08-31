@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMPSD
+    # Instruction CMPSD: Compare Scalar Double-Precision Floating-Point Values
     CMPSD = Instruction.new("CMPSD", [
     # cmpsd: xmm, xmm, imm8
       Form.new([

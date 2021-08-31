@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PFRSQIT1
+    # Instruction PFRSQIT1: Packed Floating-Point Reciprocal Square Root Iteration 1
     PFRSQIT1 = Instruction.new("PFRSQIT1", [
     # pfrsqit1: mm, mm
       Form.new([

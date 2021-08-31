@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPHADDUBW
+    # Instruction VPHADDUBW: Packed Horizontal Add Unsigned Byte to Word
     VPHADDUBW = Instruction.new("VPHADDUBW", [
     # vphaddubw: xmm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction INC
+    # Instruction INC: Increment by 1
     INC = Instruction.new("INC", [
     # incb: r8
       Form.new([

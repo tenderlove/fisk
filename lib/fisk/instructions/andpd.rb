@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction ANDPD
+    # Instruction ANDPD: Bitwise Logical AND of Packed Double-Precision Floating-Point Values
     ANDPD = Instruction.new("ANDPD", [
     # andpd: xmm, xmm
       Form.new([

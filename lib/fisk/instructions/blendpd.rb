@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction BLENDPD
+    # Instruction BLENDPD: Blend Packed Double Precision Floating-Point Values
     BLENDPD = Instruction.new("BLENDPD", [
     # blendpd: xmm, xmm, imm8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JP
+    # Instruction JP: Jump if parity (PF == 1)
     JP = Instruction.new("JP", [
     # jp: rel8
       Form.new([

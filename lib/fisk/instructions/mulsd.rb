@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MULSD
+    # Instruction MULSD: Multiply Scalar Double-Precision Floating-Point Values
     MULSD = Instruction.new("MULSD", [
     # mulsd: xmm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction EMMS
+    # Instruction EMMS: Exit MMX State
     EMMS = Instruction.new("EMMS", [
     # emms: 
       Form.new([

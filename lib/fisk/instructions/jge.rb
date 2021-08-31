@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JGE
+    # Instruction JGE: Jump if greater or equal (SF == OF)
     JGE = Instruction.new("JGE", [
     # jge: rel8
       Form.new([

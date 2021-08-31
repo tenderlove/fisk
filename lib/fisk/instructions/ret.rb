@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction RET
+    # Instruction RET: Return from Procedure
     RET = Instruction.new("RET", [
     # ret: 
       Form.new([

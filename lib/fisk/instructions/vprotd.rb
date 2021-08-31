@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPROTD
+    # Instruction VPROTD: Packed Rotate Doublewords
     VPROTD = Instruction.new("VPROTD", [
     # vprotd: xmm, xmm, imm8
       Form.new([

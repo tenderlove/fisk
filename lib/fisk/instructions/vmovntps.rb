@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMOVNTPS
+    # Instruction VMOVNTPS: Store Packed Single-Precision Floating-Point Values Using Non-Temporal Hint
     VMOVNTPS = Instruction.new("VMOVNTPS", [
     # vmovntps: m128, xmm
       Form.new([

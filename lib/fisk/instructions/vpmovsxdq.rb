@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVSXDQ
+    # Instruction VPMOVSXDQ: Move Packed Doubleword Integers to Quadword Integers with Sign Extension
     VPMOVSXDQ = Instruction.new("VPMOVSXDQ", [
     # vpmovsxdq: xmm{k}{z}, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPHADDWQ
+    # Instruction VPHADDWQ: Packed Horizontal Add Signed Word to Signed Quadword
     VPHADDWQ = Instruction.new("VPHADDWQ", [
     # vphaddwq: xmm, xmm
       Form.new([

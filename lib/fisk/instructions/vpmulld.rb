@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMULLD
+    # Instruction VPMULLD: Multiply Packed Signed Doubleword Integers and Store Low Result
     VPMULLD = Instruction.new("VPMULLD", [
     # vpmulld: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

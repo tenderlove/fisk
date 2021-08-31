@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMOVDDUP
+    # Instruction VMOVDDUP: Move One Double-FP and Duplicate
     VMOVDDUP = Instruction.new("VMOVDDUP", [
     # vmovddup: xmm{k}{z}, xmm
       Form.new([

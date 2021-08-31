@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVNTI
+    # Instruction MOVNTI: Store Doubleword Using Non-Temporal Hint
     MOVNTI = Instruction.new("MOVNTI", [
     # movntil: m32, r32
       Form.new([

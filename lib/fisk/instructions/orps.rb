@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction ORPS
+    # Instruction ORPS: Bitwise Logical OR of Single-Precision Floating-Point Values
     ORPS = Instruction.new("ORPS", [
     # orps: xmm, xmm
       Form.new([

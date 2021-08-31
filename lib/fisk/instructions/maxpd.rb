@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MAXPD
+    # Instruction MAXPD: Return Maximum Packed Double-Precision Floating-Point Values
     MAXPD = Instruction.new("MAXPD", [
     # maxpd: xmm, xmm
       Form.new([

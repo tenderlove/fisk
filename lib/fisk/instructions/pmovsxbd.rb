@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PMOVSXBD
+    # Instruction PMOVSXBD: Move Packed Byte Integers to Doubleword Integers with Sign Extension
     PMOVSXBD = Instruction.new("PMOVSXBD", [
     # pmovsxbd: xmm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CVTPI2PS
+    # Instruction CVTPI2PS: Convert Packed Dword Integers to Packed Single-Precision FP Values
     CVTPI2PS = Instruction.new("CVTPI2PS", [
     # cvtpi2ps: xmm, mm
       Form.new([

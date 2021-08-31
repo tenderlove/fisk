@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VFMADDSS
+    # Instruction VFMADDSS: Fused Multiply-Add of Scalar Single-Precision Floating-Point Values
     VFMADDSS = Instruction.new("VFMADDSS", [
     # vfmaddss: xmm, xmm, xmm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VFRCZPS
+    # Instruction VFRCZPS: Extract Fraction Packed Single-Precision Floating-Point
     VFRCZPS = Instruction.new("VFRCZPS", [
     # vfrczps: xmm, xmm
       Form.new([

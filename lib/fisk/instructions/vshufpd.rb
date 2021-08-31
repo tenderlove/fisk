@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VSHUFPD
+    # Instruction VSHUFPD: Shuffle Packed Double-Precision Floating-Point Values
     VSHUFPD = Instruction.new("VSHUFPD", [
     # vshufpd: xmm{k}{z}, xmm, m128/m64bcst, imm8
       Form.new([

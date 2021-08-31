@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PADDQ
+    # Instruction PADDQ: Add Packed Quadword Integers
     PADDQ = Instruction.new("PADDQ", [
     # paddq: mm, mm
       Form.new([

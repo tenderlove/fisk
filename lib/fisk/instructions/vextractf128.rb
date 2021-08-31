@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VEXTRACTF128
+    # Instruction VEXTRACTF128: Extract Packed Floating-Point Values
     VEXTRACTF128 = Instruction.new("VEXTRACTF128", [
     # vextractf128: xmm, ymm, imm8
       Form.new([

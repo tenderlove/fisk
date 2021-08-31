@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVUSQB
+    # Instruction VPMOVUSQB: Down Convert Packed Quadword Values to Byte Values with Unsigned Saturation
     VPMOVUSQB = Instruction.new("VPMOVUSQB", [
     # vpmovusqb: xmm{k}{z}, xmm
       Form.new([

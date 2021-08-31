@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JNS
+    # Instruction JNS: Jump if not sign (SF == 0)
     JNS = Instruction.new("JNS", [
     # jns: rel8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction RDSEED
+    # Instruction RDSEED: Read Random SEED
     RDSEED = Instruction.new("RDSEED", [
     # rdseed: r16
       Form.new([

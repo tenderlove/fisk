@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PMULHRW
+    # Instruction PMULHRW: Packed Multiply High Rounded Word
     PMULHRW = Instruction.new("PMULHRW", [
     # pmulhrw: mm, mm
       Form.new([

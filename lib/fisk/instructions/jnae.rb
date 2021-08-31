@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JNAE
+    # Instruction JNAE: Jump if not above or equal (CF == 1)
     JNAE = Instruction.new("JNAE", [
     # jnae: rel8
       Form.new([

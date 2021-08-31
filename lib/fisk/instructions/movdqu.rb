@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVDQU
+    # Instruction MOVDQU: Move Unaligned Double Quadword
     MOVDQU = Instruction.new("MOVDQU", [
     # movdqu: xmm, xmm
       Form.new([

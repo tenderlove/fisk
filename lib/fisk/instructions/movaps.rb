@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVAPS
+    # Instruction MOVAPS: Move Aligned Packed Single-Precision Floating-Point Values
     MOVAPS = Instruction.new("MOVAPS", [
     # movaps: xmm, xmm
       Form.new([

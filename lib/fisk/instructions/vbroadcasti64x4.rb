@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VBROADCASTI64X4
+    # Instruction VBROADCASTI64X4: Broadcast Four Quadword Elements
     VBROADCASTI64X4 = Instruction.new("VBROADCASTI64X4", [
     # vbroadcasti64x4: zmm{k}{z}, m256
       Form.new([

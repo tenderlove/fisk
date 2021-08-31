@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CLC
+    # Instruction CLC: Clear Carry Flag
     CLC = Instruction.new("CLC", [
     # clc: 
       Form.new([

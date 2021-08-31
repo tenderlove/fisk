@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JRCXZ
+    # Instruction JRCXZ: Jump if RCX register is 0
     JRCXZ = Instruction.new("JRCXZ", [
     # jrcxz: rel8
       Form.new([

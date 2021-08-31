@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPBROADCASTMB2Q
+    # Instruction VPBROADCASTMB2Q: Broadcast Low Byte of Mask Register to Packed Quadword Values
     VPBROADCASTMB2Q = Instruction.new("VPBROADCASTMB2Q", [
     # vpbroadcastmb2q: xmm, k
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VSHUFI32X4
+    # Instruction VSHUFI32X4: Shuffle 128-Bit Packed Doubleword Integer Values
     VSHUFI32X4 = Instruction.new("VSHUFI32X4", [
     # vshufi32x4: ymm{k}{z}, ymm, m256/m32bcst, imm8
       Form.new([

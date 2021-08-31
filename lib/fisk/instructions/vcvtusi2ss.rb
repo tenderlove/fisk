@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCVTUSI2SS
+    # Instruction VCVTUSI2SS: Convert Unsigned Integer to Scalar Single-Precision Floating-Point Value
     VCVTUSI2SS = Instruction.new("VCVTUSI2SS", [
     # vcvtusi2ss: xmm, xmm, m32
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CALL
+    # Instruction CALL: Call Procedure
     CALL = Instruction.new("CALL", [
     # call: rel32
       Form.new([

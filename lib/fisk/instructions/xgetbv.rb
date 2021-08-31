@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction XGETBV
+    # Instruction XGETBV: Get Value of Extended Control Register
     XGETBV = Instruction.new("XGETBV", [
     # xgetbv: 
       Form.new([

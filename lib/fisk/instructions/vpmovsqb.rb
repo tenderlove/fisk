@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVSQB
+    # Instruction VPMOVSQB: Down Convert Packed Quadword Values to Byte Values with Signed Saturation
     VPMOVSQB = Instruction.new("VPMOVSQB", [
     # vpmovsqb: xmm{k}{z}, xmm
       Form.new([

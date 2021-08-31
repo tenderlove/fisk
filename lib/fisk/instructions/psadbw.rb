@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PSADBW
+    # Instruction PSADBW: Compute Sum of Absolute Differences
     PSADBW = Instruction.new("PSADBW", [
     # psadbw: mm, mm
       Form.new([

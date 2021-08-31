@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETNL
+    # Instruction SETNL: Set byte if not less (SF == OF)
     SETNL = Instruction.new("SETNL", [
     # setnl: r8
       Form.new([

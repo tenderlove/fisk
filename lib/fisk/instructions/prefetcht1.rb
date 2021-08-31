@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PREFETCHT1
+    # Instruction PREFETCHT1: Prefetch Data Into Caches using T1 Hint
     PREFETCHT1 = Instruction.new("PREFETCHT1", [
     # prefetcht1: m8
       Form.new([

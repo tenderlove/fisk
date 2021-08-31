@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PFCMPEQ
+    # Instruction PFCMPEQ: Packed Floating-Point Compare for Equal
     PFCMPEQ = Instruction.new("PFCMPEQ", [
     # pfcmpeq: mm, mm
       Form.new([

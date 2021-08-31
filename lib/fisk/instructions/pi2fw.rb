@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PI2FW
+    # Instruction PI2FW: Packed Integer to Floating-Point Word Conversion
     PI2FW = Instruction.new("PI2FW", [
     # pi2fw: mm, mm
       Form.new([

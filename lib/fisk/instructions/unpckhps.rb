@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction UNPCKHPS
+    # Instruction UNPCKHPS: Unpack and Interleave High Packed Single-Precision Floating-Point Values
     UNPCKHPS = Instruction.new("UNPCKHPS", [
     # unpckhps: xmm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVUPS
+    # Instruction MOVUPS: Move Unaligned Packed Single-Precision Floating-Point Values
     MOVUPS = Instruction.new("MOVUPS", [
     # movups: xmm, xmm
       Form.new([

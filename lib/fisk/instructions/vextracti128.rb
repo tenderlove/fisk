@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VEXTRACTI128
+    # Instruction VEXTRACTI128: Extract Packed Integer Values
     VEXTRACTI128 = Instruction.new("VEXTRACTI128", [
     # vextracti128: xmm, ymm, imm8
       Form.new([

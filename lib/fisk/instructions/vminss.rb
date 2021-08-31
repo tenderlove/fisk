@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMINSS
+    # Instruction VMINSS: Return Minimum Scalar Single-Precision Floating-Point Value
     VMINSS = Instruction.new("VMINSS", [
     # vminss: xmm{k}{z}, xmm, m32
       Form.new([

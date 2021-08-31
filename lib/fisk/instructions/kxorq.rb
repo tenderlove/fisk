@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KXORQ
+    # Instruction KXORQ: Bitwise Logical XOR 64-bit Masks
     KXORQ = Instruction.new("KXORQ", [
     # kxorq: k, k, k
       Form.new([

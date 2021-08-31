@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction TEST
+    # Instruction TEST: Logical Compare
     TEST = Instruction.new("TEST", [
     # testb: al, imm8
       Form.new([

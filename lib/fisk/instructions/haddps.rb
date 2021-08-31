@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction HADDPS
+    # Instruction HADDPS: Packed Single-FP Horizontal Add
     HADDPS = Instruction.new("HADDPS", [
     # haddps: xmm, xmm
       Form.new([

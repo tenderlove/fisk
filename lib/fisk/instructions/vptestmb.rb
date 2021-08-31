@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPTESTMB
+    # Instruction VPTESTMB: Logical AND of Packed Byte Integer Values and Set Mask
     VPTESTMB = Instruction.new("VPTESTMB", [
     # vptestmb: k{k}, xmm, xmm
       Form.new([

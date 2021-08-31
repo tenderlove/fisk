@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VAESENCLAST
+    # Instruction VAESENCLAST: Perform Last Round of an AES Encryption Flow
     VAESENCLAST = Instruction.new("VAESENCLAST", [
     # vaesenclast: xmm, xmm, xmm
       Form.new([

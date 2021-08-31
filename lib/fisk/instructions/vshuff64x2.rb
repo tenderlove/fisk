@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VSHUFF64X2
+    # Instruction VSHUFF64X2: Shuffle 128-Bit Packed Double-Precision Floating-Point Values
     VSHUFF64X2 = Instruction.new("VSHUFF64X2", [
     # vshuff64x2: ymm{k}{z}, ymm, m256/m64bcst, imm8
       Form.new([

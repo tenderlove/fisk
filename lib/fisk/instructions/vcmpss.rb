@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCMPSS
+    # Instruction VCMPSS: Compare Scalar Single-Precision Floating-Point Values
     VCMPSS = Instruction.new("VCMPSS", [
     # vcmpss: k{k}, xmm, m32, imm8
       Form.new([

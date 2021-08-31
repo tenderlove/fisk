@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KANDNQ
+    # Instruction KANDNQ: Bitwise Logical AND NOT 64-bit Masks
     KANDNQ = Instruction.new("KANDNQ", [
     # kandnq: k, k, k
       Form.new([

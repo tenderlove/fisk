@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCMPUB
+    # Instruction VPCMPUB: Compare Packed Unsigned Byte Values
     VPCMPUB = Instruction.new("VPCMPUB", [
     # vpcmpub: k{k}, xmm, xmm, imm8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVHPS
+    # Instruction MOVHPS: Move High Packed Single-Precision Floating-Point Values
     MOVHPS = Instruction.new("MOVHPS", [
     # movhps: xmm, m64
       Form.new([

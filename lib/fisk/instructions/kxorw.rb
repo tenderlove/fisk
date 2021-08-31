@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KXORW
+    # Instruction KXORW: Bitwise Logical XOR 16-bit Masks
     KXORW = Instruction.new("KXORW", [
     # kxorw: k, k, k
       Form.new([

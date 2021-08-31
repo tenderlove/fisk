@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SHA1NEXTE
+    # Instruction SHA1NEXTE: Calculate SHA1 State Variable E after Four Rounds
     SHA1NEXTE = Instruction.new("SHA1NEXTE", [
     # sha1nexte: xmm, xmm
       Form.new([

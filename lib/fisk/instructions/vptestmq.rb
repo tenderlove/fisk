@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPTESTMQ
+    # Instruction VPTESTMQ: Logical AND of Packed Quadword Integer Values and Set Mask
     VPTESTMQ = Instruction.new("VPTESTMQ", [
     # vptestmq: k{k}, xmm, m128/m64bcst
       Form.new([

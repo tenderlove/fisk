@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETPE
+    # Instruction SETPE: Set byte if parity even (PF == 1)
     SETPE = Instruction.new("SETPE", [
     # setpe: r8
       Form.new([

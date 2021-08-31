@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MULX
+    # Instruction MULX: Unsigned Multiply Without Affecting Flags
     MULX = Instruction.new("MULX", [
     # mulxl: r32, r32, r32
       Form.new([

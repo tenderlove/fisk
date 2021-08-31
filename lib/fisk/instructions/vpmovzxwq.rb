@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVZXWQ
+    # Instruction VPMOVZXWQ: Move Packed Word Integers to Quadword Integers with Zero Extension
     VPMOVZXWQ = Instruction.new("VPMOVZXWQ", [
     # vpmovzxwq: xmm{k}{z}, xmm
       Form.new([

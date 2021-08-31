@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCONFLICTD
+    # Instruction VPCONFLICTD: Detect Conflicts Within a Vector of Packed Doubleword Values into Dense Memory/Register
     VPCONFLICTD = Instruction.new("VPCONFLICTD", [
     # vpconflictd: xmm{k}{z}, m128/m32bcst
       Form.new([

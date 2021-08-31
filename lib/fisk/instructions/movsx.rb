@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVSX
+    # Instruction MOVSX: Move with Sign-Extension
     MOVSX = Instruction.new("MOVSX", [
     # movsbw: r16, r8
       Form.new([

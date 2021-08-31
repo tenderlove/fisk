@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPROTB
+    # Instruction VPROTB: Packed Rotate Bytes
     VPROTB = Instruction.new("VPROTB", [
     # vprotb: xmm, xmm, imm8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction UCOMISS
+    # Instruction UCOMISS: Unordered Compare Scalar Single-Precision Floating-Point Values and Set EFLAGS
     UCOMISS = Instruction.new("UCOMISS", [
     # ucomiss: xmm, xmm
       Form.new([

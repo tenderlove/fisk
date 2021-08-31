@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction BLCMSK
+    # Instruction BLCMSK: Mask From Lowest Clear Bit
     BLCMSK = Instruction.new("BLCMSK", [
     # blcmsk: r32, r32
       Form.new([

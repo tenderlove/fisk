@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PSRAD
+    # Instruction PSRAD: Shift Packed Doubleword Data Right Arithmetic
     PSRAD = Instruction.new("PSRAD", [
     # psrad: mm, imm8
       Form.new([

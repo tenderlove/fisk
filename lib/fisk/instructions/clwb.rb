@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CLWB
+    # Instruction CLWB: Cache Line Write Back
     CLWB = Instruction.new("CLWB", [
     # clwb: m8
       Form.new([

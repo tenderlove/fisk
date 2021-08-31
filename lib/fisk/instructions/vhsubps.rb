@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VHSUBPS
+    # Instruction VHSUBPS: Packed Single-FP Horizontal Subtract
     VHSUBPS = Instruction.new("VHSUBPS", [
     # vhsubps: xmm, xmm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KTESTB
+    # Instruction KTESTB: Bit Test 8-bit Masks and Set Flags
     KTESTB = Instruction.new("KTESTB", [
     # ktestb: k, k
       Form.new([

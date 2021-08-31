@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVSWB
+    # Instruction VPMOVSWB: Down Convert Packed Word Values to Byte Values with Signed Saturation
     VPMOVSWB = Instruction.new("VPMOVSWB", [
     # vpmovswb: xmm{k}{z}, xmm
       Form.new([

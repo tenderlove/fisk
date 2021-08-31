@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PHADDW
+    # Instruction PHADDW: Packed Horizontal Add Word Integers
     PHADDW = Instruction.new("PHADDW", [
     # phaddw: mm, mm
       Form.new([

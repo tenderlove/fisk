@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction POPCNT
+    # Instruction POPCNT: Count of Number of Bits Set to 1
     POPCNT = Instruction.new("POPCNT", [
     # popcntw: r16, r16
       Form.new([

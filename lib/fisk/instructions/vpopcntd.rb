@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPOPCNTD
+    # Instruction VPOPCNTD: Packed Population Count for Doubleword Integers
     VPOPCNTD = Instruction.new("VPOPCNTD", [
     # vpopcntd: zmm{k}{z}, m512/m32bcst
       Form.new([

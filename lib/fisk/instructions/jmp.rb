@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JMP
+    # Instruction JMP: Jump Unconditionally
     JMP = Instruction.new("JMP", [
     # jmp: rel8
       Form.new([

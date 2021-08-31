@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SUBSD
+    # Instruction SUBSD: Subtract Scalar Double-Precision Floating-Point Values
     SUBSD = Instruction.new("SUBSD", [
     # subsd: xmm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VINSERTF32X4
+    # Instruction VINSERTF32X4: Insert 128 Bits of Packed Single-Precision Floating-Point Values
     VINSERTF32X4 = Instruction.new("VINSERTF32X4", [
     # vinsertf32x4: ymm{k}{z}, ymm, xmm, imm8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPORQ
+    # Instruction VPORQ: Bitwise Logical OR of Packed Quadword Integers
     VPORQ = Instruction.new("VPORQ", [
     # vporq: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

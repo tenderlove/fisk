@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction XORPS
+    # Instruction XORPS: Bitwise Logical XOR for Single-Precision Floating-Point Values
     XORPS = Instruction.new("XORPS", [
     # xorps: xmm, xmm
       Form.new([

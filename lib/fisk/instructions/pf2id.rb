@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PF2ID
+    # Instruction PF2ID: Packed Floating-Point to Integer Doubleword Converson
     PF2ID = Instruction.new("PF2ID", [
     # pf2id: mm, mm
       Form.new([

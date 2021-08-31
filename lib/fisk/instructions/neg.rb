@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction NEG
+    # Instruction NEG: Two's Complement Negation
     NEG = Instruction.new("NEG", [
     # negb: r8
       Form.new([

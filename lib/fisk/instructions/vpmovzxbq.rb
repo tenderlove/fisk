@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVZXBQ
+    # Instruction VPMOVZXBQ: Move Packed Byte Integers to Quadword Integers with Zero Extension
     VPMOVZXBQ = Instruction.new("VPMOVZXBQ", [
     # vpmovzxbq: xmm{k}{z}, xmm
       Form.new([

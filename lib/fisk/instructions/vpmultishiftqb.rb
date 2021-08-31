@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMULTISHIFTQB
+    # Instruction VPMULTISHIFTQB: Select Packed Unaligned Bytes from Quadword Sources
     VPMULTISHIFTQB = Instruction.new("VPMULTISHIFTQB", [
     # vpmultishiftqb: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

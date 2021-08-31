@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVWB
+    # Instruction VPMOVWB: Down Convert Packed Word Values to Byte Values with Truncation
     VPMOVWB = Instruction.new("VPMOVWB", [
     # vpmovwb: xmm{k}{z}, xmm
       Form.new([

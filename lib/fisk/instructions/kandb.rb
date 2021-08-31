@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KANDB
+    # Instruction KANDB: Bitwise Logical AND 8-bit Masks
     KANDB = Instruction.new("KANDB", [
     # kandb: k, k, k
       Form.new([

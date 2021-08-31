@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPALIGNR
+    # Instruction VPALIGNR: Packed Align Right
     VPALIGNR = Instruction.new("VPALIGNR", [
     # vpalignr: xmm{k}{z}, xmm, xmm, imm8
       Form.new([

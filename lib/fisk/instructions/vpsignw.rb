@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSIGNW
+    # Instruction VPSIGNW: Packed Sign of Word Integers
     VPSIGNW = Instruction.new("VPSIGNW", [
     # vpsignw: xmm, xmm, xmm
       Form.new([

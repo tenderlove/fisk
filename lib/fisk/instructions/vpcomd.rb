@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCOMD
+    # Instruction VPCOMD: Compare Packed Signed Doubleword Integers
     VPCOMD = Instruction.new("VPCOMD", [
     # vpcomd: xmm, xmm, xmm, imm8
       Form.new([

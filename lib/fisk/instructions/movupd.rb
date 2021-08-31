@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVUPD
+    # Instruction MOVUPD: Move Unaligned Packed Double-Precision Floating-Point Values
     MOVUPD = Instruction.new("MOVUPD", [
     # movupd: xmm, xmm
       Form.new([

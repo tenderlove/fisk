@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction UCOMISD
+    # Instruction UCOMISD: Unordered Compare Scalar Double-Precision Floating-Point Values and Set EFLAGS
     UCOMISD = Instruction.new("UCOMISD", [
     # ucomisd: xmm, xmm
       Form.new([

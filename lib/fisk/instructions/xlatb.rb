@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction XLATB
+    # Instruction XLATB: Table Look-up Translation
     XLATB = Instruction.new("XLATB", [
     # xlatb: 
       Form.new([

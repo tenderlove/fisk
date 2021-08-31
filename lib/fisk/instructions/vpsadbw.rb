@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSADBW
+    # Instruction VPSADBW: Compute Sum of Absolute Differences
     VPSADBW = Instruction.new("VPSADBW", [
     # vpsadbw: xmm, xmm, xmm
       Form.new([

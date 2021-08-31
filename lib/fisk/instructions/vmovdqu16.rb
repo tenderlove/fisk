@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMOVDQU16
+    # Instruction VMOVDQU16: Move Unaligned Word Values
     VMOVDQU16 = Instruction.new("VMOVDQU16", [
     # vmovdqu16: m128{k}{z}, xmm
       Form.new([

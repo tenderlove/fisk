@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPABSB
+    # Instruction VPABSB: Packed Absolute Value of Byte Integers
     VPABSB = Instruction.new("VPABSB", [
     # vpabsb: xmm{k}{z}, xmm
       Form.new([

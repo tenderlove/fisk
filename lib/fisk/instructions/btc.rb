@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction BTC
+    # Instruction BTC: Bit Test and Complement
     BTC = Instruction.new("BTC", [
     # btcw: r16, imm8
       Form.new([

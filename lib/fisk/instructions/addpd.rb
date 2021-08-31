@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction ADDPD
+    # Instruction ADDPD: Add Packed Double-Precision Floating-Point Values
     ADDPD = Instruction.new("ADDPD", [
     # addpd: xmm, xmm
       Form.new([

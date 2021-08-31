@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction AESENC
+    # Instruction AESENC: Perform One Round of an AES Encryption Flow
     AESENC = Instruction.new("AESENC", [
     # aesenc: xmm, xmm
       Form.new([

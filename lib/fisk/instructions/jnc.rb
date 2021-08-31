@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JNC
+    # Instruction JNC: Jump if not carry (CF == 0)
     JNC = Instruction.new("JNC", [
     # jnc: rel8
       Form.new([

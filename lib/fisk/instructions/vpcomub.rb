@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCOMUB
+    # Instruction VPCOMUB: Compare Packed Unsigned Byte Integers
     VPCOMUB = Instruction.new("VPCOMUB", [
     # vpcomub: xmm, xmm, xmm, imm8
       Form.new([

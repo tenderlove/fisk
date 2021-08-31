@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SAR
+    # Instruction SAR: Arithmetic Shift Right
     SAR = Instruction.new("SAR", [
     # sarb: r8, 1
       Form.new([

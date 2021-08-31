@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETNC
+    # Instruction SETNC: Set byte if not carry (CF == 0)
     SETNC = Instruction.new("SETNC", [
     # setnc: r8
       Form.new([

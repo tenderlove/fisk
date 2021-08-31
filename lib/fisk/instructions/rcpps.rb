@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction RCPPS
+    # Instruction RCPPS: Compute Approximate Reciprocals of Packed Single-Precision Floating-Point Values
     RCPPS = Instruction.new("RCPPS", [
     # rcpps: xmm, xmm
       Form.new([

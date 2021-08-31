@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction DIVSD
+    # Instruction DIVSD: Divide Scalar Double-Precision Floating-Point Values
     DIVSD = Instruction.new("DIVSD", [
     # divsd: xmm, xmm
       Form.new([

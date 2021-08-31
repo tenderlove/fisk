@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VEXTRACTF32X8
+    # Instruction VEXTRACTF32X8: Extract 256 Bits of Packed Single-Precision Floating-Point Values
     VEXTRACTF32X8 = Instruction.new("VEXTRACTF32X8", [
     # vextractf32x8: ymm{k}{z}, zmm, imm8
       Form.new([

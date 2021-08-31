@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VEXPANDPS
+    # Instruction VEXPANDPS: Load Sparse Packed Single-Precision Floating-Point Values from Dense Memory
     VEXPANDPS = Instruction.new("VEXPANDPS", [
     # vexpandps: xmm{k}{z}, xmm
       Form.new([

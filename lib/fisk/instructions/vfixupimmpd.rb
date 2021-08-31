@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VFIXUPIMMPD
+    # Instruction VFIXUPIMMPD: Fix Up Special Packed Double-Precision Floating-Point Values
     VFIXUPIMMPD = Instruction.new("VFIXUPIMMPD", [
     # vfixupimmpd: xmm{k}{z}, xmm, m128/m64bcst, imm8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PSUBUSB
+    # Instruction PSUBUSB: Subtract Packed Unsigned Byte Integers with Unsigned Saturation
     PSUBUSB = Instruction.new("PSUBUSB", [
     # psubusb: mm, mm
       Form.new([

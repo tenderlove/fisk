@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSHLW
+    # Instruction VPSHLW: Packed Shift Logical Words
     VPSHLW = Instruction.new("VPSHLW", [
     # vpshlw: xmm, xmm, xmm
       Form.new([

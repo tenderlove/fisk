@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PADDD
+    # Instruction PADDD: Add Packed Doubleword Integers
     PADDD = Instruction.new("PADDD", [
     # paddd: mm, mm
       Form.new([

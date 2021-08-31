@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCVTSD2USI
+    # Instruction VCVTSD2USI: Convert Scalar Double-Precision Floating-Point Value to Unsigned Doubleword Integer
     VCVTSD2USI = Instruction.new("VCVTSD2USI", [
     # vcvtsd2usi: r32, m64
       Form.new([

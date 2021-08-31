@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPHADDUBQ
+    # Instruction VPHADDUBQ: Packed Horizontal Add Unsigned Byte to Quadword
     VPHADDUBQ = Instruction.new("VPHADDUBQ", [
     # vphaddubq: xmm, xmm
       Form.new([

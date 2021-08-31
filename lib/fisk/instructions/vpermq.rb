@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPERMQ
+    # Instruction VPERMQ: Permute Quadword Integers
     VPERMQ = Instruction.new("VPERMQ", [
     # vpermq: ymm{k}{z}, m256/m64bcst, imm8
       Form.new([

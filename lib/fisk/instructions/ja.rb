@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JA
+    # Instruction JA: Jump if above (CF == 0 and ZF == 0)
     JA = Instruction.new("JA", [
     # ja: rel8
       Form.new([

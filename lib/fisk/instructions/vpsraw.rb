@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSRAW
+    # Instruction VPSRAW: Shift Packed Word Data Right Arithmetic
     VPSRAW = Instruction.new("VPSRAW", [
     # vpsraw: xmm{k}{z}, xmm, imm8
       Form.new([

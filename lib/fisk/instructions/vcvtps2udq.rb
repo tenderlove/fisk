@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCVTPS2UDQ
+    # Instruction VCVTPS2UDQ: Convert Packed Single-Precision Floating-Point Values to Packed Unsigned Doubleword Integer Values
     VCVTPS2UDQ = Instruction.new("VCVTPS2UDQ", [
     # vcvtps2udq: xmm{k}{z}, m128/m32bcst
       Form.new([

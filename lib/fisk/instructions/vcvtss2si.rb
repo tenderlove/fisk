@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCVTSS2SI
+    # Instruction VCVTSS2SI: Convert Scalar Single-Precision FP Value to Dword Integer
     VCVTSS2SI = Instruction.new("VCVTSS2SI", [
     # vcvtss2si: r32, xmm
       Form.new([

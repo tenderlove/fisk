@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CVTPD2PS
+    # Instruction CVTPD2PS: Convert Packed Double-Precision FP Values to Packed Single-Precision FP Values
     CVTPD2PS = Instruction.new("CVTPD2PS", [
     # cvtpd2ps: xmm, xmm
       Form.new([

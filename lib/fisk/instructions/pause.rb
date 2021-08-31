@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PAUSE
+    # Instruction PAUSE: Spin Loop Hint
     PAUSE = Instruction.new("PAUSE", [
     # pause: 
       Form.new([

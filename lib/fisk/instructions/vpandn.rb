@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPANDN
+    # Instruction VPANDN: Packed Bitwise Logical AND NOT
     VPANDN = Instruction.new("VPANDN", [
     # vpandn: xmm, xmm, xmm
       Form.new([

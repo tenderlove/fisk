@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JE
+    # Instruction JE: Jump if equal (ZF == 1)
     JE = Instruction.new("JE", [
     # je: rel8
       Form.new([

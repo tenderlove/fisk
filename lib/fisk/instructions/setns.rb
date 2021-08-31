@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETNS
+    # Instruction SETNS: Set byte if not sign (SF == 0)
     SETNS = Instruction.new("SETNS", [
     # setns: r8
       Form.new([

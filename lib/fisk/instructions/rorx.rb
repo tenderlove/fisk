@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction RORX
+    # Instruction RORX: Rotate Right Logical Without Affecting Flags
     RORX = Instruction.new("RORX", [
     # rorxl: r32, r32, imm8
       Form.new([

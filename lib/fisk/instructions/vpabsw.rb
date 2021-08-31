@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPABSW
+    # Instruction VPABSW: Packed Absolute Value of Word Integers
     VPABSW = Instruction.new("VPABSW", [
     # vpabsw: xmm{k}{z}, xmm
       Form.new([

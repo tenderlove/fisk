@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VDIVPD
+    # Instruction VDIVPD: Divide Packed Double-Precision Floating-Point Values
     VDIVPD = Instruction.new("VDIVPD", [
     # vdivpd: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

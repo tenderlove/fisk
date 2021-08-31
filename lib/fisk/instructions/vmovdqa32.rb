@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMOVDQA32
+    # Instruction VMOVDQA32: Move Aligned Doubleword Values
     VMOVDQA32 = Instruction.new("VMOVDQA32", [
     # vmovdqa32: m128{k}{z}, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction ADCX
+    # Instruction ADCX: Unsigned Integer Addition of Two Operands with Carry Flag
     ADCX = Instruction.new("ADCX", [
     # adcxl: r32, r32
       Form.new([

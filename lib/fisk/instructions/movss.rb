@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVSS
+    # Instruction MOVSS: Move Scalar Single-Precision Floating-Point Values
     MOVSS = Instruction.new("MOVSS", [
     # movss: xmm, xmm
       Form.new([

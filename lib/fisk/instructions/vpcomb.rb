@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCOMB
+    # Instruction VPCOMB: Compare Packed Signed Byte Integers
     VPCOMB = Instruction.new("VPCOMB", [
     # vpcomb: xmm, xmm, xmm, imm8
       Form.new([

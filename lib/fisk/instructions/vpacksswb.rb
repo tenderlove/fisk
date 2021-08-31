@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPACKSSWB
+    # Instruction VPACKSSWB: Pack Words into Bytes with Signed Saturation
     VPACKSSWB = Instruction.new("VPACKSSWB", [
     # vpacksswb: xmm{k}{z}, xmm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMOVSS
+    # Instruction VMOVSS: Move Scalar Single-Precision Floating-Point Values
     VMOVSS = Instruction.new("VMOVSS", [
     # vmovss: m32{k}, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMOVNO
+    # Instruction CMOVNO: Move if not overflow (OF == 0)
     CMOVNO = Instruction.new("CMOVNO", [
     # cmovno: r16, r16
       Form.new([

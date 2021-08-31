@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCMPGTQ
+    # Instruction VPCMPGTQ: Compare Packed Data for Greater Than
     VPCMPGTQ = Instruction.new("VPCMPGTQ", [
     # vpcmpgtq: k{k}, xmm, m128/m64bcst
       Form.new([

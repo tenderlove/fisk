@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PSIGNW
+    # Instruction PSIGNW: Packed Sign of Word Integers
     PSIGNW = Instruction.new("PSIGNW", [
     # psignw: mm, mm
       Form.new([

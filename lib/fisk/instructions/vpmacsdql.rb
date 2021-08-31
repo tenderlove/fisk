@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMACSDQL
+    # Instruction VPMACSDQL: Packed Multiply Accumulate Signed Low Doubleword to Signed Quadword
     VPMACSDQL = Instruction.new("VPMACSDQL", [
     # vpmacsdql: xmm, xmm, xmm, xmm
       Form.new([

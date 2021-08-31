@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MINSS
+    # Instruction MINSS: Return Minimum Scalar Single-Precision Floating-Point Value
     MINSS = Instruction.new("MINSS", [
     # minss: xmm, xmm
       Form.new([

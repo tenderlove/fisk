@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMOVHLPS
+    # Instruction VMOVHLPS: Move Packed Single-Precision Floating-Point Values High to Low
     VMOVHLPS = Instruction.new("VMOVHLPS", [
     # vmovhlps: xmm, xmm, xmm
       Form.new([

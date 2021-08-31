@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETBE
+    # Instruction SETBE: Set byte if below or equal (CF == 1 or ZF == 1)
     SETBE = Instruction.new("SETBE", [
     # setbe: r8
       Form.new([

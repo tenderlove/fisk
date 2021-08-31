@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PUNPCKHDQ
+    # Instruction PUNPCKHDQ: Unpack and Interleave High-Order Doublewords into Quadwords
     PUNPCKHDQ = Instruction.new("PUNPCKHDQ", [
     # punpckhdq: mm, mm
       Form.new([

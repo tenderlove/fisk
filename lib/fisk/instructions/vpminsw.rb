@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMINSW
+    # Instruction VPMINSW: Minimum of Packed Signed Word Integers
     VPMINSW = Instruction.new("VPMINSW", [
     # vpminsw: xmm{k}{z}, xmm, xmm
       Form.new([

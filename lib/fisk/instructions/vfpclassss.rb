@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VFPCLASSSS
+    # Instruction VFPCLASSSS: Test Class of Scalar Single-Precision Floating-Point Value
     VFPCLASSSS = Instruction.new("VFPCLASSSS", [
     # vfpclassss: k{k}, xmm, imm8
       Form.new([

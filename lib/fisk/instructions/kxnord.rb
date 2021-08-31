@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KXNORD
+    # Instruction KXNORD: Bitwise Logical XNOR 32-bit Masks
     KXNORD = Instruction.new("KXNORD", [
     # kxnord: k, k, k
       Form.new([

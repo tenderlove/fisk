@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVMSKPS
+    # Instruction MOVMSKPS: Extract Packed Single-Precision Floating-Point Sign Mask
     MOVMSKPS = Instruction.new("MOVMSKPS", [
     # movmskps: r32, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MULPD
+    # Instruction MULPD: Multiply Packed Double-Precision Floating-Point Values
     MULPD = Instruction.new("MULPD", [
     # mulpd: xmm, xmm
       Form.new([

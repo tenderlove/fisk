@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPINSRW
+    # Instruction VPINSRW: Insert Word
     VPINSRW = Instruction.new("VPINSRW", [
     # vpinsrw: xmm, xmm, r32, imm8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KUNPCKWD
+    # Instruction KUNPCKWD: Unpack and Interleave 16-bit Masks
     KUNPCKWD = Instruction.new("KUNPCKWD", [
     # kunpckwd: k, k, k
       Form.new([

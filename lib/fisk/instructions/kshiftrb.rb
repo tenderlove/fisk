@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KSHIFTRB
+    # Instruction KSHIFTRB: Shift Right 8-bit Masks
     KSHIFTRB = Instruction.new("KSHIFTRB", [
     # kshiftrb: k, k, imm8
       Form.new([

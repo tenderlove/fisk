@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KANDNW
+    # Instruction KANDNW: Bitwise Logical AND NOT 16-bit Masks
     KANDNW = Instruction.new("KANDNW", [
     # kandnw: k, k, k
       Form.new([

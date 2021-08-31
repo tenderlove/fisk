@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPERMI2Q
+    # Instruction VPERMI2Q: Full Permute of Quadwords From Two Tables Overwriting the Index
     VPERMI2Q = Instruction.new("VPERMI2Q", [
     # vpermi2q: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

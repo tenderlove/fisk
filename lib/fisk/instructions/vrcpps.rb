@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VRCPPS
+    # Instruction VRCPPS: Compute Approximate Reciprocals of Packed Single-Precision Floating-Point Values
     VRCPPS = Instruction.new("VRCPPS", [
     # vrcpps: xmm, xmm
       Form.new([

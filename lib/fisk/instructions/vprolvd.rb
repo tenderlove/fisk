@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPROLVD
+    # Instruction VPROLVD: Variable Rotate Packed Doubleword Left
     VPROLVD = Instruction.new("VPROLVD", [
     # vprolvd: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction UNPCKLPS
+    # Instruction UNPCKLPS: Unpack and Interleave Low Packed Single-Precision Floating-Point Values
     UNPCKLPS = Instruction.new("UNPCKLPS", [
     # unpcklps: xmm, xmm
       Form.new([

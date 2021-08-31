@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPAVGB
+    # Instruction VPAVGB: Average Packed Byte Integers
     VPAVGB = Instruction.new("VPAVGB", [
     # vpavgb: xmm{k}{z}, xmm, xmm
       Form.new([

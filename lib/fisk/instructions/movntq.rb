@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVNTQ
+    # Instruction MOVNTQ: Store of Quadword Using Non-Temporal Hint
     MOVNTQ = Instruction.new("MOVNTQ", [
     # movntq: m64, mm
       Form.new([

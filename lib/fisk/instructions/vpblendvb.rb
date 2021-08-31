@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPBLENDVB
+    # Instruction VPBLENDVB: Variable Blend Packed Bytes
     VPBLENDVB = Instruction.new("VPBLENDVB", [
     # vpblendvb: xmm, xmm, xmm, xmm
       Form.new([

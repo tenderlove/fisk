@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPRORVQ
+    # Instruction VPRORVQ: Variable Rotate Packed Quadword Right
     VPRORVQ = Instruction.new("VPRORVQ", [
     # vprorvq: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

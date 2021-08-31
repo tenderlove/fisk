@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MAXSD
+    # Instruction MAXSD: Return Maximum Scalar Double-Precision Floating-Point Value
     MAXSD = Instruction.new("MAXSD", [
     # maxsd: xmm, xmm
       Form.new([

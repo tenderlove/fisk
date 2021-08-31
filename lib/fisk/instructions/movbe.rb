@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVBE
+    # Instruction MOVBE: Move Data After Swapping Bytes
     MOVBE = Instruction.new("MOVBE", [
     # movbew: r16, m16
       Form.new([

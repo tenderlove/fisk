@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KUNPCKDQ
+    # Instruction KUNPCKDQ: Unpack and Interleave 32-bit Masks
     KUNPCKDQ = Instruction.new("KUNPCKDQ", [
     # kunpckdq: k, k, k
       Form.new([

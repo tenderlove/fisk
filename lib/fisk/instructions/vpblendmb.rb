@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPBLENDMB
+    # Instruction VPBLENDMB: Blend Byte Vectors Using an OpMask Control
     VPBLENDMB = Instruction.new("VPBLENDMB", [
     # vpblendmb: xmm{k}{z}, xmm, xmm
       Form.new([

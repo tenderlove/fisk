@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMOVPO
+    # Instruction CMOVPO: Move if parity odd (PF == 0)
     CMOVPO = Instruction.new("CMOVPO", [
     # cmovpo: r16, r16
       Form.new([

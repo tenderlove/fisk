@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VSQRTPS
+    # Instruction VSQRTPS: Compute Square Roots of Packed Single-Precision Floating-Point Values
     VSQRTPS = Instruction.new("VSQRTPS", [
     # vsqrtps: xmm{k}{z}, m128/m32bcst
       Form.new([

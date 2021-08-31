@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PCMPGTQ
+    # Instruction PCMPGTQ: Compare Packed Data for Greater Than
     PCMPGTQ = Instruction.new("PCMPGTQ", [
     # pcmpgtq: xmm, xmm
       Form.new([

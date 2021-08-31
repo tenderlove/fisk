@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JZ
+    # Instruction JZ: Jump if zero (ZF == 1)
     JZ = Instruction.new("JZ", [
     # jz: rel8
       Form.new([

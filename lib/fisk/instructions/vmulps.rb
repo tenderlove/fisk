@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMULPS
+    # Instruction VMULPS: Multiply Packed Single-Precision Floating-Point Values
     VMULPS = Instruction.new("VMULPS", [
     # vmulps: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

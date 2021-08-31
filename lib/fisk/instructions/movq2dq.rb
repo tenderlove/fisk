@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVQ2DQ
+    # Instruction MOVQ2DQ: Move Quadword from MMX Technology to XMM Register
     MOVQ2DQ = Instruction.new("MOVQ2DQ", [
     # movq2dq: xmm, mm
       Form.new([

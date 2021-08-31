@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPHADDSW
+    # Instruction VPHADDSW: Packed Horizontal Add Signed Word Integers with Signed Saturation
     VPHADDSW = Instruction.new("VPHADDSW", [
     # vphaddsw: xmm, xmm, xmm
       Form.new([

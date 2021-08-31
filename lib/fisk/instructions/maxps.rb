@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MAXPS
+    # Instruction MAXPS: Return Maximum Packed Single-Precision Floating-Point Values
     MAXPS = Instruction.new("MAXPS", [
     # maxps: xmm, xmm
       Form.new([

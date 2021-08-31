@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PSHUFD
+    # Instruction PSHUFD: Shuffle Packed Doublewords
     PSHUFD = Instruction.new("PSHUFD", [
     # pshufd: xmm, xmm, imm8
       Form.new([

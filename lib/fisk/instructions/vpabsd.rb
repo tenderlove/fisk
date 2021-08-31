@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPABSD
+    # Instruction VPABSD: Packed Absolute Value of Doubleword Integers
     VPABSD = Instruction.new("VPABSD", [
     # vpabsd: xmm{k}{z}, m128/m32bcst
       Form.new([

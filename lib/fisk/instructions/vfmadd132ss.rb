@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VFMADD132SS
+    # Instruction VFMADD132SS: Fused Multiply-Add of Scalar Single-Precision Floating-Point Values
     VFMADD132SS = Instruction.new("VFMADD132SS", [
     # vfmadd132ss: xmm{k}{z}, xmm, m32
       Form.new([

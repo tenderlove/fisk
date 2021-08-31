@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMASKMOVDQU
+    # Instruction VMASKMOVDQU: Store Selected Bytes of Double Quadword
     VMASKMOVDQU = Instruction.new("VMASKMOVDQU", [
     # vmaskmovdqu: xmm, xmm
       Form.new([

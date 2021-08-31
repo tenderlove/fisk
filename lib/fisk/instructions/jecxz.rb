@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JECXZ
+    # Instruction JECXZ: Jump if ECX register is 0
     JECXZ = Instruction.new("JECXZ", [
     # jecxz: rel8
       Form.new([

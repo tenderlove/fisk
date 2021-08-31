@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PMINSW
+    # Instruction PMINSW: Minimum of Packed Signed Word Integers
     PMINSW = Instruction.new("PMINSW", [
     # pminsw: mm, mm
       Form.new([

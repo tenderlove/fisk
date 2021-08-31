@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VFMSUBPS
+    # Instruction VFMSUBPS: Fused Multiply-Subtract of Packed Single-Precision Floating-Point Values
     VFMSUBPS = Instruction.new("VFMSUBPS", [
     # vfmsubps: xmm, xmm, xmm, xmm
       Form.new([

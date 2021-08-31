@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SHLD
+    # Instruction SHLD: Integer Double Precision Shift Left
     SHLD = Instruction.new("SHLD", [
     # shldw: r16, r16, imm8
       Form.new([

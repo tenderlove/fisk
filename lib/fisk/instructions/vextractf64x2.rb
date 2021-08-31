@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VEXTRACTF64X2
+    # Instruction VEXTRACTF64X2: Extract 128 Bits of Packed Double-Precision Floating-Point Values
     VEXTRACTF64X2 = Instruction.new("VEXTRACTF64X2", [
     # vextractf64x2: xmm{k}{z}, ymm, imm8
       Form.new([

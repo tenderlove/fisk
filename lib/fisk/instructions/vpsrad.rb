@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSRAD
+    # Instruction VPSRAD: Shift Packed Doubleword Data Right Arithmetic
     VPSRAD = Instruction.new("VPSRAD", [
     # vpsrad: xmm{k}{z}, m128/m32bcst, imm8
       Form.new([

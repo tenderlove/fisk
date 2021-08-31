@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSHUFB
+    # Instruction VPSHUFB: Packed Shuffle Bytes
     VPSHUFB = Instruction.new("VPSHUFB", [
     # vpshufb: xmm{k}{z}, xmm, xmm
       Form.new([

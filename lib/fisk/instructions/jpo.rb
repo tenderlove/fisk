@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JPO
+    # Instruction JPO: Jump if parity odd (PF == 0)
     JPO = Instruction.new("JPO", [
     # jpo: rel8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PREFETCHW
+    # Instruction PREFETCHW: Prefetch Data into Caches in Anticipation of a Write
     PREFETCHW = Instruction.new("PREFETCHW", [
     # prefetchw: m8
       Form.new([

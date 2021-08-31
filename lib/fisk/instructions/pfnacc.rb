@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PFNACC
+    # Instruction PFNACC: Packed Floating-Point Negative Accumulate
     PFNACC = Instruction.new("PFNACC", [
     # pfnacc: mm, mm
       Form.new([

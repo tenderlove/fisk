@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PMINSD
+    # Instruction PMINSD: Minimum of Packed Signed Doubleword Integers
     PMINSD = Instruction.new("PMINSD", [
     # pminsd: xmm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SHL
+    # Instruction SHL: Logical Shift Left
     SHL = Instruction.new("SHL", [
     # shlb: r8, 1
       Form.new([

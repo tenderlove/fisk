@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VANDPS
+    # Instruction VANDPS: Bitwise Logical AND of Packed Single-Precision Floating-Point Values
     VANDPS = Instruction.new("VANDPS", [
     # vandps: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VINSERTI64X4
+    # Instruction VINSERTI64X4: Insert 256 Bits of Packed Quadword Integer Values
     VINSERTI64X4 = Instruction.new("VINSERTI64X4", [
     # vinserti64x4: zmm{k}{z}, zmm, ymm, imm8
       Form.new([

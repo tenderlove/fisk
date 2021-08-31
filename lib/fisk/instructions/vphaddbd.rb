@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPHADDBD
+    # Instruction VPHADDBD: Packed Horizontal Add Signed Byte to Signed Doubleword
     VPHADDBD = Instruction.new("VPHADDBD", [
     # vphaddbd: xmm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KNOTW
+    # Instruction KNOTW: NOT 16-bit Mask Register
     KNOTW = Instruction.new("KNOTW", [
     # knotw: k, k
       Form.new([

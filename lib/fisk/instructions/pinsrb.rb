@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PINSRB
+    # Instruction PINSRB: Insert Byte
     PINSRB = Instruction.new("PINSRB", [
     # pinsrb: xmm, r32, imm8
       Form.new([

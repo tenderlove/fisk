@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPHADDW
+    # Instruction VPHADDW: Packed Horizontal Add Word Integers
     VPHADDW = Instruction.new("VPHADDW", [
     # vphaddw: xmm, xmm, xmm
       Form.new([

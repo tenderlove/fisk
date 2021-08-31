@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPTESTMD
+    # Instruction VPTESTMD: Logical AND of Packed Doubleword Integer Values and Set Mask
     VPTESTMD = Instruction.new("VPTESTMD", [
     # vptestmd: k{k}, xmm, m128/m32bcst
       Form.new([

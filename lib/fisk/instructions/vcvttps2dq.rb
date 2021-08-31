@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCVTTPS2DQ
+    # Instruction VCVTTPS2DQ: Convert with Truncation Packed Single-Precision FP Values to Packed Dword Integers
     VCVTTPS2DQ = Instruction.new("VCVTTPS2DQ", [
     # vcvttps2dq: xmm{k}{z}, m128/m32bcst
       Form.new([

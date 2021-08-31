@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SHUFPS
+    # Instruction SHUFPS: Shuffle Packed Single-Precision Floating-Point Values
     SHUFPS = Instruction.new("SHUFPS", [
     # shufps: xmm, xmm, imm8
       Form.new([

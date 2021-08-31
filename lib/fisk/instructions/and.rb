@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction AND
+    # Instruction AND: Logical AND
     AND = Instruction.new("AND", [
     # andb: al, imm8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction ROUNDPD
+    # Instruction ROUNDPD: Round Packed Double Precision Floating-Point Values
     ROUNDPD = Instruction.new("ROUNDPD", [
     # roundpd: xmm, xmm, imm8
       Form.new([

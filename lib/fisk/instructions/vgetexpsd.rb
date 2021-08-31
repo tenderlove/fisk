@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VGETEXPSD
+    # Instruction VGETEXPSD: Extract Exponent of Scalar Double-Precision Floating-Point Value as Double-Precision Floating-Point Value
     VGETEXPSD = Instruction.new("VGETEXPSD", [
     # vgetexpsd: xmm{k}{z}, xmm, m64
       Form.new([

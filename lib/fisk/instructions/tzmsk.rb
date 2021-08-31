@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction TZMSK
+    # Instruction TZMSK: Mask From Trailing Zeros
     TZMSK = Instruction.new("TZMSK", [
     # tzmsk: r32, r32
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction LFENCE
+    # Instruction LFENCE: Load Fence
     LFENCE = Instruction.new("LFENCE", [
     # lfence: 
       Form.new([

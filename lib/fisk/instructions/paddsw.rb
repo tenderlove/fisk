@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PADDSW
+    # Instruction PADDSW: Add Packed Signed Word Integers with Signed Saturation
     PADDSW = Instruction.new("PADDSW", [
     # paddsw: mm, mm
       Form.new([

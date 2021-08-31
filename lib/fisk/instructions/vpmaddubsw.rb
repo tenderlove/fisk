@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMADDUBSW
+    # Instruction VPMADDUBSW: Multiply and Add Packed Signed and Unsigned Byte Integers
     VPMADDUBSW = Instruction.new("VPMADDUBSW", [
     # vpmaddubsw: xmm{k}{z}, xmm, xmm
       Form.new([

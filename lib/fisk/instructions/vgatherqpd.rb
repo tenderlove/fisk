@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VGATHERQPD
+    # Instruction VGATHERQPD: Gather Packed Double-Precision Floating-Point Values Using Signed Quadword Indices
     VGATHERQPD = Instruction.new("VGATHERQPD", [
     # vgatherqpd: xmm{k}, vm64x
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PACKUSDW
+    # Instruction PACKUSDW: Pack Doublewords into Words with Unsigned Saturation
     PACKUSDW = Instruction.new("PACKUSDW", [
     # packusdw: xmm, xmm
       Form.new([

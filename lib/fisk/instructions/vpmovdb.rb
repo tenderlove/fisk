@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVDB
+    # Instruction VPMOVDB: Down Convert Packed Doubleword Values to Byte Values with Truncation
     VPMOVDB = Instruction.new("VPMOVDB", [
     # vpmovdb: xmm{k}{z}, xmm
       Form.new([

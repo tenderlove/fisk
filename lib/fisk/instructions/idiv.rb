@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction IDIV
+    # Instruction IDIV: Signed Divide
     IDIV = Instruction.new("IDIV", [
     # idivb: r8
       Form.new([

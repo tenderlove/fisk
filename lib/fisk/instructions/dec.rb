@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction DEC
+    # Instruction DEC: Decrement by 1
     DEC = Instruction.new("DEC", [
     # decb: r8
       Form.new([

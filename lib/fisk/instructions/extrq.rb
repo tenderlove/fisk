@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction EXTRQ
+    # Instruction EXTRQ: Extract Field
     EXTRQ = Instruction.new("EXTRQ", [
     # extrq: xmm, xmm
       Form.new([

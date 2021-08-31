@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMOVPE
+    # Instruction CMOVPE: Move if parity even (PF == 1)
     CMOVPE = Instruction.new("CMOVPE", [
     # cmovpe: r16, r16
       Form.new([

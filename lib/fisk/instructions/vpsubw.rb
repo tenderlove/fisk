@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSUBW
+    # Instruction VPSUBW: Subtract Packed Word Integers
     VPSUBW = Instruction.new("VPSUBW", [
     # vpsubw: xmm{k}{z}, xmm, xmm
       Form.new([

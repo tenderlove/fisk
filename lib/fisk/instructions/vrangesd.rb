@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VRANGESD
+    # Instruction VRANGESD: Range Restriction Calculation For a pair of Scalar Double-Precision Floating-Point Values
     VRANGESD = Instruction.new("VRANGESD", [
     # vrangesd: xmm{k}{z}, xmm, m64, imm8
       Form.new([

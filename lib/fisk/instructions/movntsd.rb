@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVNTSD
+    # Instruction MOVNTSD: Store Scalar Double-Precision Floating-Point Values Using Non-Temporal Hint
     MOVNTSD = Instruction.new("MOVNTSD", [
     # movntsd: m64, xmm
       Form.new([

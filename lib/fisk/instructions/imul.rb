@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction IMUL
+    # Instruction IMUL: Signed Multiply
     IMUL = Instruction.new("IMUL", [
     # imulb: r8
       Form.new([

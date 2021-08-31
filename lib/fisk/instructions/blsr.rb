@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction BLSR
+    # Instruction BLSR: Reset Lowest Set Bit
     BLSR = Instruction.new("BLSR", [
     # blsr: r32, r32
       Form.new([

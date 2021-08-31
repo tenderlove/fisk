@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction LEA
+    # Instruction LEA: Load Effective Address
     LEA = Instruction.new("LEA", [
     # leaw: r16, m
       Form.new([

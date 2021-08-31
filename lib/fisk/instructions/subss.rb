@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SUBSS
+    # Instruction SUBSS: Subtract Scalar Single-Precision Floating-Point Values
     SUBSS = Instruction.new("SUBSS", [
     # subss: xmm, xmm
       Form.new([

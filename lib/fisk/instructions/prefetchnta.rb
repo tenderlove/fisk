@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PREFETCHNTA
+    # Instruction PREFETCHNTA: Prefetch Data Into Caches using NTA Hint
     PREFETCHNTA = Instruction.new("PREFETCHNTA", [
     # prefetchnta: m8
       Form.new([

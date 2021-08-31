@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PALIGNR
+    # Instruction PALIGNR: Packed Align Right
     PALIGNR = Instruction.new("PALIGNR", [
     # palignr: mm, mm, imm8
       Form.new([

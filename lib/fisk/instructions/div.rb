@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction DIV
+    # Instruction DIV: Unsigned Divide
     DIV = Instruction.new("DIV", [
     # divb: r8
       Form.new([

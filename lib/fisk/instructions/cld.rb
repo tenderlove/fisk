@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CLD
+    # Instruction CLD: Clear Direction Flag
     CLD = Instruction.new("CLD", [
     # cld: 
       Form.new([

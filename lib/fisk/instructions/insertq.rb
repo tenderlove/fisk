@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction INSERTQ
+    # Instruction INSERTQ: Insert Field
     INSERTQ = Instruction.new("INSERTQ", [
     # insertq: xmm, xmm
       Form.new([

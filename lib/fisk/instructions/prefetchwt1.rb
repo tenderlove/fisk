@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PREFETCHWT1
+    # Instruction PREFETCHWT1: Prefetch Vector Data Into Caches with Intent to Write and T1 Hint
     PREFETCHWT1 = Instruction.new("PREFETCHWT1", [
     # prefetchwt1: m8
       Form.new([

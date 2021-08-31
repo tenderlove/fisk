@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVQ
+    # Instruction MOVQ: Move Quadword
     MOVQ = Instruction.new("MOVQ", [
     # movq: r64, mm
       Form.new([

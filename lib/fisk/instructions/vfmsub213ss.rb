@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VFMSUB213SS
+    # Instruction VFMSUB213SS: Fused Multiply-Subtract of Scalar Single-Precision Floating-Point Values
     VFMSUB213SS = Instruction.new("VFMSUB213SS", [
     # vfmsub213ss: xmm{k}{z}, xmm, m32
       Form.new([

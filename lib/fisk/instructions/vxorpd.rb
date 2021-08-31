@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VXORPD
+    # Instruction VXORPD: Bitwise Logical XOR for Double-Precision Floating-Point Values
     VXORPD = Instruction.new("VXORPD", [
     # vxorpd: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

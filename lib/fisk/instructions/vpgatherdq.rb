@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPGATHERDQ
+    # Instruction VPGATHERDQ: Gather Packed Quadword Values Using Signed Doubleword Indices
     VPGATHERDQ = Instruction.new("VPGATHERDQ", [
     # vpgatherdq: xmm{k}, vm32x
       Form.new([

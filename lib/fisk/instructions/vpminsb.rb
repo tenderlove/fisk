@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMINSB
+    # Instruction VPMINSB: Minimum of Packed Signed Byte Integers
     VPMINSB = Instruction.new("VPMINSB", [
     # vpminsb: xmm{k}{z}, xmm, xmm
       Form.new([

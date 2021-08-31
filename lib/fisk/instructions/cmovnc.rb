@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMOVNC
+    # Instruction CMOVNC: Move if not carry (CF == 0)
     CMOVNC = Instruction.new("CMOVNC", [
     # cmovnc: r16, r16
       Form.new([

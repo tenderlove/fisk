@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MONITORX
+    # Instruction MONITORX: Monitor a Linear Address Range with Timeout
     MONITORX = Instruction.new("MONITORX", [
     # monitorx: 
       Form.new([

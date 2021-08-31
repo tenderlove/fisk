@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSIGNB
+    # Instruction VPSIGNB: Packed Sign of Byte Integers
     VPSIGNB = Instruction.new("VPSIGNB", [
     # vpsignb: xmm, xmm, xmm
       Form.new([

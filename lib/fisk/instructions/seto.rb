@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETO
+    # Instruction SETO: Set byte if overflow (OF == 1)
     SETO = Instruction.new("SETO", [
     # seto: r8
       Form.new([

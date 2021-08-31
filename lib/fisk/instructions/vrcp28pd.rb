@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VRCP28PD
+    # Instruction VRCP28PD: Approximation to the Reciprocal of Packed Double-Precision Floating-Point Values with Less Than 2^-28 Relative Error
     VRCP28PD = Instruction.new("VRCP28PD", [
     # vrcp28pd: zmm{k}{z}, m512/m64bcst
       Form.new([

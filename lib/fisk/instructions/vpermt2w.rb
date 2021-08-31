@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPERMT2W
+    # Instruction VPERMT2W: Full Permute of Words From Two Tables Overwriting a Table
     VPERMT2W = Instruction.new("VPERMT2W", [
     # vpermt2w: xmm{k}{z}, xmm, xmm
       Form.new([

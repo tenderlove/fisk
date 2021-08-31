@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PFSUB
+    # Instruction PFSUB: Packed Floating-Point Subtract
     PFSUB = Instruction.new("PFSUB", [
     # pfsub: mm, mm
       Form.new([

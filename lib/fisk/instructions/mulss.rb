@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MULSS
+    # Instruction MULSS: Multiply Scalar Single-Precision Floating-Point Values
     MULSS = Instruction.new("MULSS", [
     # mulss: xmm, xmm
       Form.new([

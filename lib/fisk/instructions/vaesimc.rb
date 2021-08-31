@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VAESIMC
+    # Instruction VAESIMC: Perform the AES InvMixColumn Transformation
     VAESIMC = Instruction.new("VAESIMC", [
     # vaesimc: xmm, xmm
       Form.new([

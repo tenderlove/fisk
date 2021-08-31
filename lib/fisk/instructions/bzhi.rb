@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction BZHI
+    # Instruction BZHI: Zero High Bits Starting with Specified Bit Position
     BZHI = Instruction.new("BZHI", [
     # bzhi: r32, r32, r32
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SFENCE
+    # Instruction SFENCE: Store Fence
     SFENCE = Instruction.new("SFENCE", [
     # sfence: 
       Form.new([

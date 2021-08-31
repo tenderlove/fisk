@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPADDUSW
+    # Instruction VPADDUSW: Add Packed Unsigned Word Integers with Unsigned Saturation
     VPADDUSW = Instruction.new("VPADDUSW", [
     # vpaddusw: xmm{k}{z}, xmm, xmm
       Form.new([

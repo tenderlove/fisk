@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CDQ
+    # Instruction CDQ: Convert Doubleword to Quadword
     CDQ = Instruction.new("CDQ", [
     # cltd: 
       Form.new([

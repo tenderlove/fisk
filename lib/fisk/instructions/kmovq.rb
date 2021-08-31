@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KMOVQ
+    # Instruction KMOVQ: Move 64-bit Mask
     KMOVQ = Instruction.new("KMOVQ", [
     # kmovq: k, k
       Form.new([

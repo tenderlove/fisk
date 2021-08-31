@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction POR
+    # Instruction POR: Packed Bitwise Logical OR
     POR = Instruction.new("POR", [
     # por: mm, mm
       Form.new([

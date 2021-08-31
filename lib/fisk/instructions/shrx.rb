@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SHRX
+    # Instruction SHRX: Logical Shift Right Without Affecting Flags
     SHRX = Instruction.new("SHRX", [
     # shrxl: r32, r32, r32
       Form.new([

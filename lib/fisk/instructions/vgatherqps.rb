@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VGATHERQPS
+    # Instruction VGATHERQPS: Gather Packed Single-Precision Floating-Point Values Using Signed Quadword Indices
     VGATHERQPS = Instruction.new("VGATHERQPS", [
     # vgatherqps: xmm{k}, vm64x
       Form.new([

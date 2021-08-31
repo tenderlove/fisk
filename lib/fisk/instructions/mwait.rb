@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MWAIT
+    # Instruction MWAIT: Monitor Wait
     MWAIT = Instruction.new("MWAIT", [
     # mwait: 
       Form.new([

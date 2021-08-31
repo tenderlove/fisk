@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VFPCLASSPS
+    # Instruction VFPCLASSPS: Test Class of Packed Single-Precision Floating-Point Values
     VFPCLASSPS = Instruction.new("VFPCLASSPS", [
     # vfpclassps: k{k}, m128/m32bcst, imm8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCMPUQ
+    # Instruction VPCMPUQ: Compare Packed Unsigned Quadword Values
     VPCMPUQ = Instruction.new("VPCMPUQ", [
     # vpcmpuq: k{k}, xmm, m128/m64bcst, imm8
       Form.new([

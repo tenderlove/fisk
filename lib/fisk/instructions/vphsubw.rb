@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPHSUBW
+    # Instruction VPHSUBW: Packed Horizontal Subtract Word Integers
     VPHSUBW = Instruction.new("VPHSUBW", [
     # vphsubw: xmm, xmm, xmm
       Form.new([

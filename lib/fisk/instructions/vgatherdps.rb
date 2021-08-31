@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VGATHERDPS
+    # Instruction VGATHERDPS: Gather Packed Single-Precision Floating-Point Values Using Signed Doubleword Indices
     VGATHERDPS = Instruction.new("VGATHERDPS", [
     # vgatherdps: xmm{k}, vm32x
       Form.new([

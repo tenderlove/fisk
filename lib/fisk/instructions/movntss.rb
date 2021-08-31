@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVNTSS
+    # Instruction MOVNTSS: Store Scalar Single-Precision Floating-Point Values Using Non-Temporal Hint
     MOVNTSS = Instruction.new("MOVNTSS", [
     # movntss: m32, xmm
       Form.new([

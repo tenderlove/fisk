@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MINSD
+    # Instruction MINSD: Return Minimum Scalar Double-Precision Floating-Point Value
     MINSD = Instruction.new("MINSD", [
     # minsd: xmm, xmm
       Form.new([

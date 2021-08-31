@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VAESKEYGENASSIST
+    # Instruction VAESKEYGENASSIST: AES Round Key Generation Assist
     VAESKEYGENASSIST = Instruction.new("VAESKEYGENASSIST", [
     # vaeskeygenassist: xmm, xmm, imm8
       Form.new([

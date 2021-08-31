@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction UD2
+    # Instruction UD2: Undefined Instruction
     UD2 = Instruction.new("UD2", [
     # ud2: 
       Form.new([

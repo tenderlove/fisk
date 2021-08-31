@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PSIGND
+    # Instruction PSIGND: Packed Sign of Doubleword Integers
     PSIGND = Instruction.new("PSIGND", [
     # psignd: mm, mm
       Form.new([

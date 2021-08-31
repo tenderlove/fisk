@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPERMT2D
+    # Instruction VPERMT2D: Full Permute of Doublewords From Two Tables Overwriting a Table
     VPERMT2D = Instruction.new("VPERMT2D", [
     # vpermt2d: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

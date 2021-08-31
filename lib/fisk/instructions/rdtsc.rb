@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction RDTSC
+    # Instruction RDTSC: Read Time-Stamp Counter
     RDTSC = Instruction.new("RDTSC", [
     # rdtsc: 
       Form.new([

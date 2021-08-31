@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PTEST
+    # Instruction PTEST: Packed Logical Compare
     PTEST = Instruction.new("PTEST", [
     # ptest: xmm, xmm
       Form.new([

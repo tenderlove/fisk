@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VXORPS
+    # Instruction VXORPS: Bitwise Logical XOR for Single-Precision Floating-Point Values
     VXORPS = Instruction.new("VXORPS", [
     # vxorps: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

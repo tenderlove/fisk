@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMPSADBW
+    # Instruction VMPSADBW: Compute Multiple Packed Sums of Absolute Difference
     VMPSADBW = Instruction.new("VMPSADBW", [
     # vmpsadbw: xmm, xmm, xmm, imm8
       Form.new([

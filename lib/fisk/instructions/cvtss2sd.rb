@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CVTSS2SD
+    # Instruction CVTSS2SD: Convert Scalar Single-Precision FP Value to Scalar Double-Precision FP Value
     CVTSS2SD = Instruction.new("CVTSS2SD", [
     # cvtss2sd: xmm, xmm
       Form.new([

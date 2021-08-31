@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PMULHW
+    # Instruction PMULHW: Multiply Packed Signed Word Integers and Store High Result
     PMULHW = Instruction.new("PMULHW", [
     # pmulhw: mm, mm
       Form.new([

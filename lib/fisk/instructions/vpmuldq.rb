@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMULDQ
+    # Instruction VPMULDQ: Multiply Packed Signed Doubleword Integers and Store Quadword Result
     VPMULDQ = Instruction.new("VPMULDQ", [
     # vpmuldq: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

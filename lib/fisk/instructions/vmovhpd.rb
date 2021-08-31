@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMOVHPD
+    # Instruction VMOVHPD: Move High Packed Double-Precision Floating-Point Value
     VMOVHPD = Instruction.new("VMOVHPD", [
     # vmovhpd: m64, xmm
       Form.new([

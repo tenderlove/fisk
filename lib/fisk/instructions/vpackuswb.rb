@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPACKUSWB
+    # Instruction VPACKUSWB: Pack Words into Bytes with Unsigned Saturation
     VPACKUSWB = Instruction.new("VPACKUSWB", [
     # vpackuswb: xmm{k}{z}, xmm, xmm
       Form.new([

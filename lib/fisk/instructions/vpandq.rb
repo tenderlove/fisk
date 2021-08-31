@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPANDQ
+    # Instruction VPANDQ: Bitwise Logical AND of Packed Quadword Integers
     VPANDQ = Instruction.new("VPANDQ", [
     # vpandq: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

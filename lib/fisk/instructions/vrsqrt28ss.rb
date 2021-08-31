@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VRSQRT28SS
+    # Instruction VRSQRT28SS: Approximation to the Reciprocal Square Root of a Scalar Single-Precision Floating-Point Value with Less Than 2^-28 Relative Error
     VRSQRT28SS = Instruction.new("VRSQRT28SS", [
     # vrsqrt28ss: xmm{k}{z}, xmm, m32
       Form.new([

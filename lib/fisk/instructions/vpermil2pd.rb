@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPERMIL2PD
+    # Instruction VPERMIL2PD: Permute Two-Source Double-Precision Floating-Point Vectors
     VPERMIL2PD = Instruction.new("VPERMIL2PD", [
     # vpermil2pd: xmm, xmm, xmm, xmm, imm4
       Form.new([

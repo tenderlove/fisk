@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VBROADCASTF32X8
+    # Instruction VBROADCASTF32X8: Broadcast Eight Single-Precision Floating-Point Elements
     VBROADCASTF32X8 = Instruction.new("VBROADCASTF32X8", [
     # vbroadcastf32x8: zmm{k}{z}, m256
       Form.new([

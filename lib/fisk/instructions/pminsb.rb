@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PMINSB
+    # Instruction PMINSB: Minimum of Packed Signed Byte Integers
     PMINSB = Instruction.new("PMINSB", [
     # pminsb: xmm, xmm
       Form.new([

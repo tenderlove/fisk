@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KNOTB
+    # Instruction KNOTB: NOT 8-bit Mask Register
     KNOTB = Instruction.new("KNOTB", [
     # knotb: k, k
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PEXT
+    # Instruction PEXT: Parallel Bits Extract
     PEXT = Instruction.new("PEXT", [
     # pext: r32, r32, r32
       Form.new([

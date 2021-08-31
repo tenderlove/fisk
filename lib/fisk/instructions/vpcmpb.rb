@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCMPB
+    # Instruction VPCMPB: Compare Packed Signed Byte Values
     VPCMPB = Instruction.new("VPCMPB", [
     # vpcmpb: k{k}, xmm, xmm, imm8
       Form.new([

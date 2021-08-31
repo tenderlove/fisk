@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MAXSS
+    # Instruction MAXSS: Return Maximum Scalar Single-Precision Floating-Point Value
     MAXSS = Instruction.new("MAXSS", [
     # maxss: xmm, xmm
       Form.new([

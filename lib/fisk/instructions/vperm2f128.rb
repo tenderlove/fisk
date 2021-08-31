@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPERM2F128
+    # Instruction VPERM2F128: Permute Floating-Point Values
     VPERM2F128 = Instruction.new("VPERM2F128", [
     # vperm2f128: ymm, ymm, ymm, imm8
       Form.new([

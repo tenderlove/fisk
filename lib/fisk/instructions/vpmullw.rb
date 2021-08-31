@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMULLW
+    # Instruction VPMULLW: Multiply Packed Signed Word Integers and Store Low Result
     VPMULLW = Instruction.new("VPMULLW", [
     # vpmullw: xmm{k}{z}, xmm, xmm
       Form.new([

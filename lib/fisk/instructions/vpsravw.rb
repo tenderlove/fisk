@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSRAVW
+    # Instruction VPSRAVW: Variable Shift Packed Word Data Right Arithmetic
     VPSRAVW = Instruction.new("VPSRAVW", [
     # vpsravw: xmm{k}{z}, xmm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction ADDSS
+    # Instruction ADDSS: Add Scalar Single-Precision Floating-Point Values
     ADDSS = Instruction.new("ADDSS", [
     # addss: xmm, xmm
       Form.new([

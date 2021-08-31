@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PFMAX
+    # Instruction PFMAX: Packed Floating-Point Maximum
     PFMAX = Instruction.new("PFMAX", [
     # pfmax: mm, mm
       Form.new([

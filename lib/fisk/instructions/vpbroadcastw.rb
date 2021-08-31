@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPBROADCASTW
+    # Instruction VPBROADCASTW: Broadcast Word Integer
     VPBROADCASTW = Instruction.new("VPBROADCASTW", [
     # vpbroadcastw: xmm{k}{z}, r32
       Form.new([

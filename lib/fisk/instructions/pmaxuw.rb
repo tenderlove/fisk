@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PMAXUW
+    # Instruction PMAXUW: Maximum of Packed Unsigned Word Integers
     PMAXUW = Instruction.new("PMAXUW", [
     # pmaxuw: xmm, xmm
       Form.new([

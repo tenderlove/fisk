@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction ADDPS
+    # Instruction ADDPS: Add Packed Single-Precision Floating-Point Values
     ADDPS = Instruction.new("ADDPS", [
     # addps: xmm, xmm
       Form.new([

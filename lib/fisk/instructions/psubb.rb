@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PSUBB
+    # Instruction PSUBB: Subtract Packed Byte Integers
     PSUBB = Instruction.new("PSUBB", [
     # psubb: mm, mm
       Form.new([

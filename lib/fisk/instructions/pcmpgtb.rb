@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PCMPGTB
+    # Instruction PCMPGTB: Compare Packed Signed Byte Integers for Greater Than
     PCMPGTB = Instruction.new("PCMPGTB", [
     # pcmpgtb: mm, mm
       Form.new([

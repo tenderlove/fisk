@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PANDN
+    # Instruction PANDN: Packed Bitwise Logical AND NOT
     PANDN = Instruction.new("PANDN", [
     # pandn: mm, mm
       Form.new([

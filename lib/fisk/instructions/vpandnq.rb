@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPANDNQ
+    # Instruction VPANDNQ: Bitwise Logical AND NOT of Packed Quadword Integers
     VPANDNQ = Instruction.new("VPANDNQ", [
     # vpandnq: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMOVS
+    # Instruction CMOVS: Move if sign (SF == 1)
     CMOVS = Instruction.new("CMOVS", [
     # cmovs: r16, r16
       Form.new([

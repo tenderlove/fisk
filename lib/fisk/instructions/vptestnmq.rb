@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPTESTNMQ
+    # Instruction VPTESTNMQ: Logical NAND of Packed Quadword Integer Values and Set Mask
     VPTESTNMQ = Instruction.new("VPTESTNMQ", [
     # vptestnmq: k{k}, xmm, m128/m64bcst
       Form.new([

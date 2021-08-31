@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVD
+    # Instruction MOVD: Move Doubleword
     MOVD = Instruction.new("MOVD", [
     # movd: r32, mm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction XCHG
+    # Instruction XCHG: Exchange Register/Memory with Register
     XCHG = Instruction.new("XCHG", [
     # xchgb: r8, r8
       Form.new([

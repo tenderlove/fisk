@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VSCATTERPF0QPS
+    # Instruction VSCATTERPF0QPS: Sparse Prefetch Packed Single-Precision Floating-Point Data Values with Signed Quadword Indices Using T0 Hint with Intent to Write
     VSCATTERPF0QPS = Instruction.new("VSCATTERPF0QPS", [
     # vscatterpf0qps: vm64z{k}
       Form.new([

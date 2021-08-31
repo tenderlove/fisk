@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VSQRTPD
+    # Instruction VSQRTPD: Compute Square Roots of Packed Double-Precision Floating-Point Values
     VSQRTPD = Instruction.new("VSQRTPD", [
     # vsqrtpd: xmm{k}{z}, m128/m32bcst
       Form.new([

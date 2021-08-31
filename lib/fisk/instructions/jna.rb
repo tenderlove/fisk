@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JNA
+    # Instruction JNA: Jump if not above (CF == 1 or ZF == 1)
     JNA = Instruction.new("JNA", [
     # jna: rel8
       Form.new([

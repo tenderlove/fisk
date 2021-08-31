@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCMPEQQ
+    # Instruction VPCMPEQQ: Compare Packed Quadword Data for Equality
     VPCMPEQQ = Instruction.new("VPCMPEQQ", [
     # vpcmpeqq: k{k}, xmm, m128/m64bcst
       Form.new([

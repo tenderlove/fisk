@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETZ
+    # Instruction SETZ: Set byte if zero (ZF == 1)
     SETZ = Instruction.new("SETZ", [
     # setz: r8
       Form.new([

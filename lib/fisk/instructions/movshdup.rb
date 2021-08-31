@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVSHDUP
+    # Instruction MOVSHDUP: Move Packed Single-FP High and Duplicate
     MOVSHDUP = Instruction.new("MOVSHDUP", [
     # movshdup: xmm, xmm
       Form.new([

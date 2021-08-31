@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KXORD
+    # Instruction KXORD: Bitwise Logical XOR 32-bit Masks
     KXORD = Instruction.new("KXORD", [
     # kxord: k, k, k
       Form.new([

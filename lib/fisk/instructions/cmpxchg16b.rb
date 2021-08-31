@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMPXCHG16B
+    # Instruction CMPXCHG16B: Compare and Exchange 16 Bytes
     CMPXCHG16B = Instruction.new("CMPXCHG16B", [
     # cmpxchg16b: m128
       Form.new([

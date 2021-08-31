@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VSCALEFPS
+    # Instruction VSCALEFPS: Scale Packed Single-Precision Floating-Point Values With Single-Precision Floating-Point Values
     VSCALEFPS = Instruction.new("VSCALEFPS", [
     # vscalefps: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

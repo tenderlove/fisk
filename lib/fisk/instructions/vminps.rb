@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMINPS
+    # Instruction VMINPS: Return Minimum Packed Single-Precision Floating-Point Values
     VMINPS = Instruction.new("VMINPS", [
     # vminps: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

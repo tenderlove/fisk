@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETNGE
+    # Instruction SETNGE: Set byte if not greater or equal (SF != OF)
     SETNGE = Instruction.new("SETNGE", [
     # setnge: r8
       Form.new([

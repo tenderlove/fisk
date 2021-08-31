@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPABSQ
+    # Instruction VPABSQ: Packed Absolute Value of Quadword Integers
     VPABSQ = Instruction.new("VPABSQ", [
     # vpabsq: xmm{k}{z}, m128/m64bcst
       Form.new([

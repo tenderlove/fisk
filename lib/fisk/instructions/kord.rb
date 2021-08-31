@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KORD
+    # Instruction KORD: Bitwise Logical OR 32-bit Masks
     KORD = Instruction.new("KORD", [
     # kord: k, k, k
       Form.new([

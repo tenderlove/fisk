@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSLLQ
+    # Instruction VPSLLQ: Shift Packed Quadword Data Left Logical
     VPSLLQ = Instruction.new("VPSLLQ", [
     # vpsllq: xmm{k}{z}, m128/m64bcst, imm8
       Form.new([

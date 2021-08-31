@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPXORQ
+    # Instruction VPXORQ: Bitwise Logical Exclusive OR of Packed Quadword Integers
     VPXORQ = Instruction.new("VPXORQ", [
     # vpxorq: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

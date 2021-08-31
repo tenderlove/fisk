@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PSLLD
+    # Instruction PSLLD: Shift Packed Doubleword Data Left Logical
     PSLLD = Instruction.new("PSLLD", [
     # pslld: mm, imm8
       Form.new([

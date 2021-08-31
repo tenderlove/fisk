@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMAXSS
+    # Instruction VMAXSS: Return Maximum Scalar Single-Precision Floating-Point Value
     VMAXSS = Instruction.new("VMAXSS", [
     # vmaxss: xmm{k}{z}, xmm, m32
       Form.new([

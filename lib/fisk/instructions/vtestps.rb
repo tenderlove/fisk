@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VTESTPS
+    # Instruction VTESTPS: Packed Single-Precision Floating-Point Bit Test
     VTESTPS = Instruction.new("VTESTPS", [
     # vtestps: xmm, xmm
       Form.new([

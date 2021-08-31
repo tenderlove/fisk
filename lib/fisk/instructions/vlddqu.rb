@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VLDDQU
+    # Instruction VLDDQU: Load Unaligned Integer 128 Bits
     VLDDQU = Instruction.new("VLDDQU", [
     # vlddqu: xmm, m128
       Form.new([

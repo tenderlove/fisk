@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PSUBUSW
+    # Instruction PSUBUSW: Subtract Packed Unsigned Word Integers with Unsigned Saturation
     PSUBUSW = Instruction.new("PSUBUSW", [
     # psubusw: mm, mm
       Form.new([

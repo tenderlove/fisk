@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CLFLUSHOPT
+    # Instruction CLFLUSHOPT: Flush Cache Line Optimized
     CLFLUSHOPT = Instruction.new("CLFLUSHOPT", [
     # clflushopt: m8
       Form.new([

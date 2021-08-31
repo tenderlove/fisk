@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPHSUBBW
+    # Instruction VPHSUBBW: Packed Horizontal Subtract Signed Byte to Signed Word
     VPHSUBBW = Instruction.new("VPHSUBBW", [
     # vphsubbw: xmm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVSXD
+    # Instruction MOVSXD: Move Doubleword to Quadword with Sign-Extension
     MOVSXD = Instruction.new("MOVSXD", [
     # movslq: r64, r32
       Form.new([

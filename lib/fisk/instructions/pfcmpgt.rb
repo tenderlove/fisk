@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PFCMPGT
+    # Instruction PFCMPGT: Packed Floating-Point Compare for Greater Than
     PFCMPGT = Instruction.new("PFCMPGT", [
     # pfcmpgt: mm, mm
       Form.new([

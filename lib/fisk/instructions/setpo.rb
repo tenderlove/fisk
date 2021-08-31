@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETPO
+    # Instruction SETPO: Set byte if parity odd (PF == 0)
     SETPO = Instruction.new("SETPO", [
     # setpo: r8
       Form.new([

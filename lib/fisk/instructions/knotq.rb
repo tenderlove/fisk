@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KNOTQ
+    # Instruction KNOTQ: NOT 64-bit Mask Register
     KNOTQ = Instruction.new("KNOTQ", [
     # knotq: k, k
       Form.new([

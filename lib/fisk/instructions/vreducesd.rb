@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VREDUCESD
+    # Instruction VREDUCESD: Perform Reduction Transformation on a Scalar Double-Precision Floating-Point Value
     VREDUCESD = Instruction.new("VREDUCESD", [
     # vreducesd: xmm{k}{z}, xmm, xmm, imm8
       Form.new([

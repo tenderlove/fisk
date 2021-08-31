@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VEXTRACTI64X2
+    # Instruction VEXTRACTI64X2: Extract 128 Bits of Packed Quadword Integer Values
     VEXTRACTI64X2 = Instruction.new("VEXTRACTI64X2", [
     # vextracti64x2: xmm{k}{z}, ymm, imm8
       Form.new([

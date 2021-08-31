@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VRANGESS
+    # Instruction VRANGESS: Range Restriction Calculation For a pair of Scalar Single-Precision Floating-Point Values
     VRANGESS = Instruction.new("VRANGESS", [
     # vrangess: xmm{k}{z}, xmm, m32, imm8
       Form.new([

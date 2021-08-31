@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMASKMOVD
+    # Instruction VPMASKMOVD: Conditional Move Packed Doubleword Integers
     VPMASKMOVD = Instruction.new("VPMASKMOVD", [
     # vpmaskmovd: xmm, xmm, m128
       Form.new([

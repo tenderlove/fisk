@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VEXTRACTI32X8
+    # Instruction VEXTRACTI32X8: Extract 256 Bits of Packed Doubleword Integer Values
     VEXTRACTI32X8 = Instruction.new("VEXTRACTI32X8", [
     # vextracti32x8: ymm{k}{z}, zmm, imm8
       Form.new([

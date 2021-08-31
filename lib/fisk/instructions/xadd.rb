@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction XADD
+    # Instruction XADD: Exchange and Add
     XADD = Instruction.new("XADD", [
     # xaddb: r8, r8
       Form.new([

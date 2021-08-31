@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMACSDD
+    # Instruction VPMACSDD: Packed Multiply Accumulate Signed Doubleword to Signed Doubleword
     VPMACSDD = Instruction.new("VPMACSDD", [
     # vpmacsdd: xmm, xmm, xmm, xmm
       Form.new([

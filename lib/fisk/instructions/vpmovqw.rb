@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVQW
+    # Instruction VPMOVQW: Down Convert Packed Quadword Values to Word Values with Truncation
     VPMOVQW = Instruction.new("VPMOVQW", [
     # vpmovqw: xmm{k}{z}, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVSDW
+    # Instruction VPMOVSDW: Down Convert Packed Doubleword Values to Word Values with Signed Saturation
     VPMOVSDW = Instruction.new("VPMOVSDW", [
     # vpmovsdw: xmm{k}{z}, xmm
       Form.new([

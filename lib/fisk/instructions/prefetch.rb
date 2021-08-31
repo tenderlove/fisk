@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PREFETCH
+    # Instruction PREFETCH: Prefetch Data into Caches
     PREFETCH = Instruction.new("PREFETCH", [
     # prefetch: m8
       Form.new([

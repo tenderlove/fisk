@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PMINUD
+    # Instruction PMINUD: Minimum of Packed Unsigned Doubleword Integers
     PMINUD = Instruction.new("PMINUD", [
     # pminud: xmm, xmm
       Form.new([

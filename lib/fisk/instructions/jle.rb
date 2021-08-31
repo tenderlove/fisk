@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JLE
+    # Instruction JLE: Jump if less or equal (ZF == 1 or SF != OF)
     JLE = Instruction.new("JLE", [
     # jle: rel8
       Form.new([

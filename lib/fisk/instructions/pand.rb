@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PAND
+    # Instruction PAND: Packed Bitwise Logical AND
     PAND = Instruction.new("PAND", [
     # pand: mm, mm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSHLB
+    # Instruction VPSHLB: Packed Shift Logical Bytes
     VPSHLB = Instruction.new("VPSHLB", [
     # vpshlb: xmm, xmm, xmm
       Form.new([

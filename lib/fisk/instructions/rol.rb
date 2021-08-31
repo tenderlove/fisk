@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction ROL
+    # Instruction ROL: Rotate Left
     ROL = Instruction.new("ROL", [
     # rolb: r8, 1
       Form.new([

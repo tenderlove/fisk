@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MONITOR
+    # Instruction MONITOR: Monitor a Linear Address Range
     MONITOR = Instruction.new("MONITOR", [
     # monitor: 
       Form.new([

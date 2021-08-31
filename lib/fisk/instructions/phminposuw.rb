@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PHMINPOSUW
+    # Instruction PHMINPOSUW: Packed Horizontal Minimum of Unsigned Word Integers
     PHMINPOSUW = Instruction.new("PHMINPOSUW", [
     # phminposuw: xmm, xmm
       Form.new([

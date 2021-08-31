@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PACKSSDW
+    # Instruction PACKSSDW: Pack Doublewords into Words with Signed Saturation
     PACKSSDW = Instruction.new("PACKSSDW", [
     # packssdw: mm, mm
       Form.new([

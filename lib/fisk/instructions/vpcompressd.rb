@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCOMPRESSD
+    # Instruction VPCOMPRESSD: Store Sparse Packed Doubleword Integer Values into Dense Memory/Register
     VPCOMPRESSD = Instruction.new("VPCOMPRESSD", [
     # vpcompressd: xmm{k}{z}, xmm
       Form.new([

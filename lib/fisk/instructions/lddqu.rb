@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction LDDQU
+    # Instruction LDDQU: Load Unaligned Integer 128 Bits
     LDDQU = Instruction.new("LDDQU", [
     # lddqu: xmm, m128
       Form.new([

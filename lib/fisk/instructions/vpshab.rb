@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSHAB
+    # Instruction VPSHAB: Packed Shift Arithmetic Bytes
     VPSHAB = Instruction.new("VPSHAB", [
     # vpshab: xmm, xmm, xmm
       Form.new([

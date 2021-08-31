@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CRC32
+    # Instruction CRC32: Accumulate CRC32 Value
     CRC32 = Instruction.new("CRC32", [
     # crc32b: r32, r8
       Form.new([

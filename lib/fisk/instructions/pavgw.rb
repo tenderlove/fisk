@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PAVGW
+    # Instruction PAVGW: Average Packed Word Integers
     PAVGW = Instruction.new("PAVGW", [
     # pavgw: mm, mm
       Form.new([

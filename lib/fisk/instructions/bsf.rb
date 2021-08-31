@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction BSF
+    # Instruction BSF: Bit Scan Forward
     BSF = Instruction.new("BSF", [
     # bsfw: r16, r16
       Form.new([

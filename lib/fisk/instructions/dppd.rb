@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction DPPD
+    # Instruction DPPD: Dot Product of Packed Double Precision Floating-Point Values
     DPPD = Instruction.new("DPPD", [
     # dppd: xmm, xmm, imm8
       Form.new([

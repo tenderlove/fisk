@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPERMB
+    # Instruction VPERMB: Permute Byte Integers
     VPERMB = Instruction.new("VPERMB", [
     # vpermb: xmm{k}{z}, xmm, xmm
       Form.new([

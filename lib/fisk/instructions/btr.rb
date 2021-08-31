@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction BTR
+    # Instruction BTR: Bit Test and Reset
     BTR = Instruction.new("BTR", [
     # btrw: r16, imm8
       Form.new([

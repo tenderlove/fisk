@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PCLMULQDQ
+    # Instruction PCLMULQDQ: Carry-Less Quadword Multiplication
     PCLMULQDQ = Instruction.new("PCLMULQDQ", [
     # pclmulqdq: xmm, xmm, imm8
       Form.new([

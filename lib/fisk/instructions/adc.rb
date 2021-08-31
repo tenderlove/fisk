@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction ADC
+    # Instruction ADC: Add with Carry
     ADC = Instruction.new("ADC", [
     # adcb: al, imm8
       Form.new([

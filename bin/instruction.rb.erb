@@ -3,7 +3,8 @@
 class Fisk
   module Instructions
 <%- name = instruction["name"] -%>
-    # Instruction <%= name %>
+<%- summary = instruction["summary"] -%>
+    # Instruction <%= name %>: <%= summary %>
     <%= name %> = Instruction.new(<%= name.dump %>, [
   <%-
     instruction.children.each do |form|

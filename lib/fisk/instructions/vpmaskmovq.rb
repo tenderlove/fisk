@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMASKMOVQ
+    # Instruction VPMASKMOVQ: Conditional Move Packed Quadword Integers
     VPMASKMOVQ = Instruction.new("VPMASKMOVQ", [
     # vpmaskmovq: xmm, xmm, m128
       Form.new([

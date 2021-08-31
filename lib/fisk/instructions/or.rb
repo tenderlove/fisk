@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction OR
+    # Instruction OR: Logical Inclusive OR
     OR = Instruction.new("OR", [
     # orb: al, imm8
       Form.new([

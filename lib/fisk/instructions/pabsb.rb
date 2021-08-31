@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PABSB
+    # Instruction PABSB: Packed Absolute Value of Byte Integers
     PABSB = Instruction.new("PABSB", [
     # pabsb: mm, mm
       Form.new([

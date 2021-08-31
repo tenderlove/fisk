@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPADDUSB
+    # Instruction VPADDUSB: Add Packed Unsigned Byte Integers with Unsigned Saturation
     VPADDUSB = Instruction.new("VPADDUSB", [
     # vpaddusb: xmm{k}{z}, xmm, xmm
       Form.new([

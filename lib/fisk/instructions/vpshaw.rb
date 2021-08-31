@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSHAW
+    # Instruction VPSHAW: Packed Shift Arithmetic Words
     VPSHAW = Instruction.new("VPSHAW", [
     # vpshaw: xmm, xmm, xmm
       Form.new([

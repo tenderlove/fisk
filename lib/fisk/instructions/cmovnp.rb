@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMOVNP
+    # Instruction CMOVNP: Move if not parity (PF == 0)
     CMOVNP = Instruction.new("CMOVNP", [
     # cmovnp: r16, r16
       Form.new([

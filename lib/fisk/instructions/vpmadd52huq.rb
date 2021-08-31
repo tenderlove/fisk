@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMADD52HUQ
+    # Instruction VPMADD52HUQ: Packed Multiply of Unsigned 52-bit Unsigned Integers and Add High 52-bit Products to Quadword Accumulators
     VPMADD52HUQ = Instruction.new("VPMADD52HUQ", [
     # vpmadd52huq: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

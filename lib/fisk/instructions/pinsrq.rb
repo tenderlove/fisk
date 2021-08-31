@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PINSRQ
+    # Instruction PINSRQ: Insert Quadword
     PINSRQ = Instruction.new("PINSRQ", [
     # pinsrq: xmm, r64, imm8
       Form.new([

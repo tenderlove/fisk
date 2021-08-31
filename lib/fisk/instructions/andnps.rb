@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction ANDNPS
+    # Instruction ANDNPS: Bitwise Logical AND NOT of Packed Single-Precision Floating-Point Values
     ANDNPS = Instruction.new("ANDNPS", [
     # andnps: xmm, xmm
       Form.new([

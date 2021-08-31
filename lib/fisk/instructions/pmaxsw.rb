@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PMAXSW
+    # Instruction PMAXSW: Maximum of Packed Signed Word Integers
     PMAXSW = Instruction.new("PMAXSW", [
     # pmaxsw: mm, mm
       Form.new([

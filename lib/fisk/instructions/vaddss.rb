@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VADDSS
+    # Instruction VADDSS: Add Scalar Single-Precision Floating-Point Values
     VADDSS = Instruction.new("VADDSS", [
     # vaddss: xmm{k}{z}, xmm, m32
       Form.new([

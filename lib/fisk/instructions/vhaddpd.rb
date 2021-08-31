@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VHADDPD
+    # Instruction VHADDPD: Packed Double-FP Horizontal Add
     VHADDPD = Instruction.new("VHADDPD", [
     # vhaddpd: xmm, xmm, xmm
       Form.new([

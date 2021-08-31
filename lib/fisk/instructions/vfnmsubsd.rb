@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VFNMSUBSD
+    # Instruction VFNMSUBSD: Fused Negative Multiply-Subtract of Scalar Double-Precision Floating-Point Values
     VFNMSUBSD = Instruction.new("VFNMSUBSD", [
     # vfnmsubsd: xmm, xmm, xmm, xmm
       Form.new([

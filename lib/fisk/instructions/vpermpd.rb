@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPERMPD
+    # Instruction VPERMPD: Permute Double-Precision Floating-Point Elements
     VPERMPD = Instruction.new("VPERMPD", [
     # vpermpd: ymm{k}{z}, m256/m64bcst, imm8
       Form.new([

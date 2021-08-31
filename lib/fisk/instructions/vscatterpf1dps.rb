@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VSCATTERPF1DPS
+    # Instruction VSCATTERPF1DPS: Sparse Prefetch Packed Single-Precision Floating-Point Data Values with Signed Doubleword Indices Using T1 Hint with Intent to Write
     VSCATTERPF1DPS = Instruction.new("VSCATTERPF1DPS", [
     # vscatterpf1dps: vm32z{k}
       Form.new([

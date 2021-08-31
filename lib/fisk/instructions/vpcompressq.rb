@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCOMPRESSQ
+    # Instruction VPCOMPRESSQ: Store Sparse Packed Quadword Integer Values into Dense Memory/Register
     VPCOMPRESSQ = Instruction.new("VPCOMPRESSQ", [
     # vpcompressq: xmm{k}{z}, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPHADDUWQ
+    # Instruction VPHADDUWQ: Packed Horizontal Add Unsigned Word to Quadword
     VPHADDUWQ = Instruction.new("VPHADDUWQ", [
     # vphadduwq: xmm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction RDRAND
+    # Instruction RDRAND: Read Random Number
     RDRAND = Instruction.new("RDRAND", [
     # rdrand: r16
       Form.new([

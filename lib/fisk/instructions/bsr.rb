@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction BSR
+    # Instruction BSR: Bit Scan Reverse
     BSR = Instruction.new("BSR", [
     # bsrw: r16, r16
       Form.new([

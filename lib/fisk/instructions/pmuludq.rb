@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PMULUDQ
+    # Instruction PMULUDQ: Multiply Packed Unsigned Doubleword Integers
     PMULUDQ = Instruction.new("PMULUDQ", [
     # pmuludq: mm, mm
       Form.new([

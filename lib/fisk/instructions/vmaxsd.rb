@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMAXSD
+    # Instruction VMAXSD: Return Maximum Scalar Double-Precision Floating-Point Value
     VMAXSD = Instruction.new("VMAXSD", [
     # vmaxsd: xmm{k}{z}, xmm, m64
       Form.new([

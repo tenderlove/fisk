@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction FEMMS
+    # Instruction FEMMS: Fast Exit Multimedia State
     FEMMS = Instruction.new("FEMMS", [
     # femms: 
       Form.new([

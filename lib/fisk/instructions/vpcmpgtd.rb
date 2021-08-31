@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCMPGTD
+    # Instruction VPCMPGTD: Compare Packed Signed Doubleword Integers for Greater Than
     VPCMPGTD = Instruction.new("VPCMPGTD", [
     # vpcmpgtd: k{k}, xmm, m128/m32bcst
       Form.new([

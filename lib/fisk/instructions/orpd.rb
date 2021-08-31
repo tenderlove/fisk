@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction ORPD
+    # Instruction ORPD: Bitwise Logical OR of Double-Precision Floating-Point Values
     ORPD = Instruction.new("ORPD", [
     # orpd: xmm, xmm
       Form.new([

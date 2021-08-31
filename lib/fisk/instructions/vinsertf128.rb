@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VINSERTF128
+    # Instruction VINSERTF128: Insert Packed Floating-Point Values
     VINSERTF128 = Instruction.new("VINSERTF128", [
     # vinsertf128: ymm, ymm, xmm, imm8
       Form.new([

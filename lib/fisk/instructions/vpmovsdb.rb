@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVSDB
+    # Instruction VPMOVSDB: Down Convert Packed Doubleword Values to Byte Values with Signed Saturation
     VPMOVSDB = Instruction.new("VPMOVSDB", [
     # vpmovsdb: xmm{k}{z}, xmm
       Form.new([

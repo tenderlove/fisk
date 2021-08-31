@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCLMULQDQ
+    # Instruction VPCLMULQDQ: Carry-Less Quadword Multiplication
     VPCLMULQDQ = Instruction.new("VPCLMULQDQ", [
     # vpclmulqdq: xmm, xmm, xmm, imm8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPAVGW
+    # Instruction VPAVGW: Average Packed Word Integers
     VPAVGW = Instruction.new("VPAVGW", [
     # vpavgw: xmm{k}{z}, xmm, xmm
       Form.new([

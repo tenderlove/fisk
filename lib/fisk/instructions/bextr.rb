@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction BEXTR
+    # Instruction BEXTR: Bit Field Extract
     BEXTR = Instruction.new("BEXTR", [
     # bextr: r32, r32, imm32
       Form.new([

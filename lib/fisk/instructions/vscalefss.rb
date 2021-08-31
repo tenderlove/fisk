@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VSCALEFSS
+    # Instruction VSCALEFSS: Scale Scalar Single-Precision Floating-Point Value With a Single-Precision Floating-Point Value
     VSCALEFSS = Instruction.new("VSCALEFSS", [
     # vscalefss: xmm{k}{z}, xmm, m32
       Form.new([

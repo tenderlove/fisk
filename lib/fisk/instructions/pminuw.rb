@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PMINUW
+    # Instruction PMINUW: Minimum of Packed Unsigned Word Integers
     PMINUW = Instruction.new("PMINUW", [
     # pminuw: xmm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMOVNTDQA
+    # Instruction VMOVNTDQA: Load Double Quadword Non-Temporal Aligned Hint
     VMOVNTDQA = Instruction.new("VMOVNTDQA", [
     # vmovntdqa: xmm, m128
       Form.new([

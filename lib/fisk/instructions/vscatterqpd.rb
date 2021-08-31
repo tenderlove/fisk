@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VSCATTERQPD
+    # Instruction VSCATTERQPD: Scatter Packed Double-Precision Floating-Point Values with Signed Quadword Indices
     VSCATTERQPD = Instruction.new("VSCATTERQPD", [
     # vscatterqpd: vm64x{k}, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSUBQ
+    # Instruction VPSUBQ: Subtract Packed Quadword Integers
     VPSUBQ = Instruction.new("VPSUBQ", [
     # vpsubq: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETS
+    # Instruction SETS: Set byte if sign (SF == 1)
     SETS = Instruction.new("SETS", [
     # sets: r8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPTESTMW
+    # Instruction VPTESTMW: Logical AND of Packed Word Integer Values and Set Mask
     VPTESTMW = Instruction.new("VPTESTMW", [
     # vptestmw: k{k}, xmm, xmm
       Form.new([

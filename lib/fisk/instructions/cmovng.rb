@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMOVNG
+    # Instruction CMOVNG: Move if not greater (ZF == 1 or SF != OF)
     CMOVNG = Instruction.new("CMOVNG", [
     # cmovng: r16, r16
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVSQD
+    # Instruction VPMOVSQD: Down Convert Packed Quadword Values to Doubleword Values with Signed Saturation
     VPMOVSQD = Instruction.new("VPMOVSQD", [
     # vpmovsqd: xmm{k}{z}, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSHLD
+    # Instruction VPSHLD: Packed Shift Logical Doublewords
     VPSHLD = Instruction.new("VPSHLD", [
     # vpshld: xmm, xmm, xmm
       Form.new([

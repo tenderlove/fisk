@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PFRCPIT1
+    # Instruction PFRCPIT1: Packed Floating-Point Reciprocal Iteration 1
     PFRCPIT1 = Instruction.new("PFRCPIT1", [
     # pfrcpit1: mm, mm
       Form.new([

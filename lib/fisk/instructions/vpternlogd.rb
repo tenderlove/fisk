@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPTERNLOGD
+    # Instruction VPTERNLOGD: Bitwise Ternary Logical Operation on Doubleword Values
     VPTERNLOGD = Instruction.new("VPTERNLOGD", [
     # vpternlogd: xmm{k}{z}, xmm, m128/m32bcst, imm8
       Form.new([

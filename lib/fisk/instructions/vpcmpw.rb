@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCMPW
+    # Instruction VPCMPW: Compare Packed Signed Word Values
     VPCMPW = Instruction.new("VPCMPW", [
     # vpcmpw: k{k}, xmm, xmm, imm8
       Form.new([

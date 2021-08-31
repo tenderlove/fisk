@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMAXSQ
+    # Instruction VPMAXSQ: Maximum of Packed Signed Quadword Integers
     VPMAXSQ = Instruction.new("VPMAXSQ", [
     # vpmaxsq: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VANDNPD
+    # Instruction VANDNPD: Bitwise Logical AND NOT of Packed Double-Precision Floating-Point Values
     VANDNPD = Instruction.new("VANDNPD", [
     # vandnpd: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

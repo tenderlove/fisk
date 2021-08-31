@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JNL
+    # Instruction JNL: Jump if not less (SF == OF)
     JNL = Instruction.new("JNL", [
     # jnl: rel8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCOMQ
+    # Instruction VPCOMQ: Compare Packed Signed Quadword Integers
     VPCOMQ = Instruction.new("VPCOMQ", [
     # vpcomq: xmm, xmm, xmm, imm8
       Form.new([

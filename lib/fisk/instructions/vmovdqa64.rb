@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMOVDQA64
+    # Instruction VMOVDQA64: Move Aligned Quadword Values
     VMOVDQA64 = Instruction.new("VMOVDQA64", [
     # vmovdqa64: m128{k}{z}, xmm
       Form.new([

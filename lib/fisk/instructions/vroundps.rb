@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VROUNDPS
+    # Instruction VROUNDPS: Round Packed Single Precision Floating-Point Values
     VROUNDPS = Instruction.new("VROUNDPS", [
     # vroundps: xmm, xmm, imm8
       Form.new([

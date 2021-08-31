@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCMPPS
+    # Instruction VCMPPS: Compare Packed Single-Precision Floating-Point Values
     VCMPPS = Instruction.new("VCMPPS", [
     # vcmpps: k{k}, xmm, m128/m32bcst, imm8
       Form.new([

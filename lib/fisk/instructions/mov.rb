@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOV
+    # Instruction MOV: Move
     MOV = Instruction.new("MOV", [
     # movb: r8, imm8
       Form.new([

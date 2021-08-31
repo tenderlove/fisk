@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PCMPESTRM
+    # Instruction PCMPESTRM: Packed Compare Explicit Length Strings, Return Mask
     PCMPESTRM = Instruction.new("PCMPESTRM", [
     # pcmpestrm: xmm, xmm, imm8
       Form.new([

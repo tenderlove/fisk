@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCMPEQB
+    # Instruction VPCMPEQB: Compare Packed Byte Data for Equality
     VPCMPEQB = Instruction.new("VPCMPEQB", [
     # vpcmpeqb: k{k}, xmm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMINUB
+    # Instruction VPMINUB: Minimum of Packed Unsigned Byte Integers
     VPMINUB = Instruction.new("VPMINUB", [
     # vpminub: xmm{k}{z}, xmm, xmm
       Form.new([

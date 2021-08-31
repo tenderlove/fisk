@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VGETMANTPD
+    # Instruction VGETMANTPD: Extract Normalized Mantissas from Packed Double-Precision Floating-Point Values
     VGETMANTPD = Instruction.new("VGETMANTPD", [
     # vgetmantpd: xmm{k}{z}, m128/m64bcst, imm8
       Form.new([

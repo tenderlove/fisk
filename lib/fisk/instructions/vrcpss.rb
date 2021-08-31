@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VRCPSS
+    # Instruction VRCPSS: Compute Approximate Reciprocal of Scalar Single-Precision Floating-Point Values
     VRCPSS = Instruction.new("VRCPSS", [
     # vrcpss: xmm, xmm, xmm
       Form.new([

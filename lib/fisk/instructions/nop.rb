@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction NOP
+    # Instruction NOP: No Operation
     NOP = Instruction.new("NOP", [
     # nop: 
       Form.new([

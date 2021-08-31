@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction RCL
+    # Instruction RCL: Rotate Left through Carry Flag
     RCL = Instruction.new("RCL", [
     # rclb: r8, 1
       Form.new([

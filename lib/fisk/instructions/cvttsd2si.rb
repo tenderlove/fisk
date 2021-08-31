@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CVTTSD2SI
+    # Instruction CVTTSD2SI: Convert with Truncation Scalar Double-Precision FP Value to Signed Integer
     CVTTSD2SI = Instruction.new("CVTTSD2SI", [
     # cvttsd2si: r32, xmm
       Form.new([

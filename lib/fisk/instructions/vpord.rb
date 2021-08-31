@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPORD
+    # Instruction VPORD: Bitwise Logical OR of Packed Doubleword Integers
     VPORD = Instruction.new("VPORD", [
     # vpord: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

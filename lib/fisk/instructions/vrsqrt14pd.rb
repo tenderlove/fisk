@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VRSQRT14PD
+    # Instruction VRSQRT14PD: Compute Approximate Reciprocals of Square Roots of Packed Double-Precision Floating-Point Values
     VRSQRT14PD = Instruction.new("VRSQRT14PD", [
     # vrsqrt14pd: xmm{k}{z}, m128/m64bcst
       Form.new([

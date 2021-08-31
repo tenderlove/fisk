@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSUBB
+    # Instruction VPSUBB: Subtract Packed Byte Integers
     VPSUBB = Instruction.new("VPSUBB", [
     # vpsubb: xmm{k}{z}, xmm, xmm
       Form.new([

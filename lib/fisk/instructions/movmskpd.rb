@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVMSKPD
+    # Instruction MOVMSKPD: Extract Packed Double-Precision Floating-Point Sign Mask
     MOVMSKPD = Instruction.new("MOVMSKPD", [
     # movmskpd: r32, xmm
       Form.new([

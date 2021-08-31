@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KMOVW
+    # Instruction KMOVW: Move 16-bit Mask
     KMOVW = Instruction.new("KMOVW", [
     # kmovw: k, k
       Form.new([

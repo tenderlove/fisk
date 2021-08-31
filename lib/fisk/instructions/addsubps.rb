@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction ADDSUBPS
+    # Instruction ADDSUBPS: Packed Single-FP Add/Subtract
     ADDSUBPS = Instruction.new("ADDSUBPS", [
     # addsubps: xmm, xmm
       Form.new([

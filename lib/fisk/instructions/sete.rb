@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETE
+    # Instruction SETE: Set byte if equal (ZF == 1)
     SETE = Instruction.new("SETE", [
     # sete: r8
       Form.new([

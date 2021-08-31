@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PEXTRW
+    # Instruction PEXTRW: Extract Word
     PEXTRW = Instruction.new("PEXTRW", [
     # pextrw: r32, mm, imm8
       Form.new([

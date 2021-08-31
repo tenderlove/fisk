@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PDEP
+    # Instruction PDEP: Parallel Bits Deposit
     PDEP = Instruction.new("PDEP", [
     # pdep: r32, r32, r32
       Form.new([

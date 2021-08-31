@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction BSWAP
+    # Instruction BSWAP: Byte Swap
     BSWAP = Instruction.new("BSWAP", [
     # bswapl: r32
       Form.new([

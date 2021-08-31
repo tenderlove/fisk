@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMULSS
+    # Instruction VMULSS: Multiply Scalar Single-Precision Floating-Point Values
     VMULSS = Instruction.new("VMULSS", [
     # vmulss: xmm{k}{z}, xmm, m32
       Form.new([

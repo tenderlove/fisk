@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPOR
+    # Instruction VPOR: Packed Bitwise Logical OR
     VPOR = Instruction.new("VPOR", [
     # vpor: xmm, xmm, xmm
       Form.new([

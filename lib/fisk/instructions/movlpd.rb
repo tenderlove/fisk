@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MOVLPD
+    # Instruction MOVLPD: Move Low Packed Double-Precision Floating-Point Value
     MOVLPD = Instruction.new("MOVLPD", [
     # movlpd: xmm, m64
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMAXUB
+    # Instruction VPMAXUB: Maximum of Packed Unsigned Byte Integers
     VPMAXUB = Instruction.new("VPMAXUB", [
     # vpmaxub: xmm{k}{z}, xmm, xmm
       Form.new([

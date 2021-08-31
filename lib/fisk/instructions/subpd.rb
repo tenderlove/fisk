@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SUBPD
+    # Instruction SUBPD: Subtract Packed Double-Precision Floating-Point Values
     SUBPD = Instruction.new("SUBPD", [
     # subpd: xmm, xmm
       Form.new([

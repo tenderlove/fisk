@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVQ2M
+    # Instruction VPMOVQ2M: Move Signs of Packed Quadword Integers to Mask Register
     VPMOVQ2M = Instruction.new("VPMOVQ2M", [
     # vpmovq2m: k, xmm
       Form.new([

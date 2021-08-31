@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction RDTSCP
+    # Instruction RDTSCP: Read Time-Stamp Counter and Processor ID
     RDTSCP = Instruction.new("RDTSCP", [
     # rdtscp: 
       Form.new([

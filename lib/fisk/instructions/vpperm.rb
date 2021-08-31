@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPPERM
+    # Instruction VPPERM: Packed Permute Bytes
     VPPERM = Instruction.new("VPPERM", [
     # vpperm: xmm, xmm, xmm, xmm
       Form.new([

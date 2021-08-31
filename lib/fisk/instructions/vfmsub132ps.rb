@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VFMSUB132PS
+    # Instruction VFMSUB132PS: Fused Multiply-Subtract of Packed Single-Precision Floating-Point Values
     VFMSUB132PS = Instruction.new("VFMSUB132PS", [
     # vfmsub132ps: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

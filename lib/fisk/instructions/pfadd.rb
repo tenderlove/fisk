@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PFADD
+    # Instruction PFADD: Packed Floating-Point Add
     PFADD = Instruction.new("PFADD", [
     # pfadd: mm, mm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSHUFHW
+    # Instruction VPSHUFHW: Shuffle Packed High Words
     VPSHUFHW = Instruction.new("VPSHUFHW", [
     # vpshufhw: xmm{k}{z}, xmm, imm8
       Form.new([

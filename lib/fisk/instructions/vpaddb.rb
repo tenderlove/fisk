@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPADDB
+    # Instruction VPADDB: Add Packed Byte Integers
     VPADDB = Instruction.new("VPADDB", [
     # vpaddb: xmm{k}{z}, xmm, xmm
       Form.new([

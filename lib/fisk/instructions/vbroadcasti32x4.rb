@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VBROADCASTI32X4
+    # Instruction VBROADCASTI32X4: Broadcast Four Doubleword Elements
     VBROADCASTI32X4 = Instruction.new("VBROADCASTI32X4", [
     # vbroadcasti32x4: ymm{k}{z}, m128
       Form.new([

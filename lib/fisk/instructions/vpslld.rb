@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSLLD
+    # Instruction VPSLLD: Shift Packed Doubleword Data Left Logical
     VPSLLD = Instruction.new("VPSLLD", [
     # vpslld: xmm{k}{z}, m128/m32bcst, imm8
       Form.new([

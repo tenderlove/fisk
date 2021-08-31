@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PINSRW
+    # Instruction PINSRW: Insert Word
     PINSRW = Instruction.new("PINSRW", [
     # pinsrw: mm, r32, imm8
       Form.new([

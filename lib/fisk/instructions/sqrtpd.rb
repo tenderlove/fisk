@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SQRTPD
+    # Instruction SQRTPD: Compute Square Roots of Packed Double-Precision Floating-Point Values
     SQRTPD = Instruction.new("SQRTPD", [
     # sqrtpd: xmm, xmm
       Form.new([

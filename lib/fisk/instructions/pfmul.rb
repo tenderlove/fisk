@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PFMUL
+    # Instruction PFMUL: Packed Floating-Point Multiply
     PFMUL = Instruction.new("PFMUL", [
     # pfmul: mm, mm
       Form.new([

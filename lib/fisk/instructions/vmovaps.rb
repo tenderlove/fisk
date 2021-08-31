@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMOVAPS
+    # Instruction VMOVAPS: Move Aligned Packed Single-Precision Floating-Point Values
     VMOVAPS = Instruction.new("VMOVAPS", [
     # vmovaps: m128{k}{z}, xmm
       Form.new([

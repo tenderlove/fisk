@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMACSSWD
+    # Instruction VPMACSSWD: Packed Multiply Accumulate with Saturation Signed Word to Signed Doubleword
     VPMACSSWD = Instruction.new("VPMACSSWD", [
     # vpmacsswd: xmm, xmm, xmm, xmm
       Form.new([

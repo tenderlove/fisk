@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCMOV
+    # Instruction VPCMOV: Packed Conditional Move
     VPCMOV = Instruction.new("VPCMOV", [
     # vpcmov: xmm, xmm, xmm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMOVNL
+    # Instruction CMOVNL: Move if not less (SF == OF)
     CMOVNL = Instruction.new("CMOVNL", [
     # cmovnl: r16, r16
       Form.new([

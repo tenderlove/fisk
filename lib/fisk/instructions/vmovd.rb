@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMOVD
+    # Instruction VMOVD: Move Doubleword
     VMOVD = Instruction.new("VMOVD", [
     # vmovd: r32, xmm
       Form.new([

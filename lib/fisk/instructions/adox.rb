@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction ADOX
+    # Instruction ADOX: Unsigned Integer Addition of Two Operands with Overflow Flag
     ADOX = Instruction.new("ADOX", [
     # adoxl: r32, r32
       Form.new([

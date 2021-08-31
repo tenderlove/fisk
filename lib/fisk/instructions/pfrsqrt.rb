@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PFRSQRT
+    # Instruction PFRSQRT: Packed Floating-Point Reciprocal Square Root Approximation
     PFRSQRT = Instruction.new("PFRSQRT", [
     # pfrsqrt: mm, mm
       Form.new([

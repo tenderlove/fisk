@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VBLENDMPS
+    # Instruction VBLENDMPS: Blend Packed Single-Precision Floating-Point Vectors Using an OpMask Control
     VBLENDMPS = Instruction.new("VBLENDMPS", [
     # vblendmps: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PUNPCKHWD
+    # Instruction PUNPCKHWD: Unpack and Interleave High-Order Words into Doublewords
     PUNPCKHWD = Instruction.new("PUNPCKHWD", [
     # punpckhwd: mm, mm
       Form.new([

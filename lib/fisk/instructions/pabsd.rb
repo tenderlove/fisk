@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PABSD
+    # Instruction PABSD: Packed Absolute Value of Doubleword Integers
     PABSD = Instruction.new("PABSD", [
     # pabsd: mm, mm
       Form.new([

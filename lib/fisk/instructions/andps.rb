@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction ANDPS
+    # Instruction ANDPS: Bitwise Logical AND of Packed Single-Precision Floating-Point Values
     ANDPS = Instruction.new("ANDPS", [
     # andps: xmm, xmm
       Form.new([

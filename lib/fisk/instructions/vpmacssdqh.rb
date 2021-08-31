@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMACSSDQH
+    # Instruction VPMACSSDQH: Packed Multiply Accumulate with Saturation Signed High Doubleword to Signed Quadword
     VPMACSSDQH = Instruction.new("VPMACSSDQH", [
     # vpmacssdqh: xmm, xmm, xmm, xmm
       Form.new([

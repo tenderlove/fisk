@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSUBD
+    # Instruction VPSUBD: Subtract Packed Doubleword Integers
     VPSUBD = Instruction.new("VPSUBD", [
     # vpsubd: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

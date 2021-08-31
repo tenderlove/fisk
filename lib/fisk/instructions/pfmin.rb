@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PFMIN
+    # Instruction PFMIN: Packed Floating-Point Minimum
     PFMIN = Instruction.new("PFMIN", [
     # pfmin: mm, mm
       Form.new([

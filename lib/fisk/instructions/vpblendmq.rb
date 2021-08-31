@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPBLENDMQ
+    # Instruction VPBLENDMQ: Blend Quadword Vectors Using an OpMask Control
     VPBLENDMQ = Instruction.new("VPBLENDMQ", [
     # vpblendmq: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

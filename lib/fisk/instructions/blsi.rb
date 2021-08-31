@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction BLSI
+    # Instruction BLSI: Isolate Lowest Set Bit
     BLSI = Instruction.new("BLSI", [
     # blsi: r32, r32
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMAXUD
+    # Instruction VPMAXUD: Maximum of Packed Unsigned Doubleword Integers
     VPMAXUD = Instruction.new("VPMAXUD", [
     # vpmaxud: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

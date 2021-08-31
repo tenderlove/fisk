@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPGATHERDD
+    # Instruction VPGATHERDD: Gather Packed Doubleword Values Using Signed Doubleword Indices
     VPGATHERDD = Instruction.new("VPGATHERDD", [
     # vpgatherdd: xmm{k}, vm32x
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SQRTSD
+    # Instruction SQRTSD: Compute Square Root of Scalar Double-Precision Floating-Point Value
     SQRTSD = Instruction.new("SQRTSD", [
     # sqrtsd: xmm, xmm
       Form.new([

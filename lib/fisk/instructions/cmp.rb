@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMP
+    # Instruction CMP: Compare Two Operands
     CMP = Instruction.new("CMP", [
     # cmpb: al, imm8
       Form.new([

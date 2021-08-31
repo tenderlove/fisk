@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KORTESTW
+    # Instruction KORTESTW: OR 16-bit Masks and Set Flags
     KORTESTW = Instruction.new("KORTESTW", [
     # kortestw: k, k
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPANDD
+    # Instruction VPANDD: Bitwise Logical AND of Packed Doubleword Integers
     VPANDD = Instruction.new("VPANDD", [
     # vpandd: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

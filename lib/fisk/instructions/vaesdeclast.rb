@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VAESDECLAST
+    # Instruction VAESDECLAST: Perform Last Round of an AES Decryption Flow
     VAESDECLAST = Instruction.new("VAESDECLAST", [
     # vaesdeclast: xmm, xmm, xmm
       Form.new([

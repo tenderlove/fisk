@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPOPCNTQ
+    # Instruction VPOPCNTQ: Packed Population Count for Quadword Integers
     VPOPCNTQ = Instruction.new("VPOPCNTQ", [
     # vpopcntq: zmm{k}{z}, m512/m64bcst
       Form.new([

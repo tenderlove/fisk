@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VREDUCEPS
+    # Instruction VREDUCEPS: Perform Reduction Transformation on Packed Single-Precision Floating-Point Values
     VREDUCEPS = Instruction.new("VREDUCEPS", [
     # vreduceps: xmm{k}{z}, m128/m32bcst, imm8
       Form.new([

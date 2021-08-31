@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VGETEXPSS
+    # Instruction VGETEXPSS: Extract Exponent of Scalar Single-Precision Floating-Point Value as Single-Precision Floating-Point Value
     VGETEXPSS = Instruction.new("VGETEXPSS", [
     # vgetexpss: xmm{k}{z}, xmm, m32
       Form.new([

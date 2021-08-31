@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPXORD
+    # Instruction VPXORD: Bitwise Logical Exclusive OR of Packed Doubleword Integers
     VPXORD = Instruction.new("VPXORD", [
     # vpxord: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

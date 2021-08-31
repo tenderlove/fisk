@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction BLSIC
+    # Instruction BLSIC: Isolate Lowest Set Bit and Complement
     BLSIC = Instruction.new("BLSIC", [
     # blsic: r32, r32
       Form.new([

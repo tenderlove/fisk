@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VDIVSD
+    # Instruction VDIVSD: Divide Scalar Double-Precision Floating-Point Values
     VDIVSD = Instruction.new("VDIVSD", [
     # vdivsd: xmm{k}{z}, xmm, m64
       Form.new([

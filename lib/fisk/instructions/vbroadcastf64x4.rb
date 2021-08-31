@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VBROADCASTF64X4
+    # Instruction VBROADCASTF64X4: Broadcast Four Double-Precision Floating-Point Elements
     VBROADCASTF64X4 = Instruction.new("VBROADCASTF64X4", [
     # vbroadcastf64x4: zmm{k}{z}, m256
       Form.new([

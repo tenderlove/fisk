@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PMINUB
+    # Instruction PMINUB: Minimum of Packed Unsigned Byte Integers
     PMINUB = Instruction.new("PMINUB", [
     # pminub: mm, mm
       Form.new([

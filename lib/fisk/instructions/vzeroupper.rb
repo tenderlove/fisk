@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VZEROUPPER
+    # Instruction VZEROUPPER: Zero Upper Bits of YMM Registers
     VZEROUPPER = Instruction.new("VZEROUPPER", [
     # vzeroupper: 
       Form.new([

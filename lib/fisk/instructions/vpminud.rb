@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMINUD
+    # Instruction VPMINUD: Minimum of Packed Unsigned Doubleword Integers
     VPMINUD = Instruction.new("VPMINUD", [
     # vpminud: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

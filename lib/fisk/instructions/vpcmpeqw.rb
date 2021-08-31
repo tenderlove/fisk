@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCMPEQW
+    # Instruction VPCMPEQW: Compare Packed Word Data for Equality
     VPCMPEQW = Instruction.new("VPCMPEQW", [
     # vpcmpeqw: k{k}, xmm, xmm
       Form.new([

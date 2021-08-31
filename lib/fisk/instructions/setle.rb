@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETLE
+    # Instruction SETLE: Set byte if less or equal (ZF == 1 or SF != OF)
     SETLE = Instruction.new("SETLE", [
     # setle: r8
       Form.new([

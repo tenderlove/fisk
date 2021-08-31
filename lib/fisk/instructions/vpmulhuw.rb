@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMULHUW
+    # Instruction VPMULHUW: Multiply Packed Unsigned Word Integers and Store High Result
     VPMULHUW = Instruction.new("VPMULHUW", [
     # vpmulhuw: xmm{k}{z}, xmm, xmm
       Form.new([

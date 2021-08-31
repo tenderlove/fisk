@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETNE
+    # Instruction SETNE: Set byte if not equal (ZF == 0)
     SETNE = Instruction.new("SETNE", [
     # setne: r8
       Form.new([

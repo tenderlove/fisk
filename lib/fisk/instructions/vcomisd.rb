@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCOMISD
+    # Instruction VCOMISD: Compare Scalar Ordered Double-Precision Floating-Point Values and Set EFLAGS
     VCOMISD = Instruction.new("VCOMISD", [
     # vcomisd: xmm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCONFLICTQ
+    # Instruction VPCONFLICTQ: Detect Conflicts Within a Vector of Packed Quadword Values into Dense Memory/Register
     VPCONFLICTQ = Instruction.new("VPCONFLICTQ", [
     # vpconflictq: xmm{k}{z}, m128/m64bcst
       Form.new([

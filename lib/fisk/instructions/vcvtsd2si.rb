@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCVTSD2SI
+    # Instruction VCVTSD2SI: Convert Scalar Double-Precision FP Value to Integer
     VCVTSD2SI = Instruction.new("VCVTSD2SI", [
     # vcvtsd2si: r32, xmm
       Form.new([

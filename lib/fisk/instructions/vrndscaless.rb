@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VRNDSCALESS
+    # Instruction VRNDSCALESS: Round Scalar Single-Precision Floating-Point Value To Include A Given Number Of Fraction Bits
     VRNDSCALESS = Instruction.new("VRNDSCALESS", [
     # vrndscaless: xmm{k}{z}, xmm, m32, imm8
       Form.new([

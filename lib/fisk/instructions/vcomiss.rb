@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCOMISS
+    # Instruction VCOMISS: Compare Scalar Ordered Single-Precision Floating-Point Values and Set EFLAGS
     VCOMISS = Instruction.new("VCOMISS", [
     # vcomiss: xmm, xmm
       Form.new([

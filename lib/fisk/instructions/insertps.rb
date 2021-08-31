@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction INSERTPS
+    # Instruction INSERTPS: Insert Packed Single Precision Floating-Point Value
     INSERTPS = Instruction.new("INSERTPS", [
     # insertps: xmm, xmm, imm8
       Form.new([

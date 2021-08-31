@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMOVNTDQ
+    # Instruction VMOVNTDQ: Store Double Quadword Using Non-Temporal Hint
     VMOVNTDQ = Instruction.new("VMOVNTDQ", [
     # vmovntdq: m128, xmm
       Form.new([

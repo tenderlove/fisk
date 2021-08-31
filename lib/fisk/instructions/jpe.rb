@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JPE
+    # Instruction JPE: Jump if parity even (PF == 1)
     JPE = Instruction.new("JPE", [
     # jpe: rel8
       Form.new([

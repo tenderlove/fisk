@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PCMPEQB
+    # Instruction PCMPEQB: Compare Packed Byte Data for Equality
     PCMPEQB = Instruction.new("PCMPEQB", [
     # pcmpeqb: mm, mm
       Form.new([

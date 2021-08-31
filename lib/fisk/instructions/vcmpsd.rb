@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCMPSD
+    # Instruction VCMPSD: Compare Scalar Double-Precision Floating-Point Values
     VCMPSD = Instruction.new("VCMPSD", [
     # vcmpsd: k{k}, xmm, m64, imm8
       Form.new([

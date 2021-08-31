@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSHUFD
+    # Instruction VPSHUFD: Shuffle Packed Doublewords
     VPSHUFD = Instruction.new("VPSHUFD", [
     # vpshufd: xmm{k}{z}, m128/m32bcst, imm8
       Form.new([

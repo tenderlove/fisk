@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VFMSUBADD213PD
+    # Instruction VFMSUBADD213PD: Fused Multiply-Alternating Subtract/Add of Packed Double-Precision Floating-Point Values
     VFMSUBADD213PD = Instruction.new("VFMSUBADD213PD", [
     # vfmsubadd213pd: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

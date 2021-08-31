@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction INT
+    # Instruction INT: Call to Interrupt Procedure
     INT = Instruction.new("INT", [
     # int: 3
       Form.new([

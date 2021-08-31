@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMINSQ
+    # Instruction VPMINSQ: Minimum of Packed Signed Quadword Integers
     VPMINSQ = Instruction.new("VPMINSQ", [
     # vpminsq: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

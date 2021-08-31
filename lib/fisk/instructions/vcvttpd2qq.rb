@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCVTTPD2QQ
+    # Instruction VCVTTPD2QQ: Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Quadword Integers
     VCVTTPD2QQ = Instruction.new("VCVTTPD2QQ", [
     # vcvttpd2qq: xmm{k}{z}, m128/m64bcst
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PMOVMSKB
+    # Instruction PMOVMSKB: Move Byte Mask
     PMOVMSKB = Instruction.new("PMOVMSKB", [
     # pmovmskb: r32, mm
       Form.new([

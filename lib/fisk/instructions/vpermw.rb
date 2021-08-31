@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPERMW
+    # Instruction VPERMW: Permute Word Integers
     VPERMW = Instruction.new("VPERMW", [
     # vpermw: xmm{k}{z}, xmm, xmm
       Form.new([

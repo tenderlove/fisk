@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSCATTERDD
+    # Instruction VPSCATTERDD: Scatter Packed Doubleword Values with Signed Doubleword Indices
     VPSCATTERDD = Instruction.new("VPSCATTERDD", [
     # vpscatterdd: vm32x{k}, xmm
       Form.new([

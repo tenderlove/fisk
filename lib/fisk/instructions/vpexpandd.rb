@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPEXPANDD
+    # Instruction VPEXPANDD: Load Sparse Packed Doubleword Integer Values from Dense Memory/Register
     VPEXPANDD = Instruction.new("VPEXPANDD", [
     # vpexpandd: xmm{k}{z}, xmm
       Form.new([

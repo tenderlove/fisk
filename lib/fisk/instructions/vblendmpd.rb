@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VBLENDMPD
+    # Instruction VBLENDMPD: Blend Packed Double-Precision Floating-Point Vectors Using an OpMask Control
     VBLENDMPD = Instruction.new("VBLENDMPD", [
     # vblendmpd: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

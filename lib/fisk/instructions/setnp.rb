@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETNP
+    # Instruction SETNP: Set byte if not parity (PF == 0)
     SETNP = Instruction.new("SETNP", [
     # setnp: r8
       Form.new([

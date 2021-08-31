@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPLZCNTQ
+    # Instruction VPLZCNTQ: Count the Number of Leading Zero Bits for Packed Quadword Values
     VPLZCNTQ = Instruction.new("VPLZCNTQ", [
     # vplzcntq: xmm{k}{z}, m128/m64bcst
       Form.new([

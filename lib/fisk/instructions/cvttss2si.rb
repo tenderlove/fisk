@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CVTTSS2SI
+    # Instruction CVTTSS2SI: Convert with Truncation Scalar Single-Precision FP Value to Dword Integer
     CVTTSS2SI = Instruction.new("CVTTSS2SI", [
     # cvttss2si: r32, xmm
       Form.new([

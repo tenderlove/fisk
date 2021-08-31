@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction TZCNT
+    # Instruction TZCNT: Count the Number of Trailing Zero Bits
     TZCNT = Instruction.new("TZCNT", [
     # tzcntw: r16, r16
       Form.new([

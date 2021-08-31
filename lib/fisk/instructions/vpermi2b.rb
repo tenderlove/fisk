@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPERMI2B
+    # Instruction VPERMI2B: Full Permute of Bytes From Two Tables Overwriting the Index
     VPERMI2B = Instruction.new("VPERMI2B", [
     # vpermi2b: xmm{k}{z}, xmm, xmm
       Form.new([

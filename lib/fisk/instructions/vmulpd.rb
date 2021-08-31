@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMULPD
+    # Instruction VMULPD: Multiply Packed Double-Precision Floating-Point Values
     VMULPD = Instruction.new("VMULPD", [
     # vmulpd: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

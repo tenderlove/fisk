@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PSRLQ
+    # Instruction PSRLQ: Shift Packed Quadword Data Right Logical
     PSRLQ = Instruction.new("PSRLQ", [
     # psrlq: mm, imm8
       Form.new([

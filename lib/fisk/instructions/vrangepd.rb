@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VRANGEPD
+    # Instruction VRANGEPD: Range Restriction Calculation For Packed Pairs of Double-Precision Floating-Point Values
     VRANGEPD = Instruction.new("VRANGEPD", [
     # vrangepd: xmm{k}{z}, xmm, m128/m64bcst, imm8
       Form.new([

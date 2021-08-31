@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VFNMSUB213PS
+    # Instruction VFNMSUB213PS: Fused Negative Multiply-Subtract of Packed Single-Precision Floating-Point Values
     VFNMSUB213PS = Instruction.new("VFNMSUB213PS", [
     # vfnmsub213ps: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

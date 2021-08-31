@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KMOVB
+    # Instruction KMOVB: Move 8-bit Mask
     KMOVB = Instruction.new("KMOVB", [
     # kmovb: k, k
       Form.new([

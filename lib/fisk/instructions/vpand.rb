@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPAND
+    # Instruction VPAND: Packed Bitwise Logical AND
     VPAND = Instruction.new("VPAND", [
     # vpand: xmm, xmm, xmm
       Form.new([

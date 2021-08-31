@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMOVNA
+    # Instruction CMOVNA: Move if not above (CF == 1 or ZF == 1)
     CMOVNA = Instruction.new("CMOVNA", [
     # cmovna: r16, r16
       Form.new([

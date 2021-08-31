@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VFRCZSS
+    # Instruction VFRCZSS: Extract Fraction Scalar Single-Precision Floating Point
     VFRCZSS = Instruction.new("VFRCZSS", [
     # vfrczss: xmm, xmm
       Form.new([

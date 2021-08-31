@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVM2Q
+    # Instruction VPMOVM2Q: Expand Bits of Mask Register to Packed Quadword Integers
     VPMOVM2Q = Instruction.new("VPMOVM2Q", [
     # vpmovm2q: xmm, k
       Form.new([

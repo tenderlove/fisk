@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMAXSD
+    # Instruction VPMAXSD: Maximum of Packed Signed Doubleword Integers
     VPMAXSD = Instruction.new("VPMAXSD", [
     # vpmaxsd: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

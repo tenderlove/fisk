@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VGETEXPPS
+    # Instruction VGETEXPPS: Extract Exponents of Packed Single-Precision Floating-Point Values as Single-Precision Floating-Point Values
     VGETEXPPS = Instruction.new("VGETEXPPS", [
     # vgetexpps: xmm{k}{z}, m128/m32bcst
       Form.new([

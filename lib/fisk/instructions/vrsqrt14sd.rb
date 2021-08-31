@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VRSQRT14SD
+    # Instruction VRSQRT14SD: Compute Approximate Reciprocal of a Square Root of a Scalar Double-Precision Floating-Point Value
     VRSQRT14SD = Instruction.new("VRSQRT14SD", [
     # vrsqrt14sd: xmm{k}{z}, xmm, xmm
       Form.new([

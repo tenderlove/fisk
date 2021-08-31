@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCMPQ
+    # Instruction VPCMPQ: Compare Packed Signed Quadword Values
     VPCMPQ = Instruction.new("VPCMPQ", [
     # vpcmpq: k{k}, xmm, m128/m64bcst, imm8
       Form.new([

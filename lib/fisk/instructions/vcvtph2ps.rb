@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCVTPH2PS
+    # Instruction VCVTPH2PS: Convert Half-Precision FP Values to Single-Precision FP Values
     VCVTPH2PS = Instruction.new("VCVTPH2PS", [
     # vcvtph2ps: xmm{k}{z}, xmm
       Form.new([

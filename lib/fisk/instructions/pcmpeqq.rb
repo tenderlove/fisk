@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PCMPEQQ
+    # Instruction PCMPEQQ: Compare Packed Quadword Data for Equality
     PCMPEQQ = Instruction.new("PCMPEQQ", [
     # pcmpeqq: xmm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SHA1RNDS4
+    # Instruction SHA1RNDS4: Perform Four Rounds of SHA1 Operation
     SHA1RNDS4 = Instruction.new("SHA1RNDS4", [
     # sha1rnds4: xmm, xmm, imm8
       Form.new([

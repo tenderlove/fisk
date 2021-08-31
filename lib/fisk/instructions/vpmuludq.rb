@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMULUDQ
+    # Instruction VPMULUDQ: Multiply Packed Unsigned Doubleword Integers
     VPMULUDQ = Instruction.new("VPMULUDQ", [
     # vpmuludq: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

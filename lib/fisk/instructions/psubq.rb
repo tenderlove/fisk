@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PSUBQ
+    # Instruction PSUBQ: Subtract Packed Quadword Integers
     PSUBQ = Instruction.new("PSUBQ", [
     # psubq: mm, mm
       Form.new([

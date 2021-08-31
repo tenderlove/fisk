@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PSWAPD
+    # Instruction PSWAPD: Packed Swap Doubleword
     PSWAPD = Instruction.new("PSWAPD", [
     # pswapd: mm, mm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VRCP28SS
+    # Instruction VRCP28SS: Approximation to the Reciprocal of a Scalar Single-Precision Floating-Point Value with Less Than 2^-28 Relative Error
     VRCP28SS = Instruction.new("VRCP28SS", [
     # vrcp28ss: xmm{k}{z}, xmm, m32
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PMAXUD
+    # Instruction PMAXUD: Maximum of Packed Unsigned Doubleword Integers
     PMAXUD = Instruction.new("PMAXUD", [
     # pmaxud: xmm, xmm
       Form.new([

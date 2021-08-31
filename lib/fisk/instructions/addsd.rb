@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction ADDSD
+    # Instruction ADDSD: Add Scalar Double-Precision Floating-Point Values
     ADDSD = Instruction.new("ADDSD", [
     # addsd: xmm, xmm
       Form.new([

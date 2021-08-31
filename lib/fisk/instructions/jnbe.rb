@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JNBE
+    # Instruction JNBE: Jump if not below or equal (CF == 0 and ZF == 0)
     JNBE = Instruction.new("JNBE", [
     # jnbe: rel8
       Form.new([

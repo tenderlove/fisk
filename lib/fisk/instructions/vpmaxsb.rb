@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMAXSB
+    # Instruction VPMAXSB: Maximum of Packed Signed Byte Integers
     VPMAXSB = Instruction.new("VPMAXSB", [
     # vpmaxsb: xmm{k}{z}, xmm, xmm
       Form.new([

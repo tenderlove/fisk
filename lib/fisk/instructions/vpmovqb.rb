@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVQB
+    # Instruction VPMOVQB: Down Convert Packed Quadword Values to Byte Values with Truncation
     VPMOVQB = Instruction.new("VPMOVQB", [
     # vpmovqb: xmm{k}{z}, xmm
       Form.new([

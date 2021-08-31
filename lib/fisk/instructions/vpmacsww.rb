@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMACSWW
+    # Instruction VPMACSWW: Packed Multiply Accumulate Signed Word to Signed Word
     VPMACSWW = Instruction.new("VPMACSWW", [
     # vpmacsww: xmm, xmm, xmm, xmm
       Form.new([

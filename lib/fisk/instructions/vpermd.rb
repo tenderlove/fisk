@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPERMD
+    # Instruction VPERMD: Permute Doubleword Integers
     VPERMD = Instruction.new("VPERMD", [
     # vpermd: ymm{k}{z}, ymm, m256/m32bcst
       Form.new([

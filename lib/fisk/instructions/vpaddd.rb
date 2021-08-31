@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPADDD
+    # Instruction VPADDD: Add Packed Doubleword Integers
     VPADDD = Instruction.new("VPADDD", [
     # vpaddd: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

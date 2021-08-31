@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSRLDQ
+    # Instruction VPSRLDQ: Shift Packed Double Quadword Right Logical
     VPSRLDQ = Instruction.new("VPSRLDQ", [
     # vpsrldq: xmm, xmm, imm8
       Form.new([

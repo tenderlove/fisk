@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPBROADCASTQ
+    # Instruction VPBROADCASTQ: Broadcast Quadword Integer
     VPBROADCASTQ = Instruction.new("VPBROADCASTQ", [
     # vpbroadcastq: xmm{k}{z}, r64
       Form.new([

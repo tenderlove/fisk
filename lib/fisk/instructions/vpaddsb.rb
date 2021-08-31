@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPADDSB
+    # Instruction VPADDSB: Add Packed Signed Byte Integers with Signed Saturation
     VPADDSB = Instruction.new("VPADDSB", [
     # vpaddsb: xmm{k}{z}, xmm, xmm
       Form.new([

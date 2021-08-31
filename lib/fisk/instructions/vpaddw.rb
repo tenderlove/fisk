@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPADDW
+    # Instruction VPADDW: Add Packed Word Integers
     VPADDW = Instruction.new("VPADDW", [
     # vpaddw: xmm{k}{z}, xmm, xmm
       Form.new([

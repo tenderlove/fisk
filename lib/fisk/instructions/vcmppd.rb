@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCMPPD
+    # Instruction VCMPPD: Compare Packed Double-Precision Floating-Point Values
     VCMPPD = Instruction.new("VCMPPD", [
     # vcmppd: k{k}, xmm, m128/m64bcst, imm8
       Form.new([

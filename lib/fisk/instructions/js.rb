@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JS
+    # Instruction JS: Jump if sign (SF == 1)
     JS = Instruction.new("JS", [
     # js: rel8
       Form.new([

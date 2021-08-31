@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSHAD
+    # Instruction VPSHAD: Packed Shift Arithmetic Doublewords
     VPSHAD = Instruction.new("VPSHAD", [
     # vpshad: xmm, xmm, xmm
       Form.new([

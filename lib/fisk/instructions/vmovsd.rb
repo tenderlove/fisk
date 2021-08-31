@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMOVSD
+    # Instruction VMOVSD: Move Scalar Double-Precision Floating-Point Value
     VMOVSD = Instruction.new("VMOVSD", [
     # vmovsd: m64{k}, xmm
       Form.new([

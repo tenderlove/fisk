@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VADDSUBPD
+    # Instruction VADDSUBPD: Packed Double-FP Add/Subtract
     VADDSUBPD = Instruction.new("VADDSUBPD", [
     # vaddsubpd: xmm, xmm, xmm
       Form.new([

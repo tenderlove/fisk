@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction ANDN
+    # Instruction ANDN: Logical AND NOT
     ANDN = Instruction.new("ANDN", [
     # andnl: r32, r32, r32
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KANDD
+    # Instruction KANDD: Bitwise Logical AND 32-bit Masks
     KANDD = Instruction.new("KANDD", [
     # kandd: k, k, k
       Form.new([

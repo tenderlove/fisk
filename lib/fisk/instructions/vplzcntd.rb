@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPLZCNTD
+    # Instruction VPLZCNTD: Count the Number of Leading Zero Bits for Packed Doubleword Values
     VPLZCNTD = Instruction.new("VPLZCNTD", [
     # vplzcntd: xmm{k}{z}, m128/m32bcst
       Form.new([

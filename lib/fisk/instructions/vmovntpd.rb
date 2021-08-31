@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMOVNTPD
+    # Instruction VMOVNTPD: Store Packed Double-Precision Floating-Point Values Using Non-Temporal Hint
     VMOVNTPD = Instruction.new("VMOVNTPD", [
     # vmovntpd: m128, xmm
       Form.new([

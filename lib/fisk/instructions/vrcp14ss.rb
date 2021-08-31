@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VRCP14SS
+    # Instruction VRCP14SS: Compute Approximate Reciprocal of a Scalar Single-Precision Floating-Point Value
     VRCP14SS = Instruction.new("VRCP14SS", [
     # vrcp14ss: xmm{k}{z}, xmm, xmm
       Form.new([

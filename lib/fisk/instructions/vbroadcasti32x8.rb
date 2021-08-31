@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VBROADCASTI32X8
+    # Instruction VBROADCASTI32X8: Broadcast Eight Doubleword Elements
     VBROADCASTI32X8 = Instruction.new("VBROADCASTI32X8", [
     # vbroadcasti32x8: zmm{k}{z}, m256
       Form.new([

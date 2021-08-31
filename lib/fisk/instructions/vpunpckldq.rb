@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPUNPCKLDQ
+    # Instruction VPUNPCKLDQ: Unpack and Interleave Low-Order Doublewords into Quadwords
     VPUNPCKLDQ = Instruction.new("VPUNPCKLDQ", [
     # vpunpckldq: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

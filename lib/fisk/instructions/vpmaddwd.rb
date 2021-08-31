@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMADDWD
+    # Instruction VPMADDWD: Multiply and Add Packed Signed Word Integers
     VPMADDWD = Instruction.new("VPMADDWD", [
     # vpmaddwd: xmm{k}{z}, xmm, xmm
       Form.new([

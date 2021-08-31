@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPHSUBSW
+    # Instruction VPHSUBSW: Packed Horizontal Subtract Signed Word Integers with Signed Saturation
     VPHSUBSW = Instruction.new("VPHSUBSW", [
     # vphsubsw: xmm, xmm, xmm
       Form.new([

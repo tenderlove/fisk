@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPEXTRW
+    # Instruction VPEXTRW: Extract Word
     VPEXTRW = Instruction.new("VPEXTRW", [
     # vpextrw: r32, xmm, imm8
       Form.new([

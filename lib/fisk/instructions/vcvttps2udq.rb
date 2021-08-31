@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCVTTPS2UDQ
+    # Instruction VCVTTPS2UDQ: Convert with Truncation Packed Single-Precision Floating-Point Values to Packed Unsigned Doubleword Integer Values
     VCVTTPS2UDQ = Instruction.new("VCVTTPS2UDQ", [
     # vcvttps2udq: xmm{k}{z}, m128/m32bcst
       Form.new([

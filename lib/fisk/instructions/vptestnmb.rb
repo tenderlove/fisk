@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPTESTNMB
+    # Instruction VPTESTNMB: Logical NAND of Packed Byte Integer Values and Set Mask
     VPTESTNMB = Instruction.new("VPTESTNMB", [
     # vptestnmb: k{k}, xmm, xmm
       Form.new([

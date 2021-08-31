@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETG
+    # Instruction SETG: Set byte if greater (ZF == 0 and SF == OF)
     SETG = Instruction.new("SETG", [
     # setg: r8
       Form.new([

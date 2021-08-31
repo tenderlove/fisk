@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MFENCE
+    # Instruction MFENCE: Memory Fence
     MFENCE = Instruction.new("MFENCE", [
     # mfence: 
       Form.new([

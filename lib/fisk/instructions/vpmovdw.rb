@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVDW
+    # Instruction VPMOVDW: Down Convert Packed Doubleword Values to Word Values with Truncation
     VPMOVDW = Instruction.new("VPMOVDW", [
     # vpmovdw: xmm{k}{z}, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPTEST
+    # Instruction VPTEST: Packed Logical Compare
     VPTEST = Instruction.new("VPTEST", [
     # vptest: xmm, xmm
       Form.new([

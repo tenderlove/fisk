@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VEXP2PD
+    # Instruction VEXP2PD: Approximation to the Exponential 2^x of Packed Double-Precision Floating-Point Values with Less Than 2^-23 Relative Error
     VEXP2PD = Instruction.new("VEXP2PD", [
     # vexp2pd: zmm{k}{z}, m512/m64bcst
       Form.new([

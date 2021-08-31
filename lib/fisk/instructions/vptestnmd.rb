@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPTESTNMD
+    # Instruction VPTESTNMD: Logical NAND of Packed Doubleword Integer Values and Set Mask
     VPTESTNMD = Instruction.new("VPTESTNMD", [
     # vptestnmd: k{k}, xmm, m128/m32bcst
       Form.new([

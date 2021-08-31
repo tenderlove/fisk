@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CVTPD2PI
+    # Instruction CVTPD2PI: Convert Packed Double-Precision FP Values to Packed Dword Integers
     CVTPD2PI = Instruction.new("CVTPD2PI", [
     # cvtpd2pi: mm, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JO
+    # Instruction JO: Jump if overflow (OF == 1)
     JO = Instruction.new("JO", [
     # jo: rel8
       Form.new([

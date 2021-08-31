@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MINPS
+    # Instruction MINPS: Return Minimum Packed Single-Precision Floating-Point Values
     MINPS = Instruction.new("MINPS", [
     # minps: xmm, xmm
       Form.new([

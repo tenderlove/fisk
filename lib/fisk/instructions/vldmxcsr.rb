@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VLDMXCSR
+    # Instruction VLDMXCSR: Load MXCSR Register
     VLDMXCSR = Instruction.new("VLDMXCSR", [
     # vldmxcsr: m32
       Form.new([

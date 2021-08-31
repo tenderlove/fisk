@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPSRLVW
+    # Instruction VPSRLVW: Variable Shift Packed Word Data Right Logical
     VPSRLVW = Instruction.new("VPSRLVW", [
     # vpsrlvw: xmm{k}{z}, xmm, xmm
       Form.new([

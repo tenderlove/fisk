@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPERMT2PD
+    # Instruction VPERMT2PD: Full Permute of Double-Precision Floating-Point Values From Two Tables Overwriting a Table
     VPERMT2PD = Instruction.new("VPERMT2PD", [
     # vpermt2pd: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

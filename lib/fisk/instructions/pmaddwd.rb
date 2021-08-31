@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PMADDWD
+    # Instruction PMADDWD: Multiply and Add Packed Signed Word Integers
     PMADDWD = Instruction.new("PMADDWD", [
     # pmaddwd: mm, mm
       Form.new([

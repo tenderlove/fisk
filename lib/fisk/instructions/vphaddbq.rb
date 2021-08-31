@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPHADDBQ
+    # Instruction VPHADDBQ: Packed Horizontal Add Signed Byte to Signed Quadword
     VPHADDBQ = Instruction.new("VPHADDBQ", [
     # vphaddbq: xmm, xmm
       Form.new([

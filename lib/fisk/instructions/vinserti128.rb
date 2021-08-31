@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VINSERTI128
+    # Instruction VINSERTI128: Insert Packed Integer Values
     VINSERTI128 = Instruction.new("VINSERTI128", [
     # vinserti128: ymm, ymm, xmm, imm8
       Form.new([

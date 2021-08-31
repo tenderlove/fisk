@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction BLCI
+    # Instruction BLCI: Isolate Lowest Clear Bit
     BLCI = Instruction.new("BLCI", [
     # blci: r32, r32
       Form.new([

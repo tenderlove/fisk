@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMOVZ
+    # Instruction CMOVZ: Move if zero (ZF == 1)
     CMOVZ = Instruction.new("CMOVZ", [
     # cmovz: r16, r16
       Form.new([

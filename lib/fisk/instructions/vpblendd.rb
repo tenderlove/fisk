@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPBLENDD
+    # Instruction VPBLENDD: Blend Packed Doublewords
     VPBLENDD = Instruction.new("VPBLENDD", [
     # vpblendd: xmm, xmm, xmm, imm8
       Form.new([

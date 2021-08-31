@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction XORPD
+    # Instruction XORPD: Bitwise Logical XOR for Double-Precision Floating-Point Values
     XORPD = Instruction.new("XORPD", [
     # xorpd: xmm, xmm
       Form.new([

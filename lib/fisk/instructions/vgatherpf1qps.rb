@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VGATHERPF1QPS
+    # Instruction VGATHERPF1QPS: Sparse Prefetch Packed Single-Precision Floating-Point Data Values with Signed Quadword Indices Using T1 Hint
     VGATHERPF1QPS = Instruction.new("VGATHERPF1QPS", [
     # vgatherpf1qps: vm64z{k}
       Form.new([

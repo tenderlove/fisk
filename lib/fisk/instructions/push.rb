@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PUSH
+    # Instruction PUSH: Push Value Onto the Stack
     PUSH = Instruction.new("PUSH", [
     # pushq: imm8
       Form.new([

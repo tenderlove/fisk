@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPBROADCASTMW2D
+    # Instruction VPBROADCASTMW2D: Broadcast Low Word of Mask Register to Packed Doubleword Values
     VPBROADCASTMW2D = Instruction.new("VPBROADCASTMW2D", [
     # vpbroadcastmw2d: xmm, k
       Form.new([

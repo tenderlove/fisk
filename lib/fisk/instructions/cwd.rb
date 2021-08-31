@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CWD
+    # Instruction CWD: Convert Word to Doubleword
     CWD = Instruction.new("CWD", [
     # cwtd: 
       Form.new([

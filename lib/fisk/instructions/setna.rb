@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETNA
+    # Instruction SETNA: Set byte if not above (CF == 1 or ZF == 1)
     SETNA = Instruction.new("SETNA", [
     # setna: r8
       Form.new([

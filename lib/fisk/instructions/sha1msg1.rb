@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SHA1MSG1
+    # Instruction SHA1MSG1: Perform an Intermediate Calculation for the Next Four SHA1 Message Doublewords
     SHA1MSG1 = Instruction.new("SHA1MSG1", [
     # sha1msg1: xmm, xmm
       Form.new([

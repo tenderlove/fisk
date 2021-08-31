@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JC
+    # Instruction JC: Jump if carry (CF == 1)
     JC = Instruction.new("JC", [
     # jc: rel8
       Form.new([

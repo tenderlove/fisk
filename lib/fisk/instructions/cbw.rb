@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CBW
+    # Instruction CBW: Convert Byte to Word
     CBW = Instruction.new("CBW", [
     # cbtw: 
       Form.new([

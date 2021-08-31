@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SBB
+    # Instruction SBB: Subtract with Borrow
     SBB = Instruction.new("SBB", [
     # sbbb: al, imm8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CLZERO
+    # Instruction CLZERO: Zero-out 64-bit Cache Line
     CLZERO = Instruction.new("CLZERO", [
     # clzero: 
       Form.new([

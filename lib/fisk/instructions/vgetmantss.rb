@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VGETMANTSS
+    # Instruction VGETMANTSS: Extract Normalized Mantissa from Scalar Single-Precision Floating-Point Value
     VGETMANTSS = Instruction.new("VGETMANTSS", [
     # vgetmantss: xmm{k}{z}, xmm, m32, imm8
       Form.new([

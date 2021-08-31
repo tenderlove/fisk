@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PHADDSW
+    # Instruction PHADDSW: Packed Horizontal Add Signed Word Integers with Signed Saturation
     PHADDSW = Instruction.new("PHADDSW", [
     # phaddsw: mm, mm
       Form.new([

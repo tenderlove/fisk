@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMAXPS
+    # Instruction VMAXPS: Return Maximum Packed Single-Precision Floating-Point Values
     VMAXPS = Instruction.new("VMAXPS", [
     # vmaxps: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

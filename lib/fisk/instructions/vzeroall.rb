@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VZEROALL
+    # Instruction VZEROALL: Zero All YMM Registers
     VZEROALL = Instruction.new("VZEROALL", [
     # vzeroall: 
       Form.new([

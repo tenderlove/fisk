@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction STC
+    # Instruction STC: Set Carry Flag
     STC = Instruction.new("STC", [
     # stc: 
       Form.new([

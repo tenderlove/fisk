@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction RSQRTSS
+    # Instruction RSQRTSS: Compute Reciprocal of Square Root of Scalar Single-Precision Floating-Point Value
     RSQRTSS = Instruction.new("RSQRTSS", [
     # rsqrtss: xmm, xmm
       Form.new([

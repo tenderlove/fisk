@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPEXTRQ
+    # Instruction VPEXTRQ: Extract Quadword
     VPEXTRQ = Instruction.new("VPEXTRQ", [
     # vpextrq: r64, xmm, imm8
       Form.new([

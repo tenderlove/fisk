@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SHA256MSG1
+    # Instruction SHA256MSG1: Perform an Intermediate Calculation for the Next Four SHA256 Message Doublewords
     SHA256MSG1 = Instruction.new("SHA256MSG1", [
     # sha256msg1: xmm, xmm
       Form.new([

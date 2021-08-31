@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPHSUBWD
+    # Instruction VPHSUBWD: Packed Horizontal Subtract Signed Word to Signed Doubleword
     VPHSUBWD = Instruction.new("VPHSUBWD", [
     # vphsubwd: xmm, xmm
       Form.new([

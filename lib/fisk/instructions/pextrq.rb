@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PEXTRQ
+    # Instruction PEXTRQ: Extract Quadword
     PEXTRQ = Instruction.new("PEXTRQ", [
     # pextrq: r64, xmm, imm8
       Form.new([

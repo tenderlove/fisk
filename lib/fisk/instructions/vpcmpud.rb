@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCMPUD
+    # Instruction VPCMPUD: Compare Packed Unsigned Doubleword Values
     VPCMPUD = Instruction.new("VPCMPUD", [
     # vpcmpud: k{k}, xmm, m128/m32bcst, imm8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KSHIFTLD
+    # Instruction KSHIFTLD: Shift Left 32-bit Masks
     KSHIFTLD = Instruction.new("KSHIFTLD", [
     # kshiftld: k, k, imm8
       Form.new([

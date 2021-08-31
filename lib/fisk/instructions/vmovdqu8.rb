@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMOVDQU8
+    # Instruction VMOVDQU8: Move Unaligned Byte Values
     VMOVDQU8 = Instruction.new("VMOVDQU8", [
     # vmovdqu8: m128{k}{z}, xmm
       Form.new([

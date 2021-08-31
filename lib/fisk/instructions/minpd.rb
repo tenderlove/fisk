@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MINPD
+    # Instruction MINPD: Return Minimum Packed Double-Precision Floating-Point Values
     MINPD = Instruction.new("MINPD", [
     # minpd: xmm, xmm
       Form.new([

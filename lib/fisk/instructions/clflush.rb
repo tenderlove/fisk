@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CLFLUSH
+    # Instruction CLFLUSH: Flush Cache Line
     CLFLUSH = Instruction.new("CLFLUSH", [
     # clflush: m8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PSUBD
+    # Instruction PSUBD: Subtract Packed Doubleword Integers
     PSUBD = Instruction.new("PSUBD", [
     # psubd: mm, mm
       Form.new([

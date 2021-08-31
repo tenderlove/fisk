@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction POP
+    # Instruction POP: Pop a Value from the Stack
     POP = Instruction.new("POP", [
     # popw: r16
       Form.new([

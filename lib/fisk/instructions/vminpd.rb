@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMINPD
+    # Instruction VMINPD: Return Minimum Packed Double-Precision Floating-Point Values
     VMINPD = Instruction.new("VMINPD", [
     # vminpd: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

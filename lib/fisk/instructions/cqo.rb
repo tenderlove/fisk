@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CQO
+    # Instruction CQO: Convert Quadword to Octaword
     CQO = Instruction.new("CQO", [
     # cqto: 
       Form.new([

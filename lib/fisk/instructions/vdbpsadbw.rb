@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VDBPSADBW
+    # Instruction VDBPSADBW: Double Block Packed Sum-Absolute-Differences on Unsigned Bytes
     VDBPSADBW = Instruction.new("VDBPSADBW", [
     # vdbpsadbw: xmm{k}{z}, xmm, xmm, imm8
       Form.new([

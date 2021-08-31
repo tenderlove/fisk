@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction XOR
+    # Instruction XOR: Logical Exclusive OR
     XOR = Instruction.new("XOR", [
     # xorb: al, imm8
       Form.new([

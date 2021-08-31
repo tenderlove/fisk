@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMAXPD
+    # Instruction VMAXPD: Return Maximum Packed Double-Precision Floating-Point Values
     VMAXPD = Instruction.new("VMAXPD", [
     # vmaxpd: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

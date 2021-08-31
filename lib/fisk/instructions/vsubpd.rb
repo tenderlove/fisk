@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VSUBPD
+    # Instruction VSUBPD: Subtract Packed Double-Precision Floating-Point Values
     VSUBPD = Instruction.new("VSUBPD", [
     # vsubpd: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

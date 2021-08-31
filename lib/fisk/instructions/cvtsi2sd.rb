@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CVTSI2SD
+    # Instruction CVTSI2SD: Convert Dword Integer to Scalar Double-Precision FP Value
     CVTSI2SD = Instruction.new("CVTSI2SD", [
     # cvtsi2sd: xmm, r32
       Form.new([

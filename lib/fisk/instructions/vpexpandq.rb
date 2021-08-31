@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPEXPANDQ
+    # Instruction VPEXPANDQ: Load Sparse Packed Quadword Integer Values from Dense Memory/Register
     VPEXPANDQ = Instruction.new("VPEXPANDQ", [
     # vpexpandq: xmm{k}{z}, xmm
       Form.new([

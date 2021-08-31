@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMOVE
+    # Instruction CMOVE: Move if equal (ZF == 1)
     CMOVE = Instruction.new("CMOVE", [
     # cmove: r16, r16
       Form.new([

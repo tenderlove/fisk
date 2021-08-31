@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VRNDSCALEPS
+    # Instruction VRNDSCALEPS: Round Packed Single-Precision Floating-Point Values To Include A Given Number Of Fraction Bits
     VRNDSCALEPS = Instruction.new("VRNDSCALEPS", [
     # vrndscaleps: xmm{k}{z}, m128/m32bcst, imm8
       Form.new([

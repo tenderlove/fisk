@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction JNO
+    # Instruction JNO: Jump if not overflow (OF == 0)
     JNO = Instruction.new("JNO", [
     # jno: rel8
       Form.new([

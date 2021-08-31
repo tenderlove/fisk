@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VSTMXCSR
+    # Instruction VSTMXCSR: Store MXCSR Register State
     VSTMXCSR = Instruction.new("VSTMXCSR", [
     # vstmxcsr: m32
       Form.new([

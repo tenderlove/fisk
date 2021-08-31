@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SUB
+    # Instruction SUB: Subtract
     SUB = Instruction.new("SUB", [
     # subb: al, imm8
       Form.new([

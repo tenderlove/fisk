@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction MWAITX
+    # Instruction MWAITX: Monitor Wait with Timeout
     MWAITX = Instruction.new("MWAITX", [
     # mwaitx: 
       Form.new([

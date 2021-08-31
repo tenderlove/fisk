@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VSCALEFPD
+    # Instruction VSCALEFPD: Scale Packed Double-Precision Floating-Point Values With Double-Precision Floating-Point Values
     VSCALEFPD = Instruction.new("VSCALEFPD", [
     # vscalefpd: xmm{k}{z}, xmm, m128/m64bcst
       Form.new([

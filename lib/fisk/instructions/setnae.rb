@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETNAE
+    # Instruction SETNAE: Set byte if not above or equal (CF == 1)
     SETNAE = Instruction.new("SETNAE", [
     # setnae: r8
       Form.new([

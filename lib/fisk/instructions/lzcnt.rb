@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction LZCNT
+    # Instruction LZCNT: Count the Number of Leading Zero Bits
     LZCNT = Instruction.new("LZCNT", [
     # lzcntw: r16, r16
       Form.new([

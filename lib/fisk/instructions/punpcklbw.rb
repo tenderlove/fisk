@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PUNPCKLBW
+    # Instruction PUNPCKLBW: Unpack and Interleave Low-Order Bytes into Words
     PUNPCKLBW = Instruction.new("PUNPCKLBW", [
     # punpcklbw: mm, mm
       Form.new([

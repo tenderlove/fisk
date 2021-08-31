@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMOVNAE
+    # Instruction CMOVNAE: Move if not above or equal (CF == 1)
     CMOVNAE = Instruction.new("CMOVNAE", [
     # cmovnae: r16, r16
       Form.new([

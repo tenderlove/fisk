@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction BLENDVPD
+    # Instruction BLENDVPD:  Variable Blend Packed Double Precision Floating-Point Values
     BLENDVPD = Instruction.new("BLENDVPD", [
     # blendvpd: xmm, xmm, xmm0
       Form.new([

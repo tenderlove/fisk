@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPRORD
+    # Instruction VPRORD: Rotate Packed Doubleword Right
     VPRORD = Instruction.new("VPRORD", [
     # vprord: xmm{k}{z}, m128/m32bcst, imm8
       Form.new([

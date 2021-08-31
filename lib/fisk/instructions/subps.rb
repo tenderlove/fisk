@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SUBPS
+    # Instruction SUBPS: Subtract Packed Single-Precision Floating-Point Values
     SUBPS = Instruction.new("SUBPS", [
     # subps: xmm, xmm
       Form.new([

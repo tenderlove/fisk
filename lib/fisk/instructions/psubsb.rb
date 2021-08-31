@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PSUBSB
+    # Instruction PSUBSB: Subtract Packed Signed Byte Integers with Signed Saturation
     PSUBSB = Instruction.new("PSUBSB", [
     # psubsb: mm, mm
       Form.new([

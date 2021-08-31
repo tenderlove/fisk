@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPERMILPS
+    # Instruction VPERMILPS: Permute Single-Precision Floating-Point Values
     VPERMILPS = Instruction.new("VPERMILPS", [
     # vpermilps: xmm{k}{z}, m128/m32bcst, imm8
       Form.new([

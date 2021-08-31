@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCVTSD2SS
+    # Instruction VCVTSD2SS: Convert Scalar Double-Precision FP Value to Scalar Single-Precision FP Value
     VCVTSD2SS = Instruction.new("VCVTSD2SS", [
     # vcvtsd2ss: xmm{k}{z}, xmm, m64
       Form.new([

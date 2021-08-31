@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCVTPS2QQ
+    # Instruction VCVTPS2QQ: Convert Packed Single Precision Floating-Point Values to Packed Singed Quadword Integer Values
     VCVTPS2QQ = Instruction.new("VCVTPS2QQ", [
     # vcvtps2qq: xmm{k}{z}, m64/m32bcst
       Form.new([

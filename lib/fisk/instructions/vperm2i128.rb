@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPERM2I128
+    # Instruction VPERM2I128: Permute 128-Bit Integer Values
     VPERM2I128 = Instruction.new("VPERM2I128", [
     # vperm2i128: ymm, ymm, ymm, imm8
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VGETEXPPD
+    # Instruction VGETEXPPD: Extract Exponents of Packed Double-Precision Floating-Point Values as Double-Precision Floating-Point Values
     VGETEXPPD = Instruction.new("VGETEXPPD", [
     # vgetexppd: xmm{k}{z}, m128/m64bcst
       Form.new([

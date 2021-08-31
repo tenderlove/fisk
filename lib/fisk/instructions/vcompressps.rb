@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCOMPRESSPS
+    # Instruction VCOMPRESSPS: Store Sparse Packed Single-Precision Floating-Point Values into Dense Memory/Register
     VCOMPRESSPS = Instruction.new("VCOMPRESSPS", [
     # vcompressps: xmm{k}{z}, xmm
       Form.new([

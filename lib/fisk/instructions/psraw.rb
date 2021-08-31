@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PSRAW
+    # Instruction PSRAW: Shift Packed Word Data Right Arithmetic
     PSRAW = Instruction.new("PSRAW", [
     # psraw: mm, imm8
       Form.new([

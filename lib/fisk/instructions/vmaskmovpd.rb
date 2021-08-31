@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VMASKMOVPD
+    # Instruction VMASKMOVPD: Conditional Move Packed Double-Precision Floating-Point Values
     VMASKMOVPD = Instruction.new("VMASKMOVPD", [
     # vmaskmovpd: xmm, xmm, m128
       Form.new([

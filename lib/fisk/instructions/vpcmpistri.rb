@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPCMPISTRI
+    # Instruction VPCMPISTRI: Packed Compare Implicit Length Strings, Return Index
     VPCMPISTRI = Instruction.new("VPCMPISTRI", [
     # vpcmpistri: xmm, xmm, imm8
       Form.new([

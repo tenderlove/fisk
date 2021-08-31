@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VSCATTERDPS
+    # Instruction VSCATTERDPS: Scatter Packed Single-Precision Floating-Point Values with Signed Doubleword Indices
     VSCATTERDPS = Instruction.new("VSCATTERDPS", [
     # vscatterdps: vm32x{k}, xmm
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMC
+    # Instruction CMC: Complement Carry Flag
     CMC = Instruction.new("CMC", [
     # cmc: 
       Form.new([

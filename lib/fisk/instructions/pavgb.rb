@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PAVGB
+    # Instruction PAVGB: Average Packed Byte Integers
     PAVGB = Instruction.new("PAVGB", [
     # pavgb: mm, mm
       Form.new([

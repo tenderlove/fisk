@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVW2M
+    # Instruction VPMOVW2M: Move Signs of Packed Word Integers to Mask Register
     VPMOVW2M = Instruction.new("VPMOVW2M", [
     # vpmovw2m: k, xmm
       Form.new([

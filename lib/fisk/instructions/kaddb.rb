@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction KADDB
+    # Instruction KADDB: ADD Two 8-bit Masks
     KADDB = Instruction.new("KADDB", [
     # kaddb: k, k, k
       Form.new([

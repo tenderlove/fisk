@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction PFRCP
+    # Instruction PFRCP: Packed Floating-Point Reciprocal Approximation
     PFRCP = Instruction.new("PFRCP", [
     # pfrcp: mm, mm
       Form.new([

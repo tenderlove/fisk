@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SETA
+    # Instruction SETA: Set byte if above (CF == 0 and ZF == 0)
     SETA = Instruction.new("SETA", [
     # seta: r8
       Form.new([

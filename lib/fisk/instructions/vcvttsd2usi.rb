@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VCVTTSD2USI
+    # Instruction VCVTTSD2USI: Convert with Truncation Scalar Double-Precision Floating-Point Value to Unsigned Integer
     VCVTTSD2USI = Instruction.new("VCVTTSD2USI", [
     # vcvttsd2usi: r32, m64
       Form.new([

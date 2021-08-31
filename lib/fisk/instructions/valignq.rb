@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VALIGNQ
+    # Instruction VALIGNQ: Align Quadword Vectors
     VALIGNQ = Instruction.new("VALIGNQ", [
     # valignq: xmm{k}{z}, xmm, m128/m64bcst, imm8
       Form.new([

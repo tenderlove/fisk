@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SYSCALL
+    # Instruction SYSCALL: Fast System Call
     SYSCALL = Instruction.new("SYSCALL", [
     # syscall: 
       Form.new([

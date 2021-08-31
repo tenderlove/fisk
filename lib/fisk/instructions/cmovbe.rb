@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction CMOVBE
+    # Instruction CMOVBE: Move if below or equal (CF == 1 or ZF == 1)
     CMOVBE = Instruction.new("CMOVBE", [
     # cmovbe: r16, r16
       Form.new([

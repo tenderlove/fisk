@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VSHUFF32X4
+    # Instruction VSHUFF32X4: Shuffle 128-Bit Packed Single-Precision Floating-Point Values
     VSHUFF32X4 = Instruction.new("VSHUFF32X4", [
     # vshuff32x4: ymm{k}{z}, ymm, m256/m32bcst, imm8
       Form.new([

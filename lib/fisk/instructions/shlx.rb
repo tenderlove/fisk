@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction SHLX
+    # Instruction SHLX: Logical Shift Left Without Affecting Flags
     SHLX = Instruction.new("SHLX", [
     # shlxl: r32, r32, r32
       Form.new([

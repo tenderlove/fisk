@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VROUNDSD
+    # Instruction VROUNDSD: Round Scalar Double Precision Floating-Point Values
     VROUNDSD = Instruction.new("VROUNDSD", [
     # vroundsd: xmm, xmm, xmm, imm8
       Form.new([

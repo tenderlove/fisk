@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPBLENDMD
+    # Instruction VPBLENDMD: Blend Doubleword Vectors Using an OpMask Control
     VPBLENDMD = Instruction.new("VPBLENDMD", [
     # vpblendmd: xmm{k}{z}, xmm, m128/m32bcst
       Form.new([

@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction BLSFILL
+    # Instruction BLSFILL: Fill From Lowest Set Bit
     BLSFILL = Instruction.new("BLSFILL", [
     # blsfill: r32, r32
       Form.new([

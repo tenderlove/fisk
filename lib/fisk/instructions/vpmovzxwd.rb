@@ -2,7 +2,7 @@
 
 class Fisk
   module Instructions
-    # Instruction VPMOVZXWD
+    # Instruction VPMOVZXWD: Move Packed Word Integers to Doubleword Integers with Zero Extension
     VPMOVZXWD = Instruction.new("VPMOVZXWD", [
     # vpmovzxwd: xmm{k}{z}, xmm
       Form.new([
