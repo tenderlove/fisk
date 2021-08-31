@@ -220,10 +220,18 @@ class Fisk
     def memory?; true; end
   end
 
-  class M64 < Memory
-    def type
-      "m64"
-    end
+  [8, 16, 32, 64].each do |size|
+    class_eval <<~eostr, __FILE__, __LINE__ + 1
+      class M#{size} < Memory
+        def type
+          "m#{size}"
+        end
+
+        def size; #{size}; end
+      end
+
+      def m#{size} val, displacement = 0; M#{size}.new(val, displacement); end
+    eostr
   end
 
   class M < Memory
@@ -234,10 +242,6 @@ class Fisk
 
   def rip displacement = 0
     Registers::Rip.new(displacement)
-  end
-
-  def m64 x, displacement = 0
-    M64.new x, displacement
   end
 
   def m x, displacement = 0

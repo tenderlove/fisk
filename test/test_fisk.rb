@@ -33,6 +33,27 @@ class FiskTest < Fisk::Test
     refute_predicate fisk.r9, :immediate?
   end
 
+  def test_32_memory_sizes
+    fisk.mov(fisk.eax, fisk.m32(fisk.eax))
+    i = disasm(fisk.to_binary).first
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal "eax, dword ptr [rax]", i.op_str.to_s
+  end
+
+  def test_16_memory_sizes
+    fisk.mov(fisk.ax, fisk.m16(fisk.ax))
+    i = disasm(fisk.to_binary).first
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal "ax, word ptr [rax]", i.op_str.to_s
+  end
+
+  def test_8_memory_sizes
+    fisk.mov(fisk.al, fisk.m8(fisk.ax))
+    i = disasm(fisk.to_binary).first
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal "al, byte ptr [rax]", i.op_str.to_s
+  end
+
   def test_find_compatible_instruction
     fisk.mov(fisk.r9, fisk.imm8(1))
     i = disasm(fisk.to_binary).first
