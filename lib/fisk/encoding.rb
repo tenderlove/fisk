@@ -102,7 +102,7 @@ class Fisk
     end
 
     def add_opcode buffer, byte, addend
-      byte |= addend
+      byte |= (addend & 0x7)
       buffer.putc byte
       1
     end

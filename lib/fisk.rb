@@ -61,7 +61,7 @@ class Fisk
       end
 
       def op_value
-        value & 0x7
+        value
       end
 
       def extended_register?
