@@ -8,6 +8,90 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_push_all
+    regs = Fisk::Registers.constants.grep(/^R[A-Z0-9]{1,2}/).find_all { |r|
+      Fisk::Registers.const_get(r).type == "r64"
+    }.map { |r| Fisk::Registers.const_get(r) }
+
+    regs.each do |reg|
+      @fisk = Fisk.new
+      fisk.push(reg)
+      i = disasm(fisk.to_binary).first
+      assert_equal "push", i.mnemonic.to_s
+      assert_equal reg.name, i.op_str.to_s
+    end
+  end
+
+  def test_push_read_all
+    regs = Fisk::Registers.constants.grep(/^R[A-Z0-9]{1,2}/).find_all { |r|
+      Fisk::Registers.const_get(r).type == "r64"
+    }.map { |r| Fisk::Registers.const_get(r) }
+
+    regs.each do |reg|
+      @fisk = Fisk.new
+      fisk.push(fisk.m64(reg))
+      i = disasm(fisk.to_binary).first
+      assert_equal "push", i.mnemonic.to_s
+      assert_equal "qword ptr [#{reg.name}]", i.op_str.to_s
+    end
+  end
+
+  def test_push_read_rsp_to_reg
+    fisk.mov(fisk.rax, fisk.m64(fisk.rsp))
+    i = disasm(fisk.to_binary).first
+    assert_equal "mov", i.mnemonic.to_s
+    assert_equal "rax, qword ptr [rsp]", i.op_str.to_s
+  end
+
+  def test_push_read_r8
+    fisk.push(fisk.m64(fisk.r8))
+    i = disasm(fisk.to_binary).first
+    assert_equal "push", i.mnemonic.to_s
+    assert_equal "qword ptr [r8]", i.op_str.to_s
+  end
+
+  def test_push_read_r11
+    fisk.push(fisk.m64(fisk.r11))
+    i = disasm(fisk.to_binary).first
+    assert_equal "push", i.mnemonic.to_s
+    assert_equal "qword ptr [r11]", i.op_str.to_s
+  end
+
+  def test_push_read_r12
+    fisk.push(fisk.m64(fisk.r12))
+    i = disasm(fisk.to_binary).first
+    assert_equal "push", i.mnemonic.to_s
+    assert_equal "qword ptr [r12]", i.op_str.to_s
+  end
+
+  def test_push_read_r13
+    fisk.push(fisk.m64(fisk.r13))
+    i = disasm(fisk.to_binary).first
+    assert_equal "push", i.mnemonic.to_s
+    assert_equal "qword ptr [r13]", i.op_str.to_s
+  end
+
+  def test_push_read_rsp
+    fisk.push(fisk.m64(fisk.rsp))
+    i = disasm(fisk.to_binary).first
+    assert_equal "push", i.mnemonic.to_s
+    assert_equal "qword ptr [rsp]", i.op_str.to_s
+  end
+
+  def test_push_read_rbp
+    fisk.push(fisk.m64(fisk.rbp))
+    i = disasm(fisk.to_binary).first
+    assert_equal "push", i.mnemonic.to_s
+    assert_equal "qword ptr [rbp]", i.op_str.to_s
+  end
+
+  def test_push_rsp
+    fisk.push(fisk.rsp)
+    i = disasm(fisk.to_binary).first
+    assert_equal "push", i.mnemonic.to_s
+    assert_equal "rsp", i.op_str.to_s
+  end
+
   def test_multiple_put_label_raises
     fisk.put_label(:continue)
     assert_raises Fisk::Errors::LabelAlreadyDefined do
