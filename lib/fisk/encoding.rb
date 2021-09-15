@@ -3,27 +3,44 @@ class Fisk
     private
 
     def add_modrm buffer, mode, reg, rm, operands
-      offset_bytes = 0
       if mem = operands.find(&:memory?)
-        if mem.displacement != 0
-          if mem.displacement >= -0x7F - 1 && mem.displacement < 0x7F
-            offset_bytes = 1
-            mode |= 0x1
-          else
-            offset_bytes = 4
-            mode |= 0x2
-          end
-        end
-      end
-      reg = reg & 0x7
-      rm = rm & 0x7
-      buffer.putc ((mode << 6) | (reg << 3) | rm)
-      if mem && mem.displacement != 0
-        1 + write_num(buffer, mem.displacement, offset_bytes)
+        add_modrm_mem mem, buffer, mode, reg, rm
       else
+        buffer.putc ((mode << 6) | ((reg & 0x7) << 3) | (rm & 0x7))
         1
       end
     end
+
+    def add_modrm_mem mem, buffer, mode, reg, rm
+      offset_bytes = 0
+      if mem.displacement != 0 || (rm & 0x7) == 5 # RBP / r13 needs an offset
+        if mem.displacement >= -0x7F - 1 && mem.displacement < 0x7F
+          offset_bytes = 1
+          mode |= 0x1
+        else
+          offset_bytes = 4
+          mode |= 0x2
+        end
+      end
+
+      count = 1
+
+      modrm_byte = ((mode << 6) | ((reg & 0x7) << 3) | (rm & 0x7))
+      buffer.putc modrm_byte
+
+      # Needs SIB, Table 2-2
+      if rm & 0x7 == 4 # RSP register / r12
+        count += 1
+        buffer.putc 0x24
+      end
+
+      if mem && (mem.displacement != 0 || (rm & 0x7) == 5)
+        count + write_num(buffer, mem.displacement, offset_bytes)
+      else
+        count
+      end
+    end
+
 
     # Add ModRM with one mem operand and one register operand
     def add_modrm_mem_reg buffer, mode, reg, rm, operands
@@ -43,25 +60,7 @@ class Fisk
         return 1 + write_num(buffer, mem.displacement, 4)
       end
 
-      if mem.displacement != 0
-        if mem.displacement >= -0x7F - 1 && mem.displacement < 0x7F
-          offset_bytes = 1
-          mode |= 0x1
-        else
-          offset_bytes = 4
-          mode |= 0x2
-        end
-      end
-
-      reg = reg & 0x7
-      rm = rm & 0x7
-      buffer.putc ((mode << 6) | (reg << 3) | rm)
-
-      if mem.displacement != 0
-        1 + write_num(buffer, mem.displacement, offset_bytes)
-      else
-        1
-      end
+      add_modrm_mem mem, buffer, mode, reg, rm
     end
 
     # Add ModRM with two register operands
@@ -92,6 +91,13 @@ class Fisk
     def add_rex buffer, operands, mandatory, w, r, x, b
       return 0 if mandatory == false && !operands.any?(&:extended_register?)
 
+      if mem = operands.find(&:memory?)
+        if mem.extended_register?
+          x = 0
+          b = 1
+        end
+      end
+
       rex = 0b0100
       rex = (rex << 1) | w
       rex = (rex << 1) | r
@@ -102,7 +108,7 @@ class Fisk
     end
 
     def add_opcode buffer, byte, addend
-      byte |= addend
+      byte |= (addend & 0x7)
       buffer.putc byte
       1
     end

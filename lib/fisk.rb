@@ -61,7 +61,7 @@ class Fisk
       end
 
       def op_value
-        value & 0x7
+        value
       end
 
       def extended_register?
@@ -209,6 +209,10 @@ class Fisk
       @displacement = displacement
     end
 
+    def extended_register?
+      @register.extended_register?
+    end
+
     def value
       @register.value
     end
@@ -218,6 +222,10 @@ class Fisk
     end
 
     def memory?; true; end
+
+    def rex_value
+      @register.rex_value
+    end
   end
 
   [8, 16, 32, 64].each do |size|
