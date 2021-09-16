@@ -53,8 +53,6 @@ class Fisk
     end
 
     def add_modrm_mem_reg_ buffer, mode, reg, rm, mem, reg_opnd
-      offset_bytes = 0
-
       if mem.rip?
         buffer.putc 0x5 + ((reg_opnd.value % 8) * 8)
         return 1 + write_num(buffer, mem.displacement, 4)
