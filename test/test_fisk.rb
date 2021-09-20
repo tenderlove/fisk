@@ -8,6 +8,10 @@ class FiskTest < Fisk::Test
     @fisk = Fisk.new
   end
 
+  def test_rdi_is_register
+    assert_predicate Fisk::Registers::RDI, :register?
+  end
+
   def test_push_all
     regs = Fisk::Registers.constants.grep(/^R[A-Z0-9]{1,2}/).find_all { |r|
       Fisk::Registers.const_get(r).type == "r64"

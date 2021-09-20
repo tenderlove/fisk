@@ -68,6 +68,8 @@ class Fisk
         @value > 7 || EXTENDED_R8.include?(self)
       end
 
+      def register?; true; end
+
       def to_register
         self
       end
