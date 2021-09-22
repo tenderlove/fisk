@@ -2,6 +2,21 @@ require "helper"
 require "fisk/helpers"
 
 class RunFiskTest < Fisk::Test
+  def test_buffer_raises_on_seek
+    jitbuf = Fisk::Helpers.jitbuffer 4096
+    assert_raises do
+      jitbuf.seek 4097
+    end
+  end
+
+  def test_buffer_raises_on_write
+    jitbuf = Fisk::Helpers.jitbuffer 4096
+    4096.times { jitbuf.putc 0x3C }
+    assert_raises do
+      jitbuf.putc 0x3C
+    end
+  end
+
   def test_jit_jump_absolute
     jitbuf = Fisk::Helpers.jitbuffer 4096
     fisk = Fisk.new { |__|

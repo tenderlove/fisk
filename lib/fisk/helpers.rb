@@ -58,12 +58,14 @@ class Fisk
       end
 
       def putc byte
+        raise if pos >= @size
         @memory[@pos] = byte
         @pos += 1
       end
 
       def seek pos, whence = IO::SEEK_SET
         raise NotImplementedError if whence != IO::SEEK_SET
+        raise if pos >= @size
 
         @pos = pos
         self
