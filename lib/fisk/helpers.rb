@@ -58,7 +58,7 @@ class Fisk
       end
 
       def putc byte
-        raise if pos >= @size
+        raise "Buffer full! #{pos} - #{@size}" if pos >= @size
         @memory[@pos] = byte
         @pos += 1
       end
