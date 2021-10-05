@@ -171,3 +171,8 @@ Target 0: (ruby) stopped.
     frame #32: 0x00007fff20530621 libdyld.dylib`start + 1
     frame #33: 0x00007fff20530621 libdyld.dylib`start + 1
 ```
+
+Note that in order to produce a stack trace like the above, the Ruby binary must include the debugging symbols (otherwise, the `ruby` frames will not be displayed); this is accomplished by specifying the `--ggdb3` compiler flag:
+
+- if compiling Ruby from source, use `./configure optflags=-gddb3` in the build process
+- if using a version manager, refer to the help; example for RVM: `optflags="-ggdb3" rvm install 3.0.2 --disable-binary`
