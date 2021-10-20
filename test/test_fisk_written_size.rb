@@ -9,7 +9,12 @@ class Fisk
       def write_instruction insn, buffer, labels
         pos = buffer.pos
         x = insn.encode buffer, labels
-        raise unless x == buffer.pos - pos
+
+        if insn.lazy?
+          raise unless buffer.pos = pos
+        else
+          raise unless x == buffer.pos - pos
+        end
       end
     end
 

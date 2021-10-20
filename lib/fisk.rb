@@ -777,7 +777,7 @@ class Fisk
       elsif insn.comment?
         comments.update({buffer.pos => insn.message}) { |_, *lines| lines.join($/) }
       elsif insn.lazy?
-        insn.encode buffer, labels
+        write_instruction insn, buffer, labels
         instructions.unshift(*@instructions)
         @instructions.clear
       else
@@ -799,7 +799,7 @@ class Fisk
     unresolved.each do |req|
       insn = req.insn
       buffer.seek req.io_seek_pos, IO::SEEK_SET
-      insn.encode buffer, labels
+      write_instruction insn, buffer, labels
     end
     buffer.seek pos, IO::SEEK_SET
 
