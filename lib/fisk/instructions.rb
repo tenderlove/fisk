@@ -36,7 +36,16 @@ class Fisk
     end
 
     Form        = Struct.new(:operands, :encodings)
-    Instruction = Struct.new(:name, :forms)
+    Instruction = Struct.new(:name, :forms) do
+      def check_performance(operands)
+        case name
+        when Instructions::MOV.name
+          if operands[0].register? && operands[1].register? && operands[0].name == operands[1].name
+            return "MOV with same register (#{operands[0].name})"
+          end
+        end
+      end
+    end
 
     OPERAND_TYPES = [
       Operand.new("al", true, true),

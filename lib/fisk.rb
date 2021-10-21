@@ -368,15 +368,6 @@ class Fisk
       encoding = @form.encodings.first
       encoding.encode buffer, @operands
     end
-
-    def check_performance
-      case @insn.name
-      when Instructions::MOV.name
-        if @operands[0].register? && @operands[1].register? && @operands[0].name == @operands[1].name
-          return "MOV with same register (#{@operands[0].name})"
-        end
-      end
-    end
   end
 
   class UnresolvedRIPInstruction
@@ -827,6 +818,7 @@ class Fisk
     buffer
   end
 
+  # If the performance check is enabled, warnings are added to @performance_warnings.
   def gen_with_insn insns, params
     forms = insns.forms.find_all do |insn|
       if insn.operands.length == params.length
@@ -878,7 +870,14 @@ class Fisk
       end
     end
 
-    insn ||= Instruction.new(insns, form, params)
+    if insn.nil?
+      insn = Instruction.new(insns, form, params)
+
+      if @check_performance
+        warning = insns.check_performance(params)
+        @performance_warnings << warning if warning
+      end
+    end
 
     @instructions << insn
 
@@ -888,11 +887,6 @@ class Fisk
   private
 
   def write_instruction insn, buffer, labels
-    if @check_performance
-      warning = insn.check_performance if insn.respond_to?(:check_performance)
-      @performance_warnings << warning if warning
-    end
-
     insn.encode buffer, labels
   end
 end
