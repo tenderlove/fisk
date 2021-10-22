@@ -508,9 +508,15 @@ class Fisk
     end
   end
 
-  def initialize
+  # params:
+  #   :check_performance: Raise a SuboptimalPerformance error on write if suboptimal
+  #                       instructions are detected.
+  #
+  def initialize check_performance: false
     @instructions = []
     @labels = {}
+    @check_performance = check_performance
+    @performance_warnings = []
     # A set of temp registers recorded as we see them (not at allocation time)
     @temp_registers = Set.new
     yield self if block_given?
@@ -763,6 +769,8 @@ class Fisk
 
   # Encode all instructions and write them to +buffer+.  +buffer+ should be an
   # IO object.
+  # If the performance check is enabled, a runtime error is raised if suboptimal
+  # instructions are found.
   def write_to buffer, metadata: {}
     labels = {}
     comments = {}
@@ -777,7 +785,7 @@ class Fisk
       elsif insn.comment?
         comments.update({buffer.pos => insn.message}) { |_, *lines| lines.join($/) }
       elsif insn.lazy?
-        insn.encode buffer, labels
+        write_instruction insn, buffer, labels
         instructions.unshift(*@instructions)
         @instructions.clear
       else
@@ -793,19 +801,24 @@ class Fisk
     metadata[:comments] = comments
     @instructions = backup
 
-    return if unresolved.empty?
-
-    pos = buffer.pos
-    unresolved.each do |req|
-      insn = req.insn
-      buffer.seek req.io_seek_pos, IO::SEEK_SET
-      insn.encode buffer, labels
+    if !unresolved.empty?
+      pos = buffer.pos
+      unresolved.each do |req|
+        insn = req.insn
+        buffer.seek req.io_seek_pos, IO::SEEK_SET
+        write_instruction insn, buffer, labels
+      end
+      buffer.seek pos, IO::SEEK_SET
     end
-    buffer.seek pos, IO::SEEK_SET
+
+    if !@performance_warnings.empty?
+      raise Errors::SuboptimalPerformance.new(@performance_warnings)
+    end
 
     buffer
   end
 
+  # If the performance check is enabled, warnings are added to @performance_warnings.
   def gen_with_insn insns, params
     forms = insns.forms.find_all do |insn|
       if insn.operands.length == params.length
@@ -857,7 +870,14 @@ class Fisk
       end
     end
 
-    insn ||= Instruction.new(insns, form, params)
+    if insn.nil?
+      insn = Instruction.new(insns, form, params)
+
+      if @check_performance
+        warning = insns.check_performance(params)
+        @performance_warnings << warning if warning
+      end
+    end
 
     @instructions << insn
 

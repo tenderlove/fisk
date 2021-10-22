@@ -31,5 +31,16 @@ class Fisk
     # `put_label` with the same name twice
     class LabelAlreadyDefined < Error
     end
+
+    # Raised when the performance check is enabled, and suboptimal instructions
+    # are found.
+    class SuboptimalPerformance < Error
+      attr_reader :warnings
+
+      def initialize(warnings)
+        super "Suboptimal instructions found!"
+        @warnings = warnings
+      end
+    end
   end
 end
