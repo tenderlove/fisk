@@ -110,6 +110,7 @@ class Fisk
       def initialize name, type
         @name        = name
         @type        = type
+        @register    = nil
         @start_point = nil
         @end_point   = nil
       end
