@@ -22,5 +22,15 @@ class Fisk
       #
       assert_equal buf.string, "\x4D\x89\xD1".b
     end
+
+    def test_remove_no_op_instruction
+      buf = StringIO.new(''.b)
+
+      fisk.mov R9, R9
+
+      fisk.write_to buf
+
+      assert_equal buf.string, "".b
+    end
   end
 end
