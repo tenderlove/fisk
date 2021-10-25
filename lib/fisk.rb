@@ -351,6 +351,8 @@ class Fisk
   class Instruction
     include InstructionPredicates
 
+    attr_reader :insn, :form, :operands
+
     def initialize insn, form, operands
       @insn     = insn
       @form     = form
