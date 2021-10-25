@@ -9,6 +9,10 @@ require "fisk/errors"
 require "fisk/version"
 
 class Fisk
+  # Performance functionality options.
+  #
+  PERFORMANCE_CHECK = :check
+
   module OperandPredicates
     def unresolved?;        false; end
     def register?;          false; end
@@ -510,13 +514,14 @@ class Fisk
   end
 
   # params:
-  #   :check_performance: Raise a SuboptimalPerformance error on write if suboptimal
-  #                       instructions are detected.
+  #   :performance: Enable performance-related functionalities:
+  #                 - :check: raise a SuboptimalPerformance error on write if suboptimal
+  #                   instructions are detected.
   #
-  def initialize check_performance: false
+  def initialize performance: nil
     @instructions = []
     @labels = {}
-    @check_performance = check_performance
+    @performance_mode = performance
     @performance_warnings = []
     # A set of temp registers recorded as we see them (not at allocation time)
     @temp_registers = Set.new
@@ -874,7 +879,8 @@ class Fisk
     if insn.nil?
       insn = Instruction.new(insns, form, params)
 
-      if @check_performance
+      case @performance_mode
+      when PERFORMANCE_CHECK
         warning = insns.check_performance(params)
         @performance_warnings << warning if warning
       end

@@ -8,7 +8,7 @@ class Fisk
 
     def setup
       super
-      @fisk = Fisk.new check_performance: true
+      @fisk = Fisk.new performance: :check
     end
 
     def test_mov_same_register
