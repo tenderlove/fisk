@@ -20,6 +20,20 @@ class Fisk
     def absolute_location?; false; end
   end
 
+  module OperandSize
+    def compute_size type
+      bits = type[/^r(\d+)$/, 1]&.to_i
+
+      if bits.nil?
+        raise ArgumentError, "Unexpected register type (#{type}); 'r<bits>' expected"
+      elsif bits % 8 != 0
+        raise ArgumentError, "Unexpected register size (#{bits}); multiple of 8 expected"
+      else
+        bits
+      end
+    end
+  end
+
   class Operand
     include OperandPredicates
 
@@ -47,12 +61,15 @@ class Fisk
 
   module Registers
     class Register < Operand
-      attr_reader :name, :type, :value
+      include OperandSize
+
+      attr_reader :name, :type, :value, :size
 
       def initialize name, type, value
         @name = name
         @type = type
         @value = value
+        @size = compute_size(type)
       end
 
       def works? op
@@ -104,7 +121,9 @@ class Fisk
     end
 
     class Temp < Operand
-      attr_reader :name, :type
+      include OperandSize
+
+      attr_reader :name, :type, :size
       attr_accessor :register, :start_point, :end_point
 
       def initialize name, type
@@ -112,6 +131,7 @@ class Fisk
         @type        = type
         @start_point = nil
         @end_point   = nil
+        @size        = compute_size(type)
       end
 
       def temp_register?; true; end
