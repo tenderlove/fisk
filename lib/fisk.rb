@@ -22,6 +22,8 @@ class Fisk
 
   module OperandSize
     def compute_size type
+      return 128 if type.start_with?('xmm')
+
       bits = type[/^r(\d+)$/, 1]&.to_i
 
       if bits.nil?
