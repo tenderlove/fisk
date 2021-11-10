@@ -31,6 +31,11 @@ class Fisk
                                         TYPE_INT,
                                         TYPE_INT], TYPE_VOIDP, name: "mmap"
 
+    mprotect_ptr = Handle::DEFAULT["mprotect"]
+    mprotect_func = Function.new mprotect_ptr, [TYPE_VOIDP,
+                                                TYPE_SIZE_T,
+                                                TYPE_INT], TYPE_INT, name: "mprotect"
+
     memcpy_ptr = Handle::DEFAULT["memcpy"]
     memcpy_func = Function.new memcpy_ptr, [TYPE_VOIDP,
                                             TYPE_VOIDP,
@@ -39,11 +44,14 @@ class Fisk
     # Expose the mmap system call
     define_singleton_method :mmap, &mmap_func
 
+    # Expose the mmap system call
+    define_singleton_method :mprotect, &mprotect_func
+
     # Expose the memcpy system call
     define_singleton_method :memcpy, &memcpy_func
 
     def self.mmap_jit size
-      ptr = mmap 0, size, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_PRIVATE | MAP_ANON, -1, 0
+      ptr = mmap 0, size, PROT_READ | PROT_EXEC, MAP_PRIVATE | MAP_ANON, -1, 0
       ptr.size = size
       ptr
     end
@@ -97,6 +105,13 @@ class Fisk
           rel_jump = to - address
         end
         self.pos
+      end
+
+      def allow_writes
+        Fisk::Helpers.mprotect(memory, @size, PROT_READ | PROT_WRITE)
+        yield
+      ensure
+        Fisk::Helpers.mprotect(memory, @size, PROT_READ | PROT_EXEC)
       end
 
       def address
