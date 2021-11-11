@@ -3,6 +3,7 @@ require "fiddle"
 class Fisk
   module Helpers
     include Fiddle
+    extend Fiddle
 
     class Fiddle::Function
       def to_proc
@@ -23,32 +24,52 @@ class Fisk
       MAP_ANON    = 0x20
     end
 
-    mmap_ptr = Handle::DEFAULT["mmap"]
-    mmap_func = Function.new mmap_ptr, [TYPE_VOIDP,
-                                        TYPE_SIZE_T,
-                                        TYPE_INT,
-                                        TYPE_INT,
-                                        TYPE_INT,
-                                        TYPE_INT], TYPE_VOIDP, name: "mmap"
+    class << self
+      mmap_ptr = Handle::DEFAULT["mmap"]
+      mmap_func = Function.new mmap_ptr, [TYPE_VOIDP,
+                                          TYPE_SIZE_T,
+                                          TYPE_INT,
+                                          TYPE_INT,
+                                          TYPE_INT,
+                                          TYPE_INT], TYPE_VOIDP, name: "mmap"
 
-    mprotect_ptr = Handle::DEFAULT["mprotect"]
-    mprotect_func = Function.new mprotect_ptr, [TYPE_VOIDP,
-                                                TYPE_SIZE_T,
-                                                TYPE_INT], TYPE_INT, name: "mprotect"
+      mprotect_ptr = Handle::DEFAULT["mprotect"]
+      mprotect_func = Function.new mprotect_ptr, [TYPE_VOIDP,
+                                                  TYPE_SIZE_T,
+                                                  TYPE_INT], TYPE_INT, name: "mprotect"
 
-    memcpy_ptr = Handle::DEFAULT["memcpy"]
-    memcpy_func = Function.new memcpy_ptr, [TYPE_VOIDP,
-                                            TYPE_VOIDP,
-                                            TYPE_SIZE_T], TYPE_VOIDP, name: "memcpy"
+      memcpy_ptr = Handle::DEFAULT["memcpy"]
+      memcpy_func = Function.new memcpy_ptr, [TYPE_VOIDP,
+                                              TYPE_VOIDP,
+                                              TYPE_SIZE_T], TYPE_VOIDP, name: "memcpy"
 
-    # Expose the mmap system call
-    define_singleton_method :mmap, &mmap_func
+      def mmap(*args)
+        ptr = _mmap(*args)
+        if ptr.to_i == -1
+          raise RuntimeError, "mmap failed"
+        end
+        ptr
+      end
 
-    # Expose the mmap system call
-    define_singleton_method :mprotect, &mprotect_func
+      def mprotect(*args)
+        ret = _mprotect(*args)
+        if ret == -1
+          raise RuntimeError, "mprotect failed"
+        end
+        ret 
+      end
 
-    # Expose the memcpy system call
-    define_singleton_method :memcpy, &memcpy_func
+      # Expose the memcpy system call
+      define_method :memcpy, &memcpy_func
+
+      private
+
+      # Expose the mmap system call
+      define_method :_mmap, &mmap_func
+
+      # Expose the mmap system call
+      define_method :_mprotect, &mprotect_func
+    end
 
     def self.mmap_jit size
       ptr = mmap 0, size, PROT_READ | PROT_EXEC, MAP_PRIVATE | MAP_ANON, -1, 0
