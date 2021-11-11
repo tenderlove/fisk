@@ -17,7 +17,7 @@ class Fisk
     PROT_EXEC   = 0x04
     MAP_PRIVATE = 0x0002
 
-    if RUBY_PLATFORM =~ /darwin/
+    if RUBY_PLATFORM =~ /darwin|openbsd/i
       MAP_ANON    = 0x1000
     else
       MAP_ANON    = 0x20
