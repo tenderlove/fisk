@@ -29,7 +29,6 @@ jobs:
         uses: ruby/setup-ruby@477b21f02be01bcb8030d50f37cfec92bfa615b6
         with:
           ruby-version: 3.0
-      - name: Install dependencies
-        run: bundle install
+          bundler-cache: true # 'bundle install' and cache
       - name: Run tests
         run: bundle exec rake
