@@ -3,6 +3,10 @@ class Fisk
     class Error < StandardError
     end
 
+    # Raised when an instruction isn't found or can't be generated
+    class InvalidInstructionError < Error
+    end
+
     # Raised when a temporary register is released more than once
     class AlreadyReleasedError < Error
     end

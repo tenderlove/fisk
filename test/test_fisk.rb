@@ -163,6 +163,12 @@ class FiskTest < Fisk::Test
     assert_equal sprintf("%#02x", expected_pos), i.op_str.to_s
   end
 
+  def test_invalid_instruction
+    assert_raises(Fisk::Errors::InvalidInstructionError) do
+      fisk.mov(fisk.imm(5), fisk.imm(5))
+    end
+  end
+
   %w{ rax rcx rdx rbx rsp rbp rsi rdi r8 r9 r10 }.each do |reg|
     define_method "test_#{reg}_to_offset" do
       fisk.lea(fisk.send(reg), fisk.rip(15))

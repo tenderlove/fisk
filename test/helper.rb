@@ -4,6 +4,18 @@ require "crabstone"
 ENV["MT_NO_PLUGINS"] = "1"
 require "minitest/autorun"
 
+# https://github.com/bnagy/crabstone/issues/10
+class Crabstone::Binding::Instruction
+  class << self
+    alias :old_release :release
+  end
+
+  # Squelch error in crabstone
+  def self.release obj
+    nil
+  end
+end
+
 class Fisk::Test < Minitest::Test
   def print_disasm binary
     cs = Crabstone::Disassembler.new(Crabstone::ARCH_X86, Crabstone::MODE_64)

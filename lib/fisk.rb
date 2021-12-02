@@ -861,7 +861,7 @@ class Fisk
       Valid forms:
       #{valid_forms}
       eostr
-      raise NotImplementedError, msg
+      raise Errors::InvalidInstructionError, msg
     end
 
     form = forms.first
