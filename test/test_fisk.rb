@@ -12,6 +12,10 @@ class FiskTest < Fisk::Test
     assert_predicate Fisk::Registers::RDI, :register?
   end
 
+  def test_rax_is_not_an_integer
+    refute_predicate Fisk::Registers::RAX, :integer?
+  end
+
   def test_push_all
     regs = Fisk::Registers.constants.grep(/^R[A-Z0-9]{1,2}/).find_all { |r|
       Fisk::Registers.const_get(r).type == "r64"

@@ -89,6 +89,8 @@ class Fisk
 
       def register?; true; end
 
+      def integer?; false; end
+
       def to_register
         self
       end
