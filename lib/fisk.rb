@@ -91,6 +91,8 @@ class Fisk
 
       def integer?; false; end
 
+      def to_i; @value; end
+
       def to_register
         self
       end
