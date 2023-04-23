@@ -6,9 +6,15 @@ require "set"
 require "fisk/instructions"
 require "fisk/basic_block"
 require "fisk/errors"
+require "fisk/optimizer"
 require "fisk/version"
 
 class Fisk
+  # Performance functionality options.
+  #
+  PERFORMANCE_CHECK = :check
+  PERFORMANCE_OPTIMIZE = :optimize
+
   module OperandPredicates
     def unresolved?;        false; end
     def register?;          false; end
@@ -135,6 +141,7 @@ class Fisk
       def initialize name, type
         @name        = name
         @type        = type
+        @register    = nil
         @start_point = nil
         @end_point   = nil
         @size        = compute_size(type)
@@ -372,6 +379,8 @@ class Fisk
   class Instruction
     include InstructionPredicates
 
+    attr_reader :insn, :form, :operands
+
     def initialize insn, form, operands
       @insn     = insn
       @form     = form
@@ -535,14 +544,17 @@ class Fisk
   end
 
   # params:
-  #   :check_performance: Raise a SuboptimalPerformance error on write if suboptimal
-  #                       instructions are detected.
+  #   :performance: Enable performance-related functionalities:
+  #                 - :check: raise a SuboptimalPerformance error on write if suboptimal
+  #                   instructions are detected.
+  #                 - :optimize: optimize the generated code.
   #
-  def initialize check_performance: false
+  def initialize performance: nil
     @instructions = []
     @labels = {}
-    @check_performance = check_performance
+    @performance_mode = performance
     @performance_warnings = []
+    @optimizer = Optimizer.new
     # A set of temp registers recorded as we see them (not at allocation time)
     @temp_registers = Set.new
     yield self if block_given?
@@ -899,13 +911,16 @@ class Fisk
     if insn.nil?
       insn = Instruction.new(insns, form, params)
 
-      if @check_performance
+      case @performance_mode
+      when PERFORMANCE_CHECK
         warning = insns.check_performance(params)
         @performance_warnings << warning if warning
+      when PERFORMANCE_OPTIMIZE
+        insn = @optimizer.optimize(insn)
       end
     end
 
-    @instructions << insn
+    @instructions << insn if insn
 
     self
   end
