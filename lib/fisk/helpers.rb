@@ -3,6 +3,7 @@ require "fiddle"
 class Fisk
   module Helpers
     include Fiddle
+    extend Fiddle
 
     class Fiddle::Function
       def to_proc
@@ -17,33 +18,61 @@ class Fisk
     PROT_EXEC   = 0x04
     MAP_PRIVATE = 0x0002
 
-    if RUBY_PLATFORM =~ /darwin/
+    if RUBY_PLATFORM =~ /darwin|openbsd/i
       MAP_ANON    = 0x1000
     else
       MAP_ANON    = 0x20
     end
 
-    mmap_ptr = Handle::DEFAULT["mmap"]
-    mmap_func = Function.new mmap_ptr, [TYPE_VOIDP,
-                                        TYPE_SIZE_T,
-                                        TYPE_INT,
-                                        TYPE_INT,
-                                        TYPE_INT,
-                                        TYPE_INT], TYPE_VOIDP, name: "mmap"
+    class << self
+      mmap_ptr = Handle::DEFAULT["mmap"]
+      mmap_func = Function.new mmap_ptr, [TYPE_VOIDP,
+                                          TYPE_SIZE_T,
+                                          TYPE_INT,
+                                          TYPE_INT,
+                                          TYPE_INT,
+                                          TYPE_INT], TYPE_VOIDP, name: "mmap"
 
-    memcpy_ptr = Handle::DEFAULT["memcpy"]
-    memcpy_func = Function.new memcpy_ptr, [TYPE_VOIDP,
-                                            TYPE_VOIDP,
-                                            TYPE_SIZE_T], TYPE_VOIDP, name: "memcpy"
+      mprotect_ptr = Handle::DEFAULT["mprotect"]
+      mprotect_func = Function.new mprotect_ptr, [TYPE_VOIDP,
+                                                  TYPE_SIZE_T,
+                                                  TYPE_INT], TYPE_INT, name: "mprotect"
 
-    # Expose the mmap system call
-    define_singleton_method :mmap, &mmap_func
+      memcpy_ptr = Handle::DEFAULT["memcpy"]
+      memcpy_func = Function.new memcpy_ptr, [TYPE_VOIDP,
+                                              TYPE_VOIDP,
+                                              TYPE_SIZE_T], TYPE_VOIDP, name: "memcpy"
 
-    # Expose the memcpy system call
-    define_singleton_method :memcpy, &memcpy_func
+      def mmap(*args)
+        ptr = _mmap(*args)
+        if ptr.to_i == -1
+          raise RuntimeError, "mmap failed"
+        end
+        ptr
+      end
+
+      def mprotect(*args)
+        ret = _mprotect(*args)
+        if ret == -1
+          raise RuntimeError, "mprotect failed"
+        end
+        ret 
+      end
+
+      # Expose the memcpy system call
+      define_method :memcpy, &memcpy_func
+
+      private
+
+      # Expose the mmap system call
+      define_method :_mmap, &mmap_func
+
+      # Expose the mmap system call
+      define_method :_mprotect, &mprotect_func
+    end
 
     def self.mmap_jit size
-      ptr = mmap 0, size, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_PRIVATE | MAP_ANON, -1, 0
+      ptr = mmap 0, size, PROT_READ | PROT_EXEC, MAP_PRIVATE | MAP_ANON, -1, 0
       ptr.size = size
       ptr
     end
@@ -97,6 +126,13 @@ class Fisk
           rel_jump = to - address
         end
         self.pos
+      end
+
+      def allow_writes
+        Fisk::Helpers.mprotect(memory, @size, PROT_READ | PROT_WRITE)
+        yield
+      ensure
+        Fisk::Helpers.mprotect(memory, @size, PROT_READ | PROT_EXEC)
       end
 
       def address

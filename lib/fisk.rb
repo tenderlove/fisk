@@ -798,6 +798,16 @@ class Fisk
   # If the performance check is enabled, a runtime error is raised if suboptimal
   # instructions are found.
   def write_to buffer, metadata: {}
+    if buffer.respond_to? :allow_writes
+      buffer.allow_writes do
+        _write_to buffer, metadata: metadata
+      end
+    else
+      _write_to buffer, metadata: metadata
+    end
+  end
+
+  private def _write_to buffer, metadata: {}
     labels = {}
     comments = {}
     unresolved = []
